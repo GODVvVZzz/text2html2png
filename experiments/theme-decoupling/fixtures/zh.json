@@ -1,0 +1,47 @@
+{
+  "id": "zh",
+  "locale": "zh-CN",
+  "eyebrow": "双产物工作流",
+  "title": "同一份事实，两种交付方式",
+  "subtitle": "HTML 默认保留编辑自由；需要快速传播时，再按需导出 PNG。",
+  "metrics": [
+    {"value":"8","label":"图表类型","detail":"流程、对比、架构等","accent":1,"emoji":"📊"},
+    {"value":"7","label":"视觉主题","detail":"结构不变，只换主题","accent":3,"emoji":"🎨"},
+    {"value":"2","label":"输出模式","detail":"HTML 默认 + PNG 按需","accent":6,"emoji":"📦"}
+  ],
+  "criteria": ["后续编辑", "最适合", "查看方式", "分享成本", "清晰度"],
+  "columns": [
+    {
+      "kicker": "产物 A",
+      "name": "可编辑 HTML",
+      "note": "保留语义结构与完整 CSS",
+      "icon": "code",
+      "emoji": "🧩",
+      "tone": 3,
+      "values": [
+        "直接修改 <strong>HTML / CSS</strong>",
+        "评审、迭代、二次排版",
+        "使用本地浏览器打开",
+        "发送一个自包含文件",
+        "浏览器原生文字与矢量图形"
+      ]
+    },
+    {
+      "kicker": "产物 B",
+      "name": "高清 PNG",
+      "note": "用户明确需要时才生成的静态成品",
+      "icon": "image",
+      "emoji": "🖼️",
+      "tone": 1,
+      "values": [
+        "明确请求后，<strong>复制即用</strong>",
+        "汇报、发布、归档",
+        "任意图片查看器",
+        "通用图片格式，零依赖",
+        "最高 4× 本地浏览器截图"
+      ]
+    }
+  ],
+  "footerLabel": "核心原则",
+  "footer": "内容只整理、不编造；图表结构保持一致，主题可以独立替换。"
+}

@@ -94,7 +94,9 @@ Do not paste a `.card` rule and assume it applies automatically.
 
 ## Offline-first fonts and icons
 
-Use local fallback stacks by default. A style reference may show an optional Google Fonts link for users who explicitly allow network access; omit it otherwise. In that explicit mode, add only the required origins to the CSP and pass `--allow-network` to both validation and rendering. Prefer inline SVG or simple CSS shapes over vendor emoji for deterministic public examples.
+Use local fallback stacks by default. A style reference may show an optional Google Fonts link for users who explicitly allow network access; omit it otherwise. In that explicit mode, add only the required origins to the CSP and pass `--allow-network` to both validation and rendering.
+
+Emoji are welcome when they improve scanning, friendliness, or match the user's requested visual language. Use one visible icon language per diagram. System emoji vary across operating systems, so use `currentColor` inline SVG instead when byte-for-byte cross-platform appearance matters. A template may include both and switch visibility through theme tokens; do not show both at once.
 
 ## Pre-render checks
 

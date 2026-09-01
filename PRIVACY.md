@@ -4,10 +4,10 @@ text2html2png runs entirely on your machine. It has no backend, no account, and 
 
 ## What the skill does with your content
 
-Your text stays in the agent conversation and in the two files written to the output directory you choose:
+Your text stays in the agent conversation and in the local output files you request:
 
-- an HTML document generated from your content;
-- a PNG rendered from that HTML by a Chrome-family browser already installed on your machine.
+- an HTML document generated from your content by default;
+- a PNG rendered from that HTML only when you explicitly request PNG, an image, or a screenshot.
 
 Nothing is uploaded. The renderer is a local process driven by [`puppeteer-core`](https://www.npmjs.com/package/puppeteer-core), which controls your existing browser binary rather than downloading one.
 
@@ -15,7 +15,7 @@ Nothing is uploaded. The renderer is a local process driven by [`puppeteer-core`
 
 | Activity | Network access |
 |---|---|
-| Rendering a diagram | None. Page JavaScript is disabled and every request the page attempts is aborted. |
+| Browser layout audit or PNG export | None. Page JavaScript is disabled and every request the page attempts is aborted. |
 | Validating HTML | None. |
 | First-time dependency install | Yes, once — `npm ci --omit=dev` fetches `puppeteer-core` and its locked transitive dependencies from your configured npm registry. |
 | Optional remote fonts or images | Only when you pass `--allow-network` explicitly. |
@@ -30,10 +30,11 @@ Nothing. The maintainers receive no data from your use of the skill. The only in
 
 The skill writes only:
 
-- `<topic>-<timestamp>.html` and `<topic>-<timestamp>.png` in the output directory you specify;
-- `node_modules/` inside the skill directory, on first install.
+- `<topic>-<timestamp>.html` in the output directory you specify;
+- `<topic>-<timestamp>.png` only when you explicitly request PNG/image output;
+- `node_modules/` inside the skill directory on the first browser-backed audit or PNG export.
 
-It refuses to overwrite an existing output file unless `--force` is passed, and it writes through a temporary file so an interrupted render cannot corrupt an existing image.
+The PNG renderer refuses to overwrite an existing image unless `--force` is passed, and it writes through a temporary file so an interrupted render cannot corrupt an existing image.
 
 ## Optional configuration
 

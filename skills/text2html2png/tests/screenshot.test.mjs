@@ -16,6 +16,11 @@ test("validates numeric CLI options", () => {
   );
 });
 
+test("preserves the HTML background unless an override is explicit", () => {
+  const args = parseArgs(["--html", "a.html", "--out", "a.png"]);
+  assert.equal(args.bg, "auto");
+});
+
 test("renders a non-empty PNG when Chrome is available", async (context) => {
   const browser = await browserIsUsable();
   if (!browser.usable) {

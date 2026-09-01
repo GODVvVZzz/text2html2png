@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./skills/text2html2png/assets/logo.svg" width="720" alt="text2html2png">
-  <p><strong>Turn any text into a diagram you can paste anywhere.</strong><br>
-  Your agent writes the HTML, local Chrome renders the PNG. Nothing leaves your machine.</p>
+  <p><strong>Turn any text into an editable HTML diagram.</strong><br>
+  Export a PNG only when you ask for one. Nothing leaves your machine.</p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a>
     ·
@@ -22,13 +22,13 @@
   </p>
 </div>
 
-![One prompt becomes a polished diagram, editable HTML, and a crisp PNG](./skills/text2html2png/assets/hero.svg)
+![One prompt becomes a polished editable HTML diagram, with PNG available on request](./skills/text2html2png/assets/hero.svg)
 
-Most diagram tools ask you to draw. This one asks you to describe. You paste a plan, a spec, a meeting note, or a set of numbers; your agent picks the right chart, keeps your facts intact, writes a self-contained HTML document, and renders a tightly cropped PNG in the browser you already have.
+Most diagram tools ask you to draw. This one asks you to describe. You paste a plan, a spec, a meeting note, or a set of numbers; your agent picks the right chart, keeps your facts intact, and writes a self-contained HTML document. When you explicitly need a paste-ready image, it also renders a tightly cropped PNG in the browser you already have.
 
 - **8 chart types** — flowchart, comparison, timeline, architecture, dashboard, Gantt, org chart, funnel
 - **7 visual themes** — warm, dark, minimal, editorial, neon, paper, glass
-- **Two useful outputs** — edit the HTML when you need pixel control, paste the PNG when you need to ship
+- **HTML first, PNG on request** — the default call writes one editable HTML file; ask for `--png` when you need a paste-ready image
 - **Measured, not hoped for** — a browser-based layout audit is a required step of the workflow and a CI gate for every published example
 - **Local-first** — no hosted rendering API, no API key, no telemetry, network blocked during render
 
@@ -42,7 +42,7 @@ Then ask your agent, in plain language:
 
 > Turn our launch plan into a Gantt chart: research weeks 1–2, design weeks 2–4, build weeks 4–7, beta week 8. Use the paper theme.
 
-You get two files back: an editable `.html` and a paste-ready `.png`.
+You get one editable `.html` file by default. Add “also export a PNG” or `--png` when you want both files.
 
 The `skills` CLI places the skill for the agent you name. To target one explicitly:
 
@@ -51,7 +51,7 @@ npx skills add GODVvVZzz/text2html2png -g -a codex -y
 npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 ```
 
-**Requirements:** Node.js 22.12+ and any Chrome-family browser (Chrome, Chromium, Edge, or Brave). On the first render the skill installs one direct dependency — `puppeteer-core`, pinned with a committed lockfile — inside its own folder. It drives the browser you already have instead of downloading one.
+**Requirements:** Node.js 22.12+ and any Chrome-family browser (Chrome, Chromium, Edge, or Brave) for browser layout auditing or optional PNG export. On the first browser-backed check the skill installs one direct dependency — `puppeteer-core`, pinned with a committed lockfile — inside its own folder. It drives the browser you already have instead of downloading one.
 
 ## See the range
 
@@ -117,7 +117,7 @@ The skill also refuses to invent content. It will not add a number, date, name, 
 
 ## Privacy and security
 
-Rendering behavior, by default:
+Browser-audit and optional PNG-export behavior:
 
 - validates a restrictive Content Security Policy in the generated document;
 - rejects scripts, event handlers, frames, forms, plugins, and `javascript:` URLs;
@@ -126,6 +126,8 @@ Rendering behavior, by default:
 - keeps the Chrome sandbox enabled;
 - refuses to overwrite an existing PNG unless `--force` is explicit;
 - caps dimensions and total render pixels.
+
+No PNG is created unless the user asks for one. The default artifact is HTML.
 
 Use `--allow-network` only when you actually want remote assets. Use `--no-sandbox` only inside a trusted isolated container. Read [SECURITY.md](./SECURITY.md) before rendering HTML from a source you do not trust, and [PRIVACY.md](./PRIVACY.md) for exactly what does and does not leave your machine.
 
@@ -187,6 +189,8 @@ Useful individual commands:
 | `npm run check:layout` | Audit every example at its recorded width |
 | `npm run audit:layout -- --html x.html --width 1040 --json` | Audit one document, machine-readable |
 | `node ../../scripts/build-gallery.mjs` | Regenerate the published gallery and prompt index |
+
+The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across seven themes in Chinese and English. Its PNGs are development review artifacts; normal skill calls still return HTML unless PNG is requested.
 
 ## Roadmap
 

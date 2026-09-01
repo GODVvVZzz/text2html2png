@@ -19,7 +19,7 @@ function usage() {
 Options:
   --html <path>       Input HTML file (required)
   --out <path>        Output PNG file (required)
-  --bg <css-color>    Padding/background color (default: #ffffff)
+  --bg <css-color>    Padding/background color; use auto for page CSS (default: auto)
   --width <px>        Initial viewport width, 320–3000 (default: 920)
   --padding <px>      Padding around .wrap, 0–160 (default: 32)
   --scale <n>         Device scale factor, 1–4 (default: 2)
@@ -43,7 +43,7 @@ export function parseArgs(argv) {
   const args = {
     html: null,
     out: null,
-    bg: "#ffffff",
+    bg: "auto",
     width: 920,
     padding: 32,
     scale: 2,
@@ -203,10 +203,12 @@ export async function renderScreenshot(args) {
     });
     await page.goto(documentUrl, { waitUntil: "load", timeout: 30_000 });
 
-    await page.evaluate((bg) => {
-      document.documentElement.style.backgroundColor = bg;
-      document.body.style.backgroundColor = bg;
-    }, args.bg);
+    if (args.bg !== "auto") {
+      await page.evaluate((bg) => {
+        document.documentElement.style.backgroundColor = bg;
+        document.body.style.backgroundColor = bg;
+      }, args.bg);
+    }
 
     await page.evaluate(async () => {
       if (document.fonts?.ready) {

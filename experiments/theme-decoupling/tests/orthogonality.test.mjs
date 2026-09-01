@@ -1,0 +1,65 @@
+import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
+import { mkdtemp, readFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { promisify } from "node:util";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { restyle } from "../scripts/restyle.mjs";
+import {
+  stripThemeBlock,
+  structureFingerprint,
+  themeDefinitions,
+  themesDir,
+  validateChartCss,
+  validateSources
+} from "../scripts/validate-orthogonality.mjs";
+
+const run = promisify(execFile);
+const testDir = path.dirname(fileURLToPath(import.meta.url));
+const experimentDir = path.resolve(testDir, "..");
+const buildScript = path.join(experimentDir, "scripts", "build.mjs");
+
+test("seven themes expose one identical token contract", async () => {
+  const result = await validateSources();
+  assert.equal(result.themes.length, 7);
+  assert.equal(result.tokenCount, 47);
+});
+
+test("themes show emoji by default while retaining the SVG fallback", async () => {
+  const warm = themeDefinitions(await readFile(path.join(themesDir, "warm.css"), "utf8"), "warm");
+  assert.equal(warm.get("--t-emoji-display"), "inline-flex");
+  assert.equal(warm.get("--t-svg-display"), "none");
+});
+
+test("chart CSS rejects a literal color outside the theme", () => {
+  assert.throws(
+    () => validateChartCss(".x { color: #fff; }", new Set()),
+    /literal colors/
+  );
+});
+
+test("build keeps source invariant across themes and DOM invariant across locales", async () => {
+  const output = await mkdtemp(path.join(os.tmpdir(), "t2h-theme-proof-"));
+  await run(process.execPath, [buildScript, "--out", output]);
+  const zhWarm = await readFile(path.join(output, "zh-warm.html"), "utf8");
+  const zhDark = await readFile(path.join(output, "zh-dark.html"), "utf8");
+  const enWarm = await readFile(path.join(output, "en-warm.html"), "utf8");
+  assert.equal(stripThemeBlock(zhWarm), stripThemeBlock(zhDark));
+  assert.equal(structureFingerprint(zhWarm), structureFingerprint(enWarm));
+  assert.match(zhWarm, /📊/);
+  assert.match(zhWarm, /col-icon-svg/);
+});
+
+test("restyle changes only the canonical theme block", async () => {
+  const output = await mkdtemp(path.join(os.tmpdir(), "t2h-restyle-proof-"));
+  await run(process.execPath, [buildScript, "--out", output, "--theme", "warm", "--locale", "zh"]);
+  const input = path.join(output, "zh-warm.html");
+  const target = path.join(output, "zh-neon.html");
+  await restyle({ html: input, theme: "neon", out: target, force: false });
+  const before = await readFile(input, "utf8");
+  const after = await readFile(target, "utf8");
+  assert.equal(stripThemeBlock(before), stripThemeBlock(after));
+  assert.match(after, /data-theme="neon"/);
+});

@@ -1,10 +1,10 @@
 interface:
   display_name: "Text2HTML2PNG"
-  short_description: "Turn structured text into polished diagrams and PNGs"
+  short_description: "Create polished HTML diagrams; export PNG on request"
   icon_small: "./assets/icon.svg"
   icon_large: "./assets/logo.svg"
   brand_color: "#7C3AED"
-  default_prompt: "Use $text2html2png to turn this content into a polished HTML diagram and PNG."
+  default_prompt: "Use $text2html2png to turn this content into a polished HTML diagram."
 
 policy:
   allow_implicit_invocation: true

@@ -5,13 +5,14 @@
     {
       "id": 1,
       "prompt": "帮我把发布流程画成图：产品确认范围 → 开发 → 代码评审 → 测试 → 灰度 → 全量上线。",
-      "expected_output": "A complete warm flowchart delivered as safe HTML and PNG without blocking on a style questionnaire.",
+      "expected_output": "A complete warm flowchart delivered as safe HTML without blocking on a style questionnaire or generating an unrequested PNG.",
       "files": [],
       "assertions": [
         "Selects flowchart and a suitable style.",
         "Preserves the six supplied stages and their order.",
         "Does not invent durations, owners, metrics, or extra gates.",
-        "Validates and visually inspects the PNG."
+        "Validates and audits the rendered HTML.",
+        "Does not generate a PNG because the user did not request one."
       ]
     },
     {
@@ -54,6 +55,17 @@
       "assertions": [
         "Recognizes the statistical/scientific plotting boundary.",
         "Does not force the request into one of the eight static diagram types."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "把这个流程做成 HTML，并同时导出一张 4× PNG：Draft → Review → Publish。",
+      "expected_output": "A validated HTML flowchart plus a 4× PNG because the user explicitly requested the image export.",
+      "files": [],
+      "assertions": [
+        "Produces the HTML deliverable first.",
+        "Exports a PNG at the requested scale.",
+        "Preserves the three supplied stages without adding steps."
       ]
     }
   ]

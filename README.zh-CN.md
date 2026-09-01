@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./skills/text2html2png/assets/logo.svg" width="720" alt="text2html2png">
-  <p><strong>把任意文字变成一张能直接粘贴的图。</strong><br>
-  由你的 agent 生成 HTML,本机 Chrome 渲染 PNG,内容不出本机。</p>
+  <p><strong>把任意文字变成可编辑的 HTML 图表。</strong><br>
+  只有明确需要时才导出 PNG,内容不出本机。</p>
   <p>
     <a href="./README.md">English</a>
     ·
@@ -22,13 +22,13 @@
   </p>
 </div>
 
-![一句话描述变成精美图表、可编辑 HTML 和高清 PNG](./skills/text2html2png/assets/hero.svg)
+![一句话描述变成精美的可编辑 HTML 图表,需要时再导出高清 PNG](./skills/text2html2png/assets/hero.svg)
 
-大多数绘图工具要你动手画,这个只要你把事情说清楚。你把一份计划、一段规格、一次会议记录或一组数字贴进去;你的 agent 选择合适的图表类型,保持你给出的事实不变,生成一份自包含的 HTML,再用你本机已有的浏览器渲染出裁剪干净的 PNG。
+大多数绘图工具要你动手画,这个只要你把事情说清楚。你把一份计划、一段规格、一次会议记录或一组数字贴进去;你的 agent 选择合适的图表类型,保持你给出的事实不变,默认生成一份自包含的 HTML。只有你明确需要可粘贴图片时,才用本机浏览器额外渲染 PNG。
 
 - **8 种图表** — 流程图、对比、时间线、架构图、KPI 看板、甘特图、组织架构、漏斗
 - **7 套视觉风格** — warm、dark、minimal、editorial、neon、paper、glass
-- **两种可用产物** — 需要精修就改 HTML,需要交付就粘 PNG
+- **HTML 默认、PNG 按需** — 默认只写一份可编辑 HTML;需要图片时再说“同时导出 PNG”或传 `--png`
 - **质量是量出来的,不是赌出来的** — 基于浏览器的版面质检既是工作流的必经步骤,也是每个已发布示例的 CI 门禁
 - **本机优先** — 无托管渲染 API、无 API Key、无遥测,渲染期间网络全部拦截
 
@@ -42,7 +42,7 @@ npx skills add GODVvVZzz/text2html2png -g -y
 
 > 把我们的上线计划做成甘特图:调研第 1–2 周,设计第 2–4 周,开发第 4–7 周,内测第 8 周。用 paper 风格。
 
-你会得到两个文件:可编辑的 `.html` 和可直接粘贴的 `.png`。
+默认会得到一份可编辑的 `.html`。如果明确说“同时导出 PNG”或传 `--png`,才会得到两个文件。
 
 `skills` CLI 会按你指定的 agent 放置技能。指定单个 agent:
 
@@ -51,7 +51,7 @@ npx skills add GODVvVZzz/text2html2png -g -a codex -y
 npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 ```
 
-**环境要求:** Node.js 22.12+,以及任意 Chrome 系浏览器(Chrome、Chromium、Edge 或 Brave)。首次渲染时,技能会在自己的目录里安装唯一的直接依赖 `puppeteer-core`(由提交的 lockfile 锁定版本)。它驱动你已装好的浏览器,不会额外下载浏览器。
+**环境要求:** 浏览器版面质检或按需导出 PNG 时,需要 Node.js 22.12+ 和任意 Chrome 系浏览器(Chrome、Chromium、Edge 或 Brave)。首次执行浏览器检查时,技能会在自己的目录里安装唯一的直接依赖 `puppeteer-core`(由提交的 lockfile 锁定版本)。它驱动你已装好的浏览器,不会额外下载浏览器。
 
 ## 看看能做成什么样
 
@@ -117,7 +117,7 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 
 ## 隐私与安全
 
-默认渲染行为:
+浏览器版面质检与按需 PNG 导出行为:
 
 - 校验生成文档中的严格 Content Security Policy;
 - 拒绝脚本、事件属性、iframe、form、插件和 `javascript:` URL;
@@ -126,6 +126,8 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 - 保留 Chrome sandbox;
 - 未显式传入 `--force` 时拒绝覆盖已存在的 PNG;
 - 限制尺寸与总渲染像素。
+
+除非用户明确提出,否则不会生成 PNG;默认产物始终是 HTML。
 
 只有确实需要远程素材时才使用 `--allow-network`。只有在可信的隔离容器内才使用 `--no-sandbox`。渲染来源不可信的 HTML 前请先读 [SECURITY.md](./SECURITY.md);想确认什么会、什么不会离开本机,请看 [PRIVACY.md](./PRIVACY.md)。
 
@@ -179,6 +181,8 @@ npm run check
 | `npm run check:layout` | 按记录的宽度质检每个示例 |
 | `npm run audit:layout -- --html x.html --width 1040 --json` | 质检单个文档,输出机器可读结果 |
 | `node ../../scripts/build-gallery.mjs` | 重新生成画廊页与 prompt 索引 |
+
+已验证的[主题/图表正交性试验](./experiments/theme-decoupling/README.md)使用同一份 comparison 结构生成中英文各 7 个主题。试验 PNG 只用于开发评审;正常调用仍默认返回 HTML,只有明确要求时才导出 PNG。
 
 ## 路线图
 

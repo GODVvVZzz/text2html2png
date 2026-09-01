@@ -1,16 +1,15 @@
 ---
 name: text2html2png
-description: Turn structured prose into polished, self-contained HTML diagrams and high-resolution PNGs. Use for static flowcharts, comparisons, timelines, architecture maps, KPI dashboards, Gantt charts, org charts, and funnels, including Chinese requests such as 流程图、架构图、甘特图、组织架构图 and 漏斗图. Do not use for statistical or scientific plots, geographic maps, slide decks, editable Mermaid/draw.io/SVG deliverables, or edits to existing images.
+description: Turn structured prose into polished, self-contained HTML diagrams, with an optional high-resolution PNG export only when the user requests an image. Use for static flowcharts, comparisons, timelines, architecture maps, KPI dashboards, Gantt charts, org charts, and funnels, including Chinese requests such as 流程图、架构图、甘特图、组织架构图 and 漏斗图. Do not use for statistical or scientific plots, geographic maps, slide decks, editable Mermaid/draw.io/SVG deliverables, or edits to existing images.
 metadata:
-  short-description: Text to polished HTML diagrams and PNGs
+  short-description: Text to polished HTML diagrams; PNG on request
 ---
 
 # text2html2png
 
-Create two deliverables from the user's content:
+Create an editable, self-contained HTML diagram by default. Render a tightly cropped, high-resolution PNG only when the user explicitly requests PNG, an image file, a screenshot, or passes `--png`.
 
-1. an editable, self-contained HTML diagram;
-2. a tightly cropped, high-resolution PNG rendered locally in Chrome.
+Do not generate a PNG merely because this skill is named `text2html2png`, or because the user generally asks to “draw a diagram.” HTML is the default deliverable.
 
 The skill supports eight diagram types and seven visual styles. Prefer a complete first result over a style questionnaire: infer a sensible chart and style unless the user specifies them or missing information would change the meaning.
 
@@ -23,7 +22,8 @@ Honor explicit options when present:
 | `--style` | `warm`, `dark`, `minimal`, `editorial`, `neon`, `paper`, `glass` |
 | `--chart` | `auto`, `flowchart`, `comparison`, `timeline`, `architecture`, `dashboard`, `gantt`, `org-chart`, `funnel` |
 | `--output` | Output directory |
-| `--scale` | `1`–`4`; use `4` for print-ready output when memory permits |
+| `--png` | Also export a PNG; disabled unless explicitly requested |
+| `--scale` | PNG only: `1`–`4`; use `4` for print-ready output when memory permits |
 
 If the conversation already established a style, reuse it and briefly say so. An explicit `--style` replaces the conversation style.
 
@@ -71,12 +71,13 @@ Read [references/design-philosophy.md](references/design-philosophy.md) only for
 - Treat user text as text: HTML-escape `& < > " '` before interpolation.
 - Do not include `<script>`, event-handler attributes, `javascript:` URLs, iframes, objects, or embeds.
 - Default to local font stacks and inline SVG shapes. Do not load remote fonts, images, scripts, or styles unless the user explicitly requests network-backed assets.
+- Use emoji when it improves scanability or the user prefers the friendlier visual language. Keep one visible icon style; use `currentColor` SVG when strict cross-platform consistency matters.
 - Use CSS Grid/Flexbox for primary layout. Derive connector geometry from the actual node count and layout; never copy fixed coordinates that only fit an example.
 - Keep titles centered, body copy left-aligned, and relationships unambiguous.
 - Use honest whitespace. Do not fabricate content merely to make the canvas look full.
 - Save as `<safe-topic>-<YYYYMMDD-HHMMSS>.html` in the chosen output directory.
 
-### 5. Validate and render
+### 5. Validate the HTML
 
 All scripts live under this skill directory. Resolve the directory containing this `SKILL.md` as `SKILL_DIR`.
 
@@ -92,33 +93,7 @@ Validate before opening the HTML in a browser:
 node "${SKILL_DIR}/scripts/validate-html.mjs" --html <html_path>
 ```
 
-Render the PNG:
-
-```bash
-node "${SKILL_DIR}/scripts/screenshot.mjs" \
-  --html <html_path> \
-  --out <png_path> \
-  --bg <style_background> \
-  --width <viewport_width> \
-  --padding 32 \
-  --scale 4
-```
-
-Defaults:
-
-| Style | Background | Width |
-|---|---:|---:|
-| `warm` | `#faf6ee` | 920 |
-| `dark` | `#0d1117` | 920 |
-| `minimal` | `#ffffff` | 920 |
-| `editorial` | `#f8f5f0` | 920 |
-| `neon` | `#0a0015` | 920 |
-| `paper` | `#f5f0e6` | 920 |
-| `glass` | `#e8eaf0` | 920 |
-
-Use width `1040` for a horizontal flowchart or wide architecture diagram. The renderer blocks network requests and JavaScript by default, preserves the Chrome sandbox, refuses to overwrite files unless `--force` is passed, and accepts `--chrome` or `CHROME_PATH` when browser discovery needs help.
-
-### 6. Audit the rendered layout, then look at it
+### 6. Audit the rendered HTML, then look at it
 
 Run the layout audit at the same width used for the render. It measures the document in the real browser and reports defects that are invisible in source review:
 
@@ -142,16 +117,44 @@ The audit exits non-zero when it finds an error. Each finding names the element,
 | `EMPTY_FILLER` | warning | A decorated box with no content. |
 | `EXTREME_ASPECT_RATIO` | warning | The canvas is far too wide or tall to read. |
 
-Fix the HTML and rerender until there are no errors. Treat warnings as defects unless the style deliberately requires them, and say which warning you accepted and why.
+Fix the HTML and rerun the audit until there are no errors. Treat warnings as defects unless the style deliberately requires them, and say which warning you accepted and why.
 
-Then inspect the PNG yourself. The audit cannot judge meaning, so still check for:
+Then inspect the rendered HTML yourself. The audit cannot judge meaning, so still check for:
 
 - unsupported claims or content not grounded in the user's input;
 - ambiguous flow direction or orphan connectors;
 - meaning conveyed only by colour;
 - inconsistent spacing or accidental dead zones.
 
-Deliver both files and summarize the selected chart/style in one sentence.
+### 7. Export PNG only when explicitly requested
+
+PNG is opt-in. Export it only when the user explicitly asks for a PNG, image file, screenshot, paste-ready image, or passes `--png`. Otherwise stop after the validated HTML is complete.
+
+```bash
+node "${SKILL_DIR}/scripts/screenshot.mjs" \
+  --html <html_path> \
+  --out <png_path> \
+  --bg <style_background> \
+  --width <viewport_width> \
+  --padding 32 \
+  --scale 4
+```
+
+| Style | Screenshot background | Width |
+|---|---:|---:|
+| `warm` | `#faf6ee` | 920 |
+| `dark` | `#0d1117` | 920 |
+| `minimal` | `#ffffff` | 920 |
+| `editorial` | `#f8f5f0` | 920 |
+| `neon` | `#0a0015` | 920 |
+| `paper` | `#f5f0e6` | 920 |
+| `glass` | `#e8eaf0` | 920 |
+
+Use width `1040` for a horizontal flowchart or wide architecture diagram. The renderer blocks network requests and JavaScript by default, preserves the Chrome sandbox, refuses to overwrite files unless `--force` is passed, and accepts `--chrome` or `CHROME_PATH` when browser discovery needs help.
+
+Inspect the PNG after export and fix any raster-only clipping or background problem.
+
+Deliver the HTML and summarize the selected chart/style in one sentence. Include the PNG path only when PNG was explicitly requested.
 
 ## Configuration
 

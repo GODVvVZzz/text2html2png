@@ -1,7 +1,7 @@
 {
   "name": "text2html2png",
   "version": "1.0.0",
-  "description": "Turn structured text into polished HTML diagrams and high-resolution PNGs.",
+  "description": "Turn structured text into polished HTML diagrams, with optional PNG export on request.",
   "author": {
     "name": "GODVvVZzz",
     "url": "https://github.com/GODVvVZzz"
@@ -19,16 +19,16 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Text2HTML2PNG",
-    "shortDescription": "Text to polished HTML diagrams and PNGs.",
-    "longDescription": "Create local-first flowcharts, comparisons, timelines, architecture maps, dashboards, Gantt charts, org charts, and funnels as editable HTML plus high-resolution PNG.",
+    "shortDescription": "Polished HTML diagrams with optional PNG export.",
+    "longDescription": "Create local-first flowcharts, comparisons, timelines, architecture maps, dashboards, Gantt charts, org charts, and funnels as editable HTML. Export a high-resolution PNG only when requested.",
     "developerName": "GODVvVZzz",
     "category": "Productivity",
     "capabilities": [],
     "websiteURL": "https://github.com/GODVvVZzz/text2html2png",
     "privacyPolicyURL": "https://github.com/GODVvVZzz/text2html2png/blob/main/PRIVACY.md",
     "defaultPrompt": [
-      "Turn this process into a polished flowchart and PNG.",
-      "Map this system as a dark architecture diagram.",
+      "Turn this process into a polished HTML flowchart.",
+      "Map this system as a dark architecture diagram and export a PNG.",
       "Compare these options in a clear visual matrix."
     ],
     "brandColor": "#7C3AED",

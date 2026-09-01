@@ -13,9 +13,11 @@ All notable changes to the public project will be documented here.
 - 1280×640 social preview card, rendered by the skill's own renderer from committed HTML.
 - Animated README strip built from six real committed renderings.
 - `PRIVACY.md` and a dark logo variant, both previously referenced by the plugin manifest but missing.
+- Theme/chart orthogonality proof: one comparison structure, 45 identical theme tokens, Chinese and English fixtures, atomic restyling, and strict 2×7 visual validation.
 
 ### Changed
 
+- HTML is now the default user deliverable. PNG export runs only when the user explicitly requests PNG, an image, a screenshot, or passes `--png`.
 - `npm run check` now also validates the example manifest and layout-audits every published example.
 - Step 6 of the skill workflow requires the layout audit before human review, with the full rule table.
 - The link checker validates `.codex-plugin/plugin.json` asset and privacy-policy paths, not only Markdown links.
@@ -51,4 +53,3 @@ All notable changes to the public project will be documented here.
 - A shared style token contract so any theme can be paired with any chart type.
 - Content rules that prohibit invented facts, metrics, names, dates, trends, and recommendations.
 - CI, release packaging, issue templates, security policy, and contribution guide.
-

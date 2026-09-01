@@ -1,0 +1,9 @@
+[
+  {"id":"warm","name":"Warm archive","background":"#faf6ee"},
+  {"id":"dark","name":"Technical graphite","background":"#0b1119"},
+  {"id":"minimal","name":"Ink grid","background":"#ffffff"},
+  {"id":"editorial","name":"Editorial folio","background":"#f7f1e8"},
+  {"id":"neon","name":"Phosphor signal lab","background":"#071411"},
+  {"id":"paper","name":"Field notebook","background":"#f3ecd9"},
+  {"id":"glass","name":"Optical proof sheet","background":"#e7edf1"}
+]
