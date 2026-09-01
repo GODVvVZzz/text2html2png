@@ -1,0 +1,10 @@
+interface:
+  display_name: "Text2HTML2PNG"
+  short_description: "Turn structured text into polished diagrams and PNGs"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/logo.svg"
+  brand_color: "#7C3AED"
+  default_prompt: "Use $text2html2png to turn this content into a polished HTML diagram and PNG."
+
+policy:
+  allow_implicit_invocation: true

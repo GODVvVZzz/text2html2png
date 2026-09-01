@@ -1,0 +1,31 @@
+name: Release skill package
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build .skill archive
+        run: |
+          mkdir -p dist/package/text2html2png
+          cp -R skills/text2html2png/. dist/package/text2html2png/
+          rm -rf dist/package/text2html2png/node_modules
+          cd dist/package
+          zip -r ../text2html2png.skill text2html2png
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "${GITHUB_REF_NAME}"
+          dist/text2html2png.skill
+          --generate-notes
+          --title "text2html2png ${GITHUB_REF_NAME}"

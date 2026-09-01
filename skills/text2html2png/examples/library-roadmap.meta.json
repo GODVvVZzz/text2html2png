@@ -1,0 +1,11 @@
+{
+  "id": "library-roadmap",
+  "title": "Six milestones to a plugin API",
+  "chart": "timeline",
+  "style": "editorial",
+  "summary": "An alternating milestone timeline where every version, quarter, and scope note is taken from the request, with nothing added between milestones.",
+  "prompt": "Draw an editorial timeline of the public roadmap for our open-source charting library, subtitled \"first render to extensible core\", six milestones: 2031 Q2 v0.1 first render (line and bar marks from a plain number array, one canvas target, no interaction or theming); 2031 Q4 v0.4 scales and axes (linear, time, ordinal scales with tick labels derived from the data range); 2032 Q1 v0.7 interaction layer (hover, tooltip, range selection, keyboard reachable and announced to screen readers); 2032 Q3 v1.0 stable API (semantic versioning starts, mark/scale/theme contracts frozen for 1.x); 2033 Q1 v1.4 server rendering (same definition renders to static SVG without a browser, for documents and email digests); 2033 Q3 v2.0 plugin API (marks, scales, and themes ship as separate packages, so the core stops growing with every new chart). Close with a note that quarters are targets, not commitments, that scope moves before a date does, and that every milestone ships from the main branch.",
+  "width": 980,
+  "background": "#f8f5f0",
+  "scale": 2
+}

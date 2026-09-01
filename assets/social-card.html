@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>text2html2png social card</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --ink: #f8fafc;
+      --muted: #aab5c8;
+      --cyan: #38bdf8;
+      --violet: #a855f7;
+      --pink: #f472b6;
+      --mint: #34d399;
+      --panel: #151b30;
+      --panel-2: #1c2440;
+      --line: #2c3556;
+    }
+    html, body { margin: 0; background: #0b1020; }
+    body { font-family: "Avenir Next", "Segoe UI", "PingFang SC", sans-serif; }
+
+    .wrap {
+      display: grid;
+      grid-template-columns: 1fr 448px;
+      align-items: center;
+      gap: 44px;
+      width: 1280px;
+      height: 640px;
+      padding: 56px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 6% 4%, rgba(56,189,248,.20), transparent 40%),
+        radial-gradient(circle at 94% 98%, rgba(168,85,247,.24), transparent 44%),
+        #0b1020;
+    }
+
+    .mark { display: flex; align-items: center; gap: 13px; margin-bottom: 24px; }
+    .glyph {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet) 52%, var(--pink));
+    }
+    .glyph span {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b1020;
+    }
+    .wordmark { font-size: 26px; font-weight: 800; letter-spacing: -.4px; }
+
+    h1 {
+      margin: 0;
+      font-size: 54px;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+    .gradient {
+      background: linear-gradient(96deg, var(--cyan), var(--violet) 56%, var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lede {
+      margin: 20px 0 0;
+      max-width: 610px;
+      color: #ccd5e5;
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .chips { display: flex; gap: 9px; margin-top: 22px; }
+    .chip {
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(21,27,48,.92);
+      color: #dde4f0;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .install {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 13px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #0f1526;
+      color: #a7ebff;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 17px;
+    }
+
+    /* Real miniature diagrams, not placeholder blocks: every panel carries the
+       same kind of labelled content the skill actually produces. */
+    .previews { display: grid; gap: 16px; }
+    .panel {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      box-shadow: 0 20px 44px rgba(0,0,0,.42);
+    }
+    .panel-title {
+      margin-bottom: 12px;
+      color: #97a3bd;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .step {
+      padding: 9px 8px 10px;
+      border-radius: 9px;
+      border-top: 3px solid var(--accent);
+      background: var(--panel-2);
+      color: #e6ecf7;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .gantt { display: grid; gap: 8px; }
+    .gantt-row { display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: 10px; }
+    .gantt-row span { color: #c3cddd; font-size: 12px; font-weight: 600; }
+    .track { height: 14px; border-radius: 7px; background: #232c4a; }
+    .fill {
+      height: 100%;
+      margin-left: var(--start);
+      width: var(--span);
+      border-radius: 7px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+    }
+
+    .funnel { display: grid; gap: 7px; }
+    .stage {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: var(--span);
+      padding: 7px 11px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, rgba(56,189,248,.9), rgba(168,85,247,.9));
+      color: #0b1020;
+      font-size: 12px;
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="text2html2png turns text into diagrams you can paste anywhere">
+    <section>
+      <div class="mark">
+        <div class="glyph"><span>&lt;&gt;</span></div>
+        <div class="wordmark">text2html2png</div>
+      </div>
+      <h1>Turn text into diagrams<br><span class="gradient">you can paste anywhere</span></h1>
+      <p class="lede">Your agent writes the HTML, local Chrome renders the PNG. Nothing leaves your machine.</p>
+      <div class="chips">
+        <div class="chip">8 chart types</div>
+        <div class="chip">7 visual themes</div>
+        <div class="chip">Local-first</div>
+      </div>
+      <div class="install">npx skills add GODVvVZzz/text2html2png -g</div>
+    </section>
+
+    <section class="previews">
+      <div class="panel">
+        <div class="panel-title">Flowchart</div>
+        <div class="flow">
+          <div class="step" style="--accent: var(--cyan)">Plan</div>
+          <div class="step" style="--accent: var(--violet)">Build</div>
+          <div class="step" style="--accent: var(--pink)">Review</div>
+          <div class="step" style="--accent: var(--mint)">Ship</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Gantt</div>
+        <div class="gantt">
+          <div class="gantt-row"><span>Research</span><div class="track"><div class="fill" style="--start: 0%; --span: 34%"></div></div></div>
+          <div class="gantt-row"><span>Design</span><div class="track"><div class="fill" style="--start: 28%; --span: 40%"></div></div></div>
+          <div class="gantt-row"><span>Build</span><div class="track"><div class="fill" style="--start: 60%; --span: 40%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Funnel</div>
+        <div class="funnel">
+          <div class="stage" style="--span: 100%"><span>Visited</span><span>48,200</span></div>
+          <div class="stage" style="--span: 72%"><span>Signed up</span><span>18,795</span></div>
+          <div class="stage" style="--span: 44%"><span>Activated</span><span>5,180</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

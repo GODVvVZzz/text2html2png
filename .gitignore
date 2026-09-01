@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build and test output
+dist/
+coverage/
+*.tmp
+*.log
+skills/text2html2png/tests/output/
+
+# Local agent state
+.claude/
+.text2html2png/
+
+# Secrets and local configuration
+.env
+.env.*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

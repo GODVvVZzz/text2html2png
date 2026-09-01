@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Release flow</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #faf6ee; }
+    body {
+      padding: 24px;
+      font-family: Georgia, "Songti SC", serif;
+      color: #2e2410;
+    }
+    .wrap { width: 760px; display: grid; gap: 14px; }
+    h1 { margin: 0; text-align: center; font-size: 28px; }
+    .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .step {
+      background: #fff;
+      border: 1px solid #e2d8c4;
+      border-top: 4px solid #c0622a;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .step strong { display: block; margin-bottom: 6px; }
+    .step span { color: #6a5a40; font-size: 14px; }
+    .summary {
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #4f2f12;
+      color: #fff8e9;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Release flow">
+    <h1>Release flow</h1>
+    <section class="flow">
+      <article class="step"><strong>Plan</strong><span>Define the change.</span></article>
+      <article class="step"><strong>Build</strong><span>Implement and review.</span></article>
+      <article class="step"><strong>Ship</strong><span>Verify and release.</span></article>
+    </section>
+    <div class="summary">A small synthetic fixture for renderer testing.</div>
+  </main>
+</body>
+</html>

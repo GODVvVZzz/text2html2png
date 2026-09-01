@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Adversarial cases</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #fff; }
+    body { padding: 20px; font-family: Georgia, serif; color: #1a1a1a; }
+    .wrap { width: 620px; }
+    h1 { font-size: 24px; margin: 0 0 16px; }
+
+    /* Case A: real text buried under an opaque panel. */
+    .stack { position: relative; height: 120px; margin-bottom: 20px; }
+    .buried { position: absolute; left: 0; top: 40px; width: 400px; font-size: 16px; }
+    .cover {
+      position: absolute;
+      left: 0;
+      top: 30px;
+      width: 420px;
+      height: 70px;
+      background: #1f2937;
+      border-radius: 10px;
+    }
+    .cover svg { margin: 20px; }
+
+    /* Case B: white text on a white card. */
+    .invisible-card { padding: 18px; background: #ffffff; border: 1px solid #eee; }
+    .invisible-card p { margin: 0; color: #ffffff; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Adversarial cases">
+    <h1>Two cases a geometry-only audit misses</h1>
+
+    <section class="stack">
+      <p class="buried">Revenue target for the region is 4,200 units.</p>
+      <div class="cover"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#60a5fa"/></svg></div>
+    </section>
+
+    <section class="invisible-card">
+      <p>Backlog at week end was 96 tickets.</p>
+    </section>
+  </main>
+</body>
+</html>

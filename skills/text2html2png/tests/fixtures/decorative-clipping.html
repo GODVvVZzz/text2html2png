@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Legitimate decorative clipping</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #0d1117; }
+    body { padding: 24px; font-family: "Avenir Next", sans-serif; color: #e6edf3; }
+    .wrap { width: 560px; }
+    h1 { margin: 0 0 16px; font-size: 24px; }
+
+    /* A perfectly ordinary card: a rounded surface with a decorative gradient
+       glow that is intentionally clipped by the card's own overflow. */
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px 24px;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      background: #161b22;
+    }
+    .glow {
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(88,166,255,.45), transparent 70%);
+      pointer-events: none;
+    }
+    .card h2 { margin: 0 0 8px; font-size: 19px; }
+    .card p { margin: 0; color: #b9c4d0; font-size: 15px; }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Legitimate decorative clipping">
+    <h1>A visually flawless card</h1>
+    <section class="card">
+      <div class="glow"></div>
+      <h2>Backlog at week end</h2>
+      <p>96 tickets remained open, down from 118 the week before.</p>
+    </section>
+  </main>
+</body>
+</html>

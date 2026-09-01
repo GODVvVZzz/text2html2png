@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Deliberately broken layout</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #ffffff; }
+    body { padding: 20px; font-family: Georgia, serif; color: #222222; }
+    .wrap { width: 600px; position: relative; }
+    h1 { margin: 0 0 12px; font-size: 26px; }
+
+    /* Escapes the capture root on the right. */
+    .escapes { width: 900px; height: 40px; background: #dbeafe; }
+
+    /* Crops its own text with a fixed height. */
+    .clipped { width: 200px; height: 18px; overflow: hidden; background: #f1f5f9; }
+
+    /* Hides a fact behind an ellipsis. */
+    .truncated {
+      width: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background: #f1f5f9;
+    }
+
+    /* Below the readability floor. */
+    .tiny { font-size: 7px; }
+
+    /* A decorated box that carries no information. */
+    .filler { width: 300px; height: 90px; background: #ede9fe; border-radius: 12px; }
+
+    /* Two labels stacked on top of each other. */
+    .collide { position: relative; height: 40px; }
+    .collide span { position: absolute; left: 10px; top: 8px; }
+    .collide span + span { left: 16px; top: 12px; }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Deliberately broken layout">
+    <h1>Broken layout fixture</h1>
+    <div class="escapes"></div>
+    <p class="clipped">This sentence is taller than the box that contains it, so part of it disappears.</p>
+    <p class="truncated">Quarterly revenue target for the region</p>
+    <p class="tiny">Unreadable footnote text.</p>
+    <div class="filler"></div>
+    <div class="collide"><span>Overlapping label</span><span>Overlapping label</span></div>
+  </main>
+</body>
+</html>

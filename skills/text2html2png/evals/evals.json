@@ -1,0 +1,60 @@
+{
+  "skill_name": "text2html2png",
+  "dataset_note": "All prompts are synthetic public test cases.",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "帮我把发布流程画成图：产品确认范围 → 开发 → 代码评审 → 测试 → 灰度 → 全量上线。",
+      "expected_output": "A complete warm flowchart delivered as safe HTML and PNG without blocking on a style questionnaire.",
+      "files": [],
+      "assertions": [
+        "Selects flowchart and a suitable style.",
+        "Preserves the six supplied stages and their order.",
+        "Does not invent durations, owners, metrics, or extra gates.",
+        "Validates and visually inspects the PNG."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Compare PostgreSQL and MySQL on performance, extensibility, JSON support, ecosystem, and learning cost. I have not supplied benchmarks and I am not asking you to pick a winner.",
+      "expected_output": "A neutral comparison layout using only grounded statements or clearly marked missing information.",
+      "files": [],
+      "assertions": [
+        "Does not fabricate benchmark numbers.",
+        "Does not add a recommended badge or declare a winner.",
+        "Aligns the five supplied comparison dimensions."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a dark architecture diagram: Web client → API gateway → User service and Order service. Both services use Redis; each has its own PostgreSQL database.",
+      "expected_output": "A layered architecture diagram with the exact supplied components and relationships.",
+      "files": [],
+      "assertions": [
+        "Uses dark architecture styling.",
+        "Shows two services, one shared Redis, and two separate PostgreSQL databases.",
+        "Does not invent protocols, cloud providers, regions, or ports."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "做一个数据看板，指标名是活跃用户、成功率、平均时延，但我暂时没有提供具体数值。",
+      "expected_output": "A truthful response that asks for values or creates a clearly labeled structural mockup without fake metrics.",
+      "files": [],
+      "assertions": [
+        "Does not invent metric values or trends.",
+        "Makes missing values explicit if a structural mockup is produced."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Plot a regression scatter chart with confidence intervals from this CSV.",
+      "expected_output": "Route to a statistical plotting workflow rather than using text2html2png.",
+      "files": [],
+      "assertions": [
+        "Recognizes the statistical/scientific plotting boundary.",
+        "Does not force the request into one of the eight static diagram types."
+      ]
+    }
+  ]
+}

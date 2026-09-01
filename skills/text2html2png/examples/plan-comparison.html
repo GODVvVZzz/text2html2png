@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Choosing a plan</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card-bg: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555555;
+      --text-muted: #6b6b6b;
+      --border-base: #e0e0e0;
+      --border-strong: #1a1a1a;
+      --accent: #1a1a1a;
+      --accent-blue: #1a1a1a;
+      --arrow-color: #555555;
+      --success: #2f2f2f;
+      --minor: #666666;
+      --critical: #111111;
+      --s1: #111111;
+      --s2: #2f2f2f;
+      --s3: #4a4a4a;
+      --s4: #666666;
+      --s5: #7a7a7a;
+      --s6: #333333;
+      --s7: #595959;
+      --rule-faint: #ededed;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; background: var(--bg); }
+
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px;
+      color: var(--text-primary);
+      font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: 1040px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      padding: 34px 36px 30px;
+      background: var(--card-bg);
+    }
+
+    /* ---------- Header ---------- */
+
+    .head { text-align: center; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+    }
+
+    .lede {
+      margin: 10px auto 0;
+      max-width: 560px;
+      color: var(--text-secondary);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .head-rule {
+      height: 2px;
+      margin-top: 18px;
+      background: var(--border-strong);
+    }
+
+    /* ---------- Matrix ---------- */
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 190px repeat(3, 1fr);
+      grid-template-rows: auto repeat(6, auto);
+      gap: 0 14px;
+    }
+
+    .rail,
+    .compare-col {
+      grid-row: 1 / span 7;
+      display: grid;
+      grid-template-rows: subgrid;
+    }
+
+    /* Criteria rail: label column, no card surface. */
+
+    .rail-head {
+      display: flex;
+      align-items: flex-end;
+      padding: 0 0 12px;
+      border-bottom: 1px solid var(--rule-faint);
+    }
+
+    .rail-head span {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .crit {
+      display: flex;
+      align-items: center;
+      min-height: 54px;
+      padding: 12px 14px 12px 0;
+      border-bottom: 1px solid var(--rule-faint);
+      color: var(--text-primary);
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .rail .crit:last-child { border-bottom: 0; }
+
+    /* Primary comparison surface. */
+
+    .compare-col {
+      border: 1.5px solid var(--border-base);
+      border-radius: 8px;
+      background: var(--card-bg);
+      overflow: hidden;
+    }
+
+    .col-head {
+      padding: 16px 18px 14px;
+      border-bottom: 1.5px solid var(--border-base);
+    }
+
+    .col-tier {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .tier-mark { display: block; }
+
+    .col-tier span {
+      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .col-name {
+      margin: 0;
+      color: var(--tone);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .col-note {
+      margin: 7px 0 0;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .cell {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 54px;
+      padding: 12px 18px;
+      border-top: 1px solid var(--rule-faint);
+      color: var(--text-primary);
+      font-size: 13.5px;
+      line-height: 1.35;
+    }
+
+    .col-head + .cell { border-top: 0; }
+
+    .num {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .unit {
+      color: var(--text-secondary);
+      font-size: 12.5px;
+    }
+
+    .word {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* ---------- Footnotes ---------- */
+
+    .notes {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 0 14px;
+      padding-top: 4px;
+    }
+
+    .notes-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .notes-body {
+      margin: 0;
+      max-width: 720px;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .notes-body strong { color: var(--text-primary); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Choosing a plan: Community, Team and Studio compared on six criteria">
+    <header class="head">
+      <p class="eyebrow">Plan comparison</p>
+      <h1>Choosing a plan</h1>
+      <p class="lede">Three tiers, measured on the same six criteria. Every figure below is illustrative.</p>
+      <div class="head-rule"></div>
+    </header>
+
+    <section class="matrix" aria-label="Comparison matrix">
+      <div class="rail">
+        <div class="rail-head"><span>Criteria</span></div>
+        <div class="crit">Seats included</div>
+        <div class="crit">Active projects</div>
+        <div class="crit">Storage</div>
+        <div class="crit">Support response</div>
+        <div class="crit">Price, monthly</div>
+        <div class="crit">Price, annual</div>
+      </div>
+
+      <div class="compare-col" style="--tone: var(--s3);">
+        <div class="col-head">
+          <div class="col-tier">
+            <svg class="tier-mark" width="26" height="14" viewBox="0 0 26 14" aria-hidden="true" focusable="false">
+              <rect x="0" y="8" width="6" height="6" fill="#4a4a4a"></rect>
+              <rect x="10" y="4" width="6" height="10" fill="#d8d8d8"></rect>
+              <rect x="20" y="0" width="6" height="14" fill="#d8d8d8"></rect>
+            </svg>
+            <span>Tier 1</span>
+          </div>
+          <h2 class="col-name">Community</h2>
+          <p class="col-note">Self-hosted, for solo work and evaluation.</p>
+        </div>
+        <div class="cell"><span class="num">3</span></div>
+        <div class="cell"><span class="num">5</span></div>
+        <div class="cell"><span class="num">2</span><span class="unit">GB</span></div>
+        <div class="cell"><span class="word">Community forum</span></div>
+        <div class="cell"><span class="num">$0</span></div>
+        <div class="cell"><span class="num">$0</span></div>
+      </div>
+
+      <div class="compare-col" style="--tone: var(--s2);">
+        <div class="col-head">
+          <div class="col-tier">
+            <svg class="tier-mark" width="26" height="14" viewBox="0 0 26 14" aria-hidden="true" focusable="false">
+              <rect x="0" y="8" width="6" height="6" fill="#2f2f2f"></rect>
+              <rect x="10" y="4" width="6" height="10" fill="#2f2f2f"></rect>
+              <rect x="20" y="0" width="6" height="14" fill="#d8d8d8"></rect>
+            </svg>
+            <span>Tier 2</span>
+          </div>
+          <h2 class="col-name">Team</h2>
+          <p class="col-note">Shared projects for a small group.</p>
+        </div>
+        <div class="cell"><span class="num">25</span></div>
+        <div class="cell"><span class="num">50</span></div>
+        <div class="cell"><span class="num">100</span><span class="unit">GB</span></div>
+        <div class="cell"><span class="num">1</span><span class="unit">business day</span></div>
+        <div class="cell"><span class="num">$18</span><span class="unit">per seat</span></div>
+        <div class="cell"><span class="num">$180</span><span class="unit">per seat</span></div>
+      </div>
+
+      <div class="compare-col" style="--tone: var(--s1);">
+        <div class="col-head">
+          <div class="col-tier">
+            <svg class="tier-mark" width="26" height="14" viewBox="0 0 26 14" aria-hidden="true" focusable="false">
+              <rect x="0" y="8" width="6" height="6" fill="#111111"></rect>
+              <rect x="10" y="4" width="6" height="10" fill="#111111"></rect>
+              <rect x="20" y="0" width="6" height="14" fill="#111111"></rect>
+            </svg>
+            <span>Tier 3</span>
+          </div>
+          <h2 class="col-name">Studio</h2>
+          <p class="col-note">Larger groups that need a response time.</p>
+        </div>
+        <div class="cell"><span class="word">Unlimited</span></div>
+        <div class="cell"><span class="word">Unlimited</span></div>
+        <div class="cell"><span class="num">1</span><span class="unit">TB</span></div>
+        <div class="cell"><span class="num">4</span><span class="unit">hours</span></div>
+        <div class="cell"><span class="num">$49</span><span class="unit">per seat</span></div>
+        <div class="cell"><span class="num">$490</span><span class="unit">per seat</span></div>
+      </div>
+    </section>
+
+    <section class="notes">
+      <div class="notes-label">How to read it</div>
+      <p class="notes-body">Seats and projects are hard caps. <strong>Support response</strong> is the target time to a first reply during business hours; Community has no target. Annual pricing bills ten months per seat, which is why <strong>$18</strong> monthly becomes <strong>$180</strong> a year and <strong>$49</strong> becomes <strong>$490</strong>.</p>
+    </section>
+  </main>
+</body>
+</html>

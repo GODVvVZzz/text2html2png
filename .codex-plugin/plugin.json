@@ -1,0 +1,45 @@
+{
+  "name": "text2html2png",
+  "version": "1.0.0",
+  "description": "Turn structured text into polished HTML diagrams and high-resolution PNGs.",
+  "author": {
+    "name": "GODVvVZzz",
+    "url": "https://github.com/GODVvVZzz"
+  },
+  "homepage": "https://github.com/GODVvVZzz/text2html2png",
+  "repository": "https://github.com/GODVvVZzz/text2html2png",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "diagram",
+    "html",
+    "png",
+    "visualization"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Text2HTML2PNG",
+    "shortDescription": "Text to polished HTML diagrams and PNGs.",
+    "longDescription": "Create local-first flowcharts, comparisons, timelines, architecture maps, dashboards, Gantt charts, org charts, and funnels as editable HTML plus high-resolution PNG.",
+    "developerName": "GODVvVZzz",
+    "category": "Productivity",
+    "capabilities": [],
+    "websiteURL": "https://github.com/GODVvVZzz/text2html2png",
+    "privacyPolicyURL": "https://github.com/GODVvVZzz/text2html2png/blob/main/PRIVACY.md",
+    "defaultPrompt": [
+      "Turn this process into a polished flowchart and PNG.",
+      "Map this system as a dark architecture diagram.",
+      "Compare these options in a clear visual matrix."
+    ],
+    "brandColor": "#7C3AED",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg",
+    "logoDark": "./assets/logo-dark.svg",
+    "screenshots": [
+      "./skills/text2html2png/assets/gallery/launch-plan.png",
+      "./skills/text2html2png/assets/gallery/support-snapshot.png",
+      "./skills/text2html2png/assets/gallery/signup-funnel.png",
+      "./skills/text2html2png/assets/gallery/studio-org.png"
+    ]
+  }
+}

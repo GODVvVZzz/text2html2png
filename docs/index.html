@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>text2html2png gallery — every diagram type, rendered locally</title>
+<meta name="description" content="Every published text2html2png example: the prompt, the editable HTML, and the rendered PNG. 8 chart types across 7 visual themes.">
+<meta property="og:title" content="text2html2png gallery">
+<meta property="og:description" content="Every published example: the prompt, the editable HTML, and the rendered PNG.">
+<meta property="og:image" content="https://raw.githubusercontent.com/GODVvVZzz/text2html2png/main/assets/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --bg: #0b1020;
+    --panel: #141a2e;
+    --panel-2: #1b2340;
+    --line: #2a3350;
+    --ink: #f4f7fc;
+    --muted: #a8b3c7;
+    --cyan: #38bdf8;
+    --violet: #a855f7;
+    --pink: #f472b6;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 "Avenir Next", "Segoe UI", "PingFang SC", system-ui, sans-serif;
+    background-image:
+      radial-gradient(circle at 6% 0%, rgba(56,189,248,.14), transparent 38%),
+      radial-gradient(circle at 96% 100%, rgba(168,85,247,.16), transparent 42%);
+    background-repeat: no-repeat;
+  }
+  a { color: var(--cyan); }
+  .shell { max-width: 1220px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  header .eyebrow {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 12px 0 0;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -1.4px;
+  }
+  h1 span {
+    background: linear-gradient(96deg, var(--cyan), var(--violet) 56%, var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede { max-width: 720px; margin: 18px 0 0; color: #cdd6e5; font-size: 19px; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .facts li {
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(20,26,46,.85);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .install {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #0f1526;
+    color: #a7ebff;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 15px;
+    overflow-x: auto;
+  }
+  .header-links { margin-top: 20px; font-size: 15px; }
+  .header-links a { margin-right: 18px; }
+
+  h2 {
+    margin: 64px 0 8px;
+    font-size: 26px;
+    letter-spacing: -.4px;
+  }
+  .section-note { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
+
+  /* Diagram aspect ratios range from 0.8 to 2.2, so an equal-height grid leaves
+     large dead zones under the wide cards. Masonry columns pack them tightly
+     without cropping or letterboxing anything. */
+  .grid {
+    columns: 3;
+    column-gap: 22px;
+  }
+  @media (max-width: 1080px) { .grid { columns: 2; } }
+  @media (max-width: 720px) { .grid { columns: 1; } }
+  .card {
+    break-inside: avoid;
+    margin: 0 0 22px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .shot { display: block; background: var(--panel-2); line-height: 0; }
+  .shot img { width: 100%; height: auto; display: block; }
+  .body { display: flex; flex-direction: column; gap: 10px; padding: 18px 20px 20px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .tag.chart { background: rgba(56,189,248,.16); color: #9adcff; }
+  .tag.theme { background: rgba(168,85,247,.18); color: #dcc0ff; }
+  .tag.size { background: rgba(148,163,184,.16); color: #cbd5e1; }
+  .card h3 { margin: 0; font-size: 20px; letter-spacing: -.3px; }
+  .summary { margin: 0; color: #c3cddc; font-size: 15px; }
+  details { border-top: 1px solid var(--line); padding-top: 12px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 14px; font-weight: 600; }
+  blockquote {
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    border-left: 3px solid var(--violet);
+    border-radius: 0 8px 8px 0;
+    background: #10162a;
+    color: #d6deec;
+    font-size: 14px;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 2px; font-size: 14px; font-weight: 600; }
+
+  .repro {
+    margin: 64px 0 0;
+    padding: 26px 28px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+  }
+  .repro h2 { margin-top: 0; }
+  pre {
+    margin: 0;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: #0f1526;
+    color: #d7e3f4;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 14px;
+    overflow-x: auto;
+  }
+  footer { margin-top: 56px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <p class="eyebrow">text2html2png gallery</p>
+    <h1>Every example, with the <span>prompt that made it</span></h1>
+    <p class="lede">These are real outputs of the skill, rendered locally in Chrome from the HTML committed next to them. Every figure is synthetic: no customer, employee, or company data appears anywhere.</p>
+    <ul class="facts">
+      <li>9 published examples</li>
+      <li>8/8 chart types</li>
+      <li>7/7 visual themes</li>
+      <li>Layout-audited in CI</li>
+    </ul>
+    <code class="install">npx skills add GODVvVZzz/text2html2png -g -y</code>
+    <p class="header-links">
+      <a href="https://github.com/GODVvVZzz/text2html2png">Repository</a>
+      <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/README.md">README</a>
+      <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/SKILL.md">SKILL.md</a>
+      <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/PRIVACY.md">Privacy</a>
+    </p>
+  </header>
+
+  <main>
+    <h2>The gallery</h2>
+    <p class="section-note">Open any prompt to see exactly what was asked for. Nothing here was hand-corrected after rendering beyond fixes the layout audit demanded.</p>
+    <div class="grid">
+      <article class="card">
+        <a class="shot" href="gallery/release-flow.png">
+          <img src="gallery/release-flow.png" alt="From idea to production, a flowchart diagram in the warm theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Flowchart</span>
+            <span class="tag theme">warm</span>
+            <span class="tag size">1040px</span>
+          </div>
+          <h3>From idea to production</h3>
+          <p class="summary">Six sequential gates, each with an explicit exit condition.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Create a warm flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/release-flow.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/release-flow.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/plan-comparison.png">
+          <img src="gallery/plan-comparison.png" alt="Choosing a plan, a comparison diagram in the minimal theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Comparison</span>
+            <span class="tag theme">minimal</span>
+            <span class="tag size">1040px</span>
+          </div>
+          <h3>Choosing a plan</h3>
+          <p class="summary">Three plan tiers aligned row by row on one shared set of criteria, with no invented winner.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Make a minimal comparison of three plans — Community, Team, Studio — on the same criteria: seats included, active projects, storage, support response, monthly price, annual price. Community: 3 seats, 5 projects, 2 GB, community forum only, $0; describe it as self-hosted, for solo work and evaluation. Team: 25 seats, 50 projects, 100 GB, 1 business day, $18 per seat monthly, $180 per seat annually; describe it as shared projects for a small group. Studio: unlimited seats and projects, 1 TB, 4 hours, $49 per seat monthly, $490 per seat annually; describe it as for larger groups that need a response time. Annual billing charges ten months per seat. Close with a short &quot;how to read it&quot; note: seats and projects are hard caps, support response is the target time to a first reply during business hours and Community has no target, and the ten-month rule is why $18 becomes $180 and $49 becomes $490. Title it &quot;Choosing a plan&quot; and do not declare a winner.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/plan-comparison.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/plan-comparison.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/library-roadmap.png">
+          <img src="gallery/library-roadmap.png" alt="Six milestones to a plugin API, a timeline diagram in the editorial theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Timeline</span>
+            <span class="tag theme">editorial</span>
+            <span class="tag size">980px</span>
+          </div>
+          <h3>Six milestones to a plugin API</h3>
+          <p class="summary">An alternating milestone timeline where every version, quarter, and scope note is taken from the request, with nothing added between milestones.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Draw an editorial timeline of the public roadmap for our open-source charting library, subtitled &quot;first render to extensible core&quot;, six milestones: 2031 Q2 v0.1 first render (line and bar marks from a plain number array, one canvas target, no interaction or theming); 2031 Q4 v0.4 scales and axes (linear, time, ordinal scales with tick labels derived from the data range); 2032 Q1 v0.7 interaction layer (hover, tooltip, range selection, keyboard reachable and announced to screen readers); 2032 Q3 v1.0 stable API (semantic versioning starts, mark/scale/theme contracts frozen for 1.x); 2033 Q1 v1.4 server rendering (same definition renders to static SVG without a browser, for documents and email digests); 2033 Q3 v2.0 plugin API (marks, scales, and themes ship as separate packages, so the core stops growing with every new chart). Close with a note that quarters are targets, not commitments, that scope moves before a date does, and that every milestone ships from the main branch.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/library-roadmap.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/library-roadmap.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/local-first-pipeline.png">
+          <img src="gallery/local-first-pipeline.png" alt="A local-first diagram pipeline, a architecture diagram in the dark theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Architecture</span>
+            <span class="tag theme">dark</span>
+            <span class="tag size">980px</span>
+          </div>
+          <h3>A local-first diagram pipeline</h3>
+          <p class="summary">How the skill itself works, and where your content stops travelling.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Create a dark architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/local-first-pipeline.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/local-first-pipeline.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/service-architecture.png">
+          <img src="gallery/service-architecture.png" alt="Service Architecture, a architecture diagram in the dark theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Architecture</span>
+            <span class="tag theme">dark</span>
+            <span class="tag size">920px</span>
+          </div>
+          <h3>Service Architecture</h3>
+          <p class="summary">Four labelled layers with per-service data ownership and no invented infrastructure.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Create a dark architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/service-architecture.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/service-architecture.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/support-snapshot.png">
+          <img src="gallery/support-snapshot.png" alt="Support desk weekly snapshot, a dashboard diagram in the glass theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Dashboard</span>
+            <span class="tag theme">glass</span>
+            <span class="tag size">1040px</span>
+          </div>
+          <h3>Support desk weekly snapshot</h3>
+          <p class="summary">A four-KPI weekly support snapshot where every delta, share, and total is derived from the stated intake, resolution, and backlog counts.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Build a glass dashboard for our weekly support desk snapshot, week 32 (Mon 2026-08-03 to Sun 2026-08-09): 1,284 tickets received against 1,206 the prior week, first-response median 42 min against 55 min, 1,194 of 1,306 resolutions inside the 24 h SLA target against 88.9% the prior week, and 96 tickets open at week end against 118. Add a per-channel intake breakdown with median first response (email 528 / 66 min, in-app chat 431 / 11 min, phone 196 / 4 min, community forum 129 / 148 min) and the open backlog by age (51 under 24 h, 29 at 1 to 3 days, 12 at 4 to 7 days, 4 over 7 days). Do not invent any figure beyond these.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/support-snapshot.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/support-snapshot.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/launch-plan.png">
+          <img src="gallery/launch-plan.png" alt="Community conference preparation plan, a gantt diagram in the paper theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Gantt</span>
+            <span class="tag theme">paper</span>
+            <span class="tag size">1040px</span>
+          </div>
+          <h3>Community conference preparation plan</h3>
+          <p class="summary">Seven workstreams on an eight-week axis, with finish-to-start arrows, deliberate overlaps, and three dated milestones.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Draw a paper-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis and mark the dependencies.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/launch-plan.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/launch-plan.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/studio-org.png">
+          <img src="gallery/studio-org.png" alt="A fourteen-person product studio, a org-chart diagram in the warm theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Org chart</span>
+            <span class="tag theme">warm</span>
+            <span class="tag size">1040px</span>
+          </div>
+          <h3>A fourteen-person product studio</h3>
+          <p class="summary">A three-level reporting tree where grouped practitioner cards and headcount badges add up to the stated total.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Draw a warm org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/studio-org.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/studio-org.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="shot" href="gallery/signup-funnel.png">
+          <img src="gallery/signup-funnel.png" alt="Landing page to activation, a funnel diagram in the neon theme" loading="lazy">
+        </a>
+        <div class="body">
+          <div class="tags">
+            <span class="tag chart">Funnel</span>
+            <span class="tag theme">neon</span>
+            <span class="tag size">920px</span>
+          </div>
+          <h3>Landing page to activation</h3>
+          <p class="summary">A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.</p>
+          <details>
+            <summary>The prompt that produced it</summary>
+            <blockquote>Make a neon funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 5,180 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.</blockquote>
+          </details>
+          <div class="links">
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/examples/signup-funnel.html">Editable HTML</a>
+            <a href="https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/assets/gallery/signup-funnel.png">Full-resolution PNG</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <section class="repro">
+      <h2>Reproduce every image</h2>
+      <p class="section-note">The gallery is generated, not curated by hand. Clone the repository and run:</p>
+      <pre>git clone https://github.com/GODVvVZzz/text2html2png.git
+cd text2html2png/skills/text2html2png
+npm ci
+npm run render:examples      # re-renders every full-resolution PNG from the committed HTML
+npm run check:layout         # measures each rendering for clipping, contrast, and overlap
+cd ../..
+node scripts/build-gallery.mjs   # rebuilds this page and the images on it</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>All example content is synthetic and created for this repository. Rendered locally with no hosted API and no telemetry.</p>
+  </footer>
+</div>
+</body>
+</html>

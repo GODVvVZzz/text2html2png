@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Node ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: skills/text2html2png
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: skills/text2html2png/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Run checks and Chrome smoke test
+        run: npm run check
+
+      - name: Inspect package allowlist
+        run: npm pack --dry-run
+
+  plugin-manifest:
+    name: Plugin manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+      - name: Validate required manifest fields
+        run: >-
+          node -e "const p=require('./.codex-plugin/plugin.json');
+          for (const k of ['name','version','description','skills']) if (!p[k]) throw new Error('missing '+k);
+          if (p.name !== 'text2html2png' || p.skills !== './skills/') throw new Error('unexpected manifest values');"
+
+      - name: Check local documentation links
+        run: node scripts/check-links.mjs
+
+  generated-docs:
+    name: Generated gallery is in sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+
+      # Regenerates the page and the prompt index from the example manifest
+      # without re-rendering images, then fails if either is stale.
+      - name: Regenerate gallery text output
+        run: node scripts/build-gallery.mjs --skip-render
+
+      - name: Fail if generated files are out of date
+        run: |
+          if ! git diff --exit-code -- docs/index.html skills/text2html2png/examples/prompts.md; then
+            echo "::error::Run 'node scripts/build-gallery.mjs' and commit the result."
+            exit 1
+          fi

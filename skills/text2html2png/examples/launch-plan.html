@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Community conference run-up</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      /* paper style tokens */
+      --bg: #f5f0e6;
+      --card-bg: #fffdf7;
+      --sheet-bg: #fdf9f0;
+      --row-bg: #fbf6ea;
+      --text-primary: #3a3228;
+      --text-secondary: #6a5e50;
+      --text-muted: #6f6250;
+      --border-base: #cdc0a6;
+      --border-sketch: #8a7e68;
+      --pencil-gray: #8a7e68;
+      --accent-red: #c0392b;
+      --accent-blue: #2e6da4;
+      --accent-green: #226f3f;
+      --accent-orange: #a35c15;
+      --accent: var(--accent-blue);
+      --arrow-color: var(--pencil-gray);
+      --s1: #2e6da4;
+      --s2: #226f3f;
+      --s3: #a35c15;
+      --s4: #c0392b;
+      --s5: #6f4f99;
+      --s6: #8a6a3e;
+      --s7: #3f7c78;
+      --success: #226f3f;
+      --minor: #a35c15;
+      --critical: #c0392b;
+
+      --font-hand: "Bradley Hand", "Marker Felt", "Segoe Script", "Comic Sans MS", cursive;
+      --font-body: "Nunito", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+      /* geometry: 8 week columns of 90px inside a 720px timeline */
+      --col: 90px;
+      --label-w: 234px;
+      --lane-w: 720px;
+      --bar-h: 22px;
+      --row-h: 38px;
+    }
+
+    html, body { margin: 0; background: var(--bg); }
+    body {
+      padding: 24px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent, transparent 27px,
+        rgba(138, 126, 104, .13) 27px, rgba(138, 126, 104, .13) 28px);
+    }
+
+    .wrap {
+      width: 1040px;
+      padding: 26px;
+      background: var(--sheet-bg);
+      border: 1px solid var(--border-base);
+      border-radius: 6px;
+      box-shadow: 0 10px 26px rgba(90, 74, 46, .12);
+    }
+
+    header { text-align: center; margin-bottom: 18px; }
+    .eyebrow {
+      margin: 0 0 4px;
+      color: var(--accent-orange);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-family: var(--font-hand);
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .lede { margin: 6px 0 0; color: var(--text-secondary); font-size: 13.5px; }
+
+    /* ---------- gantt ---------- */
+    .gantt {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 14px;
+      background: var(--card-bg);
+      border: 2px solid var(--border-sketch);
+      border-radius: 4px;
+    }
+
+    .gantt-header { display: flex; align-items: flex-end; padding-bottom: 8px; }
+    .gantt-header .gantt-label-col {
+      justify-content: flex-end;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .gantt-header .gantt-timeline { min-height: 34px; align-items: end; }
+
+    .gantt-label-col {
+      width: var(--label-w);
+      flex: 0 0 var(--label-w);
+      padding: 5px 12px 5px 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }
+    .gantt-task-name { font-size: 13.5px; font-weight: 700; line-height: 1.25; }
+    .gantt-task-when { font-size: 11.5px; color: var(--text-muted); }
+
+    .gantt-timeline {
+      width: var(--lane-w);
+      flex: 0 0 var(--lane-w);
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(8, var(--col));
+    }
+
+    .gantt-period {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      padding-bottom: 6px;
+      border-left: 1px dashed var(--border-base);
+      border-bottom: 1.5px solid var(--border-sketch);
+    }
+    .gantt-period:first-child { border-left: none; }
+    .gantt-week { font-size: 12.5px; font-weight: 800; color: var(--text-primary); }
+    .gantt-date { font-size: 10.5px; color: var(--text-muted); }
+
+    .gantt-row {
+      display: flex;
+      min-height: var(--row-h);
+      background: var(--row-bg);
+      border: 1px dashed var(--border-base);
+      border-radius: 3px;
+    }
+    .gantt-row .tick { border-left: 1px dashed rgba(138, 126, 104, .32); }
+    .gantt-row .tick:first-child { border-left: none; }
+
+    .gantt-bar {
+      position: absolute;
+      left: var(--x);
+      width: var(--w);
+      top: 50%;
+      transform: translateY(-50%);
+      height: var(--bar-h);
+      background: var(--c);
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(58, 50, 40, .18);
+    }
+
+    /* dependency arrow: drops from the predecessor bar's bottom edge
+       (-13px) to this bar's top edge (+7px) — 20px of travel. */
+    .dep {
+      position: absolute;
+      left: calc(var(--x) - 8px);
+      top: -13px;
+      color: var(--pencil-gray);
+    }
+
+    .gantt-category {
+      margin: 8px 0 0;
+      padding-left: 2px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .gantt-category:first-of-type { margin-top: 2px; }
+
+    .ms-line {
+      position: absolute;
+      left: calc(var(--x) - 0.75px);
+      top: 3px;
+      bottom: 3px;
+      width: 1.5px;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--c), var(--c) 4px, transparent 4px, transparent 7px);
+    }
+    .gantt-diamond {
+      position: absolute;
+      left: calc(var(--x) - 7px);
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      transform: translateY(-50%) rotate(45deg);
+      background: var(--c);
+      border: 1.5px solid var(--card-bg);
+    }
+
+    /* ---------- notes ---------- */
+    .annotation {
+      margin: 12px 34px 0 0;
+      text-align: right;
+      font-family: var(--font-hand);
+      font-size: 16px;
+      color: var(--accent-red);
+      transform: rotate(-1deg);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 26px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .legend li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .legend .sw { width: 26px; height: 12px; border-radius: 3px; background: var(--c); }
+    .legend .dia {
+      width: 12px;
+      height: 12px;
+      transform: rotate(45deg);
+      background: var(--s4);
+    }
+    .legend svg { color: var(--pencil-gray); }
+
+    .banner {
+      margin-top: 14px;
+      padding: 12px 22px;
+      text-align: center;
+      background: var(--card-bg);
+      border: 2px solid var(--border-sketch);
+      border-radius: 4px;
+      font-family: var(--font-hand);
+      font-size: 18px;
+      color: var(--text-primary);
+    }
+    .banner em { font-style: normal; color: var(--accent-red); }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Eight-week preparation plan for a community conference">
+    <header>
+      <p class="eyebrow">Eight-week run-up</p>
+      <h1>Community conference preparation plan</h1>
+      <p class="lede">Mon Apr 5 – Sun May 30, 2027 &middot; seven workstreams, three dated milestones</p>
+    </header>
+
+    <section class="gantt" aria-label="Week-by-week schedule of seven workstreams and three milestones">
+      <div class="gantt-header">
+        <div class="gantt-label-col">Workstream</div>
+        <div class="gantt-timeline">
+          <div class="gantt-period"><span class="gantt-week">W1</span><span class="gantt-date">Apr 5</span></div>
+          <div class="gantt-period"><span class="gantt-week">W2</span><span class="gantt-date">Apr 12</span></div>
+          <div class="gantt-period"><span class="gantt-week">W3</span><span class="gantt-date">Apr 19</span></div>
+          <div class="gantt-period"><span class="gantt-week">W4</span><span class="gantt-date">Apr 26</span></div>
+          <div class="gantt-period"><span class="gantt-week">W5</span><span class="gantt-date">May 3</span></div>
+          <div class="gantt-period"><span class="gantt-week">W6</span><span class="gantt-date">May 10</span></div>
+          <div class="gantt-period"><span class="gantt-week">W7</span><span class="gantt-date">May 17</span></div>
+          <div class="gantt-period"><span class="gantt-week">W8</span><span class="gantt-date">May 24</span></div>
+        </div>
+      </div>
+
+      <p class="gantt-category">Program</p>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Venue and date lock</span>
+          <span class="gantt-task-when">W1&ndash;W2 &middot; 2 weeks</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="gantt-bar" style="--x: 0px; --w: 180px; --c: var(--s1);"></span>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Call for talks open</span>
+          <span class="gantt-task-when">W3&ndash;W5 &middot; 3 weeks</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <svg class="dep" style="--x: 180px;" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true">
+            <path d="M8 0 L8 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/>
+            <path d="M4 11.5 L8 19 L12 11.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="gantt-bar" style="--x: 180px; --w: 270px; --c: var(--s7);"></span>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Talk review and scheduling</span>
+          <span class="gantt-task-when">W5&ndash;W6 &middot; 2 weeks</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="gantt-bar" style="--x: 360px; --w: 180px; --c: var(--s5);"></span>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Speaker confirmations</span>
+          <span class="gantt-task-when">W7 &middot; 1 week</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <svg class="dep" style="--x: 540px;" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true">
+            <path d="M8 0 L8 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/>
+            <path d="M4 11.5 L8 19 L12 11.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="gantt-bar" style="--x: 540px; --w: 90px; --c: var(--s6);"></span>
+        </div>
+      </div>
+
+      <p class="gantt-category">Audience</p>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Tickets and promotion</span>
+          <span class="gantt-task-when">W3&ndash;W8 &middot; 6 weeks</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="gantt-bar" style="--x: 180px; --w: 540px; --c: var(--s3);"></span>
+        </div>
+      </div>
+
+      <p class="gantt-category">Operations</p>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Volunteer recruiting and briefing</span>
+          <span class="gantt-task-when">W5&ndash;W7 &middot; 3 weeks</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="gantt-bar" style="--x: 360px; --w: 270px; --c: var(--s2);"></span>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Walkthrough and event week</span>
+          <span class="gantt-task-when">W8 &middot; 1 week</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <svg class="dep" style="--x: 630px;" width="16" height="20" viewBox="0 0 16 20" aria-hidden="true">
+            <path d="M8 0 L8 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/>
+            <path d="M4 11.5 L8 19 L12 11.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="gantt-bar" style="--x: 630px; --w: 90px; --c: var(--s4);"></span>
+        </div>
+      </div>
+
+      <p class="gantt-category">Milestones</p>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Call for talks closes</span>
+          <span class="gantt-task-when">End of W5 &middot; Sun May 9</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="ms-line" style="--x: 450px; --c: var(--s4);"></span>
+          <span class="gantt-diamond" style="--x: 450px; --c: var(--s4);"></span>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Schedule published</span>
+          <span class="gantt-task-when">End of W6 &middot; Sun May 16</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="ms-line" style="--x: 540px; --c: var(--s4);"></span>
+          <span class="gantt-diamond" style="--x: 540px; --c: var(--s4);"></span>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="gantt-label-col">
+          <span class="gantt-task-name">Doors open</span>
+          <span class="gantt-task-when">Sat May 29, in W8</span>
+        </div>
+        <div class="gantt-timeline">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i><i class="tick"></i>
+          <span class="ms-line" style="--x: 694px; --c: var(--s4);"></span>
+          <span class="gantt-diamond" style="--x: 694px; --c: var(--s4);"></span>
+        </div>
+      </div>
+    </section>
+
+    <p class="annotation">Week 5 is the crunch &mdash; four workstreams run at once.</p>
+
+    <ul class="legend">
+      <li><span class="sw" style="--c: var(--s1);"></span>Bar covers every week the workstream is active</li>
+      <li>
+        <svg width="14" height="18" viewBox="0 0 14 18" aria-hidden="true">
+          <path d="M7 1 L7 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/>
+          <path d="M3 10.5 L7 17 L11 10.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Arrow: the workstream above must finish first
+      </li>
+      <li><span class="dia"></span>Diamond: a dated milestone</li>
+    </ul>
+
+    <p class="banner">8 weeks &middot; 7 workstreams &middot; 3 milestones &mdash; <em>doors open Sat May 29, 2027</em></p>
+  </main>
+</body>
+</html>

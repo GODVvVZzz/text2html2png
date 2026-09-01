@@ -1,0 +1,11 @@
+{
+  "id": "signup-funnel",
+  "title": "Landing page to activation",
+  "chart": "funnel",
+  "style": "neon",
+  "summary": "A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.",
+  "prompt": "Make a neon funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 5,180 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.",
+  "width": 920,
+  "background": "#0a0015",
+  "scale": 2
+}

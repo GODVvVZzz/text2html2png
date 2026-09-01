@@ -1,0 +1,31 @@
+name: Feature request
+description: Propose a focused improvement or public use case.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user problem is difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed outcome
+      description: Describe behavior and acceptance criteria, not only implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Synthetic example
+      description: Add a public example prompt or mock input if useful.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This fits static HTML + PNG diagram generation.
+          required: true

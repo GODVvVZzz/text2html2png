@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Signup funnel: landing page to activation</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0015;
+      --card-bg: rgba(26, 13, 52, 0.72);
+      --card-bg-solid: #140a28;
+      --text-primary: #f2ecff;
+      --text-secondary: #c5b6e8;
+      --text-muted: #a99bcd;
+      --border-base: rgba(140, 100, 255, 0.28);
+
+      --accent: #22d3ee;
+      --accent-blue: #22d3ee;
+      --arrow-color: #a855f7;
+      --success: #4ade80;
+      --minor: #facc15;
+      --critical: #fb7185;
+
+      --s1: #22d3ee;
+      --s2: #a855f7;
+      --s3: #ec4899;
+      --s4: #4ade80;
+      --s5: #fb923c;
+      --s6: #60a5fa;
+      --s7: #facc15;
+
+      --display: "Orbitron", "DIN Alternate", "Bahnschrift SemiCondensed", "Helvetica Neue", Arial, sans-serif;
+      --body: "Rajdhani", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      --mono: "Share Tech Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+
+    html, body { margin: 0; background: var(--bg); }
+
+    body {
+      padding: 24px;
+      color: var(--text-primary);
+      font-family: var(--body);
+      background-image:
+        radial-gradient(ellipse at 18% 0%, rgba(168, 85, 247, 0.16) 0%, transparent 52%),
+        radial-gradient(ellipse at 86% 100%, rgba(34, 211, 238, 0.12) 0%, transparent 50%);
+    }
+
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 920px;
+      margin: 0 auto;
+      padding: 28px 30px 24px;
+      border: 1px solid rgba(140, 100, 255, 0.22);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(28, 15, 56, 0.86) 0%, rgba(13, 6, 30, 0.92) 100%);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .head { text-align: center; }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      margin: 9px 0 0;
+      color: var(--text-primary);
+      font-family: var(--display);
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: 0.045em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      text-shadow: 0 0 22px rgba(34, 211, 238, 0.28);
+    }
+
+    .page-sub {
+      margin: 10px 0 0;
+      color: var(--text-secondary);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+    }
+
+    .funnel {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 176px 1fr 176px;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .funnel-head {
+      padding: 0 19px 7px;
+      border-bottom: 1px solid rgba(140, 100, 255, 0.18);
+    }
+
+    .funnel-head span {
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .funnel-head .col-stage { text-align: right; }
+    .funnel-head .col-volume { text-align: center; }
+
+    .funnel-stage {
+      padding: 12px 18px;
+      border: 1px solid var(--border-base);
+      border-radius: 12px;
+      background: var(--card-bg);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .stage-label { text-align: right; }
+
+    .stage-name {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .stage-vol {
+      margin: 2px 0 0;
+      color: var(--tone);
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .stage-track { display: flex; justify-content: center; }
+
+    .stage-bar {
+      width: var(--w);
+      min-width: 46px;
+      height: 34px;
+      border: 1px solid var(--tone);
+      border-radius: 7px;
+      background: linear-gradient(90deg, var(--tone-soft) 0%, var(--tone) 100%);
+      box-shadow: 0 0 16px -3px var(--tone-glow);
+    }
+
+    .stage-share {
+      margin: 0;
+      color: var(--text-primary);
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .stage-share .pct {
+      margin-left: 2px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .funnel-drop { padding: 0 19px; }
+
+    .drop-note {
+      grid-column: 2;
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 0;
+    }
+
+    .drop-note svg { display: block; }
+
+    .drop-text {
+      color: var(--text-secondary);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .banner {
+      padding: 13px 24px;
+      border: 1px solid var(--border-base);
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.16) 0%, rgba(34, 211, 238, 0.10) 100%);
+      color: var(--text-secondary);
+      font-size: 13.5px;
+      text-align: center;
+    }
+
+    .banner em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(34, 211, 238, 0.32);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Signup funnel from landing page visit to activation">
+    <header class="head">
+      <p class="eyebrow">Signup funnel</p>
+      <h1 class="page-title">Landing page to activation</h1>
+      <p class="page-sub">30-day cohort &middot; 48,200 visitors &rarr; 5,180 activated &middot; synthetic sample data</p>
+    </header>
+
+    <section class="funnel">
+      <div class="row funnel-head">
+        <span class="col-stage">Stage</span>
+        <span class="col-volume">Volume</span>
+        <span class="col-share">% of visitors</span>
+      </div>
+
+      <div class="row funnel-stage" style="--tone: var(--s1); --tone-soft: rgba(34, 211, 238, 0.28); --tone-glow: rgba(34, 211, 238, 0.55); --w: 100%;">
+        <div class="stage-label">
+          <p class="stage-name">Visited landing page</p>
+          <p class="stage-vol">48,200</p>
+        </div>
+        <div class="stage-track"><div class="stage-bar"></div></div>
+        <p class="stage-share">100<span class="pct">%</span></p>
+      </div>
+
+      <div class="row funnel-drop">
+        <div class="drop-note">
+          <svg viewBox="0 0 12 16" width="12" height="16" aria-hidden="true">
+            <path d="M6 1.5 V10.5 M2.2 7.6 L6 12 L9.8 7.6" fill="none" stroke="#a855f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="drop-text">39.0% continue &middot; 29,405 drop off</span>
+        </div>
+      </div>
+
+      <div class="row funnel-stage" style="--tone: var(--s2); --tone-soft: rgba(168, 85, 247, 0.28); --tone-glow: rgba(168, 85, 247, 0.55); --w: 39.0%;">
+        <div class="stage-label">
+          <p class="stage-name">Started signup</p>
+          <p class="stage-vol">18,795</p>
+        </div>
+        <div class="stage-track"><div class="stage-bar"></div></div>
+        <p class="stage-share">39.0<span class="pct">%</span></p>
+      </div>
+
+      <div class="row funnel-drop">
+        <div class="drop-note">
+          <svg viewBox="0 0 12 16" width="12" height="16" aria-hidden="true">
+            <path d="M6 1.5 V10.5 M2.2 7.6 L6 12 L9.8 7.6" fill="none" stroke="#a855f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="drop-text">67.3% continue &middot; 6,155 drop off</span>
+        </div>
+      </div>
+
+      <div class="row funnel-stage" style="--tone: var(--s3); --tone-soft: rgba(236, 72, 153, 0.28); --tone-glow: rgba(236, 72, 153, 0.55); --w: 26.2%;">
+        <div class="stage-label">
+          <p class="stage-name">Verified email</p>
+          <p class="stage-vol">12,640</p>
+        </div>
+        <div class="stage-track"><div class="stage-bar"></div></div>
+        <p class="stage-share">26.2<span class="pct">%</span></p>
+      </div>
+
+      <div class="row funnel-drop">
+        <div class="drop-note">
+          <svg viewBox="0 0 12 16" width="12" height="16" aria-hidden="true">
+            <path d="M6 1.5 V10.5 M2.2 7.6 L6 12 L9.8 7.6" fill="none" stroke="#a855f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="drop-text">70.6% continue &middot; 3,710 drop off</span>
+        </div>
+      </div>
+
+      <div class="row funnel-stage" style="--tone: var(--s5); --tone-soft: rgba(251, 146, 60, 0.28); --tone-glow: rgba(251, 146, 60, 0.55); --w: 18.5%;">
+        <div class="stage-label">
+          <p class="stage-name">Completed profile</p>
+          <p class="stage-vol">8,930</p>
+        </div>
+        <div class="stage-track"><div class="stage-bar"></div></div>
+        <p class="stage-share">18.5<span class="pct">%</span></p>
+      </div>
+
+      <div class="row funnel-drop">
+        <div class="drop-note">
+          <svg viewBox="0 0 12 16" width="12" height="16" aria-hidden="true">
+            <path d="M6 1.5 V10.5 M2.2 7.6 L6 12 L9.8 7.6" fill="none" stroke="#a855f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="drop-text">58.0% continue &middot; 3,750 drop off</span>
+        </div>
+      </div>
+
+      <div class="row funnel-stage" style="--tone: var(--s4); --tone-soft: rgba(74, 222, 128, 0.28); --tone-glow: rgba(74, 222, 128, 0.55); --w: 10.7%;">
+        <div class="stage-label">
+          <p class="stage-name">Activated</p>
+          <p class="stage-vol">5,180</p>
+        </div>
+        <div class="stage-track"><div class="stage-bar"></div></div>
+        <p class="stage-share">10.7<span class="pct">%</span></p>
+      </div>
+    </section>
+
+    <footer class="banner">
+      Overall conversion <em>10.7%</em> &mdash; 5,180 of 48,200 visitors activated. Largest drop-off: landing page to signup start, 29,405 people.
+    </footer>
+  </main>
+</body>
+</html>

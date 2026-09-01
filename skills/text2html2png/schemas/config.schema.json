@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GODVvVZzz/text2html2png/blob/main/skills/text2html2png/schemas/config.schema.json",
+  "title": "text2html2png configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "style": {
+      "enum": ["warm", "dark", "minimal", "editorial", "neon", "paper", "glass"]
+    },
+    "chart": {
+      "enum": ["auto", "flowchart", "comparison", "timeline", "architecture", "dashboard", "gantt", "org-chart", "funnel"]
+    },
+    "outputDir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 480,
+      "maximum": 2000
+    },
+    "padding": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 160
+    },
+    "scale": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4
+    }
+  }
+}

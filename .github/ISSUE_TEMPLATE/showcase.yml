@@ -1,0 +1,36 @@
+name: Community showcase
+description: Share a public prompt, HTML diagram, and PNG.
+title: "[Showcase] "
+labels: ["showcase"]
+body:
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt
+      description: Use synthetic or public content only.
+    validations:
+      required: true
+  - type: input
+    id: combination
+    attributes:
+      label: Chart and style
+      placeholder: architecture × dark
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Public HTML and PNG links
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Rights and privacy
+      options:
+        - label: I have the right to publish the prompt, HTML, PNG, fonts, icons, and other included assets.
+          required: true
+        - label: The submission contains no confidential, customer, employee, applicant, or production data.
+          required: true
+        - label: I allow the project to link to or reproduce this showcase under the repository license.
+          required: true
