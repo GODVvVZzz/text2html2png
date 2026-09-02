@@ -1,0 +1,42 @@
+{
+  "id": "order-platform-topology",
+  "locale": "en-US",
+  "eyebrow": "System Architecture",
+  "title": "Order Platform Topology",
+  "subtitle": "A three-tier topology: stateless edge, horizontally scalable services, one source of truth for data.",
+  "layers": [
+    {
+      "tag": "Edge",
+      "accent": 1,
+      "nodes": [
+        {"name": "Mobile app", "desc": "iOS and Android clients", "emoji": "📱", "icon": "image"},
+        {"name": "Web client", "desc": "browser single-page app", "emoji": "🖥", "icon": "code"},
+        {"name": "Public API", "desc": "third-party credentials", "emoji": "🔑", "icon": "lock"}
+      ]
+    },
+    {
+      "tag": "Service",
+      "accent": 6,
+      "nodes": [
+        {"name": "API gateway", "desc": "rate limiting, auth, routing", "emoji": "🛡", "icon": "shield"},
+        {"name": "Core services", "desc": "orders and billing domain", "emoji": "⚙️", "icon": "code"},
+        {"name": "Async jobs", "desc": "queues and scheduled tasks", "emoji": "📦", "icon": "package"}
+      ]
+    },
+    {
+      "tag": "Data",
+      "accent": 2,
+      "nodes": [
+        {"name": "Primary DB", "desc": "transactions and consistency", "emoji": "🗄", "icon": "lock"},
+        {"name": "Cache", "desc": "hot reads at ms latency", "emoji": "⚡", "icon": "chart"},
+        {"name": "Object storage", "desc": "images and attachments", "emoji": "🧊", "icon": "layers"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": "HTTPS / WSS"},
+    {"label": "gRPC"}
+  ],
+  "footerLabel": "Architecture rules",
+  "footer": "Every cross-tier call is authenticated at the gateway; only services reach the data tier, clients never connect directly."
+}

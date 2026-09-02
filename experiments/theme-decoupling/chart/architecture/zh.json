@@ -1,0 +1,42 @@
+{
+  "id": "order-platform-topology",
+  "locale": "zh-CN",
+  "eyebrow": "系统架构图",
+  "title": "订单平台服务拓扑",
+  "subtitle": "三分层拓扑：接入无状态、服务可水平扩展、数据单一事实来源。",
+  "layers": [
+    {
+      "tag": "接入层",
+      "accent": 1,
+      "nodes": [
+        {"name": "移动 App", "desc": "iOS / Android 客户端", "emoji": "📱", "icon": "image"},
+        {"name": "Web 端", "desc": "浏览器单页应用", "emoji": "🖥", "icon": "code"},
+        {"name": "开放 API", "desc": "第三方集成凭据", "emoji": "🔑", "icon": "lock"}
+      ]
+    },
+    {
+      "tag": "服务层",
+      "accent": 6,
+      "nodes": [
+        {"name": "API 网关", "desc": "限流、鉴权、路由", "emoji": "🛡", "icon": "shield"},
+        {"name": "核心服务", "desc": "订单与结算域", "emoji": "⚙️", "icon": "code"},
+        {"name": "异步任务", "desc": "队列与定时任务", "emoji": "📦", "icon": "package"}
+      ]
+    },
+    {
+      "tag": "数据层",
+      "accent": 2,
+      "nodes": [
+        {"name": "主库", "desc": "事务与一致性", "emoji": "🗄", "icon": "lock"},
+        {"name": "缓存", "desc": "热点数据毫秒读取", "emoji": "⚡", "icon": "chart"},
+        {"name": "对象存储", "desc": "图片与附件", "emoji": "🧊", "icon": "layers"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": "HTTPS / WSS"},
+    {"label": "gRPC"}
+  ],
+  "footerLabel": "架构约束",
+  "footer": "所有跨层调用都经网关鉴权；数据层只允许服务层访问，客户端不得直连。"
+}

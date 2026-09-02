@@ -181,3 +181,32 @@ Add labels supplied by the user, such as protocols, beside connector lines. Deri
 6. **SVG connectors**: Lines + arrowheads, color matches `--border-base` or accent for key paths
 7. Layer gap: 0 (connectors handle spacing)
 8. **Connectors follow the universal rule** (see `design-philosophy.md` → Connectors & Labels): arrows must always be complete; labels go beside the arrow, not overlapping it; use `min-height` + `padding` on `.conn-center`, not fixed `height`
+
+---
+
+## Pipeline migration note (theme-decoupling)
+
+Architecture is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/architecture/`
+(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
+snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+
+Validated structure (all 7 themes × zh/en, `build --render --audit` 84/84 green):
+
+- `.arch` stacks layers and connector rows; each is the same two-column grid
+  (`88px minmax(0, 1fr)`), so layer tags and connectors share one fixed gutter and everything
+  stays inside the viewport (no absolute positioning).
+- Per-layer accent via `--tone`: node cards tint their background with `color-mix(in srgb,
+  var(--tone) 6%, var(--t-surface-strong))` and their border with a 60% tone mix — 45% was too
+  faint on light glass surfaces. Nodes are `flex: 1 1 0` with a max-width, so every layer's cards
+  are equal width regardless of node count.
+- The connector is one measurement-free vertical stem + solid arrowhead SVG (stroke/fill on
+  `currentColor`, `.conn-center` colored by `--t-rule`), centered in the timeline column; the
+  protocol label sits BESIDE the arrow, never on it.
+- Protocol labels are data, not labels: `.conn-label` uses the label font/size/weight/tracking
+  tokens but NO `text-transform` — the theme uppercase treatment turned "gRPC" into "GRPC" and
+  proper nouns must survive verbatim.
+- Do not wrap connector rows in `aria-hidden`: the audit fails visible text inside hidden
+  subtrees (WARN throws in strict mode). The decorative SVG carries its own `aria-hidden`.
+- Layer accents must differ in hue family per theme — dark's grey-blue accent-6 read as the same
+  color as accent-1 on tinted card borders, so accent-6 moved to magenta (#c77bd8). Thin tinted
+  borders are a stricter accent-identity test than large text blocks.
