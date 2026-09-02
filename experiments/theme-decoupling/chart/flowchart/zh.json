@@ -1,0 +1,23 @@
+{
+  "id": "release-pipeline",
+  "locale": "zh-CN",
+  "direction": "horizontal",
+  "eyebrow": "发布工程",
+  "title": "一个开源库的发布流水线",
+  "subtitle": "从版本冻结到发布公告，每一步都由同一份检查单驱动。",
+  "stats": [
+    {"value":"6","label":"流水线阶段","detail":"全部可脚本化复跑","accent":1,"emoji":"🧩","icon":"layers"},
+    {"value":"2","label":"人工闸门","detail":"RC 评审与发布批准","accent":3,"emoji":"✅","icon":"check"},
+    {"value":"1","label":"回滚命令","detail":"任何一步失败即停","accent":6,"emoji":"🛡","icon":"shield"}
+  ],
+  "steps": [
+    {"num":"01","name":"版本冻结","detail":"合并特性分支，此后只接受修复补丁。","accent":1,"emoji":"🔒","icon":"lock"},
+    {"num":"02","name":"测试矩阵","detail":"三大操作系统与两个 LTS 版本全量执行。","accent":3,"emoji":"✅","icon":"check"},
+    {"num":"03","name":"RC 预发布","detail":"发布候选版本，留出一周社区反馈窗口。","accent":6,"emoji":"🚩","icon":"flag"},
+    {"num":"04","name":"签名构建","detail":"生成签名工件，校验可重复构建的哈希。","accent":2,"emoji":"🛡","icon":"shield"},
+    {"num":"05","name":"正式发布","detail":"npm 发布并打 Git 标签，镜像同步。","accent":4,"emoji":"📦","icon":"package"},
+    {"num":"06","name":"公告与文档","detail":"发布说明、迁移指南与社区公告同步上线。","accent":5,"emoji":"📣","icon":"megaphone"}
+  ],
+  "footerLabel": "流程原则",
+  "footer": "每一步的产物可验证、可回滚；任何一步失败都停在原地，而不是带病前进。"
+}

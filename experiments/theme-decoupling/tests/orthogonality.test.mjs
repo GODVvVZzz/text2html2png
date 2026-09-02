@@ -43,20 +43,30 @@ test("chart CSS rejects a literal color outside the theme", () => {
 test("build keeps source invariant across themes and DOM invariant across locales", async () => {
   const output = await mkdtemp(path.join(os.tmpdir(), "t2h-theme-proof-"));
   await run(process.execPath, [buildScript, "--out", output]);
-  const zhWarm = await readFile(path.join(output, "zh-warm.html"), "utf8");
-  const zhDark = await readFile(path.join(output, "zh-dark.html"), "utf8");
-  const enWarm = await readFile(path.join(output, "en-warm.html"), "utf8");
+  const zhWarm = await readFile(path.join(output, "comparison-zh-warm.html"), "utf8");
+  const zhDark = await readFile(path.join(output, "comparison-zh-dark.html"), "utf8");
+  const enWarm = await readFile(path.join(output, "comparison-en-warm.html"), "utf8");
   assert.equal(stripThemeBlock(zhWarm), stripThemeBlock(zhDark));
   assert.equal(structureFingerprint(zhWarm), structureFingerprint(enWarm));
   assert.match(zhWarm, /📊/);
   assert.match(zhWarm, /col-icon-svg/);
 });
 
+test("every discovered chart renders through the same theme pipeline", async () => {
+  const output = await mkdtemp(path.join(os.tmpdir(), "t2h-multichart-proof-"));
+  await run(process.execPath, [buildScript, "--out", output]);
+  const zhFlow = await readFile(path.join(output, "flowchart-zh-warm.html"), "utf8");
+  const enFlow = await readFile(path.join(output, "flowchart-en-neon.html"), "utf8");
+  assert.equal(structureFingerprint(zhFlow), structureFingerprint(enFlow));
+  assert.match(zhFlow, /step-icon-svg/);
+  assert.match(zhFlow, /class="arrow"/);
+});
+
 test("restyle changes only the canonical theme block", async () => {
   const output = await mkdtemp(path.join(os.tmpdir(), "t2h-restyle-proof-"));
   await run(process.execPath, [buildScript, "--out", output, "--theme", "warm", "--locale", "zh"]);
-  const input = path.join(output, "zh-warm.html");
-  const target = path.join(output, "zh-neon.html");
+  const input = path.join(output, "comparison-zh-warm.html");
+  const target = path.join(output, "comparison-zh-neon.html");
   await restyle({ html: input, theme: "neon", out: target, force: false });
   const before = await readFile(input, "utf8");
   const after = await readFile(target, "utf8");

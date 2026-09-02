@@ -1,0 +1,23 @@
+{
+  "id": "release-pipeline",
+  "locale": "en",
+  "direction": "horizontal",
+  "eyebrow": "Release engineering",
+  "title": "A release pipeline for an open-source library",
+  "subtitle": "From the version freeze to the announcement, every step runs off the same checklist.",
+  "stats": [
+    {"value":"6","label":"Pipeline stages","detail":"All re-runnable by script","accent":1,"emoji":"🧩","icon":"layers"},
+    {"value":"2","label":"Human gates","detail":"RC review and ship approval","accent":3,"emoji":"✅","icon":"check"},
+    {"value":"1","label":"Rollback command","detail":"Any failure halts the line","accent":6,"emoji":"🛡","icon":"shield"}
+  ],
+  "steps": [
+    {"num":"01","name":"Version freeze","detail":"Feature branches merged; only fixes accepted from here.","accent":1,"emoji":"🔒","icon":"lock"},
+    {"num":"02","name":"Test matrix","detail":"Full runs across three operating systems and two LTS lines.","accent":3,"emoji":"✅","icon":"check"},
+    {"num":"03","name":"RC preview","detail":"Candidate release published with a one-week community window.","accent":6,"emoji":"🚩","icon":"flag"},
+    {"num":"04","name":"Signed build","detail":"Signed artifacts with reproducible-build hash verification.","accent":2,"emoji":"🛡","icon":"shield"},
+    {"num":"05","name":"Ship","detail":"npm publish, Git tag, and mirror sync in one go.","accent":4,"emoji":"📦","icon":"package"},
+    {"num":"06","name":"Announce","detail":"Release notes, migration guide, and community post go live together.","accent":5,"emoji":"📣","icon":"megaphone"}
+  ],
+  "footerLabel": "Process rule",
+  "footer": "Every step produces verifiable, reversible output; a failure stops the line instead of pushing through."
+}

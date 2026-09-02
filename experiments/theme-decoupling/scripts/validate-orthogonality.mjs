@@ -9,7 +9,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 export const experimentDir = path.resolve(scriptDir, "..");
 export const themesDir = path.join(experimentDir, "themes");
-export const chartPath = path.join(experimentDir, "chart", "comparison.css");
+export const chartDir = path.join(experimentDir, "chart");
+export const sharedCssPath = path.join(chartDir, "shared.css");
 
 export const REQUIRED_THEME_TOKENS = [
   "--t-canvas", "--t-canvas-image", "--t-surface", "--t-surface-strong",
@@ -139,7 +140,7 @@ export function validateMarkup(markup, label = "markup") {
   for (const match of stripped.matchAll(/style=["']([^"']+)["']/gi)) {
     for (const declaration of match[1].split(";").map((value) => value.trim()).filter(Boolean)) {
       const [, property = "", value = ""] = declaration.match(/^([^:]+):(.+)$/) ?? [];
-      if (property.startsWith("--t-") || property === "--tone" || property === "--metric-accent") {
+      if (property.startsWith("--t-") || ["--tone", "--metric-accent", "--step-accent"].includes(property)) {
         if (!/^var\(--t-[a-z0-9-]+\)$/i.test(value.trim())) {
           failures.push(`inline theme property must be a pure var(): ${declaration}`);
         }
@@ -175,6 +176,27 @@ export function structureFingerprint(html) {
   );
 }
 
+// Chart directories: one folder per chart with chart.css, body.mjs, and
+// one fixture per locale. Discovery stays dynamic so new charts onboard
+// without touching this file.
+export async function discoverCharts() {
+  const entries = await readdir(chartDir, { withFileTypes: true });
+  const charts = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const dir = path.join(chartDir, entry.name);
+    const files = new Set(await readdir(dir));
+    for (const required of ["chart.css", "body.mjs", "zh.json", "en.json"]) {
+      if (!files.has(required)) {
+        throw new Error(`chart/${entry.name}: missing ${required}`);
+      }
+    }
+    charts.push({ id: entry.name, dir });
+  }
+  if (!charts.length) throw new Error("No chart directories found.");
+  return charts.sort((a, b) => a.id.localeCompare(b.id));
+}
+
 export async function validateSources() {
   const themeMeta = JSON.parse(await readFile(path.join(themesDir, "themes.json"), "utf8"));
   const tokenSets = [];
@@ -190,14 +212,20 @@ export async function validateSources() {
     }
   }
 
-  const chartCss = await readFile(chartPath, "utf8");
-  validateChartCss(chartCss, new Set(tokenSets[0][1].keys()));
-  return { themes: themeMeta, chartCss, tokenCount: tokenSets[0][1].size };
+  const tokenContract = new Set(tokenSets[0][1].keys());
+  const sharedCss = await readFile(sharedCssPath, "utf8");
+  validateChartCss(sharedCss, tokenContract);
+  const charts = await discoverCharts();
+  for (const chart of charts) {
+    const chartCss = await readFile(path.join(chart.dir, "chart.css"), "utf8");
+    validateChartCss(chartCss, tokenContract);
+  }
+  return { themes: themeMeta, sharedCss, charts, tokenCount: tokenSets[0][1].size };
 }
 
 async function main() {
   const result = await validateSources();
-  console.log(`Orthogonality sources passed: ${result.themes.length} themes, ${result.tokenCount} identical tokens, one comparison structure.`);
+  console.log(`Orthogonality sources passed: ${result.themes.length} themes, ${result.tokenCount} identical tokens, ${result.charts.length} chart structures.`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {

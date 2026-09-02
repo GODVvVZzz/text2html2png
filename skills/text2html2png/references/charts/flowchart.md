@@ -184,3 +184,27 @@ Use horizontal row → vertical arrow → horizontal sub-row → vertical arrow 
 4. Color cycling: Each step uses next accent color from style's palette
 5. Top stats row + bottom banner make the chart feel complete, not bare
 6. Step numbers: Optional but recommended for vertical layouts (01, 02, 03...)
+
+---
+
+## Pipeline migration note (theme-decoupling)
+
+Flowchart is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/flowchart/`
+(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
+snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+
+Validated structure (all 7 themes × zh/en, `build --render --audit` 28/28 green):
+
+- Single horizontal flex row `.flow`; each `.step` is a card with `padding: 13px 14px 14px`,
+  a 4px accent top bar via `::before`, and a `--step-accent` data variable (not a theme token)
+  pointing at `var(--t-accent-1..7)`.
+- Arrows are `<span class="arrow">` (28px) holding an inline SVG line + chevron drawn with
+  `currentColor`; the span colors itself from `color-mix(in srgb, var(--t-accent-1) 60%, transparent)`.
+  No literal colors, no dashed strokes.
+- Icons are monochrome inline SVGs using `currentColor` (shared `chart/icons.mjs`); the emoji
+  channel exists but every theme sets `--t-emoji-display: none`.
+- Step numbers use the label token pair (`--t-label-*`); themes must keep all seven accents
+  legible as text on their own surfaces — the strict audit enforces 4.5:1.
+- Optional stats row reuses the comparison `.metrics` skeleton (exactly 3 entries).
+- `structureFingerprint` must be identical across all themes and both locales; zh/en fixtures
+  share one DOM.
