@@ -6,8 +6,8 @@ Every image in this repository is either an original vector mark made for this p
 
 | Asset | How it was produced |
 |---|---|
-| `skills/text2html2png/assets/gallery/*.png` | Rendered locally in Chrome from the matching `skills/text2html2png/examples/*.html`, using the width, background, and scale recorded in each `*.meta.json`. Regenerate with `npm run render:examples`. |
-| `docs/gallery/*.png` | The same examples rendered at scale 1 for fast page loads. Regenerate with `node scripts/build-gallery.mjs`. |
+| `skills/text2html2png/assets/gallery/*.png` | Rendered locally in Chrome from the matching bilingual `skills/text2html2png/examples/<id>-<locale>.html`, named `<id>-<locale>-<theme>.png` using the width and scale recorded in each `*.meta.json`. Regenerate with `npm run render:examples`. |
+| `docs/gallery/*.png` | The same examples, English rendering, at scale 1 for fast page loads. Regenerate with `node scripts/build-gallery.mjs`. |
 | `assets/social-card.png` | Rendered from `assets/social-card.html` with the project's own renderer at 1280×640. |
 | `assets/demo.gif` | Assembled from six committed gallery PNGs by `scripts/build-demo-animation.sh` (requires ffmpeg). Every frame is a real rendering, not a mockup. |
 

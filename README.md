@@ -63,10 +63,10 @@ Every frame above is a real committed example, not a mockup. The full set, each 
 
 |  |  |
 |---|---|
-| **Gantt** · `paper`<br><img src="./skills/text2html2png/assets/gallery/launch-plan.png" width="400" alt="An eight-week conference preparation Gantt chart in the paper theme"><br>[Prompt and HTML](./skills/text2html2png/examples/launch-plan.html) | **Dashboard** · `glass`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot.png" width="400" alt="A weekly support desk KPI dashboard in the glass theme"><br>[Prompt and HTML](./skills/text2html2png/examples/support-snapshot.html) |
-| **Org chart** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org.png" width="400" alt="A fourteen-person product studio org chart in the warm theme"><br>[Prompt and HTML](./skills/text2html2png/examples/studio-org.html) | **Funnel** · `neon`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel.png" width="400" alt="A five-stage signup funnel in the neon theme"><br>[Prompt and HTML](./skills/text2html2png/examples/signup-funnel.html) |
+| **Gantt** · `paper`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="400" alt="An eight-week conference preparation Gantt chart in the paper theme"><br>[Prompt and HTML](./skills/text2html2png/examples/launch-plan-en.html) | **Dashboard** · `glass`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-en-glass.png" width="400" alt="A weekly support desk KPI dashboard in the glass theme"><br>[Prompt and HTML](./skills/text2html2png/examples/support-snapshot-en.html) |
+| **Org chart** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org-en-warm.png" width="400" alt="A fourteen-person product studio org chart in the warm theme"><br>[Prompt and HTML](./skills/text2html2png/examples/studio-org-en.html) | **Funnel** · `neon`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-en-neon.png" width="400" alt="A five-stage signup funnel in the neon theme"><br>[Prompt and HTML](./skills/text2html2png/examples/signup-funnel-en.html) |
 
-Also published: a [warm release flowchart](./skills/text2html2png/examples/release-flow.html), an [editorial roadmap timeline](./skills/text2html2png/examples/library-roadmap.html), a [minimal comparison table](./skills/text2html2png/examples/plan-comparison.html), and two dark architecture maps — [a service topology](./skills/text2html2png/examples/service-architecture.html) and [the skill's own pipeline](./skills/text2html2png/examples/local-first-pipeline.html). All example data is synthetic — see [asset provenance](./ASSET_PROVENANCE.md).
+Also published: a [warm release flowchart](./skills/text2html2png/examples/release-flow-en.html), an [editorial roadmap timeline](./skills/text2html2png/examples/library-roadmap-en.html), a [minimal comparison table](./skills/text2html2png/examples/plan-comparison-en.html), and two dark architecture maps — [a service topology](./skills/text2html2png/examples/service-architecture-en.html) and [the skill's own pipeline](./skills/text2html2png/examples/local-first-pipeline-en.html). Every example also ships in Chinese; all example data is synthetic — see [asset provenance](./ASSET_PROVENANCE.md).
 
 ## What it makes
 
@@ -176,7 +176,7 @@ npm run check
 The layout audit needs a browser that can actually start. In a container where the Chrome sandbox is unavailable, run it explicitly instead of through `npm run check`:
 
 ```bash
-node scripts/audit-examples.mjs --strict --no-sandbox
+node scripts/build-examples.mjs --audit --no-sandbox
 ```
 
 Tests that need a browser skip themselves when one cannot launch, so `npm test` stays green on machines without Chrome.

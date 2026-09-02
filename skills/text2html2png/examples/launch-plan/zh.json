@@ -1,0 +1,48 @@
+{
+  "id": "launch-plan",
+  "locale": "zh-CN",
+  "eyebrow": "八周冲刺筹备",
+  "title": "社区大会筹备排期",
+  "subtitle": "2027 年 4 月 5 日（周一）– 5 月 30 日（周日）· 七条工作线，三个定档里程碑",
+  "periods": [
+    {"label": "W1", "date": "4/5"},
+    {"label": "W2", "date": "4/12"},
+    {"label": "W3", "date": "4/19"},
+    {"label": "W4", "date": "4/26"},
+    {"label": "W5", "date": "5/3"},
+    {"label": "W6", "date": "5/10"},
+    {"label": "W7", "date": "5/17"},
+    {"label": "W8", "date": "5/24"}
+  ],
+  "groups": [
+    {
+      "name": "节目",
+      "tasks": [
+        {"name": "场地与日期锁定", "start": 0, "span": 2, "accent": 1, "duration": "2 周"},
+        {"name": "议题征集开启", "start": 2, "span": 3, "accent": 7, "duration": "3 周"},
+        {"name": "议题评审与排期", "start": 4, "span": 2, "accent": 5, "duration": "2 周"},
+        {"name": "讲者确认", "start": 6, "span": 1, "accent": 6, "duration": "1 周"}
+      ]
+    },
+    {
+      "name": "受众",
+      "tasks": [
+        {"name": "售票与推广", "start": 2, "span": 6, "accent": 3, "duration": "6 周"}
+      ]
+    },
+    {
+      "name": "运营",
+      "tasks": [
+        {"name": "志愿者招募与培训", "start": 4, "span": 3, "accent": 2, "duration": "3 周"},
+        {"name": "彩排与会期保障", "start": 7, "span": 1, "accent": 4, "duration": "1 周"}
+      ]
+    }
+  ],
+  "milestones": [
+    {"name": "议题征集截止", "pos": 5, "accent": 4},
+    {"name": "日程公布", "pos": 6, "accent": 4},
+    {"name": "大会开门", "pos": 7.7, "accent": 4}
+  ],
+  "footerLabel": "排期备注",
+  "footer": "第 5 周最挤——四条工作线并行。条形覆盖工作线活跃的每一周，菱形为定档里程碑。共 8 周 · 7 条工作线 · 3 个里程碑——2027 年 5 月 29 日（周六）开门。"
+}

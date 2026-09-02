@@ -1,0 +1,65 @@
+{
+  "id": "plan-comparison",
+  "locale": "en-US",
+  "eyebrow": "Plan comparison",
+  "title": "Choosing a plan",
+  "subtitle": "Three tiers, measured on the same six criteria. Every figure below is illustrative.",
+  "metrics": [
+    {"value": "3", "label": "Plan tiers", "detail": "Community, Team and Studio", "accent": 1, "emoji": "🗂️", "icon": "layers"},
+    {"value": "6", "label": "Shared criteria", "detail": "Every tier measured on the same six rows", "accent": 3, "emoji": "📏", "icon": "check"},
+    {"value": "10", "label": "Billed months per year", "detail": "Annual price = monthly price × 10, per seat", "accent": 2, "emoji": "📅", "icon": "flag"}
+  ],
+  "criteria": ["Seats included", "Active projects", "Storage", "Support response", "Price, monthly", "Price, annual"],
+  "columns": [
+    {
+      "kicker": "Tier 1",
+      "name": "Community",
+      "note": "Self-hosted, for solo work and evaluation.",
+      "icon": "lock",
+      "emoji": "🏠",
+      "tone": 3,
+      "values": [
+        "<strong>3</strong>",
+        "<strong>5</strong>",
+        "<strong>2</strong> GB",
+        "<strong>Community forum</strong>",
+        "<strong>$0</strong>",
+        "<strong>$0</strong>"
+      ]
+    },
+    {
+      "kicker": "Tier 2",
+      "name": "Team",
+      "note": "Shared projects for a small group.",
+      "icon": "person",
+      "emoji": "🤝",
+      "tone": 2,
+      "values": [
+        "<strong>25</strong>",
+        "<strong>50</strong>",
+        "<strong>100</strong> GB",
+        "<strong>1</strong> business day",
+        "<strong>$18</strong> per seat",
+        "<strong>$180</strong> per seat"
+      ]
+    },
+    {
+      "kicker": "Tier 3",
+      "name": "Studio",
+      "note": "Larger groups that need a response time.",
+      "icon": "shield",
+      "emoji": "🛡️",
+      "tone": 1,
+      "values": [
+        "<strong>Unlimited</strong>",
+        "<strong>Unlimited</strong>",
+        "<strong>1</strong> TB",
+        "<strong>4</strong> hours",
+        "<strong>$49</strong> per seat",
+        "<strong>$490</strong> per seat"
+      ]
+    }
+  ],
+  "footerLabel": "How to read it",
+  "footer": "Seats and projects are hard caps. Support response is the target time to a first reply during business hours; Community has no target. Annual pricing bills ten months per seat, which is why $18 monthly becomes $180 a year and $49 becomes $490."
+}

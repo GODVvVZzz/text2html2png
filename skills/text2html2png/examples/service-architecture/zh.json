@@ -1,0 +1,47 @@
+{
+  "id": "service-architecture",
+  "locale": "zh-CN",
+  "eyebrow": "架构总览",
+  "title": "服务架构",
+  "subtitle": "浏览器 → API 网关 → 认证服务 / 订单服务",
+  "layers": [
+    {
+      "tag": "客户端层",
+      "accent": 1,
+      "nodes": [
+        {"name": "浏览器", "desc": "连接 API 网关", "emoji": "🖥", "icon": "code"}
+      ]
+    },
+    {
+      "tag": "接入层",
+      "accent": 6,
+      "nodes": [
+        {"name": "API 网关", "desc": "连接认证服务与订单服务", "emoji": "🛡", "icon": "shield"}
+      ]
+    },
+    {
+      "tag": "服务层",
+      "accent": 2,
+      "nodes": [
+        {"name": "认证服务", "desc": "使用 PostgreSQL", "emoji": "🔑", "icon": "person"},
+        {"name": "订单服务", "desc": "使用 PostgreSQL 与 Redis", "emoji": "📦", "icon": "package"}
+      ]
+    },
+    {
+      "tag": "数据层",
+      "accent": 3,
+      "nodes": [
+        {"name": "PostgreSQL", "desc": "归属认证服务", "emoji": "🗄", "icon": "lock"},
+        {"name": "PostgreSQL", "desc": "归属订单服务", "emoji": "🗄", "icon": "lock"},
+        {"name": "Redis", "desc": "归属订单服务", "emoji": "⚡", "icon": "layers"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": ""},
+    {"label": ""},
+    {"label": ""}
+  ],
+  "footerLabel": "连线方向",
+  "footer": "浏览器连接 API 网关。API 网关连接认证服务与订单服务。认证服务使用 PostgreSQL。订单服务使用 PostgreSQL 与 Redis。"
+}

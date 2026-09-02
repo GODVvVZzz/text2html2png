@@ -1,0 +1,41 @@
+{
+  "id": "local-first-pipeline",
+  "locale": "en-US",
+  "eyebrow": "Architecture",
+  "title": "A local-first diagram pipeline",
+  "subtitle": "Structured content becomes an editable visual without leaving the machine.",
+  "layers": [
+    {
+      "tag": "Input",
+      "accent": 1,
+      "nodes": [
+        {"name": "Prompt", "desc": "The diagram goal, audience, and preferred format.", "emoji": "💬", "icon": "megaphone"},
+        {"name": "Source facts", "desc": "Steps, components, dates, metrics, or hierarchy.", "emoji": "📋", "icon": "layers"}
+      ]
+    },
+    {
+      "tag": "Agent",
+      "accent": 6,
+      "nodes": [
+        {"name": "Select", "desc": "Choose one chart and one visual style.", "emoji": "✅", "icon": "check"},
+        {"name": "Structure", "desc": "Organize facts without inventing missing data.", "emoji": "🧱", "icon": "package"},
+        {"name": "Compose", "desc": "Generate safe, self-contained HTML and CSS.", "emoji": "⌨️", "icon": "code"}
+      ]
+    },
+    {
+      "tag": "Runtime",
+      "accent": 2,
+      "nodes": [
+        {"name": "Validate", "desc": "Block scripts, remote assets, and unsafe markup.", "emoji": "🛡", "icon": "shield"},
+        {"name": "Render", "desc": "Measure the layout in a local Chrome-family browser.", "emoji": "🖥", "icon": "image"},
+        {"name": "HTML + PNG", "desc": "Edit the source or paste the high-resolution image anywhere.", "emoji": "🖼", "icon": "code"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": ""},
+    {"label": ""}
+  ],
+  "footerLabel": "Local by default",
+  "footer": "No telemetry · no hosted API · network requests blocked"
+}

@@ -36,10 +36,10 @@
     "logo": "./assets/logo.svg",
     "logoDark": "./assets/logo-dark.svg",
     "screenshots": [
-      "./skills/text2html2png/assets/gallery/launch-plan.png",
-      "./skills/text2html2png/assets/gallery/support-snapshot.png",
-      "./skills/text2html2png/assets/gallery/signup-funnel.png",
-      "./skills/text2html2png/assets/gallery/studio-org.png"
+      "./skills/text2html2png/assets/gallery/launch-plan-en-paper.png",
+      "./skills/text2html2png/assets/gallery/support-snapshot-en-glass.png",
+      "./skills/text2html2png/assets/gallery/signup-funnel-en-neon.png",
+      "./skills/text2html2png/assets/gallery/studio-org-en-warm.png"
     ]
   }
 }

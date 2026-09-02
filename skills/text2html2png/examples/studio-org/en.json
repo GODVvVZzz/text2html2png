@@ -1,0 +1,55 @@
+{
+  "id": "studio-org",
+  "locale": "en-US",
+  "eyebrow": "Studio structure",
+  "title": "A fourteen-person product studio",
+  "subtitle": "Three levels: one studio lead, three discipline leads, ten practitioners — role titles only",
+  "tree": {
+    "name": "Studio lead",
+    "role": "Direction & hiring",
+    "meta": "14 people in the studio",
+    "accent": 1,
+    "emoji": "👤",
+    "icon": "person",
+    "children": [
+      {
+        "name": "Design lead",
+        "role": "Craft & brand quality",
+        "meta": "5 people incl. lead",
+        "accent": 1,
+        "emoji": "👤",
+        "icon": "layers",
+        "children": [
+          {"name": "Product design", "role": "Flows, screens, UI code", "meta": "×3", "emoji": "👤", "icon": "image"},
+          {"name": "Brand designer", "role": "Identity, decks, pages", "meta": "×1", "emoji": "👤", "icon": "megaphone"}
+        ]
+      },
+      {
+        "name": "Engineering lead",
+        "role": "Tech direction, releases",
+        "meta": "4 people incl. lead",
+        "accent": 3,
+        "emoji": "👤",
+        "icon": "code",
+        "children": [
+          {"name": "Frontend & backend", "role": "Apps, services, APIs", "meta": "×2", "emoji": "👤", "icon": "code"},
+          {"name": "Platform engineer", "role": "Build, deploy, tooling", "meta": "×1", "emoji": "👤", "icon": "package"}
+        ]
+      },
+      {
+        "name": "Delivery lead",
+        "role": "Scope, schedule, clients",
+        "meta": "4 people incl. lead",
+        "accent": 5,
+        "emoji": "👤",
+        "icon": "flag",
+        "children": [
+          {"name": "Research & content", "role": "Interviews, tests, docs", "meta": "×2", "emoji": "👤", "icon": "chart"},
+          {"name": "Delivery producer", "role": "Estimates, schedules", "meta": "×1", "emoji": "👤", "icon": "check"}
+        ]
+      }
+    ]
+  },
+  "footerLabel": "Studio headcount",
+  "footer": "14 people — 1 studio lead, 3 discipline leads, and 10 practitioners across design, engineering, and delivery"
+}

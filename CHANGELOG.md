@@ -7,7 +7,7 @@ All notable changes to the public project will be documented here.
 ### Added
 
 - Post-render layout audit (`scripts/audit-layout.mjs`): measures the rendered page in a real browser and fails on content pushed outside the capture area, clipped or truncated text, connectors escaping their `viewBox`, type below 10px, low contrast, colliding labels, empty filler boxes, and unreadable aspect ratios. Every finding reports the element, the measured evidence, and one repair.
-- Example manifest (`examples/<id>.meta.json`) as the single source of truth for each published example, plus `scripts/examples.mjs`, `scripts/audit-examples.mjs`, and `scripts/render-examples.mjs` for coverage reporting, batch auditing, and reproducible re-rendering.
+- Example manifest (`examples/<id>.meta.json`) plus per-locale fixtures (`examples/<id>/{zh,en}.json`) as the single source of truth for each published example, and `scripts/build-examples.mjs` for manifest validation, strict layout auditing, and reproducible re-rendering of every bilingual example.
 - Six new synthetic examples on top of the original three, bringing coverage to 9 examples across all 8 chart types and all 7 visual themes: a minimal plan comparison, an editorial roadmap timeline, a glass support dashboard, a neon signup funnel, a paper conference Gantt chart, and a warm org chart.
 - Published gallery at `docs/index.html`, generated from the manifest together with the prompt index, so the site, the Markdown, and the committed images cannot drift apart.
 - 1280×640 social preview card, rendered by the skill's own renderer from committed HTML.

@@ -232,5 +232,5 @@ export async function validatePipelineSources(pipelineDir) {
     validateChartCss(chartCss, tokenContract);
     charts.push(chart);
   }
-  return { themes: themeMeta, sharedCss, charts, tokenCount: tokenSets[0][1].size };
+  return { themes: themeMeta, sharedCss, charts, tokenCount: tokenSets[0][1].size, tokenContract };
 }

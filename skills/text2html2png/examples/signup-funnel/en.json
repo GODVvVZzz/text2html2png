@@ -1,0 +1,22 @@
+{
+  "id": "signup-funnel",
+  "locale": "en-US",
+  "eyebrow": "Signup funnel",
+  "title": "Landing page to activation",
+  "subtitle": "30-day cohort · 48,200 visitors → 8,700 activated · synthetic sample data",
+  "stages": [
+    {"name": "Visited landing page", "value": 48200, "accent": 2},
+    {"name": "Started signup", "value": 18795, "accent": 4},
+    {"name": "Verified email", "value": 12640, "accent": 7},
+    {"name": "Profile", "value": 8930, "accent": 3},
+    {"name": "Activated", "value": 8700, "accent": 6}
+  ],
+  "dropReasons": [
+    "29,405 dropped off",
+    "6,155 dropped off",
+    "3,710 dropped off",
+    "230 dropped off"
+  ],
+  "footerLabel": "Takeaway",
+  "footer": "Overall conversion 18% — 8,700 of 48,200 visitors activated. Largest drop-off: landing page to signup start, 29,405 people."
+}

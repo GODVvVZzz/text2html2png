@@ -1,0 +1,48 @@
+{
+  "id": "launch-plan",
+  "locale": "en-US",
+  "eyebrow": "Eight-week run-up",
+  "title": "Community conference preparation plan",
+  "subtitle": "Mon Apr 5 – Sun May 30, 2027 · seven workstreams, three dated milestones",
+  "periods": [
+    {"label": "W1", "date": "Apr 5"},
+    {"label": "W2", "date": "Apr 12"},
+    {"label": "W3", "date": "Apr 19"},
+    {"label": "W4", "date": "Apr 26"},
+    {"label": "W5", "date": "May 3"},
+    {"label": "W6", "date": "May 10"},
+    {"label": "W7", "date": "May 17"},
+    {"label": "W8", "date": "May 24"}
+  ],
+  "groups": [
+    {
+      "name": "Program",
+      "tasks": [
+        {"name": "Venue and date lock", "start": 0, "span": 2, "accent": 1, "duration": "2 weeks"},
+        {"name": "Call for talks open", "start": 2, "span": 3, "accent": 7, "duration": "3 weeks"},
+        {"name": "Talk review and scheduling", "start": 4, "span": 2, "accent": 5, "duration": "2 weeks"},
+        {"name": "Speaker confirmations", "start": 6, "span": 1, "accent": 6, "duration": "1 week"}
+      ]
+    },
+    {
+      "name": "Audience",
+      "tasks": [
+        {"name": "Tickets and promotion", "start": 2, "span": 6, "accent": 3, "duration": "6 weeks"}
+      ]
+    },
+    {
+      "name": "Operations",
+      "tasks": [
+        {"name": "Volunteer recruiting and briefing", "start": 4, "span": 3, "accent": 2, "duration": "3 weeks"},
+        {"name": "Walkthrough and event week", "start": 7, "span": 1, "accent": 4, "duration": "1 week"}
+      ]
+    }
+  ],
+  "milestones": [
+    {"name": "Call for talks closes", "pos": 5, "accent": 4},
+    {"name": "Schedule published", "pos": 6, "accent": 4},
+    {"name": "Doors open", "pos": 7.7, "accent": 4}
+  ],
+  "footerLabel": "Scheduling notes",
+  "footer": "Week 5 is the crunch — four workstreams run at once. Bars cover every active week and diamonds are dated milestones. 8 weeks · 7 workstreams · 3 milestones — doors open Sat May 29, 2027."
+}

@@ -2,10 +2,13 @@
   "id": "plan-comparison",
   "title": "Choosing a plan",
   "chart": "comparison",
-  "style": "minimal",
   "summary": "Three plan tiers aligned row by row on one shared set of criteria, with no invented winner.",
   "prompt": "Make a minimal comparison of three plans — Community, Team, Studio — on the same criteria: seats included, active projects, storage, support response, monthly price, annual price. Community: 3 seats, 5 projects, 2 GB, community forum only, $0; describe it as self-hosted, for solo work and evaluation. Team: 25 seats, 50 projects, 100 GB, 1 business day, $18 per seat monthly, $180 per seat annually; describe it as shared projects for a small group. Studio: unlimited seats and projects, 1 TB, 4 hours, $49 per seat monthly, $490 per seat annually; describe it as for larger groups that need a response time. Annual billing charges ten months per seat. Close with a short \"how to read it\" note: seats and projects are hard caps, support response is the target time to a first reply during business hours and Community has no target, and the ten-month rule is why $18 becomes $180 and $49 becomes $490. Title it \"Choosing a plan\" and do not declare a winner.",
   "width": 1040,
-  "background": "#ffffff",
-  "scale": 2
+  "scale": 2,
+  "theme": "minimal",
+  "locales": [
+    "zh",
+    "en"
+  ]
 }
