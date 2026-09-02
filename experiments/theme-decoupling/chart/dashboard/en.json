@@ -1,0 +1,41 @@
+{
+  "id": "weekly-ops-dashboard",
+  "locale": "en-US",
+  "eyebrow": "Weekly Ops Dashboard",
+  "title": "Week 36 Operations Review",
+  "subtitle": "Aug 31 - Sep 6, 2026. All four KPIs stay inside their healthy range.",
+  "stats": [
+    {"value": "128,472", "label": "Monthly actives", "detail": "vs. same period last month", "accent": 1, "emoji": "👥", "icon": "chart", "trend": {"direction": "up", "delta": "+12.3%"}},
+    {"value": "4.87%", "label": "Free-to-paid", "detail": "7-day conversion window", "accent": 3, "emoji": "🎯", "icon": "check", "trend": {"direction": "flat", "delta": "±0.2pp"}},
+    {"value": "¥892K", "label": "Subscription MRR", "detail": "net of refunds", "accent": 6, "emoji": "💰", "icon": "package", "trend": {"direction": "up", "delta": "+23.1%"}},
+    {"value": "247ms", "label": "P50 latency", "detail": "edge-rendered pages", "accent": 2, "emoji": "⚡", "icon": "shield", "trend": {"direction": "down", "delta": "-8.5%"}}
+  ],
+  "panels": [
+    {
+      "title": "Traffic channels",
+      "accent": 4,
+      "emoji": "🧭",
+      "icon": "megaphone",
+      "rows": [
+        {"name": "Organic search", "value": "38,412", "bar": 42},
+        {"name": "Community", "value": "21,306", "bar": 23},
+        {"name": "Paid ads", "value": "14,918", "bar": 16},
+        {"name": "Email winback", "value": "6,204", "bar": 7}
+      ]
+    },
+    {
+      "title": "Error mix",
+      "accent": 5,
+      "emoji": "🛡",
+      "icon": "shield",
+      "rows": [
+        {"name": "Upstream timeout", "value": "96", "bar": 44},
+        {"name": "Rate limited", "value": "64", "bar": 30},
+        {"name": "Render failure", "value": "37", "bar": 17},
+        {"name": "Other", "value": "21", "bar": 9}
+      ]
+    }
+  ],
+  "footerLabel": "Dashboard notes",
+  "footer": "All metrics are weekly aggregates; trends compare against the previous cycle. Error share is measured per request."
+}

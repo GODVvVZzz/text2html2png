@@ -147,7 +147,7 @@ export function validateMarkup(markup, label = "markup") {
         if (!/^var\(--t-[a-z0-9-]+\)$/i.test(value.trim())) {
           failures.push(`inline theme property must be a pure var(): ${declaration}`);
         }
-      } else if (!["--compare-count", "--criteria-count", "--matrix-rows"].includes(property)) {
+      } else if (!["--compare-count", "--criteria-count", "--matrix-rows", "--stat-count", "--panel-count", "--bar-pct"].includes(property)) {
         failures.push(`unexpected inline style property: ${property || declaration}`);
       }
     }

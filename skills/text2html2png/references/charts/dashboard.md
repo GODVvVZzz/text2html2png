@@ -207,3 +207,30 @@ For visual data representation within cards:
 5. **Number formatting**: Large numbers with commas (12,847), percentages with 1 decimal (98.7%)
 6. **Card gap**: 10px between stat cards, 10px between detail cards
 7. Bottom banner summarizes only status present in the source
+
+---
+
+## Pipeline migration note (theme-decoupling)
+
+Dashboard is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/dashboard/`
+(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
+snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+
+Validated structure (all 7 themes × zh/en, `build --render --audit` 56/56 green):
+
+- One uniform DOM: `.metrics.dash-grid` KPI row (`--stat-count` structural var) + `.dash-panels`
+  detail row (`--panel-count`), so both locales and all themes share one fingerprint. The
+  `.dash-grid` override comes later in the cascade than the shared 3-column `.metrics` rule.
+- KPI cards reuse the shared `.metric` anatomy (accent top bar, `--metric-accent` tint, data-font
+  value) plus a `.metric-trend` row: a monochrome `trend-up`/`trend-down`/`trend-flat` SVG icon and
+  the delta text. Trend direction is encoded by icon shape and the +/- sign, never by color —
+  semantic green/red would break theme orthogonality.
+- Detail panels follow the shared card anatomy with a `--tone`-tinted background and 4px top bar;
+  each row is name → dotted leader → tabular `panel-value` (same leader pattern as comparison).
+- Progress bars inject data through the `--bar-pct` structural var (whitelisted inline); the track
+  is `color-mix(in srgb, var(--tone) 16%, var(--t-surface))` so the fill/track pairing adapts to
+  every theme without literal colors.
+- Trend values and panel values use `font-variant-numeric: tabular-nums` for column-stable digits.
+- Themes must keep all 7 accents distinct ON THEIR OWN surfaces: the dark theme's grey-blue
+  accent-3/accent-6 pair read as one color inside a 4-up KPI row, so accent-3 moved to warm sand
+  (#d4a763) — adjacent KPI cards are the strictest accent-identity test in the suite.

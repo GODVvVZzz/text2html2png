@@ -1,0 +1,41 @@
+{
+  "id": "weekly-ops-dashboard",
+  "locale": "zh-CN",
+  "eyebrow": "每周运营看板",
+  "title": "第 36 周运营总览",
+  "subtitle": "2026-08-31 至 2026-09-06，四项核心指标全部处于健康区间。",
+  "stats": [
+    {"value": "128,472", "label": "月活跃用户", "detail": "对比上月同期", "accent": 1, "emoji": "👥", "icon": "chart", "trend": {"direction": "up", "delta": "+12.3%"}},
+    {"value": "4.87%", "label": "付费转化率", "detail": "近 7 日转化窗口", "accent": 3, "emoji": "🎯", "icon": "check", "trend": {"direction": "flat", "delta": "±0.2pp"}},
+    {"value": "¥892K", "label": "订阅收入", "detail": "已扣除退款", "accent": 6, "emoji": "💰", "icon": "package", "trend": {"direction": "up", "delta": "+23.1%"}},
+    {"value": "247ms", "label": "P50 延迟", "detail": "边缘渲染页面", "accent": 2, "emoji": "⚡", "icon": "shield", "trend": {"direction": "down", "delta": "-8.5%"}}
+  ],
+  "panels": [
+    {
+      "title": "流量渠道",
+      "accent": 4,
+      "emoji": "🧭",
+      "icon": "megaphone",
+      "rows": [
+        {"name": "自然搜索", "value": "38,412", "bar": 42},
+        {"name": "内容社区", "value": "21,306", "bar": 23},
+        {"name": "付费投放", "value": "14,918", "bar": 16},
+        {"name": "邮件召回", "value": "6,204", "bar": 7}
+      ]
+    },
+    {
+      "title": "错误分布",
+      "accent": 5,
+      "emoji": "🛡",
+      "icon": "shield",
+      "rows": [
+        {"name": "上游超时", "value": "96 次", "bar": 44},
+        {"name": "限流拒绝", "value": "64 次", "bar": 30},
+        {"name": "渲染失败", "value": "37 次", "bar": 17},
+        {"name": "其他", "value": "21 次", "bar": 9}
+      ]
+    }
+  ],
+  "footerLabel": "看板口径",
+  "footer": "所有指标为周粒度汇总，趋势对比上一周期；错误占比按请求次数计算。"
+}

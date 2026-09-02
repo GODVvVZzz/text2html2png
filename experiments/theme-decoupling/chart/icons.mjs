@@ -57,6 +57,21 @@ export function iconSvg(kind) {
         '<path d="M25.5 5.5l-12 4.8H9a3.6 3.6 0 0 0-3.6 3.6v.2A3.6 3.6 0 0 0 9 17.7h4.5l12 4.8v-17z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
         '<path d="M12.5 17.7l1.5 7.3a2 2 0 0 0 2 1.6h.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'
       ]);
+    case "trend-up":
+      return svg([
+        '<path d="M5 24l8.5-8.5 5 5L27 12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
+        '<path d="M19.5 11h8v8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
+      ]);
+    case "trend-down":
+      return svg([
+        '<path d="M5 8l8.5 8.5 5-5L27 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
+        '<path d="M19.5 21h8v-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
+      ]);
+    case "trend-flat":
+      return svg([
+        '<path d="M5 16h22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+        '<path d="M21.5 10.5L27 16l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
+      ]);
     default:
       throw new Error("Unknown icon: " + kind);
   }
