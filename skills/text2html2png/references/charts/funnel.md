@@ -243,3 +243,31 @@ Add drop-off reasons next to each transition:
 7. **Min-width on bars**: At least 80px even for small percentages (so text remains readable)
 8. Drop height: 20px between stages
 9. Bar border-radius: 6px (slightly rounded, not pill-shaped)
+
+---
+
+## Pipeline migration note (theme-decoupling)
+
+Funnel is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/funnel/`
+(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
+snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+
+Validated structure (all 7 themes × zh/en, `build --render --audit` 112/112 green; bar-width
+accuracy measured at ≤0.22% deviation from theory in subagent review):
+
+- Bars are width-driven solids: each stage sets a structural inline var `--bar-width` derived from
+  `value / firstValue` (clamped 18–100%). `assertFixture` enforces every stage ≥18% of the first so
+  on-bar text always fits; `min-width: 120px` guards narrow tails.
+- On-accent text (`name` + `num` in `--t-on-accent`) may only sit on elements whose OWN declared
+  background is the tone color — the audit resolves computed backgrounds and cannot see
+  pseudo-element fills.
+- Centering baseline trap (the one systematic bug found): `.funnel-stage` as flex with centered
+  [bar + fixed label column] squeezes the 100% bar (its region excludes the label column) while
+  narrower bars are width-% of the FULL row — bars read ~8% too wide relative to the 100% bar.
+  Fix: `.funnel-stage` is a two-column grid `minmax(0, 1fr) 64px` and the bar uses
+  `justify-self: center`. Every bar is then a width-% child of the same 1fr bar region, so all
+  bars share one centering baseline and label percentages align in the fixed column.
+- Drop rows between stages carry the delta (data font, tabular-nums, sign reflects shrink vs
+  growth) plus a reason string; reason text is 12px — the audit's minBodyFont floor.
+- Adjacent stages reuse the strictest accent-identity test: stage accents cycle and must remain
+  hue-distinct per theme (see dark-theme accent fixes in the dashboard/architecture notes).

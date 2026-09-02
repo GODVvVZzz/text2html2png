@@ -1,0 +1,22 @@
+{
+  "id": "backend-hiring-funnel",
+  "locale": "zh-CN",
+  "eyebrow": "招聘漏斗",
+  "title": "后端工程师招聘转化",
+  "subtitle": "从简历初筛到 Offer 签发，五层转化与每层流失主因。",
+  "stages": [
+    {"name": "简历初筛", "value": 2400},
+    {"name": "笔试测评", "value": 1488},
+    {"name": "技术面", "value": 984},
+    {"name": "交叉面", "value": 624},
+    {"name": "Offer 签发", "value": 432}
+  ],
+  "dropReasons": [
+    "主因：岗位匹配度不足",
+    "主因：编码测评未过线",
+    "主因：系统设计深挖失分",
+    "主因：竞争 offer 分流"
+  ],
+  "footerLabel": "口径说明",
+  "footer": "漏斗各层为连续 90 天数据；降幅按相邻层计算，主因取自当期复盘记录。"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "backend-hiring-funnel",
+  "locale": "en-US",
+  "eyebrow": "Hiring Funnel",
+  "title": "Backend Engineer Hiring Funnel",
+  "subtitle": "Five stages from resume screen to signed offer, with the main drop-off cause at each step.",
+  "stages": [
+    {"name": "Resume screen", "value": 2400},
+    {"name": "Coding assessment", "value": 1488},
+    {"name": "Technical interview", "value": 984},
+    {"name": "Cross interview", "value": 624},
+    {"name": "Offer signed", "value": 432}
+  ],
+  "dropReasons": [
+    "Main cause: low role match",
+    "Main cause: below bar on coding",
+    "Main cause: system design depth",
+    "Main cause: competing offers"
+  ],
+  "footerLabel": "Methodology",
+  "footer": "Stages cover a rolling 90 days; drops are measured between adjacent stages, causes come from the period retrospective."
+}
