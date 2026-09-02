@@ -24,17 +24,16 @@
     "package-lock.json"
   ],
   "scripts": {
-    "check": "npm run check:skill && npm run check:styles && npm run check:orthogonality && npm run check:examples && npm run check:privacy && npm test && npm run check:layout",
+    "check": "npm run check:skill && npm run check:styles && npm run check:examples && npm run check:privacy && npm test && npm run check:layout",
     "check:examples": "node scripts/examples.mjs",
     "check:layout": "node scripts/audit-examples.mjs --strict",
-    "check:orthogonality": "node ../../experiments/theme-decoupling/scripts/validate-orthogonality.mjs",
     "check:privacy": "node scripts/privacy-check.mjs",
     "check:skill": "node scripts/validate-skill.mjs",
     "check:styles": "node scripts/validate-style-contract.mjs",
     "audit:layout": "node scripts/audit-layout.mjs",
     "render:examples": "node scripts/render-examples.mjs",
     "screenshot": "node scripts/screenshot.mjs",
-    "test": "node --test tests/*.test.mjs ../../experiments/theme-decoupling/tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "puppeteer-core": "25.9.0"

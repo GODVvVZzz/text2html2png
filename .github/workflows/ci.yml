@@ -59,6 +59,29 @@ jobs:
       - name: Check local documentation links
         run: node scripts/check-links.mjs
 
+  theme-orthogonality:
+    name: Theme / chart orthogonality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+          cache: npm
+          cache-dependency-path: skills/text2html2png/package-lock.json
+
+      # The experiment lives outside the shippable skill package, so it is
+      # verified here rather than from the skill's own scripts.
+      - name: Install locked dependencies
+        run: npm ci
+        working-directory: skills/text2html2png
+
+      - name: Validate source orthogonality
+        run: node experiments/theme-decoupling/scripts/validate-orthogonality.mjs
+
+      - name: Run orthogonality tests
+        run: node --test experiments/theme-decoupling/tests/*.test.mjs
+
   generated-docs:
     name: Generated gallery is in sync
     runs-on: ubuntu-latest

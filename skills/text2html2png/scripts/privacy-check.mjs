@@ -1,12 +1,31 @@
 #!/usr/bin/env node
 
+import { existsSync } from "node:fs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const defaultRoot = path.resolve(scriptDir, "../../..");
+const skillDir = path.resolve(scriptDir, "..");
+
+// Inside this repository the useful scan root is the repository itself, so that
+// README, docs, and workflow files are covered. Once the skill is installed on
+// its own there is no repository above it, and blindly walking up would scan
+// unrelated directories belonging to the user. So only adopt an ancestor that
+// actually contains this skill at the expected path.
+export function defaultScanRoot() {
+  let candidate = path.resolve(skillDir, "../..");
+  for (let depth = 0; depth < 3; depth += 1) {
+    if (existsSync(path.join(candidate, "skills", "text2html2png", "SKILL.md"))) return candidate;
+    const parent = path.dirname(candidate);
+    if (parent === candidate) break;
+    candidate = parent;
+  }
+  return skillDir;
+}
+
+const defaultRoot = defaultScanRoot();
 const ignoredDirectories = new Set([".git", "node_modules", "dist", "coverage"]);
 const textExtensions = new Set([
   ".md", ".json", ".mjs", ".js", ".ts", ".css", ".html", ".yml", ".yaml",
