@@ -13,10 +13,14 @@ Every image in this repository is either an original vector mark made for this p
 
 All example content — names, numbers, dates, roles, and volumes — is synthetic and written for this repository. Organisational examples use role titles only and contain no personal names.
 
+## Fonts
+
+The `paper` theme uses LXGW WenKai as its display face. No font binary is committed: the font arrives as the npm dependency `@fontsource/lxgw-wenkai` and is subset at render time to exactly the codepoints in the user's copy. The committed `paper` example HTML therefore embeds small data-URI font subsets derived from that face. LXGW WenKai is copyright LXGW (with Klee by Fontworks as its base) and licensed under the SIL Open Font License 1.1; the license text is archived at [`skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt`](./skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt).
+
 ## Vector assets
 
 `assets/logo.svg`, `assets/logo-dark.svg`, and `assets/icon.svg` are original vector artwork created for this open-source release.
 
 ## What is deliberately absent
 
-No company logos, private templates, browser screenshots, profile images, or proprietary fonts are included. The style references mention optional Google Fonts by family name only; no font files are redistributed, and remote fonts are not loaded unless the user explicitly passes `--allow-network`.
+No company logos, private templates, browser screenshots, profile images, or proprietary fonts are included. The style references mention optional fonts by family name only, and remote fonts are never loaded unless the user explicitly passes `--allow-network`.
