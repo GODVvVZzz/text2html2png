@@ -5,9 +5,9 @@
   "title": "One source of truth, two useful deliverables",
   "subtitle": "HTML is the editable default. Export PNG only when a paste-ready image is explicitly requested.",
   "metrics": [
-    {"value":"8","label":"Diagram types","detail":"Flows, comparisons, architecture, and more","accent":1,"emoji":"📊"},
-    {"value":"7","label":"Visual themes","detail":"The structure stays; only the theme changes","accent":3,"emoji":"🎨"},
-    {"value":"2","label":"Output modes","detail":"HTML by default; PNG on request","accent":6,"emoji":"📦"}
+    {"value":"8","label":"Diagram types","detail":"Flows, comparisons, architecture, and more","accent":1,"emoji":"📊","icon":"chart"},
+    {"value":"7","label":"Visual themes","detail":"The structure stays; only the theme changes","accent":3,"emoji":"🎨","icon":"layers"},
+    {"value":"2","label":"Output modes","detail":"HTML by default; PNG on request","accent":6,"emoji":"📦","icon":"package"}
   ],
   "criteria": ["Editing", "Best used for", "How to view", "Sharing cost", "Fidelity"],
   "columns": [

@@ -9,15 +9,16 @@
   --t-text-muted: #806d50;
   --t-border: #dfd0b4;
   --t-rule: #cdbb9a;
+  --t-head-rule-image: #c9b48c;
   --t-accent-1: #a8501f;
   --t-accent-2: #8a6512;
-  --t-accent-3: #2f7284;
+  --t-accent-3: #5e6e4c;
   --t-accent-4: #67347f;
   --t-accent-5: #286891;
   --t-accent-6: #765433;
   --t-accent-7: #3a7049;
   --t-on-accent: #ffffff;
-  --t-banner-bg: linear-gradient(135deg, #432a11, #5a3817);
+  --t-banner-bg: #4a2f13;
   --t-banner-text: #fff7e8;
   --t-banner-accent: #f0c060;
   --t-font-display: Georgia, "Songti SC", "STSong", serif;
@@ -44,6 +45,6 @@
   --t-backdrop: none;
   --t-leader-style: dotted;
   --t-leader-width: 1.5px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }

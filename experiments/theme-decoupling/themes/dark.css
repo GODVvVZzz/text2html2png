@@ -9,15 +9,16 @@
   --t-text-muted: #8294a7;
   --t-border: #344456;
   --t-rule: #42536a;
+  --t-head-rule-image: rgba(93, 169, 233, 0.55);
   --t-accent-1: #5da9e9;
-  --t-accent-2: #45b98d;
-  --t-accent-3: #d4a33a;
-  --t-accent-4: #d2725b;
-  --t-accent-5: #9b8dd4;
-  --t-accent-6: #55b3c0;
-  --t-accent-7: #b98760;
+  --t-accent-2: #55b3c0;
+  --t-accent-3: #7fa3c4;
+  --t-accent-4: #8294a7;
+  --t-accent-5: #6b7f93;
+  --t-accent-6: #3f6f9e;
+  --t-accent-7: #4a5d70;
   --t-on-accent: #071019;
-  --t-banner-bg: linear-gradient(135deg, #111c29, #182638);
+  --t-banner-bg: #131e2b;
   --t-banner-text: #dfeaf5;
   --t-banner-accent: #72b8ff;
   --t-font-display: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -44,6 +45,6 @@
   --t-backdrop: none;
   --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }

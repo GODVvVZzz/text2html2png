@@ -24,13 +24,13 @@ const buildScript = path.join(experimentDir, "scripts", "build.mjs");
 test("seven themes expose one identical token contract", async () => {
   const result = await validateSources();
   assert.equal(result.themes.length, 7);
-  assert.equal(result.tokenCount, 47);
+  assert.equal(result.tokenCount, 48);
 });
 
-test("themes show emoji by default while retaining the SVG fallback", async () => {
+test("themes default to monochrome SVG icons while keeping emoji as a fallback", async () => {
   const warm = themeDefinitions(await readFile(path.join(themesDir, "warm.css"), "utf8"), "warm");
-  assert.equal(warm.get("--t-emoji-display"), "inline-flex");
-  assert.equal(warm.get("--t-svg-display"), "none");
+  assert.equal(warm.get("--t-svg-display"), "inline-flex");
+  assert.equal(warm.get("--t-emoji-display"), "none");
 });
 
 test("chart CSS rejects a literal color outside the theme", () => {

@@ -8,7 +8,8 @@
   --t-text-secondary: #bed5bf;
   --t-text-muted: #88aa8f;
   --t-border: rgba(183, 243, 74, 0.34);
-  --t-rule: rgba(53, 212, 197, 0.38);
+  --t-rule: rgba(183, 243, 74, 0.18);
+  --t-head-rule-image: rgba(183, 243, 74, 0.5);
   --t-accent-1: #b7f34a;
   --t-accent-2: #35d4c5;
   --t-accent-3: #ffb454;
@@ -17,7 +18,7 @@
   --t-accent-6: #61d995;
   --t-accent-7: #ff7f66;
   --t-on-accent: #071411;
-  --t-banner-bg: linear-gradient(90deg, #0a352a, #233412);
+  --t-banner-bg: #0a2b22;
   --t-banner-text: #eaffd0;
   --t-banner-accent: #b7f34a;
   --t-font-display: "DIN Alternate", Bahnschrift, "Arial Narrow", "PingFang SC", sans-serif;
@@ -42,8 +43,8 @@
   --t-card-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
   --t-highlight-shadow: 0 0 22px rgba(183, 243, 74, 0.14);
   --t-backdrop: none;
-  --t-leader-style: dashed;
+  --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }

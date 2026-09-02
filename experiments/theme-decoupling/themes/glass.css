@@ -1,6 +1,6 @@
 :root {
   --t-canvas: #e7edf1;
-  --t-canvas-image: radial-gradient(circle at 14% 18%, rgba(23, 105, 170, 0.13), transparent 34%), radial-gradient(circle at 82% 24%, rgba(9, 139, 128, 0.11), transparent 32%), radial-gradient(circle at 58% 88%, rgba(181, 108, 10, 0.08), transparent 30%);
+  --t-canvas-image: radial-gradient(circle at 12% 14%, rgba(23, 105, 170, 0.44), transparent 44%), radial-gradient(circle at 88% 28%, rgba(9, 139, 128, 0.36), transparent 42%), radial-gradient(circle at 52% 94%, rgba(166, 95, 8, 0.3), transparent 46%);
   --t-surface: rgba(255, 255, 255, 0.58);
   --t-surface-strong: rgba(255, 255, 255, 0.8);
   --t-surface-soft: rgba(238, 247, 249, 0.62);
@@ -9,6 +9,7 @@
   --t-text-muted: #687b8b;
   --t-border: rgba(255, 255, 255, 0.82);
   --t-rule: rgba(42, 77, 100, 0.22);
+  --t-head-rule-image: rgba(23, 105, 170, 0.35);
   --t-accent-1: #1769aa;
   --t-accent-2: #098b80;
   --t-accent-3: #a65f08;
@@ -17,7 +18,7 @@
   --t-accent-6: #177c91;
   --t-accent-7: #39784e;
   --t-on-accent: #ffffff;
-  --t-banner-bg: linear-gradient(110deg, rgba(23, 105, 170, 0.9), rgba(9, 139, 128, 0.88));
+  --t-banner-bg: rgba(23, 105, 170, 0.92);
   --t-banner-text: #ffffff;
   --t-banner-accent: #ffe0a6;
   --t-font-display: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -44,6 +45,6 @@
   --t-backdrop: blur(14px);
   --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }

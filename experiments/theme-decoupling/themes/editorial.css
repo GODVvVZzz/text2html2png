@@ -1,6 +1,6 @@
 :root {
   --t-canvas: #f7f1e8;
-  --t-canvas-image: linear-gradient(90deg, transparent 0%, transparent 49.9%, rgba(143, 104, 17, 0.04) 50%, transparent 50.1%);
+  --t-canvas-image: none;
   --t-surface: #fffaf2;
   --t-surface-strong: #fffdf8;
   --t-surface-soft: #efe5d8;
@@ -9,6 +9,7 @@
   --t-text-muted: #7d685b;
   --t-border: #d4c4b2;
   --t-rule: #ab9581;
+  --t-head-rule-image: #5f4b40;
   --t-accent-1: #93472c;
   --t-accent-2: #253b56;
   --t-accent-3: #8f6811;
@@ -44,6 +45,6 @@
   --t-backdrop: none;
   --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }

@@ -25,17 +25,52 @@ export const REQUIRED_THEME_TOKENS = [
   "--t-border-width", "--t-border-style", "--t-card-shadow",
   "--t-highlight-shadow", "--t-backdrop", "--t-leader-style",
   "--t-leader-width", "--t-emoji-display", "--t-svg-display",
+  "--t-head-rule-image",
 ];
 
 function stripComments(source) {
   return source.replace(/\/\*[\s\S]*?\*\//g, "").trim();
 }
 
+// Fonts are an asset-loading concern, not styling: an embedded @font-face may
+// only declare descriptors and a data: URI source, never selectors or colors.
+function extractFontFaces(source, label) {
+  const faces = [];
+  const rest = source.replace(/@font-face\s*\{[^}]*\}/g, (block) => {
+    faces.push(block);
+    return "";
+  });
+  for (const face of faces) {
+    const body = face.replace(/^@font-face\s*\{/, "").replace(/\}$/, "");
+    // The data: URI contains semicolons, so src must be lifted out before
+    // the remaining descriptors can be split on ";".
+    let rest = body;
+    let sawSrc = false;
+    rest = rest.replace(/src\s*:\s*[\s\S]*?(?=font-family|font-style|font-weight|font-display|unicode-range|$)/, (srcDecl) => {
+      sawSrc = true;
+      const normalized = srcDecl.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\s+/g, "");
+      if (!/^src:url\(["']?data:font\/(woff2?|ttf|otf);base64,[A-Za-z0-9+/=]+["']?\)format\(["']?(woff2|woff|truetype|opentype)["']?\);?$/i.test(normalized)) {
+        throw new Error(`${label}: @font-face src must be an inline data: URI font`);
+      }
+      return "";
+    });
+    if (!sawSrc) throw new Error(`${label}: @font-face is missing a src descriptor`);
+    for (const declaration of rest.split(";").map((s) => s.trim()).filter(Boolean)) {
+      const [, property = ""] = declaration.match(/^([a-z-]+)\s*:/i) ?? [];
+      if (!["font-family", "font-style", "font-weight", "font-display", "unicode-range"].includes(property)) {
+        throw new Error(`${label}: forbidden descriptor in @font-face: ${property || declaration.slice(0, 40)}`);
+      }
+    }
+  }
+  return rest.trim();
+}
+
 export function themeDefinitions(source, label = "theme") {
   const clean = stripComments(source);
-  const match = clean.match(/^:root\s*\{([\s\S]*)\}\s*$/);
+  const rest = extractFontFaces(clean, label);
+  const match = rest.match(/^:root\s*\{([\s\S]*)\}\s*$/);
   if (!match) {
-    throw new Error(`${label}: theme CSS must contain exactly one :root rule and no component selectors.`);
+    throw new Error(`${label}: theme CSS must contain exactly one :root rule (plus optional @font-face) and no component selectors.`);
   }
 
   const definitions = new Map();

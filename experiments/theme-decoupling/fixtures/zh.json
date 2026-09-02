@@ -5,9 +5,9 @@
   "title": "同一份事实，两种交付方式",
   "subtitle": "HTML 默认保留编辑自由；需要快速传播时，再按需导出 PNG。",
   "metrics": [
-    {"value":"8","label":"图表类型","detail":"流程、对比、架构等","accent":1,"emoji":"📊"},
-    {"value":"7","label":"视觉主题","detail":"结构不变，只换主题","accent":3,"emoji":"🎨"},
-    {"value":"2","label":"输出模式","detail":"HTML 默认 + PNG 按需","accent":6,"emoji":"📦"}
+    {"value":"8","label":"图表类型","detail":"流程、对比、架构等","accent":1,"emoji":"📊","icon":"chart"},
+    {"value":"7","label":"视觉主题","detail":"结构不变，只换主题","accent":3,"emoji":"🎨","icon":"layers"},
+    {"value":"2","label":"输出模式","detail":"HTML 默认 + PNG 按需","accent":6,"emoji":"📦","icon":"package"}
   ],
   "criteria": ["后续编辑", "最适合", "查看方式", "分享成本", "清晰度"],
   "columns": [

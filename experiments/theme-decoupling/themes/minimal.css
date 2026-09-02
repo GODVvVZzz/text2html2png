@@ -9,6 +9,7 @@
   --t-text-muted: #6b6b6b;
   --t-border: #d8d8d8;
   --t-rule: #b8b8b8;
+  --t-head-rule-image: #111111;
   --t-accent-1: #111111;
   --t-accent-2: #2b2b2b;
   --t-accent-3: #444444;
@@ -44,6 +45,6 @@
   --t-backdrop: none;
   --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }

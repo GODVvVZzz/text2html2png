@@ -62,6 +62,29 @@ function iconSvg(kind) {
       "</svg>"
     ].join("");
   }
+  if (kind === "chart") {
+    return [
+      '<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">',
+      '<path d="M9.5 26V15.5M16 26V6.5M22.5 26V11M4 26.5h24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>',
+      "</svg>"
+    ].join("");
+  }
+  if (kind === "layers") {
+    return [
+      '<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">',
+      '<path d="M16 4.5l11.5 5.8L16 16.1 4.5 10.3 16 4.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+      '<path d="M4.5 16.2l11.5 5.8 11.5-5.8M4.5 22l11.5 5.8L27.5 22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+      "</svg>"
+    ].join("");
+  }
+  if (kind === "package") {
+    return [
+      '<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">',
+      '<path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+      '<path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+      "</svg>"
+    ].join("");
+  }
   throw new Error("Unknown icon: " + kind);
 }
 
@@ -90,6 +113,7 @@ function bodyMarkup(fixture) {
       '<article class="metric" style="--metric-accent: var(--t-accent-' + Number(metric.accent) + ');">',
       '<span class="metric-top">',
       '<span class="metric-emoji">' + escapeHtml(metric.emoji) + "</span>",
+      '<span class="metric-icon-svg">' + iconSvg(metric.icon) + "</span>",
       '<span class="metric-value">' + escapeHtml(metric.value) + "</span>",
       "</span>",
       '<span class="metric-label">' + escapeHtml(metric.label) + "</span>",
