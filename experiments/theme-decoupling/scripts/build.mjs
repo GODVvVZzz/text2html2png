@@ -6,6 +6,7 @@ import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { renderScreenshot } from "../../../skills/text2html2png/scripts/screenshot.mjs";
 import { auditLayout, formatReport } from "../../../skills/text2html2png/scripts/audit-layout.mjs";
+import { buildWenKaiFaces } from "../../../skills/text2html2png/scripts/subset-wenkai.mjs";
 import {
   chartDir,
   experimentDir,
@@ -95,12 +96,36 @@ function documentHtml(input) {
   const html = input.template
     .replace("{{LANG}}", escapeAttr(input.fixture.locale))
     .replace("{{DOCUMENT_TITLE}}", escapeAttr(input.fixture.title))
+    .replace("{{FONT_CSS}}", input.fontCss)
     .replace("{{THEME_ID}}", escapeAttr(input.theme.id))
     .replace("{{THEME_CSS}}", input.themeCss.trim())
+    .replace("{{CHART_ID}}", escapeAttr(input.chart.id))
     .replace("{{CHART_CSS}}", input.chartCss.trim())
     .replace("{{BODY}}", body);
   validateMarkup(html, `${input.chart.id}-${input.fixture.locale}-${input.theme.id}`);
   return html;
+}
+
+// Collect every string in the fixture: the font subset must cover all copy
+// the document can render, wherever it appears in the data.
+function fixtureStrings(value, out) {
+  if (typeof value === "string") out.push(value);
+  else if (Array.isArray(value)) for (const item of value) fixtureStrings(item, out);
+  else if (value && typeof value === "object") for (const item of Object.values(value)) fixtureStrings(item, out);
+  return out;
+}
+
+// One subset per chart+locale, shared by every theme so the theme-invariant
+// source check stays meaningful.
+const fontCache = new Map();
+async function fontCssFor(chartId, locale, fixture) {
+  const key = chartId + "/" + locale;
+  if (!fontCache.has(key)) {
+    const text = fixtureStrings(fixture, []).join("\n");
+    const result = await buildWenKaiFaces(text);
+    fontCache.set(key, result);
+  }
+  return fontCache.get(key);
 }
 
 function escapeAttr(value) {
@@ -150,11 +175,18 @@ async function main() {
       let chartLocaleBaseline = null;
       for (const theme of selectedThemes) {
         const themeCss = await readFile(path.join(themesDir, theme.id + ".css"), "utf8");
+        // A theme gets the dynamic WenKai faces exactly when it references
+        // the family; subsets are computed once per chart+locale.
+        const fontCss = themeCss.includes("LXGW WenKai")
+          ? await fontCssFor(chart.id, locale, fixture)
+          : "";
+        const fontNote = fontCss ? ` fonts=${fontCss.faces.length} face/${fontCss.totalBytes}B` : "";
         const html = documentHtml({
           chart: chart,
           fixture: fixture,
           theme: theme,
           themeCss: themeCss,
+          fontCss: fontCss ? '<style id="text2html2png-fonts" data-font="LXGW WenKai">\n' + fontCss.css + "  </style>\n  " : "",
           chartCss: chartCss,
           template: template,
           bodyMarkup: chart.bodyMarkup
@@ -170,7 +202,7 @@ async function main() {
         const pngPath = path.join(args.out, stem + ".png");
         await writeFile(htmlPath, html, "utf8");
         generated.push({ chartId: chart.id, locale: locale, themeId: theme.id, htmlPath: htmlPath, pngPath: pngPath });
-        console.log("built " + stem + ".html  invariant=" + invariantHash.slice(0, 12));
+        console.log("built " + stem + ".html  invariant=" + invariantHash.slice(0, 12) + fontNote);
       }
     }
   }

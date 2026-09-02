@@ -161,11 +161,13 @@ export function validateMarkup(markup, label = "markup") {
   if (failures.length) throw new Error(`${label}:\n- ${[...new Set(failures)].join("\n- ")}`);
 }
 
+// Removes the theme block AND the runtime-injected WenKai font block: both
+// are theme/asset injection, never part of the chart structure that the
+// invariant hash and the markup scan reason about.
 export function stripThemeBlock(html) {
-  return html.replace(
-    /\s*<style id="text2html2png-theme" data-theme="[^"]+">[\s\S]*?<\/style>\s*/i,
-    "\n"
-  );
+  return html
+    .replace(/\s*<style id="text2html2png-theme" data-theme="[^"]+">[\s\S]*?<\/style>\s*/i, "\n")
+    .replace(/\s*<style id="text2html2png-fonts" data-font="[^"]*">[\s\S]*?<\/style>\s*/i, "\n");
 }
 
 export function sourceHash(source) {
