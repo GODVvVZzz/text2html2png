@@ -1,0 +1,18 @@
+{
+  "id": "release-flow",
+  "locale": "en-US",
+  "direction": "horizontal",
+  "eyebrow": "Release workflow",
+  "title": "From idea to production",
+  "subtitle": "Six explicit gates keep every change reviewable and safe.",
+  "steps": [
+    {"num": "01", "name": "Plan", "detail": "Define scope and acceptance criteria. Gate: Scope ready.", "accent": 1, "emoji": "🎯", "icon": "flag"},
+    {"num": "02", "name": "Build", "detail": "Implement the smallest complete change. Gate: Checks pass.", "accent": 2, "emoji": "🛠", "icon": "code"},
+    {"num": "03", "name": "Review", "detail": "Validate correctness, clarity, and risk. Gate: Approved.", "accent": 3, "emoji": "👀", "icon": "person"},
+    {"num": "04", "name": "Test", "detail": "Exercise behavior in a safe environment. Gate: Verified.", "accent": 4, "emoji": "✅", "icon": "check"},
+    {"num": "05", "name": "Canary", "detail": "Release narrowly and observe signals. Gate: Healthy.", "accent": 5, "emoji": "🐤", "icon": "trend-up"},
+    {"num": "06", "name": "Production", "detail": "Expand confidently with rollback ready. Gate: Shipped.", "accent": 7, "emoji": "🚀", "icon": "package"}
+  ],
+  "footerLabel": "Gate by gate",
+  "footer": "Every stage earns the next one — a change that fails a gate stays put until the gate passes."
+}

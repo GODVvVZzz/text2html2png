@@ -2,10 +2,13 @@
   "id": "support-snapshot",
   "title": "Support desk weekly snapshot",
   "chart": "dashboard",
-  "style": "glass",
   "summary": "A four-KPI weekly support snapshot where every delta, share, and total is derived from the stated intake, resolution, and backlog counts.",
   "prompt": "Build a glass dashboard for our weekly support desk snapshot, week 32 (Mon 2026-08-03 to Sun 2026-08-09): 1,284 tickets received against 1,206 the prior week, first-response median 42 min against 55 min, 1,194 of 1,306 resolutions inside the 24 h SLA target against 88.9% the prior week, and 96 tickets open at week end against 118. Add a per-channel intake breakdown with median first response (email 528 / 66 min, in-app chat 431 / 11 min, phone 196 / 4 min, community forum 129 / 148 min) and the open backlog by age (51 under 24 h, 29 at 1 to 3 days, 12 at 4 to 7 days, 4 over 7 days). Do not invent any figure beyond these.",
   "width": 1040,
-  "background": "#e8eaf0",
-  "scale": 2
+  "scale": 2,
+  "theme": "glass",
+  "locales": [
+    "zh",
+    "en"
+  ]
 }

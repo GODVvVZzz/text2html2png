@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>从想法到生产环境</title>
+  <style id="text2html2png-theme" data-theme="warm">
+:root {
+  --t-canvas: #faf6ee;
+  --t-canvas-image: radial-gradient(circle at 8% 4%, rgba(168, 80, 31, 0.08), transparent 24%), radial-gradient(circle at 94% 92%, rgba(47, 114, 132, 0.06), transparent 28%);
+  --t-surface: #fffdf8;
+  --t-surface-strong: #ffffff;
+  --t-surface-soft: #f4ead9;
+  --t-text: #2e2410;
+  --t-text-secondary: #6a5a40;
+  --t-text-muted: #806d50;
+  --t-border: #dfd0b4;
+  --t-rule: #cdbb9a;
+  --t-head-rule-image: #c9b48c;
+  --t-accent-1: #a8501f;
+  --t-accent-2: #8a6512;
+  --t-accent-3: #5e6e4c;
+  --t-accent-4: #7a3b45;
+  --t-accent-5: #4e5d7c;
+  --t-accent-6: #765433;
+  --t-accent-7: #3a7049;
+  --t-on-accent: #ffffff;
+  --t-banner-bg: #4a2f13;
+  --t-banner-text: #fff7e8;
+  --t-banner-accent: #f0c060;
+  --t-font-display: Georgia, "Songti SC", "STSong", serif;
+  --t-font-body: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+  --t-title-size: 34px;
+  --t-title-weight: 700;
+  --t-title-tracking: -0.025em;
+  --t-title-transform: none;
+  --t-body-size: 14px;
+  --t-body-weight: 500;
+  --t-label-size: 11px;
+  --t-label-weight: 700;
+  --t-label-tracking: 0.12em;
+  --t-label-transform: uppercase;
+  --t-data-size: 29px;
+  --t-data-weight: 800;
+  --t-card-radius: 12px;
+  --t-small-radius: 8px;
+  --t-border-width: 1.5px;
+  --t-border-style: solid;
+  --t-card-shadow: 0 8px 26px rgba(72, 48, 18, 0.08);
+  --t-highlight-shadow: 0 0 0 4px rgba(168, 80, 31, 0.08);
+  --t-backdrop: none;
+  --t-leader-style: dotted;
+  --t-leader-width: 1.5px;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
+}
+  </style>
+  <style id="text2html2png-chart" data-chart="flowchart">
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--t-canvas);
+  background-image: var(--t-canvas-image);
+}
+
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  color: var(--t-text);
+  font-family: var(--t-font-body);
+  font-size: var(--t-body-size);
+  font-weight: var(--t-body-weight);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: 1040px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 32px 26px;
+  overflow: hidden;
+  background: var(--t-surface);
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-card-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.head {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--t-accent-1);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+h1 {
+  margin: 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: var(--t-title-size);
+  font-weight: var(--t-title-weight);
+  letter-spacing: var(--t-title-tracking);
+  line-height: 1.12;
+  text-transform: var(--t-title-transform);
+}
+
+.lede {
+  max-width: 700px;
+  margin: 9px auto 0;
+  color: var(--t-text-secondary);
+  font-size: var(--t-body-size);
+  line-height: 1.55;
+}
+
+.head-rule {
+  height: 2px;
+  margin-top: 16px;
+  background: var(--t-head-rule-image);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  position: relative;
+  min-height: 102px;
+  padding: 14px 16px 13px;
+  overflow: hidden;
+  text-align: center;
+  background: color-mix(in srgb, var(--metric-accent) 7%, var(--t-surface-strong));
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.metric:first-child {
+  box-shadow: var(--t-highlight-shadow);
+}
+
+.metric::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--metric-accent);
+}
+
+.metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.metric-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.metric-icon-svg {
+  display: var(--t-svg-display);
+  width: 19px;
+  height: 19px;
+}
+
+.metric-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.metric-value {
+  display: inline-block;
+  color: var(--metric-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-data-size);
+  font-weight: var(--t-data-weight);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-label {
+  display: block;
+  margin-top: 8px;
+  color: var(--t-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metric-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--t-text-muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+html:lang(zh-CN) .eyebrow,
+html:lang(zh-CN) .footer-label {
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+html:lang(zh-CN) h1 {
+  letter-spacing: 0;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  color: var(--t-banner-text);
+  background: var(--t-banner-bg);
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+}
+
+.footer-label {
+  color: var(--t-banner-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+}
+
+.step {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 13px 14px 14px;
+  background: color-mix(in srgb, var(--step-accent) 6%, var(--t-surface-strong));
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--step-accent);
+}
+
+.step-num {
+  color: var(--step-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+}
+
+.step-icons {
+  display: flex;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.step-icon-svg {
+  display: var(--t-svg-display);
+  width: 22px;
+  height: 22px;
+}
+
+.step-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.step-name {
+  color: var(--t-text);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.step-detail {
+  margin-top: 6px;
+  color: var(--t-text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.arrow {
+  display: flex;
+  flex: 0 0 auto;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in srgb, var(--t-accent-1) 60%, transparent);
+}
+
+.arrow svg {
+  display: block;
+}
+
+html:lang(zh-CN) .step-num {
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+  </style>
+</head>
+<body>
+<main class="wrap" aria-label="从想法到生产环境">
+<header class="head">
+<p class="eyebrow">发布工作流</p>
+<h1>从想法到生产环境</h1>
+<p class="lede">六道明确的闸门，确保每次变更都可评审、可安全推进。</p>
+<div class="head-rule"></div>
+</header>
+<section class="flow" aria-label="从想法到生产环境">
+<article class="step" style="--step-accent: var(--t-accent-1);">
+<span class="step-num">01</span>
+<div class="step-head">
+<span class="step-icons">
+<span class="step-icon-emoji">🎯</span>
+<span class="step-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M8.5 27.5v-23" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M8.5 6h15l-3.8 4.5 3.8 4.5h-15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="step-name">规划</h2>
+</div>
+<p class="step-detail">明确范围与验收标准。闸门：范围就绪。</p>
+</article><span class="arrow" aria-hidden="true"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="1" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.8"/><path d="M14 4.5l7.5 5.5-7.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><article class="step" style="--step-accent: var(--t-accent-2);">
+<span class="step-num">02</span>
+<div class="step-head">
+<span class="step-icons">
+<span class="step-icon-emoji">🛠</span>
+<span class="step-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M12 9L5 16l7 7M20 9l7 7-7 7M18.5 6l-5 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="step-name">构建</h2>
+</div>
+<p class="step-detail">实现最小且完整的变更。闸门：检查通过。</p>
+</article><span class="arrow" aria-hidden="true"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="1" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.8"/><path d="M14 4.5l7.5 5.5-7.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><article class="step" style="--step-accent: var(--t-accent-3);">
+<span class="step-num">03</span>
+<div class="step-head">
+<span class="step-icons">
+<span class="step-icon-emoji">👀</span>
+<span class="step-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="10.5" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M6.5 27c1.4-5.2 5-7.8 9.5-7.8s8.1 2.6 9.5 7.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+</span>
+<h2 class="step-name">评审</h2>
+</div>
+<p class="step-detail">校验正确性、清晰度与风险。闸门：已批准。</p>
+</article><span class="arrow" aria-hidden="true"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="1" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.8"/><path d="M14 4.5l7.5 5.5-7.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><article class="step" style="--step-accent: var(--t-accent-4);">
+<span class="step-num">04</span>
+<div class="step-head">
+<span class="step-icons">
+<span class="step-icon-emoji">✅</span>
+<span class="step-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="step-name">测试</h2>
+</div>
+<p class="step-detail">在安全环境中验证实际行为。闸门：已验证。</p>
+</article><span class="arrow" aria-hidden="true"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="1" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.8"/><path d="M14 4.5l7.5 5.5-7.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><article class="step" style="--step-accent: var(--t-accent-5);">
+<span class="step-num">05</span>
+<div class="step-head">
+<span class="step-icons">
+<span class="step-icon-emoji">🐤</span>
+<span class="step-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M5 24l8.5-8.5 5 5L27 12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.5 11h8v8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="step-name">金丝雀发布</h2>
+</div>
+<p class="step-detail">小范围发布并持续观察信号。闸门：运行健康。</p>
+</article><span class="arrow" aria-hidden="true"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="1" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.8"/><path d="M14 4.5l7.5 5.5-7.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><article class="step" style="--step-accent: var(--t-accent-7);">
+<span class="step-num">06</span>
+<div class="step-head">
+<span class="step-icons">
+<span class="step-icon-emoji">🚀</span>
+<span class="step-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="step-name">生产上线</h2>
+</div>
+<p class="step-detail">在回滚预案就绪的前提下放心扩大范围。闸门：已发布。</p>
+</article>
+</section>
+<footer class="footer">
+<div class="footer-label">逐闸推进</div>
+<p>每一阶段都为下一阶段赢得资格——未过闸门的变更就地等待，直至闸门放行。</p>
+</footer>
+</main>
+</body>
+</html>

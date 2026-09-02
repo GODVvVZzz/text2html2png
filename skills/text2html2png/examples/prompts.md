@@ -3,19 +3,19 @@
 # Public example prompts
 
 9 examples covering 8/8 chart types and 7/7 visual themes.
-All example content is synthetic.
+All example content is synthetic. Every example ships in English and Chinese, rendered from one shared DOM.
 
 | Example | Chart | Theme | Files |
 |---|---|---|---|
-| From idea to production | Flowchart | `warm` | [HTML](release-flow.html) · [PNG](../assets/gallery/release-flow.png) |
-| Choosing a plan | Comparison | `minimal` | [HTML](plan-comparison.html) · [PNG](../assets/gallery/plan-comparison.png) |
-| Six milestones to a plugin API | Timeline | `editorial` | [HTML](library-roadmap.html) · [PNG](../assets/gallery/library-roadmap.png) |
-| A local-first diagram pipeline | Architecture | `dark` | [HTML](local-first-pipeline.html) · [PNG](../assets/gallery/local-first-pipeline.png) |
-| Service Architecture | Architecture | `dark` | [HTML](service-architecture.html) · [PNG](../assets/gallery/service-architecture.png) |
-| Support desk weekly snapshot | Dashboard | `glass` | [HTML](support-snapshot.html) · [PNG](../assets/gallery/support-snapshot.png) |
-| Community conference preparation plan | Gantt | `paper` | [HTML](launch-plan.html) · [PNG](../assets/gallery/launch-plan.png) |
-| A fourteen-person product studio | Org chart | `warm` | [HTML](studio-org.html) · [PNG](../assets/gallery/studio-org.png) |
-| Landing page to activation | Funnel | `neon` | [HTML](signup-funnel.html) · [PNG](../assets/gallery/signup-funnel.png) |
+| From idea to production | Flowchart | `warm` | [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-warm.png) |
+| Choosing a plan | Comparison | `minimal` | [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-minimal.png) |
+| Six milestones to a plugin API | Timeline | `editorial` | [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png) |
+| A local-first diagram pipeline | Architecture | `dark` | [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-dark.png) |
+| Service Architecture | Architecture | `dark` | [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-dark.png) |
+| Support desk weekly snapshot | Dashboard | `glass` | [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-glass.png) |
+| Community conference preparation plan | Gantt | `paper` | [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-paper.png) |
+| A fourteen-person product studio | Org chart | `warm` | [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png) |
+| Landing page to activation | Funnel | `neon` | [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-neon.png) |
 
 ## From idea to production
 
@@ -25,7 +25,7 @@ All example content is synthetic.
 
 Six sequential gates, each with an explicit exit condition.
 
-Output: [HTML](release-flow.html) · [PNG](../assets/gallery/release-flow.png)
+Output: [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-warm.png)
 
 ## Choosing a plan
 
@@ -35,7 +35,7 @@ Output: [HTML](release-flow.html) · [PNG](../assets/gallery/release-flow.png)
 
 Three plan tiers aligned row by row on one shared set of criteria, with no invented winner.
 
-Output: [HTML](plan-comparison.html) · [PNG](../assets/gallery/plan-comparison.png)
+Output: [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-minimal.png)
 
 ## Six milestones to a plugin API
 
@@ -45,7 +45,7 @@ Output: [HTML](plan-comparison.html) · [PNG](../assets/gallery/plan-comparison.
 
 An alternating milestone timeline where every version, quarter, and scope note is taken from the request, with nothing added between milestones.
 
-Output: [HTML](library-roadmap.html) · [PNG](../assets/gallery/library-roadmap.png)
+Output: [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png)
 
 ## A local-first diagram pipeline
 
@@ -55,7 +55,7 @@ Output: [HTML](library-roadmap.html) · [PNG](../assets/gallery/library-roadmap.
 
 How the skill itself works, and where your content stops travelling.
 
-Output: [HTML](local-first-pipeline.html) · [PNG](../assets/gallery/local-first-pipeline.png)
+Output: [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-dark.png)
 
 ## Service Architecture
 
@@ -65,7 +65,7 @@ Output: [HTML](local-first-pipeline.html) · [PNG](../assets/gallery/local-first
 
 Four labelled layers with per-service data ownership and no invented infrastructure.
 
-Output: [HTML](service-architecture.html) · [PNG](../assets/gallery/service-architecture.png)
+Output: [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-dark.png)
 
 ## Support desk weekly snapshot
 
@@ -75,17 +75,17 @@ Output: [HTML](service-architecture.html) · [PNG](../assets/gallery/service-arc
 
 A four-KPI weekly support snapshot where every delta, share, and total is derived from the stated intake, resolution, and backlog counts.
 
-Output: [HTML](support-snapshot.html) · [PNG](../assets/gallery/support-snapshot.png)
+Output: [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-glass.png)
 
 ## Community conference preparation plan
 
 `gantt` × `paper` · rendered at 1040px
 
-> Draw a paper-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis and mark the dependencies.
+> Draw a paper-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis.
 
-Seven workstreams on an eight-week axis, with finish-to-start arrows, deliberate overlaps, and three dated milestones.
+Seven workstreams on an eight-week axis, with deliberate overlaps and three dated milestones.
 
-Output: [HTML](launch-plan.html) · [PNG](../assets/gallery/launch-plan.png)
+Output: [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-paper.png)
 
 ## A fourteen-person product studio
 
@@ -95,14 +95,14 @@ Output: [HTML](launch-plan.html) · [PNG](../assets/gallery/launch-plan.png)
 
 A three-level reporting tree where grouped practitioner cards and headcount badges add up to the stated total.
 
-Output: [HTML](studio-org.html) · [PNG](../assets/gallery/studio-org.png)
+Output: [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png)
 
 ## Landing page to activation
 
-`funnel` × `neon` · rendered at 920px
+`funnel` × `neon` · rendered at 1120px
 
-> Make a neon funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 5,180 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
+> Make a neon funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
 
 A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.
 
-Output: [HTML](signup-funnel.html) · [PNG](../assets/gallery/signup-funnel.png)
+Output: [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-neon.png)

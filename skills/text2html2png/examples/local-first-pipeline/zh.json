@@ -1,0 +1,41 @@
+{
+  "id": "local-first-pipeline",
+  "locale": "zh-CN",
+  "eyebrow": "架构图",
+  "title": "本地优先的图表管线",
+  "subtitle": "结构化内容不出本机，即可变成可编辑的图示。",
+  "layers": [
+    {
+      "tag": "输入",
+      "accent": 1,
+      "nodes": [
+        {"name": "提示词", "desc": "图表的目标、受众与首选格式。", "emoji": "💬", "icon": "megaphone"},
+        {"name": "原始事实", "desc": "步骤、组件、日期、指标或层级。", "emoji": "📋", "icon": "layers"}
+      ]
+    },
+    {
+      "tag": "智能体",
+      "accent": 6,
+      "nodes": [
+        {"name": "选择", "desc": "选定一种图表与一种视觉风格。", "emoji": "✅", "icon": "check"},
+        {"name": "结构化", "desc": "组织事实，不虚构缺失数据。", "emoji": "🧱", "icon": "package"},
+        {"name": "编写", "desc": "生成安全、自包含的 HTML 与 CSS。", "emoji": "⌨️", "icon": "code"}
+      ]
+    },
+    {
+      "tag": "运行时",
+      "accent": 2,
+      "nodes": [
+        {"name": "校验", "desc": "拦截脚本、远程资源与不安全标记。", "emoji": "🛡", "icon": "shield"},
+        {"name": "渲染", "desc": "在本机 Chrome 系浏览器中测量布局。", "emoji": "🖥", "icon": "image"},
+        {"name": "HTML + PNG", "desc": "编辑源码，或将高分辨率图像粘贴到任意位置。", "emoji": "🖼", "icon": "code"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": ""},
+    {"label": ""}
+  ],
+  "footerLabel": "默认本地",
+  "footer": "无遥测 · 无托管 API · 网络请求被阻断"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "library-roadmap",
+  "locale": "en-US",
+  "eyebrow": "Open-source roadmap",
+  "title": "Six milestones to a plugin API",
+  "subtitle": "A public plan for the charting library, first render to extensible core, 2031–2033.",
+  "events": [
+    {
+      "date": "2031 Q2",
+      "name": "v0.1 First render",
+      "detail": "Line and bar marks draw from a plain array of numbers. One canvas target, no interaction, no theming.",
+      "accent": 1,
+      "emoji": "📈",
+      "icon": "chart"
+    },
+    {
+      "date": "2031 Q4",
+      "name": "v0.4 Scales and axes",
+      "detail": "Linear, time, and ordinal scales, with tick labels chosen from the data range instead of hard-coded.",
+      "accent": 2,
+      "emoji": "📐",
+      "icon": "layers"
+    },
+    {
+      "date": "2032 Q1",
+      "name": "v0.7 Interaction layer",
+      "detail": "Hover, tooltip, and range selection, each reachable from the keyboard and announced to screen readers.",
+      "accent": 3,
+      "emoji": "🖱️",
+      "icon": "person"
+    },
+    {
+      "date": "2032 Q3",
+      "name": "v1.0 Stable API",
+      "detail": "Semantic versioning begins. The mark, scale, and theme contracts are frozen for the whole 1.x line.",
+      "accent": 4,
+      "emoji": "🔒",
+      "icon": "lock"
+    },
+    {
+      "date": "2033 Q1",
+      "name": "v1.4 Server rendering",
+      "detail": "The same chart definition renders to static SVG without a browser, for documents and email digests.",
+      "accent": 5,
+      "emoji": "📄",
+      "icon": "image"
+    },
+    {
+      "date": "2033 Q3",
+      "name": "v2.0 Plugin API",
+      "detail": "Marks, scales, and themes can ship as separate packages, so the core stops growing with every new chart.",
+      "accent": 6,
+      "emoji": "🧩",
+      "icon": "package"
+    }
+  ],
+  "footerLabel": "Roadmap note",
+  "footer": "Quarters are targets, not commitments. Scope moves before a date does, and every milestone ships from main."
+}

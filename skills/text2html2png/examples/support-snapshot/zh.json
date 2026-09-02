@@ -1,0 +1,41 @@
+{
+  "id": "support-snapshot",
+  "locale": "zh-CN",
+  "eyebrow": "客服运营",
+  "title": "客服周度快照",
+  "subtitle": "第 32 周 · 2026-08-03（周一）至 2026-08-09（周日）· 邮件、应用内聊天、电话、社区论坛",
+  "stats": [
+    {"value": "1,284", "label": "工单接入量", "detail": "上周 1,206 · 增加 78 张", "accent": 1, "emoji": "📥", "icon": "package", "trend": {"direction": "up", "delta": "+6.5%"}},
+    {"value": "42 分钟", "label": "首次响应中位数", "detail": "上周 55 分钟 · 快 13 分钟", "accent": 4, "emoji": "⏰", "icon": "person", "trend": {"direction": "down", "delta": "-23.6%"}},
+    {"value": "91.4%", "label": "SLA 内解决率", "detail": "1,306 张中 1,194 张达成 24 小时目标 · 上周 88.9%", "accent": 2, "emoji": "✅", "icon": "check", "trend": {"direction": "up", "delta": "+2.5 pts"}},
+    {"value": "96", "label": "周末积压工单", "detail": "上周末 118 · 减少 22 张", "accent": 3, "emoji": "📋", "icon": "layers", "trend": {"direction": "down", "delta": "-18.6%"}}
+  ],
+  "panels": [
+    {
+      "title": "各渠道工单接入量",
+      "accent": 1,
+      "emoji": "💬",
+      "icon": "megaphone",
+      "rows": [
+        {"name": "邮件", "value": "528 · 41.1% · 66 分钟", "bar": 100},
+        {"name": "应用内聊天", "value": "431 · 33.6% · 11 分钟", "bar": 81.6},
+        {"name": "电话", "value": "196 · 15.3% · 4 分钟", "bar": 37.1},
+        {"name": "社区论坛", "value": "129 · 10.0% · 148 分钟", "bar": 24.4}
+      ]
+    },
+    {
+      "title": "积压工单时长分布",
+      "accent": 7,
+      "emoji": "⏳",
+      "icon": "chart",
+      "rows": [
+        {"name": "24 小时内", "value": "51 · 53.1%", "bar": 100},
+        {"name": "1 至 3 天", "value": "29 · 30.2%", "bar": 56.9},
+        {"name": "4 至 7 天", "value": "12 · 12.5%", "bar": 23.5},
+        {"name": "超过 7 天", "value": "4 · 4.2%", "bar": 7.8}
+      ]
+    }
+  ],
+  "footerLabel": "第 32 周备注",
+  "footer": "本周接入 1,284、解决 1,306，未结积压 118 → 96。中位数为各渠道首次响应时长，积压时长截至 2026-08-09（周日）。所有数据均为合成的示例数据。"
+}

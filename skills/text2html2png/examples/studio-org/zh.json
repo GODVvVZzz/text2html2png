@@ -1,0 +1,55 @@
+{
+  "id": "studio-org",
+  "locale": "zh-CN",
+  "eyebrow": "工作室架构",
+  "title": "一家 14 人的产品工作室",
+  "subtitle": "三个层级：1 名工作室负责人、3 名专业负责人与 10 名一线成员 —— 仅标注头衔，不列姓名。",
+  "tree": {
+    "name": "工作室负责人",
+    "role": "负责工作室方向、客户组合与招聘",
+    "meta": "工作室全员 14 人",
+    "accent": 1,
+    "emoji": "👤",
+    "icon": "person",
+    "children": [
+      {
+        "name": "设计负责人",
+        "role": "把控产品与品牌作品的工艺质量",
+        "meta": "含负责人 5 人",
+        "accent": 1,
+        "emoji": "👤",
+        "icon": "layers",
+        "children": [
+          {"name": "产品设计", "role": "流程、界面、原型与代码", "meta": "3 人", "emoji": "👤", "icon": "image"},
+          {"name": "品牌设计", "role": "标识、演示文稿与页面", "meta": "1 人", "emoji": "👤", "icon": "megaphone"}
+        ]
+      },
+      {
+        "name": "工程负责人",
+        "role": "把握技术方向、评审与发布",
+        "meta": "含负责人 4 人",
+        "accent": 3,
+        "emoji": "👤",
+        "icon": "code",
+        "children": [
+          {"name": "前后端", "role": "客户端与服务", "meta": "2 人", "emoji": "👤", "icon": "code"},
+          {"name": "平台工程", "role": "构建与工具链", "meta": "1 人", "emoji": "👤", "icon": "package"}
+        ]
+      },
+      {
+        "name": "交付负责人",
+        "role": "统筹范围、排期与客户沟通",
+        "meta": "含负责人 4 人",
+        "accent": 5,
+        "emoji": "👤",
+        "icon": "flag",
+        "children": [
+          {"name": "研究测试", "role": "访谈、可用性测试与文档", "meta": "2 人", "emoji": "👤", "icon": "chart"},
+          {"name": "交付统筹", "role": "排期与供应商", "meta": "1 人", "emoji": "👤", "icon": "check"}
+        ]
+      }
+    ]
+  },
+  "footerLabel": "人数合计",
+  "footer": "全员 14 人 —— 1 名工作室负责人、3 名专业负责人与 10 名一线成员，分布在设计、工程与交付三个方向。"
+}

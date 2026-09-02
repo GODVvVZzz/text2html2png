@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>Service Architecture</title>
+  <style id="text2html2png-theme" data-theme="dark">
+:root {
+  --t-canvas: #0b1119;
+  --t-canvas-image: linear-gradient(rgba(107, 139, 170, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(107, 139, 170, 0.035) 1px, transparent 1px), radial-gradient(circle at 50% 0%, rgba(90, 169, 255, 0.09), transparent 42%);
+  --t-surface: #141c27;
+  --t-surface-strong: #1b2633;
+  --t-surface-soft: #0f1722;
+  --t-text: #edf4fb;
+  --t-text-secondary: #b6c3d1;
+  --t-text-muted: #8294a7;
+  --t-border: #344456;
+  --t-rule: #42536a;
+  --t-head-rule-image: rgba(93, 169, 233, 0.55);
+  --t-accent-1: #5da9e9;
+  --t-accent-2: #55b3c0;
+  --t-accent-3: #d4a763;
+  --t-accent-4: #8294a7;
+  --t-accent-5: #a4b6e8;
+  --t-accent-6: #c77bd8;
+  --t-accent-7: #96d7e8;
+  --t-on-accent: #071019;
+  --t-banner-bg: #131e2b;
+  --t-banner-text: #dfeaf5;
+  --t-banner-accent: #72b8ff;
+  --t-font-display: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-body: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+  --t-title-size: 32px;
+  --t-title-weight: 800;
+  --t-title-tracking: -0.025em;
+  --t-title-transform: none;
+  --t-body-size: 14px;
+  --t-body-weight: 500;
+  --t-label-size: 11px;
+  --t-label-weight: 700;
+  --t-label-tracking: 0.15em;
+  --t-label-transform: uppercase;
+  --t-data-size: 28px;
+  --t-data-weight: 800;
+  --t-card-radius: 10px;
+  --t-small-radius: 6px;
+  --t-border-width: 1px;
+  --t-border-style: solid;
+  --t-card-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+  --t-highlight-shadow: none;
+  --t-backdrop: none;
+  --t-leader-style: solid;
+  --t-leader-width: 1px;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
+}
+  </style>
+  <style id="text2html2png-chart" data-chart="architecture">
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--t-canvas);
+  background-image: var(--t-canvas-image);
+}
+
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  color: var(--t-text);
+  font-family: var(--t-font-body);
+  font-size: var(--t-body-size);
+  font-weight: var(--t-body-weight);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: 1040px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 32px 26px;
+  overflow: hidden;
+  background: var(--t-surface);
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-card-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.head {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--t-accent-1);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+h1 {
+  margin: 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: var(--t-title-size);
+  font-weight: var(--t-title-weight);
+  letter-spacing: var(--t-title-tracking);
+  line-height: 1.12;
+  text-transform: var(--t-title-transform);
+}
+
+.lede {
+  max-width: 700px;
+  margin: 9px auto 0;
+  color: var(--t-text-secondary);
+  font-size: var(--t-body-size);
+  line-height: 1.55;
+}
+
+.head-rule {
+  height: 2px;
+  margin-top: 16px;
+  background: var(--t-head-rule-image);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  position: relative;
+  min-height: 102px;
+  padding: 14px 16px 13px;
+  overflow: hidden;
+  text-align: center;
+  background: color-mix(in srgb, var(--metric-accent) 7%, var(--t-surface-strong));
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.metric:first-child {
+  box-shadow: var(--t-highlight-shadow);
+}
+
+.metric::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--metric-accent);
+}
+
+.metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.metric-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.metric-icon-svg {
+  display: var(--t-svg-display);
+  width: 19px;
+  height: 19px;
+}
+
+.metric-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.metric-value {
+  display: inline-block;
+  color: var(--metric-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-data-size);
+  font-weight: var(--t-data-weight);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-label {
+  display: block;
+  margin-top: 8px;
+  color: var(--t-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metric-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--t-text-muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+html:lang(zh-CN) .eyebrow,
+html:lang(zh-CN) .footer-label {
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+html:lang(zh-CN) h1 {
+  letter-spacing: 0;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  color: var(--t-banner-text);
+  background: var(--t-banner-bg);
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+}
+
+.footer-label {
+  color: var(--t-banner-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.arch {
+  display: flex;
+  flex-direction: column;
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: center;
+  padding: 7px 0;
+}
+
+.layer-tag {
+  padding-right: 14px;
+  color: var(--t-text-muted);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+  text-align: right;
+  line-height: 1.35;
+}
+
+.layer-nodes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.node {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 250px;
+  padding: 13px 14px 12px;
+  text-align: center;
+  background: color-mix(in srgb, var(--tone) 6%, var(--t-surface-strong));
+  border: var(--t-border-width) var(--t-border-style) color-mix(in srgb, var(--tone) 60%, var(--t-border));
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.node-icons {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-icon-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.node-icon-svg {
+  display: var(--t-svg-display);
+  width: 24px;
+  height: 24px;
+  color: var(--tone);
+}
+
+.node-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.node-name {
+  margin: 0;
+  color: var(--t-text);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.node-desc {
+  margin: 3px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.conn-row {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+}
+
+.conn-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  color: var(--t-rule);
+}
+
+.conn-center svg {
+  display: block;
+  width: 18px;
+  height: 30px;
+}
+
+.conn-label {
+  color: var(--t-text-muted);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+}
+
+html:lang(zh-CN) .layer-tag,
+html:lang(zh-CN) .conn-label {
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+  </style>
+</head>
+<body>
+<main class="wrap" aria-label="Service Architecture">
+<header class="head">
+<p class="eyebrow">Architecture Map</p>
+<h1>Service Architecture</h1>
+<p class="lede">Browser → API Gateway → Auth Service / Order Service</p>
+<div class="head-rule"></div>
+</header>
+<section class="arch" aria-label="Service Architecture">
+<div class="layer" style="--tone: var(--t-accent-1);">
+<div class="layer-tag">Client</div>
+<div class="layer-nodes">
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">🖥</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M12 9L5 16l7 7M20 9l7 7-7 7M18.5 6l-5 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="node-name">Browser</h2>
+<p class="node-desc">connects to API Gateway</p>
+</article>
+</div>
+</div>
+<div class="conn-row">
+<span class="conn-spacer"></span>
+<div class="conn-center">
+<svg viewBox="0 0 20 32" aria-hidden="true" focusable="false"><path d="M10 0v22" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 21L10 30l5.5-9z" fill="currentColor"/></svg>
+</div>
+</div>
+<div class="layer" style="--tone: var(--t-accent-6);">
+<div class="layer-tag">Entry</div>
+<div class="layer-nodes">
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">🛡</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4l10 3.8v7.4c0 6.8-4.4 10.8-10 12.8-5.6-2-10-6-10-12.8V7.8L16 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11.5 15.5l3.2 3.2 6-6.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="node-name">API Gateway</h2>
+<p class="node-desc">connects to Auth Service and Order Service</p>
+</article>
+</div>
+</div>
+<div class="conn-row">
+<span class="conn-spacer"></span>
+<div class="conn-center">
+<svg viewBox="0 0 20 32" aria-hidden="true" focusable="false"><path d="M10 0v22" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 21L10 30l5.5-9z" fill="currentColor"/></svg>
+</div>
+</div>
+<div class="layer" style="--tone: var(--t-accent-2);">
+<div class="layer-tag">Services</div>
+<div class="layer-nodes">
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">🔑</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="10.5" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M6.5 27c1.4-5.2 5-7.8 9.5-7.8s8.1 2.6 9.5 7.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+</span>
+<h2 class="node-name">Auth Service</h2>
+<p class="node-desc">uses PostgreSQL</p>
+</article>
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">📦</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="node-name">Order Service</h2>
+<p class="node-desc">uses PostgreSQL and Redis</p>
+</article>
+</div>
+</div>
+<div class="conn-row">
+<span class="conn-spacer"></span>
+<div class="conn-center">
+<svg viewBox="0 0 20 32" aria-hidden="true" focusable="false"><path d="M10 0v22" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 21L10 30l5.5-9z" fill="currentColor"/></svg>
+</div>
+</div>
+<div class="layer" style="--tone: var(--t-accent-3);">
+<div class="layer-tag">Data</div>
+<div class="layer-nodes">
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">🗄</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="14.5" width="18" height="12.5" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 14.5V10a5 5 0 0 1 10 0v4.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="16" cy="20.5" r="1.8" fill="currentColor"/></svg></span>
+</span>
+<h2 class="node-name">PostgreSQL</h2>
+<p class="node-desc">Auth Service</p>
+</article>
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">🗄</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="14.5" width="18" height="12.5" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 14.5V10a5 5 0 0 1 10 0v4.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="16" cy="20.5" r="1.8" fill="currentColor"/></svg></span>
+</span>
+<h2 class="node-name">PostgreSQL</h2>
+<p class="node-desc">Order Service</p>
+</article>
+<article class="node">
+<span class="node-icons">
+<span class="node-icon-emoji">⚡</span>
+<span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11.5 5.8L16 16.1 4.5 10.3 16 4.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M4.5 16.2l11.5 5.8 11.5-5.8M4.5 22l11.5 5.8L27.5 22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</span>
+<h2 class="node-name">Redis</h2>
+<p class="node-desc">Order Service</p>
+</article>
+</div>
+</div>
+</section>
+<footer class="footer">
+<div class="footer-label">connection direction</div>
+<p>Browser connects to API Gateway. API Gateway connects to Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "id": "release-flow",
+  "locale": "zh-CN",
+  "direction": "horizontal",
+  "eyebrow": "发布工作流",
+  "title": "从想法到生产环境",
+  "subtitle": "六道明确的闸门，确保每次变更都可评审、可安全推进。",
+  "steps": [
+    {"num": "01", "name": "规划", "detail": "明确范围与验收标准。闸门：范围就绪。", "accent": 1, "emoji": "🎯", "icon": "flag"},
+    {"num": "02", "name": "构建", "detail": "实现最小且完整的变更。闸门：检查通过。", "accent": 2, "emoji": "🛠", "icon": "code"},
+    {"num": "03", "name": "评审", "detail": "校验正确性、清晰度与风险。闸门：已批准。", "accent": 3, "emoji": "👀", "icon": "person"},
+    {"num": "04", "name": "测试", "detail": "在安全环境中验证实际行为。闸门：已验证。", "accent": 4, "emoji": "✅", "icon": "check"},
+    {"num": "05", "name": "金丝雀发布", "detail": "小范围发布并持续观察信号。闸门：运行健康。", "accent": 5, "emoji": "🐤", "icon": "trend-up"},
+    {"num": "06", "name": "生产上线", "detail": "在回滚预案就绪的前提下放心扩大范围。闸门：已发布。", "accent": 7, "emoji": "🚀", "icon": "package"}
+  ],
+  "footerLabel": "逐闸推进",
+  "footer": "每一阶段都为下一阶段赢得资格——未过闸门的变更就地等待，直至闸门放行。"
+}

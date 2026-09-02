@@ -2,10 +2,13 @@
   "id": "launch-plan",
   "title": "Community conference preparation plan",
   "chart": "gantt",
-  "style": "paper",
-  "summary": "Seven workstreams on an eight-week axis, with finish-to-start arrows, deliberate overlaps, and three dated milestones.",
-  "prompt": "Draw a paper-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis and mark the dependencies.",
+  "theme": "paper",
+  "locales": [
+    "zh",
+    "en"
+  ],
+  "summary": "Seven workstreams on an eight-week axis, with deliberate overlaps and three dated milestones.",
+  "prompt": "Draw a paper-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis.",
   "width": 1040,
-  "background": "#f5f0e6",
   "scale": 2
 }

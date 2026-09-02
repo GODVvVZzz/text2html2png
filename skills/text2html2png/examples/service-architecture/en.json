@@ -1,0 +1,47 @@
+{
+  "id": "service-architecture",
+  "locale": "en-US",
+  "eyebrow": "Architecture Map",
+  "title": "Service Architecture",
+  "subtitle": "Browser → API Gateway → Auth Service / Order Service",
+  "layers": [
+    {
+      "tag": "Client",
+      "accent": 1,
+      "nodes": [
+        {"name": "Browser", "desc": "connects to API Gateway", "emoji": "🖥", "icon": "code"}
+      ]
+    },
+    {
+      "tag": "Entry",
+      "accent": 6,
+      "nodes": [
+        {"name": "API Gateway", "desc": "connects to Auth Service and Order Service", "emoji": "🛡", "icon": "shield"}
+      ]
+    },
+    {
+      "tag": "Services",
+      "accent": 2,
+      "nodes": [
+        {"name": "Auth Service", "desc": "uses PostgreSQL", "emoji": "🔑", "icon": "person"},
+        {"name": "Order Service", "desc": "uses PostgreSQL and Redis", "emoji": "📦", "icon": "package"}
+      ]
+    },
+    {
+      "tag": "Data",
+      "accent": 3,
+      "nodes": [
+        {"name": "PostgreSQL", "desc": "Auth Service", "emoji": "🗄", "icon": "lock"},
+        {"name": "PostgreSQL", "desc": "Order Service", "emoji": "🗄", "icon": "lock"},
+        {"name": "Redis", "desc": "Order Service", "emoji": "⚡", "icon": "layers"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": ""},
+    {"label": ""},
+    {"label": ""}
+  ],
+  "footerLabel": "connection direction",
+  "footer": "Browser connects to API Gateway. API Gateway connects to Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis."
+}

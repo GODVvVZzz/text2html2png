@@ -2,10 +2,13 @@
   "id": "local-first-pipeline",
   "title": "A local-first diagram pipeline",
   "chart": "architecture",
-  "style": "dark",
   "summary": "How the skill itself works, and where your content stops travelling.",
   "prompt": "Create a dark architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.",
   "width": 980,
-  "background": "#0d1117",
-  "scale": 2
+  "scale": 2,
+  "theme": "dark",
+  "locales": [
+    "zh",
+    "en"
+  ]
 }
