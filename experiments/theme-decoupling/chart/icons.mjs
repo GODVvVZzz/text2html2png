@@ -57,6 +57,11 @@ export function iconSvg(kind) {
         '<path d="M25.5 5.5l-12 4.8H9a3.6 3.6 0 0 0-3.6 3.6v.2A3.6 3.6 0 0 0 9 17.7h4.5l12 4.8v-17z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
         '<path d="M12.5 17.7l1.5 7.3a2 2 0 0 0 2 1.6h.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'
       ]);
+    case "person":
+      return svg([
+        '<circle cx="16" cy="10.5" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/>',
+        '<path d="M6.5 27c1.4-5.2 5-7.8 9.5-7.8s8.1 2.6 9.5 7.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'
+      ]);
     case "trend-up":
       return svg([
         '<path d="M5 24l8.5-8.5 5 5L27 12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',

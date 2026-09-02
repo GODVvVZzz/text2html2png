@@ -202,3 +202,33 @@ Each department branch uses a consistent accent color:
 6. **Max 4 levels deep**: Beyond that, use compact variant or group leaf nodes
 7. **Consistent node width**: use a shared minimum, but derive connector centers from final rendered widths
 8. **Color by department**: Same branch shares accent color
+
+---
+
+## Pipeline migration note (theme-decoupling)
+
+Org chart is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/org-chart/`
+(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
+snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+
+Validated structure (all 7 themes × zh/en, `build --render --audit` 98/98 green; connector
+alignment measured at ≤1px in subagent review):
+
+- Exact connector alignment WITHOUT runtime measurement: every level is a grid of `--leaf-count`
+  equal columns; nodes span their subtree with `grid-column: var(--node-start) / span
+  var(--node-span)` (both structural inline vars). Connector SVGs share the same 0..100
+  coordinate space via `viewBox="0 0 100 28" preserveAspectRatio="none"`, so stems, bars and
+  drops computed in percent land exactly on node centers; `vector-effect="non-scaling-stroke"`
+  keeps 1.5px lines under non-uniform scaling.
+- Cards are inset with `margin: 0 7px` (NOT column-gap) — gaps would shift slot centers and
+  break the percent math; equal left/right margins keep the card centered in its track.
+- Branch accents: the root carries an accent and children INHERIT it unless a node declares its
+  own — departments get distinct hue families per theme. Do not rely on the single-cycle accent
+  loop here; a tree where every node inherits the root color fails branch identity.
+- Leaf-slot width is the wrapping constraint: with 1120px canvas, six leaves leave ~130px for
+  text and Chinese role titles wrap with orphan characters. Keep fixtures at four leaves per
+  row (or shorten roles); assert 2-6 leaves in `assertFixture`.
+- Root card is heavier via `border-width: calc(var(--t-border-width) + 1px)` — thickness scales
+  with the theme's own border width.
+- Connector rows may be `aria-hidden` here (they carry no text); the architecture chart's
+  labeled connectors must not be.

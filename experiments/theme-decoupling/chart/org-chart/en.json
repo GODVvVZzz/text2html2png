@@ -1,0 +1,43 @@
+{
+  "id": "tech-org-chart",
+  "locale": "en-US",
+  "eyebrow": "Org Chart",
+  "title": "Engineering Org, Q1 Headcount",
+  "subtitle": "Two product lines, four teams; card headcount is full-time only.",
+  "tree": {
+    "name": "Elena Wood",
+    "role": "Chief Executive Officer",
+    "meta": "64 people total",
+    "accent": 4,
+    "emoji": "👤",
+    "icon": "person",
+    "children": [
+      {
+        "name": "Daniel Reed",
+        "role": "VP of Engineering",
+        "meta": "28 people",
+        "accent": 1,
+        "emoji": "👤",
+        "icon": "person",
+        "children": [
+          {"name": "Iris Chen", "role": "Platform lead", "meta": "12 people", "emoji": "👤", "icon": "person"},
+          {"name": "Owen Park", "role": "Frontend lead", "meta": "9 people", "emoji": "👤", "icon": "person"}
+        ]
+      },
+      {
+        "name": "Grace Lin",
+        "role": "VP of Product and Design",
+        "meta": "16 people",
+        "accent": 6,
+        "emoji": "👤",
+        "icon": "person",
+        "children": [
+          {"name": "Amy Zhao", "role": "Product lead", "meta": "8 people", "emoji": "👤", "icon": "person"},
+          {"name": "Leo Ma", "role": "Design lead", "meta": "8 people", "emoji": "👤", "icon": "person"}
+        ]
+      }
+    ]
+  },
+  "footerLabel": "Headcount notes",
+  "footer": "Dotted-line reporting is not shown here; contractors and interns are tracked per project and excluded from headcount."
+}

@@ -1,0 +1,43 @@
+{
+  "id": "tech-org-chart",
+  "locale": "zh-CN",
+  "eyebrow": "组织架构图",
+  "title": "技术团队 Q1 编制",
+  "subtitle": "两条产品线、四个小组；卡片人数为在编全职。",
+  "tree": {
+    "name": "林深",
+    "role": "首席执行官",
+    "meta": "全员 64 人",
+    "accent": 4,
+    "emoji": "👤",
+    "icon": "person",
+    "children": [
+      {
+        "name": "陈曦",
+        "role": "工程副总裁",
+        "meta": "28 人",
+        "accent": 1,
+        "emoji": "👤",
+        "icon": "person",
+        "children": [
+          {"name": "周航", "role": "平台组负责人", "meta": "12 人", "emoji": "👤", "icon": "person"},
+          {"name": "吴悠", "role": "前端组负责人", "meta": "9 人", "emoji": "👤", "icon": "person"}
+        ]
+      },
+      {
+        "name": "沈言",
+        "role": "产品设计副总裁",
+        "meta": "16 人",
+        "accent": 6,
+        "emoji": "👤",
+        "icon": "person",
+        "children": [
+          {"name": "韩梅", "role": "产品组负责人", "meta": "8 人", "emoji": "👤", "icon": "person"},
+          {"name": "苏晴", "role": "设计组负责人", "meta": "8 人", "emoji": "👤", "icon": "person"}
+        ]
+      }
+    ]
+  },
+  "footerLabel": "编制口径",
+  "footer": "虚线汇报关系不在此图呈现；外包与实习按项目单独统计，不计入编制。"
+}
