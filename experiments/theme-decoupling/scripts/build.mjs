@@ -9,6 +9,7 @@ import { auditLayout, formatReport } from "../../../skills/text2html2png/scripts
 import {
   chartDir,
   experimentDir,
+  pipelineDir,
   sourceHash,
   stripThemeBlock,
   structureFingerprint,
@@ -20,7 +21,7 @@ import {
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(experimentDir, "../..");
-const themesDir = path.join(experimentDir, "themes");
+const themesDir = path.join(pipelineDir, "themes");
 const defaultOutput = path.resolve(repoRoot, "../theme-decoupling-output");
 
 function usage() {
@@ -79,10 +80,10 @@ async function loadChart(chart) {
   }
   const chartCss = await readFile(path.join(chart.dir, "chart.css"), "utf8");
   const fixtureFiles = [];
-  for (const [locale, file] of [["zh", "zh.json"], ["en", "en.json"]]) {
-    const fixture = JSON.parse(await readFile(path.join(chart.dir, file), "utf8"));
+  for (const locale of ["zh", "en"]) {
+    const fixture = JSON.parse(await readFile(chart.fixturePath(locale), "utf8"));
     if (!fixture.id) {
-      throw new Error(`chart/${chart.id}/${file}: fixture is missing an id.`);
+      throw new Error(`chart/${chart.id}/${locale}.json: fixture is missing an id.`);
     }
     fixtureFiles.push([locale, fixture]);
   }
@@ -119,7 +120,7 @@ async function main() {
   }
 
   const sources = await validateSources();
-  const template = await readFile(path.join(chartDir, "template.html"), "utf8");
+  const template = await readFile(path.join(pipelineDir, "template.html"), "utf8");
   const selectedThemes = sources.themes.filter(function (theme) {
     return !args.theme || theme.id === args.theme;
   });

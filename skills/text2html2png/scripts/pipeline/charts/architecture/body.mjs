@@ -1,5 +1,5 @@
-import { escapeHtml } from "../markup.mjs";
-import { iconSvg } from "../icons.mjs";
+import { escapeHtml } from "../../markup.mjs";
+import { iconSvg } from "../../icons.mjs";
 
 // One vertical stem with a solid arrowhead; a shared, measurement-free
 // connector that stays centered regardless of how many nodes a layer has.

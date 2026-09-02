@@ -1,4 +1,4 @@
-import { escapeHtml } from "../markup.mjs";
+import { escapeHtml } from "../../markup.mjs";
 
 export function assertFixture(fixture) {
   if (!fixture.id || !fixture.locale || !fixture.title) throw new Error("Fixture is missing identity fields.");

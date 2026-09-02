@@ -1,6 +1,6 @@
-import { escapeHtml, renderRichText } from "../markup.mjs";
-import { metricsMarkup } from "../metrics.mjs";
-import { iconSvg } from "../icons.mjs";
+import { escapeHtml, renderRichText } from "../../markup.mjs";
+import { metricsMarkup } from "../../metrics.mjs";
+import { iconSvg } from "../../icons.mjs";
 
 export function assertFixture(fixture) {
   if (!fixture.id || !fixture.locale || !fixture.title) throw new Error("Fixture is missing identity fields.");

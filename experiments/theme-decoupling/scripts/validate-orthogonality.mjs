@@ -8,9 +8,14 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 export const experimentDir = path.resolve(scriptDir, "..");
-export const themesDir = path.join(experimentDir, "themes");
+// The pipeline (template, shared skeleton, per-chart structure CSS + body
+// builders, themes) is product code owned by the skill; the experiment is the
+// QA harness and only owns the per-chart fixtures.
+export const pipelineDir = path.resolve(experimentDir, "../../skills/text2html2png/scripts/pipeline");
+export const themesDir = path.join(pipelineDir, "themes");
+export const pipelineChartDir = path.join(pipelineDir, "charts");
 export const chartDir = path.join(experimentDir, "chart");
-export const sharedCssPath = path.join(chartDir, "shared.css");
+export const sharedCssPath = path.join(pipelineDir, "shared.css");
 
 export const REQUIRED_THEME_TOKENS = [
   "--t-canvas", "--t-canvas-image", "--t-surface", "--t-surface-strong",
@@ -179,22 +184,31 @@ export function structureFingerprint(html) {
   );
 }
 
-// Chart directories: one folder per chart with chart.css, body.mjs, and
-// one fixture per locale. Discovery stays dynamic so new charts onboard
-// without touching this file.
+// Chart directories: one folder per chart in the skill pipeline with
+// chart.css and body.mjs, plus one fixture per locale in the experiment's
+// fixture root. Discovery stays dynamic so new charts onboard without
+// touching this file.
 export async function discoverCharts() {
-  const entries = await readdir(chartDir, { withFileTypes: true });
+  const entries = await readdir(pipelineChartDir, { withFileTypes: true });
   const charts = [];
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
-    const dir = path.join(chartDir, entry.name);
+    const dir = path.join(pipelineChartDir, entry.name);
     const files = new Set(await readdir(dir));
-    for (const required of ["chart.css", "body.mjs", "zh.json", "en.json"]) {
+    for (const required of ["chart.css", "body.mjs"]) {
       if (!files.has(required)) {
-        throw new Error(`chart/${entry.name}: missing ${required}`);
+        throw new Error(`charts/${entry.name}: missing ${required}`);
       }
     }
-    charts.push({ id: entry.name, dir });
+    const fixturePath = (locale) => path.join(chartDir, entry.name, `${locale}.json`);
+    for (const locale of ["zh", "en"]) {
+      try {
+        await readFile(fixturePath(locale));
+      } catch {
+        throw new Error(`chart/${entry.name}: missing ${locale}.json fixture in the experiment`);
+      }
+    }
+    charts.push({ id: entry.name, dir, fixturePath });
   }
   if (!charts.length) throw new Error("No chart directories found.");
   return charts.sort((a, b) => a.id.localeCompare(b.id));
