@@ -242,3 +242,34 @@ SVG arrows from one bar's end to another bar's start.
 6. **Category separators**: Uppercase labels with top border
 7. **Color coding**: Different categories or priorities use different bar colors
 8. Time periods: 4-8 columns work best visually
+
+---
+
+## Pipeline migration note (theme-decoupling)
+
+Gantt is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/gantt/`
+(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
+snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+
+Validated structure (all 7 themes × zh/en, `build --render --audit` 70/70 green):
+
+- One grid, subgrid rows: `.gantt` is a two-column grid (`minmax(0, 235px) minmax(0, 1fr)`);
+  header and task rows are `grid-template-columns: subgrid` items, so the label column and the
+  timeline column stay pixel-identical across the header, every task row and every milestone row.
+- Time geometry is data, not CSS: `--period-count` sizes the header ticks; bars inject
+  `--bar-start` / `--bar-span` (and partial progress `--bar-pct`) as inline structural vars,
+  computed from period units. All three are whitelisted inline properties.
+- Bars come in exactly two shapes. Solid (planned-only or 100% complete): `background: var(--tone)`
+  with the duration text inside in `var(--t-on-accent)`. Partial: a `color-mix` track (30% tone)
+  with a `::before` fill at `--bar-pct`, and the percentage label OUTSIDE the track end — inner
+  text would sit on the track mix and fail the contrast audit against the element's declared
+  background (the audit resolves computed backgrounds, it cannot see pseudo-element fills).
+- Milestones are rotated 45° squares (`transform`, not border-radius), positioned by
+  `--bar-start` and tinted via `--tone`; the diamond is exempt from accent-cycling rules that
+  apply to text.
+- Alternating row shading from the legacy snippet used a literal `rgba` — dropped. Row separation
+  comes from the header's bottom border and a leader line on `.gantt-row + .gantt-category`.
+- Category labels reuse the label-token stack (`--t-label-*` on `--t-font-data`), so dotted /
+  uppercase / tracking treatments follow the theme automatically.
+- Copy discipline: the footer text must describe the fixture's real granularity (half-week units
+  are legal; "snap to week boundaries" is not, if any bar starts at 0.5).

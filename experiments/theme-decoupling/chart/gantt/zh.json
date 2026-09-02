@@ -1,0 +1,40 @@
+{
+  "id": "v1-release-gantt",
+  "locale": "zh-CN",
+  "eyebrow": "项目甘特图",
+  "title": "1.0 发布排期",
+  "subtitle": "六周冲刺：后端与前端并行推进，菱形为不可顺延的里程碑。",
+  "periods": [
+    {"label": "W1", "date": "3/2"},
+    {"label": "W2", "date": "3/9"},
+    {"label": "W3", "date": "3/16"},
+    {"label": "W4", "date": "3/23"},
+    {"label": "W5", "date": "3/30"},
+    {"label": "W6", "date": "4/6"}
+  ],
+  "groups": [
+    {
+      "name": "后端",
+      "tasks": [
+        {"name": "API 设计", "owner": "张伟", "start": 0, "span": 2, "progress": 100, "accent": 1, "duration": "2 周"},
+        {"name": "数据库建模", "owner": "李娜", "start": 1, "span": 2, "progress": 60, "accent": 2},
+        {"name": "服务端实现", "owner": "王强", "start": 2, "span": 2.5, "progress": 20, "accent": 3},
+        {"name": "联调与回归", "owner": "陈晨", "start": 4, "span": 2, "accent": 6, "duration": "2 周"}
+      ]
+    },
+    {
+      "name": "前端",
+      "tasks": [
+        {"name": "设计走查", "owner": "周玥", "start": 0.5, "span": 1.5, "progress": 100, "accent": 5, "duration": "1.5 周"},
+        {"name": "组件开发", "owner": "高远", "start": 2, "span": 2.5, "progress": 45, "accent": 1},
+        {"name": "联调提测", "owner": "孙倩", "start": 4.5, "span": 1.5, "accent": 2, "duration": "1.5 周"}
+      ]
+    }
+  ],
+  "milestones": [
+    {"name": "提测冻结", "pos": 4, "accent": 4},
+    {"name": "1.0 正式发布", "pos": 6, "accent": 7}
+  ],
+  "footerLabel": "排期口径",
+  "footer": "条形以半周为最小粒度对齐，进度在每日站会更新；里程碑错过即顺延一个完整周期。"
+}

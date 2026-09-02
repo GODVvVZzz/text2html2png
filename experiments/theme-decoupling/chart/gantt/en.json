@@ -1,0 +1,40 @@
+{
+  "id": "v1-release-gantt",
+  "locale": "en-US",
+  "eyebrow": "Project Gantt",
+  "title": "1.0 Release Schedule",
+  "subtitle": "A six-week sprint: backend and frontend run in parallel; diamonds are immovable milestones.",
+  "periods": [
+    {"label": "W1", "date": "3/2"},
+    {"label": "W2", "date": "3/9"},
+    {"label": "W3", "date": "3/16"},
+    {"label": "W4", "date": "3/23"},
+    {"label": "W5", "date": "3/30"},
+    {"label": "W6", "date": "4/6"}
+  ],
+  "groups": [
+    {
+      "name": "Backend",
+      "tasks": [
+        {"name": "API design", "owner": "Alex", "start": 0, "span": 2, "progress": 100, "accent": 1, "duration": "2 wks"},
+        {"name": "DB schema", "owner": "Mia", "start": 1, "span": 2, "progress": 60, "accent": 2},
+        {"name": "API implementation", "owner": "Sam", "start": 2, "span": 2.5, "progress": 20, "accent": 3},
+        {"name": "Integration QA", "owner": "Noah", "start": 4, "span": 2, "accent": 6, "duration": "2 wks"}
+      ]
+    },
+    {
+      "name": "Frontend",
+      "tasks": [
+        {"name": "Design pass", "owner": "Zoe", "start": 0.5, "span": 1.5, "progress": 100, "accent": 5, "duration": "1.5 wks"},
+        {"name": "Component build", "owner": "Ray", "start": 2, "span": 2.5, "progress": 45, "accent": 1},
+        {"name": "Handoff QA", "owner": "Ivy", "start": 4.5, "span": 1.5, "accent": 2, "duration": "1.5 wks"}
+      ]
+    }
+  ],
+  "milestones": [
+    {"name": "Feature freeze", "pos": 4, "accent": 4},
+    {"name": "1.0 launch", "pos": 6, "accent": 7}
+  ],
+  "footerLabel": "Scheduling notes",
+  "footer": "Bars align on half-week granularity; progress is updated at the daily standup. Missing a milestone slips the plan by a full cycle."
+}
