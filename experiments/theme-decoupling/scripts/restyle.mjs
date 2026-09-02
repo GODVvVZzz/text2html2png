@@ -6,9 +6,9 @@ import path from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 import { validateHtmlFile } from "../../../skills/text2html2png/scripts/validate-html.mjs";
-import { experimentDir, themeDefinitions, validateMarkup } from "./validate-orthogonality.mjs";
+import { experimentDir, pipelineDir, themeDefinitions, validateMarkup } from "./validate-orthogonality.mjs";
 
-const themesDir = path.join(experimentDir, "themes");
+const themesDir = path.join(pipelineDir, "themes");
 
 async function exists(target) {
   try {

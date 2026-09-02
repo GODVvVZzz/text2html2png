@@ -1,5 +1,5 @@
-import { escapeHtml } from "../markup.mjs";
-import { iconSvg } from "../icons.mjs";
+import { escapeHtml } from "../../markup.mjs";
+import { iconSvg } from "../../icons.mjs";
 
 const TREND_DIRECTIONS = ["up", "down", "flat"];
 
