@@ -1,0 +1,21 @@
+{
+  "id": "v1-roadmap",
+  "locale": "zh-CN",
+  "eyebrow": "产品路线图",
+  "title": "从需求冻结到 1.0 发布",
+  "subtitle": "五步路线图：每个节点都可独立验证，日期为季度信号而非承诺。",
+  "stats": [
+    {"value": "5", "label": "里程碑节点", "detail": "全部对应可验证产物", "accent": 1, "emoji": "🧭", "icon": "layers"},
+    {"value": "8", "label": "个月周期", "detail": "从需求冻结到正式发布", "accent": 3, "emoji": "📆", "icon": "chart"},
+    {"value": "2", "label": "次公开预览", "detail": "预览期集中收集反馈", "accent": 6, "emoji": "📣", "icon": "megaphone"}
+  ],
+  "events": [
+    {"date": "2026-03", "name": "需求冻结", "detail": "特性清单定稿，此后只接受修复补丁，不再新增范围。", "accent": 1, "emoji": "❄️", "icon": "check"},
+    {"date": "2026-05", "name": "开发者预览", "detail": "面向百位种子用户发放内部版本，建立反馈通道。", "accent": 3, "emoji": "🚩", "icon": "flag", "milestone": true},
+    {"date": "2026-07", "name": "公测开放", "detail": "注册全面开放，定价方案与文档站同步公布。", "accent": 6, "emoji": "📣", "icon": "megaphone"},
+    {"date": "2026-09", "name": "候选版本", "detail": "签名构建与可重复构建验证完成，冻结发布候选。", "accent": 2, "emoji": "🛡", "icon": "shield"},
+    {"date": "2026-11", "name": "1.0 正式发布", "detail": "正式版、迁移指南与长期支持承诺一并上线。", "accent": 4, "emoji": "🚀", "icon": "package", "milestone": true}
+  ],
+  "footerLabel": "路线图原则",
+  "footer": "只有上一个里程碑验收通过，下一个才会启动；日期按季度呈现，不承诺具体日期。"
+}

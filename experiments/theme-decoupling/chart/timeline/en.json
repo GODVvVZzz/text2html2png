@@ -1,0 +1,21 @@
+{
+  "id": "v1-roadmap",
+  "locale": "en-US",
+  "eyebrow": "Product roadmap",
+  "title": "From scope freeze to the 1.0 launch",
+  "subtitle": "A five-step roadmap: every node is verifiable on its own; dates are quarterly signals, not promises.",
+  "stats": [
+    {"value": "5", "label": "Milestones", "detail": "Each ships a verifiable artifact", "accent": 1, "emoji": "🧭", "icon": "layers"},
+    {"value": "8", "label": "Month runway", "detail": "From scope freeze to launch", "accent": 3, "emoji": "📆", "icon": "chart"},
+    {"value": "2", "label": "Public previews", "detail": "Feedback windows built in", "accent": 6, "emoji": "📣", "icon": "megaphone"}
+  ],
+  "events": [
+    {"date": "2026-03", "name": "Scope freeze", "detail": "The feature list is locked; only fixes land after this point.", "accent": 1, "emoji": "❄️", "icon": "check"},
+    {"date": "2026-05", "name": "Developer preview", "detail": "A private build reaches a hundred seed users with a feedback channel.", "accent": 3, "emoji": "🚩", "icon": "flag", "milestone": true},
+    {"date": "2026-07", "name": "Public beta", "detail": "Registration opens fully and pricing goes public with the docs site.", "accent": 6, "emoji": "📣", "icon": "megaphone"},
+    {"date": "2026-09", "name": "Release candidate", "detail": "Signed, reproducible builds are verified end to end before the freeze.", "accent": 2, "emoji": "🛡", "icon": "shield"},
+    {"date": "2026-11", "name": "1.0 launch", "detail": "The stable release, migration guide, and long-term support ship together.", "accent": 4, "emoji": "🚀", "icon": "package", "milestone": true}
+  ],
+  "footerLabel": "Roadmap rule",
+  "footer": "A milestone starts only after the previous one is accepted; dates are quarterly signals, not promises."
+}

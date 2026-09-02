@@ -100,7 +100,10 @@ function themedPropertyViolations(source) {
   ];
   for (const [property, pattern] of checks) {
     for (const match of source.matchAll(pattern)) {
-      if (!/^var\(--t-[a-z0-9-]+\)$/i.test(match[1].trim())) {
+      const value = match[1].trim();
+      const tokenShaped = /^var\(--t-[a-z0-9-]+\)$/i.test(value);
+      const geometric = property === "border-radius" && value === "50%";
+      if (!tokenShaped && !geometric) {
         failures.push(property + " must use a theme token");
       }
     }
