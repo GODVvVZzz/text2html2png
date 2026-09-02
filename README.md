@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./skills/text2html2png/assets/logo.svg" width="720" alt="text2html2png">
-  <p><strong>Turn any text into an editable HTML diagram.</strong><br>
-  Export a PNG only when you ask for one. Nothing leaves your machine.</p>
+  <p><strong>Turn any text into a paste-ready diagram.</strong><br>
+  Every render is editable HTML; PNG export is one request away. Nothing leaves your machine.</p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a>
     ·
@@ -22,13 +22,17 @@
   </p>
 </div>
 
-![One prompt becomes a polished editable HTML diagram, with PNG available on request](./skills/text2html2png/assets/hero.svg)
+<div align="center">
+  <img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="32.5%" alt="An eight-week conference Gantt chart in the paper theme, rendered in LXGW WenKai">
+  <img src="./skills/text2html2png/assets/gallery/signup-funnel-en-neon.png" width="32.5%" alt="A five-stage signup funnel in the neon theme">
+  <img src="./skills/text2html2png/assets/gallery/library-roadmap-en-editorial.png" width="32.5%" alt="A six-milestone plugin-API roadmap timeline in the editorial theme">
+</div>
 
-Most diagram tools ask you to draw. This one asks you to describe. You paste a plan, a spec, a meeting note, or a set of numbers; your agent picks the right chart, keeps your facts intact, and writes a self-contained HTML document. When you explicitly need a paste-ready image, it also renders a tightly cropped PNG in the browser you already have.
+Most diagram tools ask you to draw. This one asks you to describe. You paste a plan, a spec, a meeting note, or a set of numbers; your agent picks the right chart, keeps your facts intact, and hands you a paste-ready image — backed by a self-contained HTML document you can restyle and keep. Carbon and ray.so do this for code snippets; this skill does it for any structured text. When you explicitly need the picture, it renders a tightly cropped PNG in the browser you already have.
 
 - **8 chart types** — flowchart, comparison, timeline, architecture, dashboard, Gantt, org chart, funnel
 - **7 visual themes** — warm, dark, minimal, editorial, neon, paper, glass
-- **HTML first, PNG on request** — the default call writes one editable HTML file; ask for `--png` when you need a paste-ready image
+- **A picture you can paste, a document you can keep** — the deliverable is one editable HTML file; say “also export a PNG” or pass `--png` when you want the image itself
 - **Measured, not hoped for** — a browser-based layout audit is a required step of the workflow and a CI gate for every published example
 - **Local-first** — no hosted rendering API, no API key, no telemetry, network blocked during render
 
@@ -42,7 +46,7 @@ Then ask your agent, in plain language:
 
 > Turn our launch plan into a Gantt chart: research weeks 1–2, design weeks 2–4, build weeks 4–7, beta week 8. Use the paper theme.
 
-You get one editable `.html` file by default. Add “also export a PNG” or `--png` when you want both files.
+The chart arrives as an editable `.html` file — restyle it, tweak the copy, keep it in Git. Add “also export a PNG” or `--png` when you want the paste-ready image too.
 
 The `skills` CLI places the skill for the agent you name. To target one explicitly:
 
@@ -127,7 +131,7 @@ Browser-audit and optional PNG-export behavior:
 - refuses to overwrite an existing PNG unless `--force` is explicit;
 - caps dimensions and total render pixels.
 
-No PNG is created unless the user asks for one. The default artifact is HTML.
+The paste-ready image is rendered only when you ask for it; until then your content stays as an editable HTML file on disk.
 
 Use `--allow-network` only when you actually want remote assets. Use `--no-sandbox` only inside a trusted isolated container. Read [SECURITY.md](./SECURITY.md) before rendering HTML from a source you do not trust, and [PRIVACY.md](./PRIVACY.md) for exactly what does and does not leave your machine.
 
@@ -155,7 +159,7 @@ If you ask for Mermaid, draw.io, Excalidraw, or editable SVG, the skill delibera
 ├── skills/text2html2png/
 │   ├── SKILL.md                  the skill contract the agent reads
 │   ├── references/               8 chart guides, 7 theme systems, shared contracts
-│   ├── examples/                 9 examples: HTML + metadata sidecar
+│   ├── examples/                 9 bilingual examples: per-locale HTML + fixtures
 │   ├── scripts/                  render, validate, audit, batch tooling
 │   └── tests/                    including a real Chrome smoke test
 └── .github/                      CI, issue and PR templates
@@ -190,7 +194,7 @@ Useful individual commands:
 | `npm run audit:layout -- --html x.html --width 1040 --json` | Audit one document, machine-readable |
 | `node ../../scripts/build-gallery.mjs` | Regenerate the published gallery and prompt index |
 
-The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across seven themes in Chinese and English. Its PNGs are development review artifacts; normal skill calls still return HTML unless PNG is requested.
+The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across seven themes in Chinese and English. Its PNGs are development review artifacts; a normal call hands you the editable HTML and renders a PNG only when you ask.
 
 ## Roadmap
 

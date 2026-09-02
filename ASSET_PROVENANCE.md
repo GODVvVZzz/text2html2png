@@ -15,7 +15,7 @@ All example content — names, numbers, dates, roles, and volumes — is synthet
 
 ## Vector assets
 
-`assets/logo.svg`, `assets/logo-dark.svg`, `assets/icon.svg`, and `skills/text2html2png/assets/hero.svg` are original vector artwork created for this open-source release.
+`assets/logo.svg`, `assets/logo-dark.svg`, and `assets/icon.svg` are original vector artwork created for this open-source release.
 
 ## What is deliberately absent
 

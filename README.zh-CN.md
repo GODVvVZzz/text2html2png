@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./skills/text2html2png/assets/logo.svg" width="720" alt="text2html2png">
-  <p><strong>把任意文字变成可编辑的 HTML 图表。</strong><br>
-  只有明确需要时才导出 PNG,内容不出本机。</p>
+  <p><strong>把任何文字变成一张能直接粘贴的图。</strong><br>
+  每次渲染都是可编辑的 HTML;PNG 一句话就能导出,内容不出本机。</p>
   <p>
     <a href="./README.md">English</a>
     ·
@@ -22,13 +22,17 @@
   </p>
 </div>
 
-![一句话描述变成精美的可编辑 HTML 图表,需要时再导出高清 PNG](./skills/text2html2png/assets/hero.svg)
+<div align="center">
+  <img src="./skills/text2html2png/assets/gallery/launch-plan-zh-paper.png" width="32.5%" alt="paper 风格的八周会议筹备甘特图,以霞鹜文楷渲染">
+  <img src="./skills/text2html2png/assets/gallery/signup-funnel-zh-neon.png" width="32.5%" alt="neon 风格的五阶段注册漏斗">
+  <img src="./skills/text2html2png/assets/gallery/library-roadmap-zh-editorial.png" width="32.5%" alt="editorial 风格的六里程碑插件 API 路线图时间线">
+</div>
 
-大多数绘图工具要你动手画,这个只要你把事情说清楚。你把一份计划、一段规格、一次会议记录或一组数字贴进去;你的 agent 选择合适的图表类型,保持你给出的事实不变,默认生成一份自包含的 HTML。只有你明确需要可粘贴图片时,才用本机浏览器额外渲染 PNG。
+大多数绘图工具要你动手画,这个只要你把事情说清楚。你把一份计划、一段规格、一次会议记录或一组数字贴进去;你的 agent 选择合适的图表类型,保持你给出的事实不变,交付一张能直接粘贴的图——图的底层是一份可以改样式、可以留档的自包含 HTML 文档。Carbon 和 ray.so 为代码片段做这件事,这个技能为任何结构化文字做这件事。需要图片时,它会用你本机已有的浏览器渲染一张裁切紧凑的 PNG。
 
 - **8 种图表** — 流程图、对比、时间线、架构图、KPI 看板、甘特图、组织架构、漏斗
 - **7 套视觉风格** — warm、dark、minimal、editorial、neon、paper、glass
-- **HTML 默认、PNG 按需** — 默认只写一份可编辑 HTML;需要图片时再说“同时导出 PNG”或传 `--png`
+- **一张图能直接粘贴,一份文档能留下来** — 交付物是一份可编辑的 HTML 文件;说一句“同时导出 PNG”或传 `--png`,就能拿到图本身
 - **质量是量出来的,不是赌出来的** — 基于浏览器的版面质检既是工作流的必经步骤,也是每个已发布示例的 CI 门禁
 - **本机优先** — 无托管渲染 API、无 API Key、无遥测,渲染期间网络全部拦截
 
@@ -42,7 +46,7 @@ npx skills add GODVvVZzz/text2html2png -g -y
 
 > 把我们的上线计划做成甘特图:调研第 1–2 周,设计第 2–4 周,开发第 4–7 周,内测第 8 周。用 paper 风格。
 
-默认会得到一份可编辑的 `.html`。如果明确说“同时导出 PNG”或传 `--png`,才会得到两个文件。
+图表以一份可编辑的 `.html` 交付——改样式、改文案、进 Git 都行。说一句“顺便导出 PNG”或传 `--png`,就能同时拿到能直接粘贴的图。
 
 `skills` CLI 会按你指定的 agent 放置技能。指定单个 agent:
 
@@ -127,7 +131,7 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 - 未显式传入 `--force` 时拒绝覆盖已存在的 PNG;
 - 限制尺寸与总渲染像素。
 
-除非用户明确提出,否则不会生成 PNG;默认产物始终是 HTML。
+能直接粘贴的图只在你开口时才渲染;在那之前,内容始终是一份留在磁盘上的可编辑 HTML 文件。
 
 只有确实需要远程素材时才使用 `--allow-network`。只有在可信的隔离容器内才使用 `--no-sandbox`。渲染来源不可信的 HTML 前请先读 [SECURITY.md](./SECURITY.md);想确认什么会、什么不会离开本机,请看 [PRIVACY.md](./PRIVACY.md)。
 
@@ -155,7 +159,7 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 ├── skills/text2html2png/
 │   ├── SKILL.md                  agent 读取的技能契约
 │   ├── references/               8 份图表指南、7 套风格系统、共享契约
-│   ├── examples/                 9 个示例:HTML + 元数据 sidecar
+│   ├── examples/                 9 个双语示例:每种语言一份 HTML + fixture
 │   ├── scripts/                  渲染、校验、质检、批处理工具
 │   └── tests/                    含真实 Chrome 冒烟测试
 └── .github/                      CI、issue 与 PR 模板
@@ -182,7 +186,7 @@ npm run check
 | `npm run audit:layout -- --html x.html --width 1040 --json` | 质检单个文档,输出机器可读结果 |
 | `node ../../scripts/build-gallery.mjs` | 重新生成画廊页与 prompt 索引 |
 
-已验证的[主题/图表正交性试验](./experiments/theme-decoupling/README.md)使用同一份 comparison 结构生成中英文各 7 个主题。试验 PNG 只用于开发评审;正常调用仍默认返回 HTML,只有明确要求时才导出 PNG。
+已验证的[主题/图表正交性试验](./experiments/theme-decoupling/README.md)使用同一份 comparison 结构生成中英文各 7 个主题。试验 PNG 只用于开发评审;正常调用交付的是可编辑 HTML,只有你开口时才渲染 PNG。
 
 ## 路线图
 
