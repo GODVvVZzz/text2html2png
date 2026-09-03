@@ -25,25 +25,28 @@ Numbers: `'IBM Plex Mono', monospace` — weight 600
 
 ```css
 :root {
+  /* Base — the identity is "no colour": a seven-step grey ramp cycles
+     through chart accents, and emphasis comes from weight and borders. */
   --bg: #ffffff;
   --card-bg: #ffffff;
-  --text-primary: #1a1a1a;
-  --text-secondary: #555555;
-  --text-muted: #999999;
+  --text-primary: #111111;
+  --text-secondary: #484848;
+  --text-muted: #6b6b6b;
   --border-base: #e0e0e0;
-  --border-strong: #1a1a1a;
-  --accent: #1a1a1a;
-  --accent-blue: #1a1a1a;
-  --arrow-color: #555555;
+  --border-strong: #111111;
+  --accent: #111111;
+  --accent-blue: #111111;
+  --arrow-color: #b8b8b8;
+  --rule-color: #b8b8b8;
   --s1: #111111;
-  --s2: #2f2f2f;
-  --s3: #4a4a4a;
-  --s4: #666666;
-  --s5: #7a7a7a;
+  --s2: #2b2b2b;
+  --s3: #444444;
+  --s4: #5c5c5c;
+  --s5: #747474;
   --s6: #333333;
-  --s7: #595959;
-  --success: #2f2f2f;
-  --minor: #666666;
+  --s7: #515151;
+  --success: #2b2b2b;
+  --minor: #5c5c5c;
   --critical: #111111;
 }
 ```
@@ -92,7 +95,7 @@ body {
 ```css
 .card {
   background: var(--card-bg);
-  border: 1.5px solid var(--border-base);
+  border: 1px solid var(--border-base);
   border-radius: 8px;
   padding: 14px 16px;
 }
