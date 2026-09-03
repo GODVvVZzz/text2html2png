@@ -36,7 +36,7 @@
   padding: 13px 14px 12px;
   text-align: center;
   background: color-mix(in srgb, var(--tone) 6%, var(--t-surface-strong));
-  border: var(--t-border-width) var(--t-border-style) color-mix(in srgb, var(--tone) 60%, var(--t-border));
+  border: var(--t-border-width) var(--t-border-style) var(--t-node-border);
   border-radius: var(--t-small-radius);
   box-shadow: var(--t-card-shadow);
   backdrop-filter: var(--t-backdrop);

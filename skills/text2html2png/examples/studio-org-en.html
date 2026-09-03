@@ -112,6 +112,7 @@
   --t-text-secondary: #6a5a40;
   --t-text-muted: #806d50;
   --t-border: #dfd0b4;
+  --t-node-border: color-mix(in srgb, var(--tone) 60%, var(--t-border));
   --t-rule: #c0a06a;
   --t-head-rule-image: #c9b48c;
   --t-accent-1: #a8511c;
@@ -151,6 +152,7 @@
   --t-leader-width: 1.5px;
   --t-emoji-display: inline-flex;
   --t-svg-display: none;
+  --t-lede-style: normal;
 }
   </style>
   <style id="text2html2png-chart" data-chart="org-chart">
@@ -222,6 +224,7 @@ h1 {
   margin: 9px auto 0;
   color: var(--t-text-secondary);
   font-size: var(--t-body-size);
+  font-style: var(--t-lede-style);
   line-height: 1.55;
 }
 

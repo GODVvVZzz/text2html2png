@@ -28,7 +28,7 @@ const FONT_LIBRARY = {
   "IBM Plex Sans": { pkg: "@fontsource/ibm-plex-sans", weights: [400, 500, 700] },
   "IBM Plex Mono": { pkg: "@fontsource/ibm-plex-mono", weights: [500, 600] },
   "Cormorant Garamond": { pkg: "@fontsource/cormorant-garamond", weights: [600, 700] },
-  "Lora": { pkg: "@fontsource/lora", weights: [400, 500, 600] },
+  "Lora": { pkg: "@fontsource/lora", weights: [400, 500, 600], italics: [500] },
   "Libre Franklin": { pkg: "@fontsource/libre-franklin", weights: [400, 500, 600] },
   "Caveat": { pkg: "@fontsource/caveat", weights: [400, 700] },
   "Nunito": { pkg: "@fontsource/nunito", weights: [400, 500, 600, 700] },
@@ -105,11 +105,11 @@ function cachedSource(pkgDir, file) {
   return sourceCache.get(key);
 }
 
-function faceCss(family, weight, subset, unicodeRange) {
+function faceCss(family, weight, subset, unicodeRange, style = "normal") {
   return (
     "@font-face {\n" +
     `  font-family: ${JSON.stringify(family)};\n` +
-    "  font-style: normal;\n" +
+    `  font-style: ${style};\n` +
     `  font-weight: ${weight};\n` +
     "  font-display: block;\n" +
     (unicodeRange ? `  unicode-range: ${unicodeRange};\n` : "") +
@@ -129,6 +129,7 @@ function faceCss(family, weight, subset, unicodeRange) {
 export async function buildThemeFontFaces(themeCss, text) {
   const families = themeFontFamilies(themeCss);
   const warnings = [];
+  const wantItalic = /--t-lede-style:\s*italic/.test(themeCss);
   const wanted = new Set();
   for (const char of text) {
     if (/\s/u.test(char)) continue;
@@ -149,7 +150,11 @@ export async function buildThemeFontFaces(themeCss, text) {
       warnings.push(`${family}: ${entry.pkg} is not installed; falling back to system fonts`);
       continue;
     }
-    for (const weight of entry.weights) {
+    const faces = entry.weights.map((weight) => ({ weight, style: "normal" }));
+    if (wantItalic && entry.italics) {
+      faces.push(...entry.italics.map((weight) => ({ weight, style: "italic" })));
+    }
+    for (const { weight, style } of faces) {
       if (entry.cjk) {
         const table = await cachedSliceTable(pkgDir, weight);
         // Assign each wanted codepoint to every slice covering it; the
@@ -169,16 +174,16 @@ export async function buildThemeFontFaces(themeCss, text) {
           const subset = await subsetFont(await cachedSource(pkgDir, table[i].file), sliceText, {
             targetFormat: "woff2",
           });
-          blocks.push(faceCss(family, weight, subset, table[i].range));
+          blocks.push(faceCss(family, weight, subset, table[i].range, style));
           totalBytes += subset.length;
         }
       } else {
-        const file = `${slug(family)}-latin-${weight}-normal.woff2`;
+        const file = `${slug(family)}-latin-${weight}-${style}.woff2`;
         try {
           const subset = await subsetFont(await cachedSource(pkgDir, file), chars, {
             targetFormat: "woff2",
           });
-          blocks.push(faceCss(family, weight, subset, null));
+          blocks.push(faceCss(family, weight, subset, null, style));
           totalBytes += subset.length;
         } catch {
           warnings.push(`${family}: ${entry.pkg} is missing ${file}; falling back for that face`);
