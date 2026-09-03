@@ -36,6 +36,7 @@ All notable changes to the public project will be documented here.
 
 ### Fixed
 
+- `package-lock.json` pointed every `@fontsource` tarball at a private registry mirror unreachable from public CI, so installs stalled for minutes and npm died with "Exit handler never called!"; the lockfile now resolves everything from the public npm registry.
 - Metric cards no longer receive a position-driven highlight on the first card; emphasis is left to the theme and content instead of card order.
 - Example copy terminology unified where one concept carried several words (plan-comparison criteria wording, roadmap scale-and-ticks title, release-flow step title), and the KPI row re-rendered with uniform card emphasis.
 - The layout audit passed two classes of genuinely broken output: text buried under an opaque element, and text whose colour matched its background. Added `TEXT_OCCLUDED` (hit-tests each text box against what is drawn on top) and `TEXT_INVISIBLE` (contrast below 1.6:1 is an error, not a warning).

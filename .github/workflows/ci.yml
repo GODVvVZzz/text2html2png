@@ -30,22 +30,20 @@ jobs:
           cache: npm
           cache-dependency-path: skills/text2html2png/package-lock.json
 
-      # --no-audit: npm ci submits the lockfile to the audit endpoint, which
-      # stalls behind rate limiting on shared CI egress IPs and can crash npm;
-      # the dedicated audit step below already covers vulnerabilities.
+      # --no-audit: the dedicated audit step below already covers
+      # vulnerabilities, so the install does not need the advisory endpoint.
       - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
+        run: npm ci --no-audit --no-fund
 
-      # npm dies with a bare "Exit handler never called!" on stalled registry
-      # requests; keep the real error around for diagnosis.
+      # Keep the real error around if the install ever fails.
       - name: Dump npm debug logs on failure
         if: failure()
         shell: bash
         run: |
-          cache="$(cygpath "$(npm config get cache)" 2>/dev/null || npm config get cache)"
-          for f in $(ls -tr "$cache"/_logs/*.log 2>/dev/null | tail -2); do
+          cache="$(npm config get cache)"
+          for f in "$cache"/_logs/*.log; do
             echo "===== $f ====="
-            tail -n 120 "$f"
+            tail -n 200 "$f"
           done
 
       - name: Audit production dependencies
@@ -88,17 +86,17 @@ jobs:
       # The experiment lives outside the shippable skill package, so it is
       # verified here rather than from the skill's own scripts.
       - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
+        run: npm ci --no-audit --no-fund
         working-directory: skills/text2html2png
 
       - name: Dump npm debug logs on failure
         if: failure()
         shell: bash
         run: |
-          cache="$(cygpath "$(npm config get cache)" 2>/dev/null || npm config get cache)"
-          for f in $(ls -tr "$cache"/_logs/*.log 2>/dev/null | tail -2); do
+          cache="$(npm config get cache)"
+          for f in "$cache"/_logs/*.log; do
             echo "===== $f ====="
-            tail -n 120 "$f"
+            tail -n 200 "$f"
           done
 
       - name: Validate source orthogonality
