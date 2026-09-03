@@ -36,14 +36,18 @@ Body: `'Noto Sans SC', sans-serif` — weight 400-500
   --accent: #c0622a;
   --accent-blue: #2c6e9e;
 
-  /* Step accent colors (cycle through) */
-  --s1: #c0622a;   /* burnt orange */
-  --s2: #b08830;   /* gold */
+  /* Step accent colors (cycle through).
+     Burnt orange and gold sit one step darker than the classic warm palette:
+     accents double as white-text backgrounds (funnel bars, badges), and these
+     are the brightest warm values that still pass the 4.5:1 contrast gate
+     against both white text and the accent-tinted card surfaces. */
+  --s1: #a8511c;   /* burnt orange */
+  --s2: #8a661a;   /* gold */
   --s3: #3a7a8c;   /* teal */
   --s4: #6a3a8c;   /* purple */
   --s5: #2c6e9e;   /* steel blue */
   --s6: #7a5c38;   /* brown */
-  --s7: #4a8c5c;   /* forest green */
+  --s7: #3d7a4e;   /* forest green */
 
   /* Semantic */
   --critical: #b83232;

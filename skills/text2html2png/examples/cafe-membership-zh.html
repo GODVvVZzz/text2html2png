@@ -424,7 +424,7 @@
     <style id="text2html2png-theme" data-theme="warm">
 :root {
   --t-canvas: #faf6ee;
-  --t-canvas-image: radial-gradient(circle at 8% 4%, rgba(168, 80, 31, 0.08), transparent 24%), radial-gradient(circle at 94% 92%, rgba(47, 114, 132, 0.06), transparent 28%);
+  --t-canvas-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"), radial-gradient(circle at 8% 4%, rgba(179, 88, 31, 0.08), transparent 24%), radial-gradient(circle at 94% 92%, rgba(58, 122, 140, 0.06), transparent 28%);
   --t-surface: #fffdf8;
   --t-surface-strong: #ffffff;
   --t-surface-soft: #f4ead9;
@@ -432,18 +432,18 @@
   --t-text-secondary: #6a5a40;
   --t-text-muted: #806d50;
   --t-border: #dfd0b4;
-  --t-rule: #cdbb9a;
+  --t-rule: #c0a06a;
   --t-head-rule-image: #c9b48c;
-  --t-accent-1: #a8501f;
-  --t-accent-2: #8a6512;
-  --t-accent-3: #5e6e4c;
-  --t-accent-4: #7a3b45;
-  --t-accent-5: #4e5d7c;
-  --t-accent-6: #765433;
-  --t-accent-7: #3a7049;
+  --t-accent-1: #a8511c;
+  --t-accent-2: #8a661a;
+  --t-accent-3: #3a7a8c;
+  --t-accent-4: #6a3a8c;
+  --t-accent-5: #2c6e9e;
+  --t-accent-6: #7a5c38;
+  --t-accent-7: #3d7a4e;
   --t-on-accent: #ffffff;
-  --t-banner-bg: #4a2f13;
-  --t-banner-text: #fff7e8;
+  --t-banner-bg: linear-gradient(135deg, #3a2a10 0%, #5c3a18 100%);
+  --t-banner-text: #f5e8cc;
   --t-banner-accent: #f0c060;
   --t-font-display: "Playfair Display", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-body: "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -465,7 +465,7 @@
   --t-border-width: 1.5px;
   --t-border-style: solid;
   --t-card-shadow: 0 8px 26px rgba(72, 48, 18, 0.08);
-  --t-highlight-shadow: 0 0 0 4px rgba(168, 80, 31, 0.08);
+  --t-highlight-shadow: 0 0 0 4px rgba(179, 88, 31, 0.08);
   --t-backdrop: none;
   --t-leader-style: dotted;
   --t-leader-width: 1.5px;
@@ -804,14 +804,27 @@ html:lang(zh-CN) h1 {
   line-height: 1.5;
 }
 
-/* Horizontal step strip with arrow connectors */
+/* Horizontal step strip with dashed arrow connectors */
 .nar-steps {
   display: flex;
   align-items: stretch;
-  gap: 11px;
+  gap: 9px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.nar-step-arrow {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  color: var(--t-rule);
+}
+
+.nar-step-arrow svg {
+  display: block;
+  width: 15px;
+  height: 17px;
 }
 
 .nar-step {
@@ -823,18 +836,6 @@ html:lang(zh-CN) h1 {
   border-top: 3px solid var(--t-accent-2);
   border-radius: var(--t-small-radius);
   background: var(--t-surface-strong);
-}
-
-.nar-step + .nar-step::before {
-  position: absolute;
-  top: 50%;
-  left: -12px;
-  color: var(--t-text-secondary);
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1;
-  content: "\2192";
-  transform: translateY(-50%);
 }
 
 .nar-step-icon {
@@ -1052,16 +1053,19 @@ html:lang(zh-CN) h1 {
 <p class="nar-step-label">点单</p>
 <p class="nar-step-text">柜台或小程序下单。</p>
 </li>
+<span class="nar-step-arrow" aria-hidden="true"><svg viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg"><line x1="1.5" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3.5 2.6"/><path d="M11 5.5 17 11l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 <li class="nar-step">
 <span class="nar-step-icon"><span class="sec-icon-emoji">⭐️</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9.5 26V15.5M16 26V6.5M22.5 26V11M4 26.5h24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></span>
 <p class="nar-step-label">攒星</p>
 <p class="nar-step-text">扫码后星星自动入账。</p>
 </li>
+<span class="nar-step-arrow" aria-hidden="true"><svg viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg"><line x1="1.5" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3.5 2.6"/><path d="M11 5.5 17 11l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 <li class="nar-step">
 <span class="nar-step-icon"><span class="sec-icon-emoji">📈</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M5 24l8.5-8.5 5 5L27 12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.5 11h8v8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
 <p class="nar-step-label">升级</p>
 <p class="nar-step-text">90 天累计达标自动升档。</p>
 </li>
+<span class="nar-step-arrow" aria-hidden="true"><svg viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg"><line x1="1.5" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3.5 2.6"/><path d="M11 5.5 17 11l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 <li class="nar-step">
 <span class="nar-step-icon"><span class="sec-icon-emoji">🎁</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M8.5 27.5v-23" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M8.5 6h15l-3.8 4.5 3.8 4.5h-15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></span>
 <p class="nar-step-label">兑换</p>

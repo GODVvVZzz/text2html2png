@@ -3,7 +3,7 @@
   "locale": "en-US",
   "eyebrow": "Product brief · café",
   "title": "Café membership revamp",
-  "subtitle": "A revamp brief for the café membership app. It leads with the decisions, then flow, impact, and acceptance.",
+  "subtitle": "A brief for the café membership app: decisions first, then flow and impact.",
   "sections": [
     {
       "kind": "cards",
@@ -29,8 +29,8 @@
       "items": [
         {"label": "Order", "text": "At the counter or in the app.", "emoji": "☕️", "icon": "package"},
         {"label": "Earn", "text": "Stars land after one scan.", "emoji": "⭐️", "icon": "chart"},
-        {"label": "Level up", "text": "The 90-day total promotes you.", "emoji": "📈", "icon": "trend-up"},
-        {"label": "Redeem", "text": "Trade stars for drinks and bakes.", "emoji": "🎁", "icon": "flag"}
+        {"label": "Level up", "text": "90 days sets your tier.", "emoji": "📈", "icon": "trend-up"},
+        {"label": "Redeem", "text": "Stars trade for treats.", "emoji": "🎁", "icon": "flag"}
       ]
     },
     {

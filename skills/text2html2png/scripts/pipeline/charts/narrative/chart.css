@@ -122,14 +122,27 @@
   line-height: 1.5;
 }
 
-/* Horizontal step strip with arrow connectors */
+/* Horizontal step strip with dashed arrow connectors */
 .nar-steps {
   display: flex;
   align-items: stretch;
-  gap: 11px;
+  gap: 9px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.nar-step-arrow {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  color: var(--t-rule);
+}
+
+.nar-step-arrow svg {
+  display: block;
+  width: 15px;
+  height: 17px;
 }
 
 .nar-step {
@@ -141,18 +154,6 @@
   border-top: 3px solid var(--t-accent-2);
   border-radius: var(--t-small-radius);
   background: var(--t-surface-strong);
-}
-
-.nar-step + .nar-step::before {
-  position: absolute;
-  top: 50%;
-  left: -12px;
-  color: var(--t-text-secondary);
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1;
-  content: "\2192";
-  transform: translateY(-50%);
 }
 
 .nar-step-icon {
