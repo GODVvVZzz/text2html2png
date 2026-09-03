@@ -195,7 +195,7 @@ Useful individual commands:
 | `npm run audit:layout -- --html x.html --width 1040 --json` | Audit one document, machine-readable |
 | `node ../../scripts/build-gallery.mjs` | Regenerate the published gallery and prompt index |
 
-The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across seven themes in Chinese and English. Its PNGs are development review artifacts; a normal call hands you the editable HTML and renders a PNG only when you ask.
+The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across every theme in Chinese and English (seven themes in the original experiment; the five that ship today). Its PNGs are development review artifacts; a normal call hands you the editable HTML and renders a PNG only when you ask.
 
 ## Roadmap
 

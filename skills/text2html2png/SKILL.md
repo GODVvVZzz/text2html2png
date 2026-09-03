@@ -12,7 +12,7 @@ Create an editable, self-contained HTML diagram by default. Render a tightly cro
 
 Do not generate a PNG merely because this skill is named `text2html2png`, or because the user generally asks to “draw a diagram.” HTML is the default deliverable.
 
-The skill supports nine diagram types and seven visual styles. Prefer a complete first result over a style questionnaire: infer a sensible chart and style unless the user specifies them.
+The skill supports nine diagram types and five visual styles. Prefer a complete first result over a style questionnaire: infer a sensible chart and style unless the user specifies them.
 
 ## Inputs
 
@@ -168,5 +168,5 @@ Optional configuration may be read from `.text2html2png/config.json` in the proj
 - [Chart selection](references/chart-types.md)
 - [Rendering and safety contract](references/rendering-contract.md)
 - [Design philosophy](references/design-philosophy.md)
-- `references/styles/` — seven visual systems
+- `references/styles/` — five visual systems
 - `references/charts/` — nine diagram layouts
