@@ -45,6 +45,6 @@
   --t-backdrop: blur(14px);
   --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: none;
-  --t-svg-display: inline-flex;
+  --t-emoji-display: inline-flex;
+  --t-svg-display: none;
 }
