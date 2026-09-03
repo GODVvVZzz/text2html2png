@@ -233,6 +233,8 @@
   --t-emoji-display: inline-flex;
   --t-svg-display: none;
   --t-lede-style: normal;
+  --t-lede-font: var(--t-font-body);
+  --t-lede-size: var(--t-body-size);
 }
   </style>
   <style id="text2html2png-chart" data-chart="org-chart">
@@ -303,7 +305,8 @@ h1 {
   max-width: 700px;
   margin: 9px auto 0;
   color: var(--t-text-secondary);
-  font-size: var(--t-body-size);
+  font-family: var(--t-lede-font);
+  font-size: var(--t-lede-size);
   font-style: var(--t-lede-style);
   line-height: 1.55;
 }

@@ -106,33 +106,33 @@
   </style>
     <style id="text2html2png-theme" data-theme="paper">
 :root {
-  --t-canvas: #f3ecd9;
-  --t-canvas-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(107, 91, 65, 0.1) 27px, rgba(107, 91, 65, 0.1) 28px);
-  --t-surface: #fffaf0;
+  --t-canvas: #f5f0e6;
+  --t-canvas-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(138, 126, 104, 0.14) 27px, rgba(138, 126, 104, 0.14) 28px);
+  --t-surface: rgba(255, 255, 255, 0.72);
   --t-surface-strong: #fffdf7;
-  --t-surface-soft: #eee3cb;
+  --t-surface-soft: #efe6d2;
   --t-text: #332b22;
   --t-text-secondary: #625747;
   --t-text-muted: #7d6f5c;
-  --t-border: #b9aa8e;
+  --t-border: #c4b896;
   --t-node-border: color-mix(in srgb, var(--tone) 60%, var(--t-border));
-  --t-rule: #c6b79b;
-  --t-head-rule-image: rgba(107, 91, 65, 0.45);
-  --t-accent-1: #2d638f;
+  --t-rule: #c4b896;
+  --t-head-rule-image: rgba(107, 91, 65, 0.5);
+  --t-accent-1: #2d5a87;
   --t-accent-2: #2f7650;
   --t-accent-3: #96560f;
-  --t-accent-4: #a54134;
+  --t-accent-4: #8b3a3a;
   --t-accent-5: #6b5685;
   --t-accent-6: #765633;
   --t-accent-7: #376f6a;
   --t-on-accent: #ffffff;
-  --t-banner-bg: #fffaf0;
+  --t-banner-bg: #fff9e6;
   --t-banner-text: #332b22;
-  --t-banner-accent: #a54134;
+  --t-banner-accent: #8b3a3a;
   --t-font-display: "Caveat", "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
   --t-font-body: "Nunito", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "Caveat", "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
-  --t-title-size: 36px;
+  --t-title-size: 38px;
   --t-title-weight: 700;
   --t-title-tracking: 0;
   --t-title-transform: none;
@@ -144,10 +144,10 @@
   --t-label-transform: none;
   --t-data-size: 29px;
   --t-data-weight: 700;
-  --t-card-radius: 2px;
-  --t-small-radius: 2px;
-  --t-border-width: 1.5px;
-  --t-border-style: solid;
+  --t-card-radius: 6px;
+  --t-small-radius: 4px;
+  --t-border-width: 2px;
+  --t-border-style: dashed;
   --t-card-shadow: 2px 3px 0 rgba(90, 72, 45, 0.12);
   --t-highlight-shadow: none;
   --t-backdrop: none;
@@ -156,6 +156,8 @@
   --t-emoji-display: none;
   --t-svg-display: inline-flex;
   --t-lede-style: normal;
+  --t-lede-font: var(--t-font-display);
+  --t-lede-size: 17px;
 }
   </style>
   <style id="text2html2png-chart" data-chart="gantt">
@@ -226,7 +228,8 @@ h1 {
   max-width: 700px;
   margin: 9px auto 0;
   color: var(--t-text-secondary);
-  font-size: var(--t-body-size);
+  font-family: var(--t-lede-font);
+  font-size: var(--t-lede-size);
   font-style: var(--t-lede-style);
   line-height: 1.55;
 }
