@@ -117,7 +117,7 @@ Each finding names the element, the measured evidence, and one concrete repair, 
 
 This is not theatre. The audit found real defects in the examples this repository already considered finished — 9px labels in one, white text at a 3.2:1 contrast ratio in another, and a legend hidden from screen readers in a third — and the false negatives it once had, including buried and invisible text, are now covered by fixtures in the test suite.
 
-The skill also refuses to invent content. It will not add a number, date, name, trend, or recommendation to make a canvas look full. Ambiguity becomes a labelled assumption or one short question.
+The skill also fills in what you have not decided. Instead of hedging with assumption labels or a round of questions, it makes the best reasonable call and draws it straight in — the chart arrives ready to paste, and anything you disagree with is one message away from being fixed.
 
 ## Privacy and security
 
