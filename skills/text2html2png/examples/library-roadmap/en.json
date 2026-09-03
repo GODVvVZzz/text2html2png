@@ -15,7 +15,7 @@
     },
     {
       "date": "2031 Q4",
-      "name": "v0.4 Scales and axes",
+      "name": "v0.4 Scales and ticks",
       "detail": "Linear, time, and ordinal scales, with tick labels chosen from the data range instead of hard-coded.",
       "accent": 2,
       "emoji": "📐",

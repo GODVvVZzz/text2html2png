@@ -36,6 +36,8 @@ All notable changes to the public project will be documented here.
 
 ### Fixed
 
+- Metric cards no longer receive a position-driven highlight on the first card; emphasis is left to the theme and content instead of card order.
+- Example copy terminology unified where one concept carried several words (plan-comparison criteria wording, roadmap scale-and-ticks title, release-flow step title), and the KPI row re-rendered with uniform card emphasis.
 - The layout audit passed two classes of genuinely broken output: text buried under an opaque element, and text whose colour matched its background. Added `TEXT_OCCLUDED` (hit-tests each text box against what is drawn on top) and `TEXT_INVISIBLE` (contrast below 1.6:1 is an error, not a warning).
 - The layout audit reported false failures on ordinary cards: a decorative shape clipped by its own container was read as cropped text, and an element already clipped by an ancestor was read as escaping the capture area. Clipping is now measured from the element's own text runs, elements with a clipping ancestor are skipped, and positioned decoration is exempt from the filler rule.
 - `check:layout` now runs with `--strict`, so the warnings the documentation claims are absent are actually enforced.
