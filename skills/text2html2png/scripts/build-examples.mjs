@@ -8,8 +8,6 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { renderScreenshot } from "./screenshot.mjs";
-import { auditLayout, formatReport } from "./audit-layout.mjs";
 import { buildThemeFontFaces, themeFontFamilies } from "./pipeline/font-embed.mjs";
 import {
   structureFingerprint,
@@ -236,6 +234,9 @@ async function main() {
 
   for (const item of generated) {
     if (args.audit) {
+      // Imported lazily so manifest-only consumers (build-gallery) work in a
+      // checkout with no installed dependencies, which is how CI runs it.
+      const { auditLayout, formatReport } = await import("./audit-layout.mjs");
       const report = await auditLayout({
         html: item.htmlPath,
         width: item.example.width,
@@ -256,6 +257,7 @@ async function main() {
       console.log("audit PASS " + item.example.id + "-" + item.locale + "-" + item.example.theme);
     }
     if (args.render) {
+      const { renderScreenshot } = await import("./screenshot.mjs");
       await renderScreenshot({
         html: item.htmlPath,
         out: item.pngPath,
