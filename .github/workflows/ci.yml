@@ -31,7 +31,17 @@ jobs:
           cache-dependency-path: skills/text2html2png/package-lock.json
 
       - name: Install locked dependencies
-        run: npm ci
+        run: npm ci --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
+
+      # The CJK @fontsource packages are large; when a download stalls on a
+      # runner, npm dies with a bare "Exit handler never called!". Keep the
+      # real error around for diagnosis.
+      - name: Dump npm debug log on failure
+        if: failure()
+        shell: bash
+        run: |
+          cache="$(cygpath "$(npm config get cache)" 2>/dev/null || npm config get cache)"
+          ls -t "$cache"/_logs/*.log 2>/dev/null | head -1 | xargs -r tail -n 150
 
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
@@ -73,8 +83,15 @@ jobs:
       # The experiment lives outside the shippable skill package, so it is
       # verified here rather than from the skill's own scripts.
       - name: Install locked dependencies
-        run: npm ci
+        run: npm ci --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
         working-directory: skills/text2html2png
+
+      - name: Dump npm debug log on failure
+        if: failure()
+        shell: bash
+        run: |
+          cache="$(cygpath "$(npm config get cache)" 2>/dev/null || npm config get cache)"
+          ls -t "$cache"/_logs/*.log 2>/dev/null | head -1 | xargs -r tail -n 150
 
       - name: Validate source orthogonality
         run: node experiments/theme-decoupling/scripts/validate-orthogonality.mjs
