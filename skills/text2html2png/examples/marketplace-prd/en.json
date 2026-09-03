@@ -1,0 +1,88 @@
+{
+  "id": "marketplace-prd",
+  "locale": "en-US",
+  "eyebrow": "Product brief · plugins",
+  "title": "Plugin marketplace revamp",
+  "subtitle": "One structured entry for skills, experts, and expert teams. This brief leads with the decisions, then scope, impact, and acceptance.",
+  "sections": [
+    {
+      "kind": "cards",
+      "eyebrow": "Decision-first",
+      "title": "The revamp in six decisions",
+      "emoji": "🧩",
+      "icon": "package",
+      "items": [
+        {"no": "01 · R1", "title": "One template structure", "text": "The registry keeps a single skill structure; user uploads and official listings share it.", "accent": 1},
+        {"no": "02 · R2", "title": "Teams get uploads", "text": "Compose a team prompt from marketplace experts and name one member as leader.", "accent": 2},
+        {"no": "03 · R3", "title": "Fixed creation order", "text": "Skill first, then expert, then team; the order never reverses.", "accent": 3},
+        {"no": "04 · R4", "title": "Signed listings", "text": "Every published plugin is content-signed at review time.", "accent": 4},
+        {"no": "05 · R5", "title": "One-click rollback", "text": "Any release can roll back to the last signed version in one click.", "accent": 5},
+        {"no": "06 · R6", "title": "Usage analytics", "text": "Authors see installs, retention, and failure counts per version.", "accent": 6}
+      ]
+    },
+    {
+      "kind": "steps",
+      "eyebrow": "Pipeline",
+      "title": "How a listing goes live",
+      "emoji": "🚀",
+      "icon": "flag",
+      "items": [
+        {"label": "Submit", "text": "Author uploads the manifest and bundle.", "emoji": "📦", "icon": "package"},
+        {"label": "Review", "text": "Automated checks plus a human pass.", "emoji": "👀", "icon": "shield"},
+        {"label": "Sign", "text": "The signing service pins content hashes.", "emoji": "🔒", "icon": "lock"},
+        {"label": "Publish", "text": "Listing appears with its signature.", "emoji": "🚀", "icon": "flag"}
+      ]
+    },
+    {
+      "kind": "table",
+      "eyebrow": "Impact",
+      "title": "What changes for whom",
+      "emoji": "🧾",
+      "icon": "chart",
+      "columns": ["Audience", "Today", "After the revamp"],
+      "rows": [
+        {"cells": ["Authors", "Re-upload the full bundle per release", "Signed delta updates per version"]},
+        {"cells": ["Users", "Search by name only", "Search by capability and version"]},
+        {"cells": ["Reviewers", "Manual checklists per release", "Signed manifests with a one-click diff"]},
+        {"cells": ["Support", "Reproduce from screenshots", "Every ticket pins version and platform"]}
+      ]
+    },
+    {
+      "kind": "callout",
+      "eyebrow": "Dependency",
+      "title": "Risks and dependencies",
+      "tone": "warn",
+      "emoji": "⚠️",
+      "icon": "shield",
+      "text": "The signing service ships two weeks before the marketplace cutover. If the key-management integration slips, R4 falls back to hash pinning and keeps the release date."
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "Acceptance",
+      "title": "Definition of done",
+      "emoji": "✅",
+      "icon": "check",
+      "items": [
+        {"ok": true, "text": "A new author publishes a signed plugin without leaving the wizard"},
+        {"ok": true, "text": "Rollback restores the previous signed version in under a minute"},
+        {"ok": true, "text": "Search returns a plugin by capability, not only by name"},
+        {"ok": true, "text": "Every ticket template pins the plugin version and platform"}
+      ]
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "Boundary",
+      "title": "Non-goals for this revamp",
+      "emoji": "🚫",
+      "icon": "lock",
+      "items": [
+        {"ok": false, "text": "Monetization and revenue sharing"},
+        {"ok": false, "text": "Cross-marketplace federation"},
+        {"ok": false, "text": "Mobile client parity"},
+        {"ok": false, "text": "Migrating legacy v1 manifests"}
+      ]
+    }
+  ],
+  "footerLabel": "Decision owners",
+  "footer": "R1–R3 product, R4–R5 platform, R6 growth. Security sign-off is required before R4 enters build. All names and figures are synthetic sample data."
+}

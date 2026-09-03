@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
+  <title>插件市场改版</title>
+  <style id="text2html2png-theme" data-theme="warm">
+:root {
+  --t-canvas: #faf6ee;
+  --t-canvas-image: radial-gradient(circle at 8% 4%, rgba(168, 80, 31, 0.08), transparent 24%), radial-gradient(circle at 94% 92%, rgba(47, 114, 132, 0.06), transparent 28%);
+  --t-surface: #fffdf8;
+  --t-surface-strong: #ffffff;
+  --t-surface-soft: #f4ead9;
+  --t-text: #2e2410;
+  --t-text-secondary: #6a5a40;
+  --t-text-muted: #806d50;
+  --t-border: #dfd0b4;
+  --t-rule: #cdbb9a;
+  --t-head-rule-image: #c9b48c;
+  --t-accent-1: #a8501f;
+  --t-accent-2: #8a6512;
+  --t-accent-3: #5e6e4c;
+  --t-accent-4: #7a3b45;
+  --t-accent-5: #4e5d7c;
+  --t-accent-6: #765433;
+  --t-accent-7: #3a7049;
+  --t-on-accent: #ffffff;
+  --t-banner-bg: #4a2f13;
+  --t-banner-text: #fff7e8;
+  --t-banner-accent: #f0c060;
+  --t-font-display: Georgia, "Songti SC", "STSong", serif;
+  --t-font-body: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+  --t-title-size: 34px;
+  --t-title-weight: 700;
+  --t-title-tracking: -0.025em;
+  --t-title-transform: none;
+  --t-body-size: 14px;
+  --t-body-weight: 500;
+  --t-label-size: 11px;
+  --t-label-weight: 700;
+  --t-label-tracking: 0.12em;
+  --t-label-transform: uppercase;
+  --t-data-size: 29px;
+  --t-data-weight: 800;
+  --t-card-radius: 12px;
+  --t-small-radius: 8px;
+  --t-border-width: 1.5px;
+  --t-border-style: solid;
+  --t-card-shadow: 0 8px 26px rgba(72, 48, 18, 0.08);
+  --t-highlight-shadow: 0 0 0 4px rgba(168, 80, 31, 0.08);
+  --t-backdrop: none;
+  --t-leader-style: dotted;
+  --t-leader-width: 1.5px;
+  --t-emoji-display: inline-flex;
+  --t-svg-display: none;
+}
+  </style>
+  <style id="text2html2png-chart" data-chart="narrative">
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--t-canvas);
+  background-image: var(--t-canvas-image);
+}
+
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  color: var(--t-text);
+  font-family: var(--t-font-body);
+  font-size: var(--t-body-size);
+  font-weight: var(--t-body-weight);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: 1040px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 32px 26px;
+  overflow: hidden;
+  background: var(--t-surface);
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-card-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.head {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--t-accent-1);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+h1 {
+  margin: 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: var(--t-title-size);
+  font-weight: var(--t-title-weight);
+  letter-spacing: var(--t-title-tracking);
+  line-height: 1.12;
+  text-transform: var(--t-title-transform);
+}
+
+.lede {
+  max-width: 700px;
+  margin: 9px auto 0;
+  color: var(--t-text-secondary);
+  font-size: var(--t-body-size);
+  line-height: 1.55;
+}
+
+.head-rule {
+  height: 2px;
+  margin-top: 16px;
+  background: var(--t-head-rule-image);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  position: relative;
+  min-height: 102px;
+  padding: 14px 16px 13px;
+  overflow: hidden;
+  text-align: center;
+  background: color-mix(in srgb, var(--metric-accent) 7%, var(--t-surface-strong));
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+  backdrop-filter: var(--t-backdrop);
+  -webkit-backdrop-filter: var(--t-backdrop);
+}
+
+.metric:first-child {
+  box-shadow: var(--t-highlight-shadow);
+}
+
+.metric::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--metric-accent);
+}
+
+.metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.metric-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+}
+
+/* Emoji slots render nothing until a fixture supplies a glyph, so an
+   emoji-on theme never leaves an empty flex gap behind. */
+[class$="-emoji"]:empty {
+  display: none;
+}
+
+.metric-icon-svg {
+  display: var(--t-svg-display);
+  width: 19px;
+  height: 19px;
+}
+
+.metric-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.metric-value {
+  display: inline-block;
+  color: var(--metric-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-data-size);
+  font-weight: var(--t-data-weight);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-label {
+  display: block;
+  margin-top: 8px;
+  color: var(--t-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metric-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--t-text-muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+html:lang(zh-CN) .eyebrow,
+html:lang(zh-CN) .footer-label {
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+html:lang(zh-CN) h1 {
+  letter-spacing: 0;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  color: var(--t-banner-text);
+  background: var(--t-banner-bg);
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-small-radius);
+  box-shadow: var(--t-card-shadow);
+}
+
+.footer-label {
+  color: var(--t-banner-accent);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Narrative chart: a decision-first long-form page of numbered sections.
+   Every color, radius, border, and typeface comes from the shared theme
+   tokens, so the layout restyles atomically across all seven themes. */
+
+.nar-sections {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.nar-section {
+  padding: 16px 20px 18px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-card-radius);
+  background: var(--t-surface);
+  box-shadow: var(--t-card-shadow);
+}
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.sec-no {
+  color: var(--t-accent-1);
+  font-family: var(--t-font-data);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sec-icon {
+  display: flex;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.sec-icon-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.sec-icon-svg {
+  display: var(--t-svg-display);
+  width: 22px;
+  height: 22px;
+  color: var(--t-accent-1);
+}
+
+.sec-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sec-titles {
+  min-width: 0;
+}
+
+.sec-eyebrow {
+  margin: 0;
+  color: var(--t-text-secondary);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+.sec-head h2 {
+  margin: 2px 0 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 17px;
+  font-weight: var(--t-title-weight);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+/* Numbered decision cards */
+.nar-cards {
+  display: grid;
+  grid-template-columns: repeat(var(--nar-cols, 3), minmax(0, 1fr));
+  gap: 11px;
+}
+
+.nar-card {
+  padding: 12px 14px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-left: 3px solid var(--card-accent);
+  border-radius: var(--t-small-radius);
+  background: color-mix(in srgb, var(--card-accent) 6%, var(--t-surface-strong));
+}
+
+.nar-card-no {
+  margin: 0;
+  color: var(--card-accent);
+  font-family: var(--t-font-data);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.nar-card-title {
+  margin: 4px 0 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.nar-card-text {
+  margin: 6px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* Horizontal step strip with arrow connectors */
+.nar-steps {
+  display: flex;
+  align-items: stretch;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nar-step {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-top: 3px solid var(--t-accent-2);
+  border-radius: var(--t-small-radius);
+  background: var(--t-surface-strong);
+}
+
+.nar-step + .nar-step::before {
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  color: var(--t-text-secondary);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  content: "\2192";
+  transform: translateY(-50%);
+}
+
+.nar-step-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nar-step-icon .sec-icon-emoji {
+  display: var(--t-emoji-display);
+  font-size: 18px;
+}
+
+.nar-step-icon .sec-icon-svg {
+  display: var(--t-svg-display);
+  width: 20px;
+  height: 20px;
+  color: var(--t-accent-2);
+}
+
+.nar-step-icon .sec-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nar-step-label {
+  margin: 7px 0 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.nar-step-text {
+  margin: 4px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* Comparison table */
+.nar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nar-table th {
+  padding: 7px 10px;
+  border-bottom: 2px solid var(--t-border);
+  color: var(--t-text-secondary);
+  font-family: var(--t-font-data);
+  font-size: 11.5px;
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-align: left;
+  text-transform: var(--t-label-transform);
+}
+
+.nar-table td {
+  padding: 9px 10px;
+  border-bottom: var(--t-border-width) var(--t-border-style) var(--t-border);
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.45;
+  vertical-align: top;
+}
+
+.nar-table tr:last-child td {
+  border-bottom: none;
+}
+
+.nar-cell-key {
+  color: var(--t-text);
+  font-weight: 700;
+}
+
+/* Callout banner */
+.nar-callout {
+  display: flex;
+  padding: 12px 16px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-left: 3px solid var(--card-accent);
+  border-radius: var(--t-small-radius);
+  background: color-mix(in srgb, var(--card-accent) 8%, var(--t-surface-strong));
+}
+
+.nar-callout-title {
+  margin: 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.nar-callout-text {
+  margin: 5px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+/* Acceptance checklist */
+.nar-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nar-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.nar-check-mark {
+  display: flex;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.nar-check-yes {
+  color: var(--t-accent-3);
+}
+
+.nar-check-yes svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nar-check-no {
+  color: var(--t-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17px;
+}
+  </style>
+</head>
+<body>
+<main class="wrap" aria-label="插件市场改版">
+<header class="head">
+<p class="eyebrow">需求说明 · 插件生态</p>
+<h1>插件市场改版</h1>
+<p class="lede">为技能、专家与专家团提供唯一的结构化入口。先给结论，再谈范围、影响面与验收标准。</p>
+<div class="head-rule"></div>
+</header>
+<div class="nar-sections">
+<section class="nar-section" aria-label="本次改版的六项决策">
+<header class="sec-head">
+<span class="sec-no">01</span>
+<span class="sec-icon"><span class="sec-icon-emoji">🧩</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></span>
+<div class="sec-titles">
+<p class="sec-eyebrow">结论先行</p>
+<h2>本次改版的六项决策</h2>
+</div>
+</header>
+<div class="nar-cards" style="--nar-cols: 3;">
+<article class="nar-card" style="--card-accent: var(--t-accent-1);">
+<p class="nar-card-no">01 · R1</p>
+<h3 class="nar-card-title">一套模板结构</h3>
+<p class="nar-card-text">注册表只保留一套技能结构，用户上传与官方上架完全同构。</p>
+</article>
+<article class="nar-card" style="--card-accent: var(--t-accent-2);">
+<p class="nar-card-no">02 · R2</p>
+<h3 class="nar-card-title">专家团开放上传</h3>
+<p class="nar-card-text">从市场已上架的专家中自由拼团，并指定一名成员为负责人。</p>
+</article>
+<article class="nar-card" style="--card-accent: var(--t-accent-3);">
+<p class="nar-card-no">03 · R3</p>
+<h3 class="nar-card-title">创建顺序固定</h3>
+<p class="nar-card-text">先技能、再专家、后专家团，顺序不可逆。</p>
+</article>
+<article class="nar-card" style="--card-accent: var(--t-accent-4);">
+<p class="nar-card-no">04 · R4</p>
+<h3 class="nar-card-title">上架即签名</h3>
+<p class="nar-card-text">每个发布的插件在审核时完成内容签名。</p>
+</article>
+<article class="nar-card" style="--card-accent: var(--t-accent-5);">
+<p class="nar-card-no">05 · R5</p>
+<h3 class="nar-card-title">一键回滚</h3>
+<p class="nar-card-text">任意版本可一键回退到上一个已签名版本。</p>
+</article>
+<article class="nar-card" style="--card-accent: var(--t-accent-6);">
+<p class="nar-card-no">06 · R6</p>
+<h3 class="nar-card-title">使用分析</h3>
+<p class="nar-card-text">作者可查看各版本的安装量、留存与失败数。</p>
+</article>
+</div>
+</section>
+<section class="nar-section" aria-label="一个插件如何走到上线">
+<header class="sec-head">
+<span class="sec-no">02</span>
+<span class="sec-icon"><span class="sec-icon-emoji">🚀</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M8.5 27.5v-23" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M8.5 6h15l-3.8 4.5 3.8 4.5h-15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></span>
+<div class="sec-titles">
+<p class="sec-eyebrow">发布管线</p>
+<h2>一个插件如何走到上线</h2>
+</div>
+</header>
+<ol class="nar-steps">
+<li class="nar-step">
+<span class="nar-step-icon"><span class="sec-icon-emoji">📦</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></span>
+<p class="nar-step-label">提交</p>
+<p class="nar-step-text">作者上传清单与插件包。</p>
+</li>
+<li class="nar-step">
+<span class="nar-step-icon"><span class="sec-icon-emoji">👀</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4l10 3.8v7.4c0 6.8-4.4 10.8-10 12.8-5.6-2-10-6-10-12.8V7.8L16 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11.5 15.5l3.2 3.2 6-6.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+<p class="nar-step-label">审核</p>
+<p class="nar-step-text">自动检查加人工复核。</p>
+</li>
+<li class="nar-step">
+<span class="nar-step-icon"><span class="sec-icon-emoji">🔒</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="14.5" width="18" height="12.5" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 14.5V10a5 5 0 0 1 10 0v4.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="16" cy="20.5" r="1.8" fill="currentColor"/></svg></span></span>
+<p class="nar-step-label">签名</p>
+<p class="nar-step-text">签名服务固化内容哈希。</p>
+</li>
+<li class="nar-step">
+<span class="nar-step-icon"><span class="sec-icon-emoji">🚀</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M8.5 27.5v-23" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M8.5 6h15l-3.8 4.5 3.8 4.5h-15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></span>
+<p class="nar-step-label">发布</p>
+<p class="nar-step-text">带签名信息正式上架。</p>
+</li>
+</ol>
+</section>
+<section class="nar-section" aria-label="对谁改变了什么">
+<header class="sec-head">
+<span class="sec-no">03</span>
+<span class="sec-icon"><span class="sec-icon-emoji">🧾</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9.5 26V15.5M16 26V6.5M22.5 26V11M4 26.5h24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></span>
+<div class="sec-titles">
+<p class="sec-eyebrow">影响面</p>
+<h2>对谁改变了什么</h2>
+</div>
+</header>
+<table class="nar-table"><thead><tr><th>角色</th><th>现状</th><th>改版之后</th></tr></thead><tbody><tr><td class="nar-cell-key">作者</td><td>每次发版重新上传整包</td><td>按版本签名增量更新</td></tr>
+<tr><td class="nar-cell-key">用户</td><td>只能按名称搜索</td><td>按能力与版本搜索</td></tr>
+<tr><td class="nar-cell-key">审核</td><td>每次发版人工过清单</td><td>签名清单一键比对差异</td></tr>
+<tr><td class="nar-cell-key">支持</td><td>靠截图复现问题</td><td>工单固定携带版本与平台</td></tr></tbody></table>
+</section>
+<section class="nar-section" aria-label="风险与依赖">
+<header class="sec-head">
+<span class="sec-no">04</span>
+<span class="sec-icon"><span class="sec-icon-emoji">⚠️</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4l10 3.8v7.4c0 6.8-4.4 10.8-10 12.8-5.6-2-10-6-10-12.8V7.8L16 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11.5 15.5l3.2 3.2 6-6.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+<div class="sec-titles">
+<p class="sec-eyebrow">依赖项</p>
+<h2>风险与依赖</h2>
+</div>
+</header>
+<aside class="nar-callout" style="--card-accent: var(--t-accent-6);">
+<p class="nar-callout-text">签名服务须早于市场切换两周上线。若密钥管理集成延期，R4 回退为哈希固化方案，发布日期不变。</p>
+</aside>
+</section>
+<section class="nar-section" aria-label="完成的定义">
+<header class="sec-head">
+<span class="sec-no">05</span>
+<span class="sec-icon"><span class="sec-icon-emoji">✅</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+<div class="sec-titles">
+<p class="sec-eyebrow">验收标准</p>
+<h2>完成的定义</h2>
+</div>
+</header>
+<ul class="nar-checks">
+<li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>新作者不出向导即可发布已签名插件</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>回滚在一分钟内恢复上一个已签名版本</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>搜索能按能力命中插件，而非只按名称</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>工单模板固定携带插件版本与平台</span></li>
+</ul>
+</section>
+<section class="nar-section" aria-label="本次不做的事">
+<header class="sec-head">
+<span class="sec-no">06</span>
+<span class="sec-icon"><span class="sec-icon-emoji">🚫</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="14.5" width="18" height="12.5" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 14.5V10a5 5 0 0 1 10 0v4.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="16" cy="20.5" r="1.8" fill="currentColor"/></svg></span></span>
+<div class="sec-titles">
+<p class="sec-eyebrow">边界</p>
+<h2>本次不做的事</h2>
+</div>
+</header>
+<ul class="nar-checks">
+<li class="nar-check"><span class="nar-check-mark nar-check-no">✕</span><span>商业化与收入分成</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-no">✕</span><span>跨市场互通</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-no">✕</span><span>移动端对齐</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-no">✕</span><span>迁移旧版 v1 清单</span></li>
+</ul>
+</section>
+</div>
+<footer class="footer">
+<div class="footer-label">决策归属</div>
+<p>R1–R3 归产品，R4–R5 归平台，R6 归增长。R4 进入开发前须通过安全评审。文中名称与数字均为合成示例数据。</p>
+</footer>
+</main>
+</body>
+</html>

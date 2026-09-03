@@ -2,7 +2,7 @@
 
 # Public example prompts
 
-9 examples covering 8/8 chart types and 7/7 visual themes.
+10 examples covering 9/9 chart types and 7/7 visual themes.
 All example content is synthetic. Every example ships in English and Chinese, rendered from one shared DOM.
 
 | Example | Chart | Theme | Files |
@@ -16,6 +16,7 @@ All example content is synthetic. Every example ships in English and Chinese, re
 | Community conference preparation plan | Gantt | `paper` | [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-paper.png) |
 | A fourteen-person product studio | Org chart | `warm` | [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png) |
 | Landing page to activation | Funnel | `neon` | [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-neon.png) |
+| Plugin marketplace revamp brief | Narrative brief | `warm` | [HTML](marketplace-prd-en.html) · [PNG](../assets/gallery/marketplace-prd-en-warm.png) |
 
 ## From idea to production
 
@@ -106,3 +107,13 @@ Output: [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm
 A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.
 
 Output: [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-neon.png)
+
+## Plugin marketplace revamp brief
+
+`narrative` × `warm` · rendered at 1120px
+
+> 把我们这次插件市场改版的需求文档做成一张图文版说明图:先给结论(六项决策),然后是发布管线四步、对谁改变了什么的影响表、风险与依赖、验收标准和本次不做的事。用 warm 风格。
+
+A decision-first product brief rendered as one long-form page: six numbered decision cards, a four-step publishing pipeline, an impact table, a risk callout, and acceptance versus non-goal checklists.
+
+Output: [HTML](marketplace-prd-en.html) · [PNG](../assets/gallery/marketplace-prd-en-warm.png)

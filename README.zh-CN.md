@@ -30,7 +30,7 @@
 
 大多数绘图工具要你动手画,这个只要你把事情说清楚。你把一份计划、一段规格、一次会议记录或一组数字贴进去;你的 agent 选择合适的图表类型,保持你给出的事实不变,交付一张能直接粘贴的图——图的底层是一份可以改样式、可以留档的自包含 HTML 文档。Carbon 和 ray.so 为代码片段做这件事,这个技能为任何结构化文字做这件事。需要图片时,它会用你本机已有的浏览器渲染一张裁切紧凑的 PNG。
 
-- **8 种图表** — 流程图、对比、时间线、架构图、KPI 看板、甘特图、组织架构、漏斗
+- **9 种图表** — 流程图、对比、时间线、架构图、KPI 看板、甘特图、组织架构、漏斗、叙事长图
 - **7 套视觉风格** — warm、dark、minimal、editorial、neon、paper、glass
 - **一张图能直接粘贴,一份文档能留下来** — 交付物是一份可编辑的 HTML 文件;说一句“同时导出 PNG”或传 `--png`,就能拿到图本身
 - **质量是量出来的,不是赌出来的** — 基于浏览器的版面质检既是工作流的必经步骤,也是每个已发布示例的 CI 门禁
@@ -70,7 +70,7 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 | **甘特图** · `paper`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-zh-paper.png" width="400" alt="paper 风格的八周会议筹备甘特图"><br>[Prompt 与 HTML](./skills/text2html2png/examples/launch-plan-zh.html) | **KPI 看板** · `glass`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-zh-glass.png" width="400" alt="glass 风格的客服周报看板"><br>[Prompt 与 HTML](./skills/text2html2png/examples/support-snapshot-zh.html) |
 | **组织架构** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org-zh-warm.png" width="400" alt="warm 风格的 14 人产品工作室组织架构"><br>[Prompt 与 HTML](./skills/text2html2png/examples/studio-org-zh.html) | **漏斗** · `neon`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-zh-neon.png" width="400" alt="neon 风格的五阶段注册漏斗"><br>[Prompt 与 HTML](./skills/text2html2png/examples/signup-funnel-zh.html) |
 
-另外还有:[warm 发布流程图](./skills/text2html2png/examples/release-flow-zh.html)、[editorial 路线图时间线](./skills/text2html2png/examples/library-roadmap-zh.html)、[minimal 方案对比表](./skills/text2html2png/examples/plan-comparison-zh.html),以及两张 dark 架构图 —— [服务拓扑](./skills/text2html2png/examples/service-architecture-zh.html) 和 [技能自身的流水线](./skills/text2html2png/examples/local-first-pipeline-zh.html)。每个示例都同时提供英文版;所有示例数据均为合成数据,见[素材来源说明](./ASSET_PROVENANCE.md)。
+另外还有:[warm 发布流程图](./skills/text2html2png/examples/release-flow-zh.html)、[editorial 路线图时间线](./skills/text2html2png/examples/library-roadmap-zh.html)、[minimal 方案对比表](./skills/text2html2png/examples/plan-comparison-zh.html),两张 dark 架构图 —— [服务拓扑](./skills/text2html2png/examples/service-architecture-zh.html) 和 [技能自身的流水线](./skills/text2html2png/examples/local-first-pipeline-zh.html),以及把整份产品说明排成一页的 [warm 叙事长图](./skills/text2html2png/examples/marketplace-prd-zh.html)。每个示例都同时提供英文版;所有示例数据均为合成数据,见[素材来源说明](./ASSET_PROVENANCE.md)。
 
 ## 图表类型
 
@@ -84,8 +84,9 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 | 甘特图 | 带日期或工期的任务 |
 | 组织架构 | 汇报关系与分类层级 |
 | 漏斗 | 你提供的各阶段量级与转化 |
+| 叙事长图 | 决策先行的图文说明:PRD、方案、复盘 |
 
-任意图表都可以搭配任意风格。统一的 style token contract 在 CI 中校验 7 套风格必须定义同样的 19 个 token,所以「甘特图 + neon」是被支持的请求,而不是碰运气。56 种组合中有 9 种已作为渲染示例发布,其余由 contract 保证兼容,但尚未纳入视觉回归。
+任意图表都可以搭配任意风格。统一的 style token contract 在 CI 中校验 7 套风格必须定义同样的 19 个 token,所以「甘特图 + neon」是被支持的请求,而不是碰运气。63 种组合中有 10 种已作为渲染示例发布,其余由 contract 保证兼容,但尚未纳入视觉回归。
 
 ## 输出为什么稳定
 
@@ -113,7 +114,7 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 | `ARIA_HIDDEN_TEXT` | warning | 可见但屏幕阅读器永远读不到的文字 |
 | `EXTREME_ASPECT_RATIO` | warning | 画布过宽或过高,难以阅读 |
 
-每条结论都会给出具体元素、量测证据和一条明确的修法,让 agent 去改文档而不是瞎猜。`npm run check:layout` 以 `--strict` 模式跑完全部 9 个已发布示例,warning 与 error 一样会让构建失败。
+每条结论都会给出具体元素、量测证据和一条明确的修法,让 agent 去改文档而不是瞎猜。`npm run check:layout` 以 `--strict` 模式跑完全部 10 个已发布示例,warning 与 error 一样会让构建失败。
 
 这不是摆设:这项检查在本仓库原本已认为完工的示例里查出了真实缺陷 —— 一个有 9px 的文字,一个白字只有 3.2:1 对比度,还有一个图例被 aria-hidden 挡住了屏幕阅读器;它曾经存在的漏报(文字被压住、文字隐形)现在都有测试 fixture 覆盖。
 
@@ -158,8 +159,8 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 ├── docs/                         已发布的案例画廊
 ├── skills/text2html2png/
 │   ├── SKILL.md                  agent 读取的技能契约
-│   ├── references/               8 份图表指南、7 套风格系统、共享契约
-│   ├── examples/                 9 个双语示例:每种语言一份 HTML + fixture
+│   ├── references/               9 份图表指南、7 套风格系统、共享契约
+│   ├── examples/                 10 个双语示例:每种语言一份 HTML + fixture
 │   ├── scripts/                  渲染、校验、质检、批处理工具
 │   └── tests/                    含真实 Chrome 冒烟测试
 └── .github/                      CI、issue 与 PR 模板

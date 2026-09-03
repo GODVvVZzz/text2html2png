@@ -26,7 +26,7 @@ export const pipelineDir = path.join(scriptDir, "pipeline");
 
 const CHARTS = new Set([
   "flowchart", "comparison", "timeline", "architecture",
-  "dashboard", "gantt", "org-chart", "funnel",
+  "dashboard", "gantt", "org-chart", "funnel", "narrative",
 ]);
 const LOCALES = ["zh", "en"];
 const REQUIRED_META_FIELDS = ["id", "title", "chart", "theme", "locales", "summary", "prompt", "width"];

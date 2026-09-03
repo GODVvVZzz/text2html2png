@@ -14,6 +14,8 @@ All notable changes to the public project will be documented here.
 - Animated README strip built from six real committed renderings.
 - `PRIVACY.md` and a dark logo variant, both previously referenced by the plugin manifest but missing.
 - Theme/chart orthogonality proof: one comparison structure, 45 identical theme tokens, Chinese and English fixtures, atomic restyling, and strict 2×7 visual validation.
+- A ninth chart type, the `narrative` brief: one page that lays a whole document out — decisions as accent cards, a process strip, an impact table, a risk callout, and ✓/✕ acceptance lists. Ships with a bilingual `marketplace-prd` example, bringing coverage to 10 published examples across all 9 chart types and 63 chart×theme pairings.
+- An emoji icon channel in the warm, glass, neon, and dark themes, mutually exclusive with the inline-SVG slots so a diagram shows exactly one icon language; empty emoji slots collapse instead of leaving a gap.
 
 ### Changed
 

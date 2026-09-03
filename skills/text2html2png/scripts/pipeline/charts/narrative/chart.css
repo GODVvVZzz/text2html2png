@@ -1,0 +1,304 @@
+/* Narrative chart: a decision-first long-form page of numbered sections.
+   Every color, radius, border, and typeface comes from the shared theme
+   tokens, so the layout restyles atomically across all seven themes. */
+
+.nar-sections {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.nar-section {
+  padding: 16px 20px 18px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-radius: var(--t-card-radius);
+  background: var(--t-surface);
+  box-shadow: var(--t-card-shadow);
+}
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.sec-no {
+  color: var(--t-accent-1);
+  font-family: var(--t-font-data);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sec-icon {
+  display: flex;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.sec-icon-emoji {
+  display: var(--t-emoji-display);
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.sec-icon-svg {
+  display: var(--t-svg-display);
+  width: 22px;
+  height: 22px;
+  color: var(--t-accent-1);
+}
+
+.sec-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sec-titles {
+  min-width: 0;
+}
+
+.sec-eyebrow {
+  margin: 0;
+  color: var(--t-text-secondary);
+  font-family: var(--t-font-data);
+  font-size: var(--t-label-size);
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-transform: var(--t-label-transform);
+}
+
+.sec-head h2 {
+  margin: 2px 0 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 17px;
+  font-weight: var(--t-title-weight);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+/* Numbered decision cards */
+.nar-cards {
+  display: grid;
+  grid-template-columns: repeat(var(--nar-cols, 3), minmax(0, 1fr));
+  gap: 11px;
+}
+
+.nar-card {
+  padding: 12px 14px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-left: 3px solid var(--card-accent);
+  border-radius: var(--t-small-radius);
+  background: color-mix(in srgb, var(--card-accent) 6%, var(--t-surface-strong));
+}
+
+.nar-card-no {
+  margin: 0;
+  color: var(--card-accent);
+  font-family: var(--t-font-data);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.nar-card-title {
+  margin: 4px 0 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.nar-card-text {
+  margin: 6px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* Horizontal step strip with arrow connectors */
+.nar-steps {
+  display: flex;
+  align-items: stretch;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nar-step {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-top: 3px solid var(--t-accent-2);
+  border-radius: var(--t-small-radius);
+  background: var(--t-surface-strong);
+}
+
+.nar-step + .nar-step::before {
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  color: var(--t-text-secondary);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  content: "\2192";
+  transform: translateY(-50%);
+}
+
+.nar-step-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nar-step-icon .sec-icon-emoji {
+  display: var(--t-emoji-display);
+  font-size: 18px;
+}
+
+.nar-step-icon .sec-icon-svg {
+  display: var(--t-svg-display);
+  width: 20px;
+  height: 20px;
+  color: var(--t-accent-2);
+}
+
+.nar-step-icon .sec-icon-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nar-step-label {
+  margin: 7px 0 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.nar-step-text {
+  margin: 4px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* Comparison table */
+.nar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nar-table th {
+  padding: 7px 10px;
+  border-bottom: 2px solid var(--t-border);
+  color: var(--t-text-secondary);
+  font-family: var(--t-font-data);
+  font-size: 11.5px;
+  font-weight: var(--t-label-weight);
+  letter-spacing: var(--t-label-tracking);
+  text-align: left;
+  text-transform: var(--t-label-transform);
+}
+
+.nar-table td {
+  padding: 9px 10px;
+  border-bottom: var(--t-border-width) var(--t-border-style) var(--t-border);
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.45;
+  vertical-align: top;
+}
+
+.nar-table tr:last-child td {
+  border-bottom: none;
+}
+
+.nar-cell-key {
+  color: var(--t-text);
+  font-weight: 700;
+}
+
+/* Callout banner */
+.nar-callout {
+  display: flex;
+  padding: 12px 16px;
+  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  border-left: 3px solid var(--card-accent);
+  border-radius: var(--t-small-radius);
+  background: color-mix(in srgb, var(--card-accent) 8%, var(--t-surface-strong));
+}
+
+.nar-callout-title {
+  margin: 0;
+  color: var(--t-text);
+  font-family: var(--t-font-display);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.nar-callout-text {
+  margin: 5px 0 0;
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+/* Acceptance checklist */
+.nar-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nar-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--t-text-secondary);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.nar-check-mark {
+  display: flex;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.nar-check-yes {
+  color: var(--t-accent-3);
+}
+
+.nar-check-yes svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nar-check-no {
+  color: var(--t-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17px;
+}

@@ -25,7 +25,7 @@ const BLOB_BASE = `https://github.com/${REPO_SLUG}/blob/main`;
 
 const CHART_ORDER = [
   "flowchart", "comparison", "timeline", "architecture",
-  "dashboard", "gantt", "org-chart", "funnel",
+  "dashboard", "gantt", "org-chart", "funnel", "narrative",
 ];
 
 const CHART_LABELS = {
@@ -37,6 +37,7 @@ const CHART_LABELS = {
   gantt: "Gantt",
   "org-chart": "Org chart",
   funnel: "Funnel",
+  narrative: "Narrative brief",
 };
 
 function escapeHtml(value) {
@@ -84,7 +85,7 @@ function card(example) {
 
 function page(examples, coverage) {
   const sorted = [...examples].sort((a, b) => chartRank(a.chart) - chartRank(b.chart) || a.id.localeCompare(b.id));
-  const charts = 8 - coverage.missingCharts.length;
+  const charts = CHART_ORDER.length - coverage.missingCharts.length;
   const styles = 7 - coverage.missingThemes.length;
 
   return `<!doctype html>
@@ -255,7 +256,7 @@ function page(examples, coverage) {
     <p class="lede">These are real outputs of the skill, rendered locally in Chrome from the HTML committed next to them. Every figure is synthetic: no customer, employee, or company data appears anywhere.</p>
     <ul class="facts">
       <li>${examples.length} published examples</li>
-      <li>${charts}/8 chart types</li>
+      <li>${charts}/${CHART_ORDER.length} chart types</li>
       <li>${styles}/7 visual themes</li>
       <li>Layout-audited in CI</li>
     </ul>
@@ -299,7 +300,7 @@ node scripts/build-gallery.mjs   # rebuilds this page and the images on it</pre>
 
 function promptsMarkdown(examples, coverage) {
   const sorted = [...examples].sort((a, b) => chartRank(a.chart) - chartRank(b.chart) || a.id.localeCompare(b.id));
-  const charts = 8 - coverage.missingCharts.length;
+  const charts = CHART_ORDER.length - coverage.missingCharts.length;
   const styles = 7 - coverage.missingThemes.length;
 
   const lines = [
@@ -307,7 +308,7 @@ function promptsMarkdown(examples, coverage) {
     "",
     "# Public example prompts",
     "",
-    `${examples.length} examples covering ${charts}/8 chart types and ${styles}/7 visual themes.`,
+    `${examples.length} examples covering ${charts}/${CHART_ORDER.length} chart types and ${styles}/7 visual themes.`,
     "All example content is synthetic. Every example ships in English and Chinese, rendered from one shared DOM.",
     "",
     "| Example | Chart | Theme | Files |",

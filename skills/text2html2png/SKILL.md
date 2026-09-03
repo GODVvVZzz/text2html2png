@@ -1,6 +1,6 @@
 ---
 name: text2html2png
-description: Turn structured prose into polished, self-contained HTML diagrams, with an optional high-resolution PNG export only when the user requests an image. Use for static flowcharts, comparisons, timelines, architecture maps, KPI dashboards, Gantt charts, org charts, and funnels, including Chinese requests such as 流程图、架构图、甘特图、组织架构图 and 漏斗图. Do not use for statistical or scientific plots, geographic maps, slide decks, editable Mermaid/draw.io/SVG deliverables, or edits to existing images.
+description: Turn structured prose into polished, self-contained HTML diagrams, with an optional high-resolution PNG export only when the user requests an image. Use for static flowcharts, comparisons, timelines, architecture maps, KPI dashboards, Gantt charts, org charts, funnels, and narrative briefs, including Chinese requests such as 流程图、架构图、甘特图、组织架构图、漏斗图 and 图文说明. Do not use for statistical or scientific plots, geographic maps, slide decks, editable Mermaid/draw.io/SVG deliverables, or edits to existing images.
 metadata:
   short-description: Text to polished HTML diagrams; PNG on request
 ---
@@ -11,7 +11,7 @@ Create an editable, self-contained HTML diagram by default. Render a tightly cro
 
 Do not generate a PNG merely because this skill is named `text2html2png`, or because the user generally asks to “draw a diagram.” HTML is the default deliverable.
 
-The skill supports eight diagram types and seven visual styles. Prefer a complete first result over a style questionnaire: infer a sensible chart and style unless the user specifies them.
+The skill supports nine diagram types and seven visual styles. Prefer a complete first result over a style questionnaire: infer a sensible chart and style unless the user specifies them.
 
 ## Inputs
 
@@ -20,7 +20,7 @@ Honor explicit options when present:
 | Option | Values |
 |---|---|
 | `--style` | `warm`, `dark`, `minimal`, `editorial`, `neon`, `paper`, `glass` |
-| `--chart` | `auto`, `flowchart`, `comparison`, `timeline`, `architecture`, `dashboard`, `gantt`, `org-chart`, `funnel` |
+| `--chart` | `auto`, `flowchart`, `comparison`, `timeline`, `architecture`, `dashboard`, `gantt`, `org-chart`, `funnel`, `narrative` |
 | `--output` | Output directory |
 | `--png` | Also export a PNG; disabled unless explicitly requested |
 | `--scale` | PNG only: `1`–`4`; use `4` for print-ready output when memory permits |
@@ -171,4 +171,4 @@ Optional configuration may be read from `.text2html2png/config.json` in the proj
 - [Rendering and safety contract](references/rendering-contract.md)
 - [Design philosophy](references/design-philosophy.md)
 - `references/styles/` — seven visual systems
-- `references/charts/` — eight diagram layouts
+- `references/charts/` — nine diagram layouts
