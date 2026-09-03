@@ -49,4 +49,6 @@
   --t-emoji-display: inline-flex;
   --t-svg-display: none;
   --t-lede-style: normal;
+  --t-lede-font: var(--t-font-body);
+  --t-lede-size: var(--t-body-size);
 }

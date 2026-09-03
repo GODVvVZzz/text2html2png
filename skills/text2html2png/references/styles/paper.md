@@ -26,30 +26,46 @@ Annotations: `'Caveat', cursive` — weight 400
 
 ```css
 :root {
+  /* Base — ruled-notebook paper: horizontal pencil-grey lines at a 27px
+     pitch, showing through the translucent note cards. */
   --bg: #f5f0e6;
-  --card-bg: #fffdf7;
-  --text-primary: #3a3228;
-  --text-secondary: #6a5e50;
-  --text-muted: #a09480;
-  --border-base: #d0c4aa;
-  --border-sketch: #8a7e68;
-  --accent-red: #c0392b;
-  --accent-blue: #2e6da4;
-  --accent-green: #27864a;
-  --accent-orange: #d4820a;
+  --bg-texture: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(138, 126, 104, 0.14) 27px, rgba(138, 126, 104, 0.14) 28px);
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --text-primary: #332b22;
+  --text-secondary: #625747;
+  --text-muted: #7d6f5c;
+  --border-base: #c4b896;
+  --border-style: dashed;   /* every edge is a hand-ruled dashed line */
+  --border-width: 2px;
+  --node-border: var(--border-base);
+  --arrow-color: #c4b896;
+  --accent: #2d5a87;
+  --accent-red: #8b3a3a;
+  --accent-blue: #2d5a87;
+  --accent-green: #2f7650;
+  --accent-orange: #96560f;
   --pencil-gray: #8a7e68;
-  --accent: var(--accent-blue);
-  --arrow-color: var(--pencil-gray);
-  --s1: #2e6da4;
-  --s2: #27864a;
-  --s3: #d4820a;
-  --s4: #c0392b;
-  --s5: #7b5aa6;
-  --s6: #8a6a3e;
-  --s7: #3f7c78;
-  --success: #27864a;
-  --minor: #d4820a;
-  --critical: #c0392b;
+  --banner-bg: #fff9e6;
+  --rule-color: #c4b896;
+
+  /* Step accent colors (cycle through).
+     Blue and red are the red-pen/navy anchors of the palette; orange sits
+     several steps darker than the classic value because accents double as
+     white-text backgrounds (gantt bars) and these are the brightest values
+     that still pass the 4.5:1 contrast gate. */
+  --s1: #2d5a87;   /* notebook blue */
+  --s2: #2f7650;   /* marker green */
+  --s3: #96560f;   /* burnt ochre */
+  --s4: #8b3a3a;   /* red pen */
+  --s5: #6b5685;   /* pencil purple */
+  --s6: #765633;   /* walnut brown */
+  --s7: #376f6a;   /* ink teal */
+
+  /* Semantic */
+  --critical: #8b3a3a;
+  --major: #96560f;
+  --minor: #765633;
+  --success: #2f7650;
 }
 ```
 
@@ -101,8 +117,8 @@ body {
 ```css
 .card {
   background: var(--card-bg);
-  border: 1.5px dashed var(--border-base);
-  border-radius: 4px;
+  border: 2px dashed var(--border-base);
+  border-radius: 6px;
   padding: 14px 16px;
   position: relative;
 }
@@ -168,8 +184,8 @@ body {
 ### Banner
 ```css
 .banner {
-  background: var(--card-bg);
-  border: 2px solid var(--border-sketch);
+  background: var(--banner-bg);
+  border: 2px dashed var(--border-base);
   border-radius: 4px;
   padding: 14px 24px;
   text-align: center;
@@ -177,6 +193,7 @@ body {
   font-family: 'Caveat', cursive;
   font-size: 18px;
 }
+.banner em { color: var(--accent-red); font-style: normal; font-weight: 700; }
 ```
 
 ---
@@ -189,7 +206,7 @@ body {
 - **Pencil-style arrows**: Slightly curved SVG paths, round caps (not geometric)
 - **Warm off-white cards**: `#fffdf7` on `#f5f0e6` background
 - **Red annotations**: Handwritten red notes for emphasis (like a teacher's markup)
-- **Very small border-radius**: 2-4px (notebooks don't have rounded corners)
+- **Very small border-radius**: 4-6px (notebooks don't have rounded corners)
 - **Subtle rotations**: 0.3-2deg rotation on annotations and sketch cards for organic feel
 
 ---
