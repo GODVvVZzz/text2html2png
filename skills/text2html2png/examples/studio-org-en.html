@@ -53,8 +53,8 @@
   --t-backdrop: none;
   --t-leader-style: dotted;
   --t-leader-width: 1.5px;
-  --t-emoji-display: none;
-  --t-svg-display: inline-flex;
+  --t-emoji-display: inline-flex;
+  --t-svg-display: none;
 }
   </style>
   <style id="text2html2png-chart" data-chart="org-chart">
@@ -180,6 +180,12 @@ h1 {
   justify-content: center;
   font-size: 19px;
   line-height: 1;
+}
+
+/* Emoji slots render nothing until a fixture supplies a glyph, so an
+   emoji-on theme never leaves an empty flex gap behind. */
+[class$="-emoji"]:empty {
+  display: none;
 }
 
 .metric-icon-svg {

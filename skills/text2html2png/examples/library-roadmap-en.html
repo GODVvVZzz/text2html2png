@@ -182,6 +182,12 @@ h1 {
   line-height: 1;
 }
 
+/* Emoji slots render nothing until a fixture supplies a glyph, so an
+   emoji-on theme never leaves an empty flex gap behind. */
+[class$="-emoji"]:empty {
+  display: none;
+}
+
 .metric-icon-svg {
   display: var(--t-svg-display);
   width: 19px;
