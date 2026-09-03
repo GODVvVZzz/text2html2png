@@ -1,0 +1,174 @@
+{
+  "id": "one-token-contract",
+  "locale": "zh-CN",
+  "eyebrow": "工程说明 · 主题解耦实验",
+  "title": "主题与图表的解耦证明",
+  "subtitle": "同一份 DOM，换一组令牌就换一套视觉。先给结论，再看流程、影响面与验收标准。",
+  "sections": [
+    {
+      "kind": "cards",
+      "eyebrow": "结论先行",
+      "title": "本次实验的四项决策",
+      "emoji": "🎨",
+      "icon": "layers",
+      "items": [
+        {
+          "no": "01 · D1",
+          "title": "令牌即皮肤",
+          "text": "主题只允许改 --t-* 变量，图表 CSS 出现具体色值即构建失败。",
+          "accent": 1
+        },
+        {
+          "no": "02 · D2",
+          "title": "结构即契约",
+          "text": "九种图表共享同一套 DOM 指纹，跨主题零漂移。",
+          "accent": 2
+        },
+        {
+          "no": "03 · D3",
+          "title": "双语同构",
+          "text": "中英 fixture 共享 DOM，只有文案不同。",
+          "accent": 3
+        },
+        {
+          "no": "04 · D4",
+          "title": "原子重皮",
+          "text": "restyle 只替换主题块，其余字节保持不变。",
+          "accent": 4
+        }
+      ]
+    },
+    {
+      "kind": "steps",
+      "eyebrow": "实验流程",
+      "title": "证明怎么跑完四步",
+      "emoji": "⚙️",
+      "icon": "trend-up",
+      "items": [
+        {
+          "label": "抽结构",
+          "text": "把图表 DOM 与主题块拆开。",
+          "emoji": "📐",
+          "icon": "package"
+        },
+        {
+          "label": "定令牌",
+          "text": "把样式收敛成一份同名令牌契约。",
+          "emoji": "🎛️",
+          "icon": "code"
+        },
+        {
+          "label": "换主题",
+          "text": "同一 DOM 逐个套用五套主题。",
+          "emoji": "🎨",
+          "icon": "layers"
+        },
+        {
+          "label": "验指纹",
+          "text": "指纹不变即通过，反之一票否决。",
+          "emoji": "🔍",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "kind": "table",
+      "eyebrow": "影响面",
+      "title": "对谁改变了什么",
+      "emoji": "🧾",
+      "icon": "chart",
+      "columns": [
+        "角色",
+        "原做法",
+        "现在"
+      ],
+      "rows": [
+        {
+          "cells": [
+            "图表作者",
+            "每套主题手改一份 CSS",
+            "只写一份结构化标记"
+          ]
+        },
+        {
+          "cells": [
+            "主题作者",
+            "改色值要动每个图表",
+            "只改一份 --t-* 令牌表"
+          ]
+        },
+        {
+          "cells": [
+            "评审者",
+            "逐图肉眼比对",
+            "指纹不同直接报错"
+          ]
+        },
+        {
+          "cells": [
+            "维护者",
+            "新主题要改九处",
+            "新主题只写一份令牌"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "callout",
+      "eyebrow": "依赖项",
+      "title": "风险与依赖",
+      "tone": "warn",
+      "emoji": "⚠️",
+      "icon": "shield",
+      "text": "令牌契约是唯一边界。对比实验只覆盖静态排版，不覆盖动画与响应式行为。"
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "验收标准",
+      "title": "完成的定义",
+      "emoji": "✅",
+      "icon": "check",
+      "items": [
+        {
+          "ok": true,
+          "text": "五套主题通过同一份令牌契约校验"
+        },
+        {
+          "ok": true,
+          "text": "九种图表在任意主题下 DOM 指纹一致"
+        },
+        {
+          "ok": true,
+          "text": "中英双语文档的结构指纹完全相同"
+        },
+        {
+          "ok": true,
+          "text": "重皮后的文档除主题块外逐字节相同"
+        }
+      ]
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "边界",
+      "title": "实验不做的事",
+      "emoji": "🚫",
+      "icon": "lock",
+      "items": [
+        {
+          "ok": false,
+          "text": "动效与过渡"
+        },
+        {
+          "ok": false,
+          "text": "响应式断点"
+        },
+        {
+          "ok": false,
+          "text": "远程字体加载"
+        }
+      ]
+    }
+  ],
+  "footerLabel": "证据归属",
+  "footer": "指纹校验与令牌契约由 scripts/validate-orthogonality.mjs 强制执行，构建脚本位于 scripts/build.mjs。文中名称与数字均为合成示例数据。"
+}

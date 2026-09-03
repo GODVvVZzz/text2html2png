@@ -13,7 +13,7 @@ All notable changes to the public project will be documented here.
 - 1280×640 social preview card, rendered by the skill's own renderer from committed HTML.
 - Animated README strip built from six real committed renderings.
 - `PRIVACY.md` and a dark logo variant, both previously referenced by the plugin manifest but missing.
-- Theme/chart orthogonality proof: one comparison structure, 45 identical theme tokens, Chinese and English fixtures, atomic restyling, and strict 2×7 visual validation.
+- Theme/chart orthogonality proof: one identical token contract (52 tokens) across five themes, bilingual fixtures for all nine chart types, atomic restyling, and fingerprint validation enforced in CI.
 - A ninth chart type, the `narrative` brief: one page that lays a whole document out — decisions as accent cards, a process strip, an impact table, a risk callout, and ✓/✕ acceptance lists. Ships with a bilingual `cafe-membership` example, bringing coverage to 10 published examples across all 9 chart types and 45 chart×theme pairings.
 - An emoji icon channel in the warm and glass themes, mutually exclusive with the inline-SVG slots so a diagram shows exactly one icon language; empty emoji slots collapse instead of leaving a gap.
 - Embedded brand typefaces for every theme: warm is set in Playfair Display with Noto Serif SC, minimal in IBM Plex Sans/Mono, editorial in Cormorant Garamond, Lora, and Libre Franklin, paper in Caveat and Nunito, and glass in Outfit — with Noto Sans SC carrying CJK body copy throughout. All faces ship as OFL-licensed `@fontsource` npm dependencies; the pipeline subsets them to the chart's actual copy and inlines them as data-URI `@font-face`, so rendering stays offline and produces identical output on any machine.
@@ -37,6 +37,7 @@ All notable changes to the public project will be documented here.
 ### Fixed
 
 - `package-lock.json` pointed every `@fontsource` tarball at a private registry mirror unreachable from public CI, so installs stalled for minutes and npm died with "Exit handler never called!"; the lockfile now resolves everything from the public npm registry.
+- The theme/chart orthogonality experiment was missing the `narrative` fixture and still asserted seven themes and 48 tokens after `dark` and `neon` were removed; it now validates five themes, 52 tokens, and all nine chart types.
 - Metric cards no longer receive a position-driven highlight on the first card; emphasis is left to the theme and content instead of card order.
 - Example copy terminology unified where one concept carried several words (plan-comparison criteria wording, roadmap scale-and-ticks title, release-flow step title), and the KPI row re-rendered with uniform card emphasis.
 - The layout audit passed two classes of genuinely broken output: text buried under an opaque element, and text whose colour matched its background. Added `TEXT_OCCLUDED` (hit-tests each text box against what is drawn on top) and `TEXT_INVISIBLE` (contrast below 1.6:1 is an error, not a warning).

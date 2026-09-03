@@ -1,0 +1,174 @@
+{
+  "id": "one-token-contract",
+  "locale": "en-US",
+  "eyebrow": "Engineering note",
+  "title": "Theme and chart, decoupled",
+  "subtitle": "One DOM, one token swap per theme. Conclusions first, then process, impact, and acceptance.",
+  "sections": [
+    {
+      "kind": "cards",
+      "eyebrow": "Conclusions first",
+      "title": "Four decisions in this experiment",
+      "emoji": "🎨",
+      "icon": "layers",
+      "items": [
+        {
+          "no": "01 · D1",
+          "title": "Tokens are the skin",
+          "text": "Themes may only override --t-* variables; a literal color fails the build.",
+          "accent": 1
+        },
+        {
+          "no": "02 · D2",
+          "title": "Structure is the contract",
+          "text": "Nine chart layouts share one DOM fingerprint across every theme.",
+          "accent": 2
+        },
+        {
+          "no": "03 · D3",
+          "title": "Bilingual by construction",
+          "text": "Chinese and English fixtures share the DOM; only the copy differs.",
+          "accent": 3
+        },
+        {
+          "no": "04 · D4",
+          "title": "Atomic restyling",
+          "text": "restyle swaps the theme block and leaves every other byte untouched.",
+          "accent": 4
+        }
+      ]
+    },
+    {
+      "kind": "steps",
+      "eyebrow": "Experiment flow",
+      "title": "How the proof runs, four steps",
+      "emoji": "⚙️",
+      "icon": "trend-up",
+      "items": [
+        {
+          "label": "Extract",
+          "text": "Split the chart DOM from its theme block.",
+          "emoji": "📐",
+          "icon": "package"
+        },
+        {
+          "label": "Tokens",
+          "text": "Collapse styling into one named contract.",
+          "emoji": "🎛️",
+          "icon": "code"
+        },
+        {
+          "label": "Restyle",
+          "text": "Apply each of the five themes to one DOM.",
+          "emoji": "🎨",
+          "icon": "layers"
+        },
+        {
+          "label": "Verify",
+          "text": "Identical fingerprints pass; any drift fails.",
+          "emoji": "🔍",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "kind": "table",
+      "eyebrow": "Impact",
+      "title": "Who gets what change",
+      "emoji": "🧾",
+      "icon": "chart",
+      "columns": [
+        "Role",
+        "Before",
+        "Now"
+      ],
+      "rows": [
+        {
+          "cells": [
+            "Chart author",
+            "One CSS variant per theme",
+            "One structured markup file"
+          ]
+        },
+        {
+          "cells": [
+            "Theme author",
+            "Color edits across charts",
+            "One --t-* token table"
+          ]
+        },
+        {
+          "cells": [
+            "Reviewer",
+            "Eyeballing each render",
+            "A fingerprint diff fails the build"
+          ]
+        },
+        {
+          "cells": [
+            "Maintainer",
+            "A new theme touches nine spots",
+            "A new theme is one token file"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "callout",
+      "eyebrow": "Dependency",
+      "title": "Risk and dependency",
+      "tone": "warn",
+      "emoji": "⚠️",
+      "icon": "shield",
+      "text": "The token contract is the only boundary. The proof covers static layout only, not animation or responsive behavior."
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "Acceptance",
+      "title": "Definition of done",
+      "emoji": "✅",
+      "icon": "check",
+      "items": [
+        {
+          "ok": true,
+          "text": "Five themes pass one identical token contract"
+        },
+        {
+          "ok": true,
+          "text": "Nine charts keep one DOM fingerprint on any theme"
+        },
+        {
+          "ok": true,
+          "text": "Chinese and English documents share one structure fingerprint"
+        },
+        {
+          "ok": true,
+          "text": "A restyled file differs from its source only in the theme block"
+        }
+      ]
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "Boundary",
+      "title": "Out of scope",
+      "emoji": "🚫",
+      "icon": "lock",
+      "items": [
+        {
+          "ok": false,
+          "text": "Motion and transitions"
+        },
+        {
+          "ok": false,
+          "text": "Responsive breakpoints"
+        },
+        {
+          "ok": false,
+          "text": "Remote font loading"
+        }
+      ]
+    }
+  ],
+  "footerLabel": "Evidence",
+  "footer": "Fingerprint checks and the token contract are enforced by scripts/validate-orthogonality.mjs; builds live in scripts/build.mjs. All names and numbers are synthetic sample data."
+}

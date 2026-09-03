@@ -2,9 +2,11 @@
 
 Status: **PASS**
 
-This experiment validates one narrow architectural claim before the other seven chart types are migrated:
+This experiment validates the architectural claim the whole skill stands on:
 
-> A comparison chart can keep one semantic DOM and one structural CSS file while seven themes change only a canonical `:root` token block.
+> Any chart can keep one semantic DOM and one structural CSS file while five themes change only a canonical `:root` token block.
+
+It started as a narrow proof on the comparison chart and now covers every chart type: each chart ships a bilingual fixture pair in `chart/<id>/`, and every chart × theme × locale document is built and fingerprint-checked on CI.
 
 It is a development proof, not a change to the default user output. The skill now produces HTML by default; the PNGs generated here exist only for visual theme review.
 
@@ -17,39 +19,38 @@ The fixture compares the skill's two output modes:
 
 The Chinese fixture is the primary visual baseline. It restores the dense horizontal reading rhythm from the original design references: large data, a criteria rail, leader lines, equal comparison columns, and a compact conclusion band. The English fixture uses the identical DOM to test longer labels and prose.
 
-The seven themes are deliberately different visual languages:
+The five themes are deliberately different visual languages:
 
 | Theme | Direction |
 |---|---|
 | `warm` | warm archive folio |
-| `dark` | technical graphite |
 | `minimal` | Swiss-style ink grid |
 | `editorial` | journal folio |
-| `neon` | phosphor signal lab, without purple/pink AI gradients |
 | `paper` | functional field notebook; handwriting is limited to display text |
 | `glass` | optical proof sheet with cobalt, teal, and amber |
+
+Two development-only themes (`dark`, `neon`) were removed from the shipping skill; the proof now tracks the five that ship.
 
 ## Boundary
 
 - `themes/*.css` contains exactly one `:root` rule and no chart selectors.
-- `chart/comparison.css` owns layout and references theme values only through `var(--t-*)`.
+- Each `charts/<chart>/chart.css` in the skill pipeline owns layout and references theme values only through `var(--t-*)`.
 - Inline SVG uses `currentColor`; no literal SVG fills or strokes are allowed.
-- The DOM contains emoji and SVG alternatives. Theme tokens show emoji by default; strict cross-platform mode can show the SVG without changing structure.
+- The DOM contains emoji and SVG alternatives. `warm` and `glass` show emoji by default, the other themes show monochrome SVG, and the two channels are structurally equivalent.
 - Font families, radii, shadows, backdrop effects, and every literal colour belong to the theme.
 - Restyling atomically replaces only `<style id="text2html2png-theme">...</style>`.
 
-Every theme exposes the same **47 tokens**.
+Every theme exposes the same **52 tokens**.
 
 ## Proof results
 
-- 7/7 themes pass the identical token-set check.
+- 5/5 themes pass the identical token-set check (52 tokens).
 - Theme files contain no component selectors.
 - Structural CSS contains no literal colours.
-- Chinese variants share one non-theme source hash: `b4442715614d...`.
-- English variants share one non-theme source hash: `7221a7e3b50c...`.
-- Chinese and English variants share the same DOM structure fingerprint.
-- 14/14 generated HTML files pass the strict browser layout audit.
-- 14 development PNGs were rendered at 2× for human review.
+- All nine chart types ship bilingual fixtures; 90 documents (9 charts × 5 themes × 2 locales) build through the same pipeline.
+- Chinese and English variants of every chart share the same DOM structure fingerprint, and each chart keeps one non-theme source hash across themes.
+- CI runs the source validation, the fingerprint and restyle tests, and a full HTML build on every push.
+- The original comparison-only proof passed a strict browser layout audit (14/14 files, PNGs at 2×); the published gallery's 20 renderings pass the same strict audit on every build.
 - `restyle.mjs` changes only the canonical theme block and validates the result.
 
 The first audit caught English metric prose at 10.5px; it was raised to 12px. Human review then caught spaces disappearing around `<strong>` inside flex cells; the text is now wrapped as one inline flow. Both defects are covered by the final generated proof.
@@ -80,11 +81,11 @@ Restyle one generated HTML file:
 
 ```bash
 node experiments/theme-decoupling/scripts/restyle.mjs \
-  --html ../theme-decoupling-output/zh-warm.html \
-  --theme neon \
-  --out ../theme-decoupling-output/zh-restyled-neon.html
+  --html ../theme-decoupling-output/comparison-zh-warm.html \
+  --theme editorial \
+  --out ../theme-decoupling-output/comparison-zh-restyled-editorial.html
 ```
 
 ## Decision
 
-The narrow hypothesis is validated. The recommended next phase is to promote the theme token contract into the canonical skill, align `references/charts/comparison.md` with this single structure, then migrate the remaining chart types one at a time. Existing privacy, layout-audit, gallery, and CI systems remain reusable.
+The hypothesis is validated and promoted: the theme token contract now lives in the skill pipeline, every chart type ships through it, and CI enforces the token, fingerprint, and restyle invariants on every push. Existing privacy, layout-audit, gallery, and CI systems remain reusable.
