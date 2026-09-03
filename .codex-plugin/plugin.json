@@ -20,7 +20,7 @@
   "interface": {
     "displayName": "Text2HTML2PNG",
     "shortDescription": "Polished HTML diagrams with optional PNG export.",
-    "longDescription": "Create local-first flowcharts, comparisons, timelines, architecture maps, dashboards, Gantt charts, org charts, and funnels as editable HTML. Export a high-resolution PNG only when requested.",
+    "longDescription": "Create local-first flowcharts, comparisons, timelines, architecture maps, dashboards, Gantt charts, org charts, funnels, and narrative briefs as editable HTML. Export a high-resolution PNG only when requested.",
     "developerName": "GODVvVZzz",
     "category": "Productivity",
     "capabilities": [],

@@ -130,8 +130,9 @@ const STRUCTURAL_INLINE_VARS = [
   "--compare-count", "--criteria-count", "--matrix-rows", "--stat-count",
   "--panel-count", "--bar-pct", "--bar-start", "--bar-span", "--bar-width",
   "--period-count", "--leaf-count", "--node-start", "--node-span",
+  "--nar-cols",
 ];
-const ACCENT_INLINE_VARS = ["--tone", "--metric-accent", "--step-accent"];
+const ACCENT_INLINE_VARS = ["--tone", "--metric-accent", "--step-accent", "--card-accent"];
 
 export function validateMarkup(markup, label = "markup") {
   const failures = [];
