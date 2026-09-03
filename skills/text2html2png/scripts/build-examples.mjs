@@ -8,7 +8,6 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { buildThemeFontFaces, themeFontFamilies } from "./pipeline/font-embed.mjs";
 import {
   structureFingerprint,
   validateChartCss,
@@ -174,6 +173,9 @@ async function main() {
   }
 
   const generated = [];
+  // Imported lazily so manifest-only consumers (build-gallery) work in a
+  // checkout with no installed dependencies, which is how CI runs it.
+  const { buildThemeFontFaces, themeFontFamilies } = await import("./pipeline/font-embed.mjs");
   for (const example of selected) {
     const chart = await loadChart(example.chart);
     const fullChartCss = sources.sharedCss + "\n" + chart.chartCss;
