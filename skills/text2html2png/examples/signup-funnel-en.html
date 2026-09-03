@@ -94,6 +94,7 @@
   --t-text-secondary: #4d5570;
   --t-text-muted: #63697f;
   --t-border: rgba(255, 255, 255, 0.62);
+  --t-node-border: color-mix(in srgb, var(--tone) 60%, var(--t-border));
   --t-rule: rgba(30, 32, 48, 0.16);
   --t-head-rule-image: rgba(109, 40, 217, 0.3);
   --t-accent-1: #6d28d9;
@@ -133,6 +134,7 @@
   --t-leader-width: 1px;
   --t-emoji-display: inline-flex;
   --t-svg-display: none;
+  --t-lede-style: normal;
 }
   </style>
   <style id="text2html2png-chart" data-chart="funnel">
@@ -204,6 +206,7 @@ h1 {
   margin: 9px auto 0;
   color: var(--t-text-secondary);
   font-size: var(--t-body-size);
+  font-style: var(--t-lede-style);
   line-height: 1.55;
 }
 

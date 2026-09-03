@@ -115,6 +115,7 @@
   --t-text-secondary: #625747;
   --t-text-muted: #7d6f5c;
   --t-border: #b9aa8e;
+  --t-node-border: color-mix(in srgb, var(--tone) 60%, var(--t-border));
   --t-rule: #c6b79b;
   --t-head-rule-image: rgba(107, 91, 65, 0.45);
   --t-accent-1: #2d638f;
@@ -154,6 +155,7 @@
   --t-leader-width: 1px;
   --t-emoji-display: none;
   --t-svg-display: inline-flex;
+  --t-lede-style: normal;
 }
   </style>
   <style id="text2html2png-chart" data-chart="gantt">
@@ -225,6 +227,7 @@ h1 {
   margin: 9px auto 0;
   color: var(--t-text-secondary);
   font-size: var(--t-body-size);
+  font-style: var(--t-lede-style);
   line-height: 1.55;
 }
 

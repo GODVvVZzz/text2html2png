@@ -1,25 +1,26 @@
 :root {
-  --t-canvas: #f7f1e8;
+  --t-canvas: #f8f5f0;
   --t-canvas-image: none;
-  --t-surface: #fffaf2;
-  --t-surface-strong: #fffdf8;
-  --t-surface-soft: #efe5d8;
-  --t-text: #211916;
-  --t-text-secondary: #5f4b40;
-  --t-text-muted: #7d685b;
-  --t-border: #d4c4b2;
-  --t-rule: #ab9581;
-  --t-head-rule-image: #5f4b40;
-  --t-accent-1: #93472c;
-  --t-accent-2: #253b56;
+  --t-surface: #fffefb;
+  --t-surface-strong: #ffffff;
+  --t-surface-soft: #efe9df;
+  --t-text: #1c1714;
+  --t-text-secondary: #5a4e42;
+  --t-text-muted: #7f7062;
+  --t-border: #d8d0c4;
+  --t-node-border: var(--t-border);
+  --t-rule: #c8bca8;
+  --t-head-rule-image: #1c1714;
+  --t-accent-1: #a0522d;
+  --t-accent-2: #2c3e5a;
   --t-accent-3: #8f6811;
-  --t-accent-4: #5d6b45;
+  --t-accent-4: #2d5a3d;
   --t-accent-5: #7a3c4f;
   --t-accent-6: #37636a;
   --t-accent-7: #775438;
   --t-on-accent: #ffffff;
-  --t-banner-bg: #253b56;
-  --t-banner-text: #f7f1e8;
+  --t-banner-bg: #2c3e5a;
+  --t-banner-text: #f0ece4;
   --t-banner-accent: #e4bd62;
   --t-font-display: "Cormorant Garamond", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-body: "Lora", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
@@ -36,8 +37,8 @@
   --t-label-transform: uppercase;
   --t-data-size: 30px;
   --t-data-weight: 700;
-  --t-card-radius: 3px;
-  --t-small-radius: 1px;
+  --t-card-radius: 6px;
+  --t-small-radius: 4px;
   --t-border-width: 1px;
   --t-border-style: solid;
   --t-card-shadow: none;
@@ -47,4 +48,5 @@
   --t-leader-width: 1px;
   --t-emoji-display: none;
   --t-svg-display: inline-flex;
+  --t-lede-style: italic;
 }

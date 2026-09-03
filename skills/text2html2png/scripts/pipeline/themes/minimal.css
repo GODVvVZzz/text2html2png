@@ -8,6 +8,7 @@
   --t-text-secondary: #484848;
   --t-text-muted: #6b6b6b;
   --t-border: #d8d8d8;
+  --t-node-border: color-mix(in srgb, var(--tone) 60%, var(--t-border));
   --t-rule: #b8b8b8;
   --t-head-rule-image: #111111;
   --t-accent-1: #111111;
@@ -47,4 +48,5 @@
   --t-leader-width: 1px;
   --t-emoji-display: none;
   --t-svg-display: inline-flex;
+  --t-lede-style: normal;
 }

@@ -25,29 +25,43 @@ Auxiliary/labels: `'Libre Franklin', 'Noto Sans SC', sans-serif` — weight 500,
 
 ```css
 :root {
+  /* Base — no texture anywhere: the editorial feel comes from typography
+     and rules, so the canvas stays flat and clean. */
   --bg: #f8f5f0;
-  --card-bg: #ffffff;
+  --bg-texture: none;
+  --card-bg: #fffefb;
   --text-primary: #1c1714;
   --text-secondary: #5a4e42;
-  --text-muted: #9a8e82;
+  --text-muted: #7f7062;
   --border-base: #d8d0c4;
-  --accent-rust: #a0522d;
-  --accent-navy: #2c3e5a;
-  --accent-gold: #b8860b;
+  --node-border: var(--border-base);  /* card edges stay neutral sand-grey; no accent tinting */
+  --arrow-color: #c8bca8;
+  --accent: #a0522d;
+  --accent-blue: #2c3e5a;
+  --accent-gold: #8f6811;
   --rule-color: #c8bca8;
-  --accent: var(--accent-rust);
-  --accent-blue: var(--accent-navy);
-  --arrow-color: #8f7f6b;
-  --s1: #a0522d;
-  --s2: #2c3e5a;
-  --s3: #b8860b;
-  --s4: #6b7a5a;
-  --s5: #7c3f58;
-  --s6: #4c6b73;
-  --s7: #8a623d;
-  --success: #4f6f52;
-  --minor: #9a6b16;
+  --banner-bg: #2c3e5a;
+  --banner-text: #f0ece4;
+  --banner-accent: #e4bd62;
+
+  /* Step accent colors (cycle through).
+     Rust and gold sit one step darker than the classic editorial palette:
+     accents double as white-text backgrounds (funnel bars, badges), and these
+     are the brightest values that still pass the 4.5:1 contrast gate against
+     white text and the accent-tinted card surfaces. */
+  --s1: #a0522d;   /* rust */
+  --s2: #2c3e5a;   /* navy */
+  --s3: #8f6811;   /* gold */
+  --s4: #2d5a3d;   /* forest green */
+  --s5: #7a3c4f;   /* plum */
+  --s6: #37636a;   /* petrol blue */
+  --s7: #775438;   /* taupe brown */
+
+  /* Semantic */
   --critical: #923f36;
+  --major: #a0522d;
+  --minor: #8f6811;
+  --success: #2d5a3d;
 }
 ```
 
@@ -99,7 +113,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--accent-rust);
+  color: var(--accent);
 }
 ```
 
@@ -132,8 +146,8 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
   font-style: italic;
-  color: var(--accent-navy);
-  border-left: 3px solid var(--accent-rust);
+  color: var(--accent-blue);
+  border-left: 3px solid var(--accent);
   padding-left: 16px;
   margin: 8px 0;
 }
@@ -153,14 +167,14 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--accent-rust);
+  color: var(--accent);
 }
 ```
 
 ### Banner
 ```css
 .banner {
-  background: var(--accent-navy);
+  background: var(--accent-blue);
   border-radius: 6px;
   padding: 14px 24px;
   text-align: center;
