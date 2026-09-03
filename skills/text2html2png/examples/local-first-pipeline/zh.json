@@ -28,7 +28,7 @@
       "nodes": [
         {"name": "校验", "desc": "拦截脚本、远程资源与不安全标记。", "emoji": "🛡", "icon": "shield"},
         {"name": "渲染", "desc": "在本机 Chrome 系浏览器中测量布局。", "emoji": "🖥", "icon": "image"},
-        {"name": "HTML + PNG", "desc": "编辑源码，或将高分辨率图像粘贴到任意位置。", "emoji": "🖼", "icon": "code"}
+        {"name": "HTML + PNG", "desc": "编辑源码，或把成图粘贴到任意文档。", "emoji": "🖼", "icon": "code"}
       ]
     }
   ],

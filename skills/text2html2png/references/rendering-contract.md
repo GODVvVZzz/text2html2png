@@ -96,7 +96,7 @@ Do not paste a `.card` rule and assume it applies automatically.
 
 Use local fallback stacks by default. A style reference may show an optional Google Fonts link for users who explicitly allow network access; omit it otherwise. In that explicit mode, add only the required origins to the CSP and pass `--allow-network` to both validation and rendering.
 
-Icon slots are dual-channel: a template may emit both an emoji span and a `currentColor` inline SVG, and the theme picks exactly one through `--t-emoji-display` / `--t-svg-display` — never both at once. The `warm`, `glass`, `neon`, and `dark` themes show emoji; `minimal`, `editorial`, and `paper` show SVGs. An empty emoji slot collapses via the shared `:empty` rule, so a fixture without emoji glyphs never leaves a gap. Emoji are welcome when they improve scanning, friendliness, or match the user's requested visual language; prefer SVG-only themes when byte-for-byte cross-platform appearance matters.
+Icon slots are dual-channel: a template may emit both an emoji span and a `currentColor` inline SVG, and the theme picks exactly one through `--t-emoji-display` / `--t-svg-display` — never both at once. The `warm` and `glass` themes show emoji; `minimal`, `editorial`, and `paper` show SVGs. An empty emoji slot collapses via the shared `:empty` rule, so a fixture without emoji glyphs never leaves a gap. Emoji are welcome when they improve scanning, friendliness, or match the user's requested visual language; prefer SVG-only themes when byte-for-byte cross-platform appearance matters.
 
 ## Pre-render checks
 

@@ -188,7 +188,7 @@ Timeline is migrated to the multi-chart pipeline in `experiments/theme-decouplin
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 42/42 green):
+Validated structure (all themes × zh/en, `build --render --audit` 42/42 green):
 
 - One uniform DOM per event: `.tl-item` = date → dot → card; even rows flip sides via grid
   `order` (the item is a 3-track grid `minmax(0,1fr) auto minmax(0,1fr)`), so both locales and

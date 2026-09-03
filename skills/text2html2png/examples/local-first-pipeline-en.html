@@ -5,56 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
   <title>A local-first diagram pipeline</title>
-  <style id="text2html2png-theme" data-theme="dark">
+  <style id="text2html2png-theme" data-theme="editorial">
 :root {
-  --t-canvas: #0b1119;
-  --t-canvas-image: linear-gradient(rgba(107, 139, 170, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(107, 139, 170, 0.035) 1px, transparent 1px), radial-gradient(circle at 50% 0%, rgba(90, 169, 255, 0.09), transparent 42%);
-  --t-surface: #141c27;
-  --t-surface-strong: #1b2633;
-  --t-surface-soft: #0f1722;
-  --t-text: #edf4fb;
-  --t-text-secondary: #b6c3d1;
-  --t-text-muted: #8294a7;
-  --t-border: #344456;
-  --t-rule: #42536a;
-  --t-head-rule-image: rgba(93, 169, 233, 0.55);
-  --t-accent-1: #5da9e9;
-  --t-accent-2: #55b3c0;
-  --t-accent-3: #d4a763;
-  --t-accent-4: #8294a7;
-  --t-accent-5: #a4b6e8;
-  --t-accent-6: #c77bd8;
-  --t-accent-7: #96d7e8;
-  --t-on-accent: #071019;
-  --t-banner-bg: #131e2b;
-  --t-banner-text: #dfeaf5;
-  --t-banner-accent: #72b8ff;
-  --t-font-display: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --t-font-body: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 32px;
-  --t-title-weight: 800;
+  --t-canvas: #f7f1e8;
+  --t-canvas-image: none;
+  --t-surface: #fffaf2;
+  --t-surface-strong: #fffdf8;
+  --t-surface-soft: #efe5d8;
+  --t-text: #211916;
+  --t-text-secondary: #5f4b40;
+  --t-text-muted: #7d685b;
+  --t-border: #d4c4b2;
+  --t-rule: #ab9581;
+  --t-head-rule-image: #5f4b40;
+  --t-accent-1: #93472c;
+  --t-accent-2: #253b56;
+  --t-accent-3: #8f6811;
+  --t-accent-4: #5d6b45;
+  --t-accent-5: #7a3c4f;
+  --t-accent-6: #37636a;
+  --t-accent-7: #775438;
+  --t-on-accent: #ffffff;
+  --t-banner-bg: #253b56;
+  --t-banner-text: #f7f1e8;
+  --t-banner-accent: #e4bd62;
+  --t-font-display: Georgia, "Songti SC", "STSong", serif;
+  --t-font-body: Georgia, "Songti SC", "STSong", serif;
+  --t-font-data: "Avenir Next", "Segoe UI", "PingFang SC", sans-serif;
+  --t-title-size: 38px;
+  --t-title-weight: 700;
   --t-title-tracking: -0.025em;
   --t-title-transform: none;
   --t-body-size: 14px;
   --t-body-weight: 500;
-  --t-label-size: 11px;
+  --t-label-size: 10px;
   --t-label-weight: 700;
-  --t-label-tracking: 0.15em;
+  --t-label-tracking: 0.2em;
   --t-label-transform: uppercase;
-  --t-data-size: 28px;
-  --t-data-weight: 800;
-  --t-card-radius: 10px;
-  --t-small-radius: 6px;
+  --t-data-size: 30px;
+  --t-data-weight: 700;
+  --t-card-radius: 3px;
+  --t-small-radius: 1px;
   --t-border-width: 1px;
   --t-border-style: solid;
-  --t-card-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+  --t-card-shadow: none;
   --t-highlight-shadow: none;
   --t-backdrop: none;
   --t-leader-style: solid;
   --t-leader-width: 1px;
-  --t-emoji-display: inline-flex;
-  --t-svg-display: none;
+  --t-emoji-display: none;
+  --t-svg-display: inline-flex;
 }
   </style>
   <style id="text2html2png-chart" data-chart="architecture">
@@ -415,7 +415,7 @@ html:lang(zh-CN) .conn-label {
 <span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11.5 5.8L16 16.1 4.5 10.3 16 4.5z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M4.5 16.2l11.5 5.8 11.5-5.8M4.5 22l11.5 5.8L27.5 22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 </span>
 <h2 class="node-name">Source facts</h2>
-<p class="node-desc">Steps, components, dates, metrics, or hierarchy.</p>
+<p class="node-desc">Steps, parts, dates, and metrics.</p>
 </article>
 </div>
 </div>
@@ -442,7 +442,7 @@ html:lang(zh-CN) .conn-label {
 <span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
 </span>
 <h2 class="node-name">Structure</h2>
-<p class="node-desc">Organize facts without inventing missing data.</p>
+<p class="node-desc">Organize the facts; add nothing.</p>
 </article>
 <article class="node">
 <span class="node-icons">
@@ -450,7 +450,7 @@ html:lang(zh-CN) .conn-label {
 <span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M12 9L5 16l7 7M20 9l7 7-7 7M18.5 6l-5 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 </span>
 <h2 class="node-name">Compose</h2>
-<p class="node-desc">Generate safe, self-contained HTML and CSS.</p>
+<p class="node-desc">Generate one self-contained HTML.</p>
 </article>
 </div>
 </div>
@@ -469,7 +469,7 @@ html:lang(zh-CN) .conn-label {
 <span class="node-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4l10 3.8v7.4c0 6.8-4.4 10.8-10 12.8-5.6-2-10-6-10-12.8V7.8L16 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11.5 15.5l3.2 3.2 6-6.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 </span>
 <h2 class="node-name">Validate</h2>
-<p class="node-desc">Block scripts, remote assets, and unsafe markup.</p>
+<p class="node-desc">No scripts, no network access.</p>
 </article>
 <article class="node">
 <span class="node-icons">

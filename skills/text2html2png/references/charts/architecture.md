@@ -190,7 +190,7 @@ Architecture is migrated to the multi-chart pipeline in `experiments/theme-decou
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 84/84 green):
+Validated structure (all themes × zh/en, `build --render --audit` 84/84 green):
 
 - `.arch` stacks layers and connector rows; each is the same two-column grid
   (`88px minmax(0, 1fr)`), so layer tags and connectors share one fixed gutter and everything
@@ -207,6 +207,6 @@ Validated structure (all 7 themes × zh/en, `build --render --audit` 84/84 green
   proper nouns must survive verbatim.
 - Do not wrap connector rows in `aria-hidden`: the audit fails visible text inside hidden
   subtrees (WARN throws in strict mode). The decorative SVG carries its own `aria-hidden`.
-- Layer accents must differ in hue family per theme — dark's grey-blue accent-6 read as the same
+- Layer accents must differ in hue family per theme — a grey-blue accent-6 once read as the same
   color as accent-1 on tinted card borders, so accent-6 moved to magenta (#c77bd8). Thin tinted
   borders are a stricter accent-identity test than large text blocks.

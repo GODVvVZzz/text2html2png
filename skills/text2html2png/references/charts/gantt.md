@@ -251,7 +251,7 @@ Gantt is migrated to the multi-chart pipeline in `experiments/theme-decoupling/c
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 70/70 green):
+Validated structure (all themes × zh/en, `build --render --audit` 70/70 green):
 
 - One grid, subgrid rows: `.gantt` is a two-column grid (`minmax(0, 235px) minmax(0, 1fr)`);
   header and task rows are `grid-template-columns: subgrid` items, so the label column and the

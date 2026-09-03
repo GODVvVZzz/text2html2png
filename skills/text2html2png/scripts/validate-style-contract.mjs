@@ -8,6 +8,9 @@ import { fileURLToPath } from "node:url";
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const skillDir = path.resolve(scriptDir, "..");
 const stylesDir = path.join(skillDir, "references", "styles");
+const themes = JSON.parse(
+  await readFile(path.join(scriptDir, "pipeline", "themes", "themes.json"), "utf8"),
+);
 const required = [
   "--bg",
   "--card-bg",
@@ -40,7 +43,9 @@ for (const file of files) {
   if (missing.length) failures.push(`${file}: missing ${missing.join(", ")}`);
 }
 
-if (files.length !== 7) failures.push(`Expected 7 style files, found ${files.length}.`);
+if (files.length !== themes.length) {
+  failures.push(`Expected a style guide per theme (${themes.length} in themes.json), found ${files.length}.`);
+}
 
 if (failures.length) {
   console.error(`Style contract failed:\n- ${failures.join("\n- ")}`);

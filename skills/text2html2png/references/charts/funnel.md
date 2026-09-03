@@ -252,7 +252,7 @@ Funnel is migrated to the multi-chart pipeline in `experiments/theme-decoupling/
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 112/112 green; bar-width
+Validated structure (all themes × zh/en, `build --render --audit` 112/112 green; bar-width
 accuracy measured at ≤0.22% deviation from theory in subagent review):
 
 - Bars are width-driven solids: each stage sets a structural inline var `--bar-width` derived from
@@ -270,4 +270,4 @@ accuracy measured at ≤0.22% deviation from theory in subagent review):
 - Drop rows between stages carry the delta (data font, tabular-nums, sign reflects shrink vs
   growth) plus a reason string; reason text is 12px — the audit's minBodyFont floor.
 - Adjacent stages reuse the strictest accent-identity test: stage accents cycle and must remain
-  hue-distinct per theme (see dark-theme accent fixes in the dashboard/architecture notes).
+  hue-distinct per theme (see the accent fixes noted in the dashboard/architecture guides).

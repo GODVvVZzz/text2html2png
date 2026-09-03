@@ -216,7 +216,7 @@ Dashboard is migrated to the multi-chart pipeline in `experiments/theme-decoupli
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 56/56 green):
+Validated structure (all themes × zh/en, `build --render --audit` 56/56 green):
 
 - One uniform DOM: `.metrics.dash-grid` KPI row (`--stat-count` structural var) + `.dash-panels`
   detail row (`--panel-count`), so both locales and all themes share one fingerprint. The
@@ -231,6 +231,6 @@ Validated structure (all 7 themes × zh/en, `build --render --audit` 56/56 green
   is `color-mix(in srgb, var(--tone) 16%, var(--t-surface))` so the fill/track pairing adapts to
   every theme without literal colors.
 - Trend values and panel values use `font-variant-numeric: tabular-nums` for column-stable digits.
-- Themes must keep all 7 accents distinct ON THEIR OWN surfaces: the dark theme's grey-blue
-  accent-3/accent-6 pair read as one color inside a 4-up KPI row, so accent-3 moved to warm sand
+- Themes must keep all 5 accents distinct ON THEIR OWN surfaces: a grey-blue
+  accent-3/accent-6 pair once read as one color inside a 4-up KPI row, so accent-3 moved to warm sand
   (#d4a763) — adjacent KPI cards are the strictest accent-identity test in the suite.

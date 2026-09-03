@@ -65,7 +65,7 @@ For showcase images, state that you own or have permission to publish the prompt
 
 ## Style and chart changes
 
-All seven style references must define the token contract checked by `scripts/validate-style-contract.mjs`. A chart example must treat coordinates and data as illustrative; do not hard-code values that silently become universal instructions.
+All five style references must define the token contract checked by `scripts/validate-style-contract.mjs`. A chart example must treat coordinates and data as illustrative; do not hard-code values that silently become universal instructions.
 
 Do not add rules that cause the agent to invent data for visual completeness.
 

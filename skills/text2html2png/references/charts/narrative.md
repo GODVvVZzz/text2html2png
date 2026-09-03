@@ -61,7 +61,7 @@ PRD 图文版、方案说明、立项 brief、项目复盘、评审材料——�
 
 ## Style
 
-默认 `warm`(亲和、汇报感)或 `glass`(现代、产品感)。emoji 槽在 warm/glass/neon/dark 下显示,与主题的图标语言保持一致。
+默认 `warm`(亲和、汇报感)或 `glass`(现代、产品感)。emoji 槽在 warm/glass 下显示,与主题的图标语言保持一致。
 
 ## Guardrails
 

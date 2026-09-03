@@ -26,10 +26,10 @@ seconds_per_frame=1.5
 frames=(
   launch-plan-en-paper
   support-snapshot-en-glass
-  signup-funnel-en-neon
+  signup-funnel-en-glass
   studio-org-en-warm
   plan-comparison-en-minimal
-  service-architecture-en-dark
+  service-architecture-en-minimal
 )
 
 work="$(mktemp -d)"

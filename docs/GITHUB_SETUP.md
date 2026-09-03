@@ -3,7 +3,7 @@
 Recommended public repository metadata:
 
 - **Name:** `text2html2png`
-- **Description:** Turn structured text into polished HTML diagrams and high-resolution PNGs — 8 diagram types × 7 themes, local-first, agent-native.
+- **Description:** Turn structured text into polished HTML diagrams and high-resolution PNGs — 9 diagram types × 5 themes, local-first, agent-native.
 - **Website:** `https://godvvvzzz.github.io/text2html2png/` — update this if you publish under a different account, and change `REPO_SLUG` in `scripts/build-gallery.mjs` to match.
 - **Topics:** `agent-skills`, `claude-code`, `codex`, `cursor`, `diagram`, `data-visualization`, `html`, `png`, `flowchart`, `architecture-diagram`, `local-first`
 
