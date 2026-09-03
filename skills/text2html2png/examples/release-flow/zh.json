@@ -10,7 +10,7 @@
     {"num": "02", "name": "构建", "detail": "实现最小且完整的变更。闸门：通过。", "accent": 2, "emoji": "🛠", "icon": "code"},
     {"num": "03", "name": "评审", "detail": "校验正确性、清晰度与发布风险。闸门：已批准。", "accent": 3, "emoji": "👀", "icon": "person"},
     {"num": "04", "name": "测试", "detail": "在安全环境实测行为。闸门：已验证。", "accent": 4, "emoji": "✅", "icon": "check"},
-    {"num": "05", "name": "金丝雀发布", "detail": "小范围发布并持续观察信号。闸门：运行健康。", "accent": 5, "emoji": "🐤", "icon": "trend-up"},
+    {"num": "05", "name": "金丝雀", "detail": "小范围发布并持续观察信号。闸门：运行健康。", "accent": 5, "emoji": "🐤", "icon": "trend-up"},
     {"num": "06", "name": "上线", "detail": "回滚就绪后逐步放量。闸门：已发布。", "accent": 7, "emoji": "🚀", "icon": "package"}
   ],
   "footerLabel": "逐闸推进",
