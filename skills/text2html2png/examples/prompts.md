@@ -2,7 +2,7 @@
 
 # Public example prompts
 
-10 examples covering 9/9 chart types and 7/7 visual themes.
+10 examples covering 9/9 chart types and 5/5 visual themes.
 All example content is synthetic. Every example ships in English and Chinese, rendered from one shared DOM.
 
 | Example | Chart | Theme | Files |
@@ -10,12 +10,12 @@ All example content is synthetic. Every example ships in English and Chinese, re
 | From idea to production | Flowchart | `warm` | [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-warm.png) |
 | Choosing a plan | Comparison | `minimal` | [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-minimal.png) |
 | Six milestones to a plugin API | Timeline | `editorial` | [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png) |
-| A local-first diagram pipeline | Architecture | `dark` | [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-dark.png) |
-| Service Architecture | Architecture | `dark` | [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-dark.png) |
+| A local-first diagram pipeline | Architecture | `editorial` | [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-editorial.png) |
+| Service Architecture | Architecture | `minimal` | [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-minimal.png) |
 | Support desk weekly snapshot | Dashboard | `glass` | [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-glass.png) |
 | Community conference preparation plan | Gantt | `paper` | [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-paper.png) |
 | A fourteen-person product studio | Org chart | `warm` | [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png) |
-| Landing page to activation | Funnel | `neon` | [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-neon.png) |
+| Landing page to activation | Funnel | `glass` | [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-glass.png) |
 | Café membership revamp brief | Narrative brief | `warm` | [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-warm.png) |
 
 ## From idea to production
@@ -50,23 +50,23 @@ Output: [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadm
 
 ## A local-first diagram pipeline
 
-`architecture` × `dark` · rendered at 980px
+`architecture` × `editorial` · rendered at 980px
 
-> Create a dark architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.
+> Create an editorial architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.
 
 How the skill itself works, and where your content stops travelling.
 
-Output: [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-dark.png)
+Output: [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-editorial.png)
 
 ## Service Architecture
 
-`architecture` × `dark` · rendered at 920px
+`architecture` × `minimal` · rendered at 920px
 
-> Create a dark architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.
+> Create a minimal architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.
 
 Four labelled layers with per-service data ownership and no invented infrastructure.
 
-Output: [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-dark.png)
+Output: [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-minimal.png)
 
 ## Support desk weekly snapshot
 
@@ -100,13 +100,13 @@ Output: [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm
 
 ## Landing page to activation
 
-`funnel` × `neon` · rendered at 1120px
+`funnel` × `glass` · rendered at 1120px
 
-> Make a neon funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
+> Make a glass funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
 
 A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.
 
-Output: [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-neon.png)
+Output: [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-glass.png)
 
 ## Café membership revamp brief
 

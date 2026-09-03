@@ -193,7 +193,7 @@ Flowchart is migrated to the multi-chart pipeline in `experiments/theme-decoupli
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 28/28 green):
+Validated structure (all themes × zh/en, `build --render --audit` 28/28 green):
 
 - Single horizontal flex row `.flow`; each `.step` is a card with `padding: 13px 14px 14px`,
   a 4px accent top bar via `::before`, and a `--step-accent` data variable (not a theme token)
@@ -203,7 +203,7 @@ Validated structure (all 7 themes × zh/en, `build --render --audit` 28/28 green
   No literal colors, no dashed strokes.
 - Icons are monochrome inline SVGs using `currentColor` (shared `chart/icons.mjs`); the emoji
   channel exists but every theme sets `--t-emoji-display: none`.
-- Step numbers use the label token pair (`--t-label-*`); themes must keep all seven accents
+- Step numbers use the label token pair (`--t-label-*`); themes must keep all five accents
   legible as text on their own surfaces — the strict audit enforces 4.5:1.
 - Optional stats row reuses the comparison `.metrics` skeleton (exactly 3 entries).
 - `structureFingerprint` must be identical across all themes and both locales; zh/en fixtures

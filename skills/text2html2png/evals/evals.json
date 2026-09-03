@@ -28,11 +28,11 @@
     },
     {
       "id": 3,
-      "prompt": "Create a dark architecture diagram: Web client → API gateway → User service and Order service. Both services use Redis; each has its own PostgreSQL database.",
+      "prompt": "Create a glass architecture diagram: Web client → API gateway → User service and Order service. Both services use Redis; each has its own PostgreSQL database.",
       "expected_output": "A layered architecture diagram with the exact supplied components and relationships.",
       "files": [],
       "assertions": [
-        "Uses dark architecture styling.",
+        "Uses glass architecture styling.",
         "Shows two services, one shared Redis, and two separate PostgreSQL databases.",
         "Keeps the supplied topology exact; any added labels use plausible defaults."
       ]

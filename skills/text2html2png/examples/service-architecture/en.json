@@ -16,7 +16,7 @@
       "tag": "Entry",
       "accent": 6,
       "nodes": [
-        {"name": "API Gateway", "desc": "connects to Auth Service and Order Service", "emoji": "🛡", "icon": "shield"}
+        {"name": "API Gateway", "desc": "Routes requests to both services.", "emoji": "🛡", "icon": "shield"}
       ]
     },
     {

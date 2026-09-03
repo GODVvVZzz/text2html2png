@@ -19,7 +19,7 @@ Honor explicit options when present:
 
 | Option | Values |
 |---|---|
-| `--style` | `warm`, `dark`, `minimal`, `editorial`, `neon`, `paper`, `glass` |
+| `--style` | `warm`, `minimal`, `editorial`, `paper`, `glass` |
 | `--chart` | `auto`, `flowchart`, `comparison`, `timeline`, `architecture`, `dashboard`, `gantt`, `org-chart`, `funnel`, `narrative` |
 | `--output` | Output directory |
 | `--png` | Also export a PNG; disabled unless explicitly requested |
@@ -44,14 +44,13 @@ Auto-select a style from the content:
 | Content | Default style |
 |---|---|
 | Process, business workflow | `warm` |
-| Technical system or topology | `dark` |
+| Technical system or topology | `glass` |
 | Formal comparison or hierarchy | `minimal` |
 | Story, history, roadmap | `editorial` |
-| Futuristic presentation or funnel | `neon` |
 | Tutorial or learning note | `paper` |
 | Product metrics or modern dashboard | `glass` |
 
-User preference always wins. All 56 chart/style combinations are allowed.
+User preference always wins. All 45 chart/style combinations are allowed.
 
 ### 3. Load only the references needed
 
@@ -69,7 +68,7 @@ Read [references/design-philosophy.md](references/design-philosophy.md) only for
 - Treat user text as text: HTML-escape `& < > " '` before interpolation.
 - Do not include `<script>`, event-handler attributes, `javascript:` URLs, iframes, objects, or embeds.
 - Default to local font stacks and inline SVG shapes. Do not load remote fonts, images, scripts, or styles unless the user explicitly requests network-backed assets.
-- Icon slots are dual-channel: the theme shows emoji (`warm`, `glass`, `neon`, `dark`) or monochrome SVG (`minimal`, `editorial`, `paper`) — never both. Fill emoji slots when the theme shows them and it improves scanability; honor an explicit user preference for or against emoji, and keep one visible icon style per diagram.
+- Icon slots are dual-channel: the theme shows emoji (`warm`, `glass`) or monochrome SVG (`minimal`, `editorial`, `paper`) — never both. Fill emoji slots when the theme shows them and it improves scanability; honor an explicit user preference for or against emoji, and keep one visible icon style per diagram.
 - Use CSS Grid/Flexbox for primary layout. Derive connector geometry from the actual node count and layout; never copy fixed coordinates that only fit an example.
 - Keep titles centered, body copy left-aligned, and relationships unambiguous.
 - Use honest whitespace. Do not fabricate content merely to make the canvas look full.
@@ -141,10 +140,8 @@ node "${SKILL_DIR}/scripts/screenshot.mjs" \
 | Style | Screenshot background | Width |
 |---|---:|---:|
 | `warm` | `#faf6ee` | 920 |
-| `dark` | `#0d1117` | 920 |
 | `minimal` | `#ffffff` | 920 |
 | `editorial` | `#f8f5f0` | 920 |
-| `neon` | `#0a0015` | 920 |
 | `paper` | `#f5f0e6` | 920 |
 | `glass` | `#e8eaf0` | 920 |
 

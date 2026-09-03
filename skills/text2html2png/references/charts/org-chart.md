@@ -211,7 +211,7 @@ Org chart is migrated to the multi-chart pipeline in `experiments/theme-decoupli
 (`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
 snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
 
-Validated structure (all 7 themes × zh/en, `build --render --audit` 98/98 green; connector
+Validated structure (all themes × zh/en, `build --render --audit` 98/98 green; connector
 alignment measured at ≤1px in subagent review):
 
 - Exact connector alignment WITHOUT runtime measurement: every level is a grid of `--leaf-count`

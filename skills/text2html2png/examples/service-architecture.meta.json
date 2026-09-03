@@ -3,10 +3,10 @@
   "title": "Service Architecture",
   "chart": "architecture",
   "summary": "Four labelled layers with per-service data ownership and no invented infrastructure.",
-  "prompt": "Create a dark architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.",
+  "prompt": "Create a minimal architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.",
   "width": 920,
   "scale": 2,
-  "theme": "dark",
+  "theme": "minimal",
   "locales": [
     "zh",
     "en"

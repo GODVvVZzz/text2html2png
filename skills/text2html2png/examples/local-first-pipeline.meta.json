@@ -3,10 +3,10 @@
   "title": "A local-first diagram pipeline",
   "chart": "architecture",
   "summary": "How the skill itself works, and where your content stops travelling.",
-  "prompt": "Create a dark architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.",
+  "prompt": "Create an editorial architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.",
   "width": 980,
   "scale": 2,
-  "theme": "dark",
+  "theme": "editorial",
   "locales": [
     "zh",
     "en"

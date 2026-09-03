@@ -108,7 +108,7 @@ export function coverageReport(examples) {
   return {
     examples: examples.length,
     missingCharts: [...CHARTS].filter((chart) => !charts.has(chart)),
-    missingThemes: [...new Set(["warm", "dark", "minimal", "editorial", "neon", "paper", "glass"])].filter((theme) => !themes.has(theme)),
+    missingThemes: [...new Set(["warm", "minimal", "editorial", "paper", "glass"])].filter((theme) => !themes.has(theme)),
   };
 }
 

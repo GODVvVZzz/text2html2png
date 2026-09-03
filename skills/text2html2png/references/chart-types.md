@@ -40,11 +40,11 @@ If none fits, ask what relationship the user wants to communicate rather than fo
 | `flowchart` | warm, paper | all |
 | `comparison` | minimal, warm | all |
 | `timeline` | editorial, paper | all |
-| `architecture` | dark, glass | all |
-| `dashboard` | glass, dark | all |
+| `architecture` | glass, minimal | all |
+| `dashboard` | glass, paper | all |
 | `gantt` | warm, minimal | all |
 | `org-chart` | minimal, glass | all |
-| `funnel` | neon, glass | all |
+| `funnel` | glass, warm | all |
 | `narrative` | warm, glass | all |
 
 These are defaults, not restrictions. An explicit user style always wins.

@@ -28,7 +28,7 @@
     "privacyPolicyURL": "https://github.com/GODVvVZzz/text2html2png/blob/main/PRIVACY.md",
     "defaultPrompt": [
       "Turn this process into a polished HTML flowchart.",
-      "Map this system as a dark architecture diagram and export a PNG.",
+      "Map this system as a glass architecture diagram and export a PNG.",
       "Compare these options in a clear visual matrix."
     ],
     "brandColor": "#7C3AED",
@@ -38,7 +38,7 @@
     "screenshots": [
       "./skills/text2html2png/assets/gallery/launch-plan-en-paper.png",
       "./skills/text2html2png/assets/gallery/support-snapshot-en-glass.png",
-      "./skills/text2html2png/assets/gallery/signup-funnel-en-neon.png",
+      "./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png",
       "./skills/text2html2png/assets/gallery/studio-org-en-warm.png"
     ]
   }

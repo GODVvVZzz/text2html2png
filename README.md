@@ -24,14 +24,14 @@
 
 <div align="center">
   <img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="32.5%" alt="An eight-week conference Gantt chart in the paper theme, rendered in LXGW WenKai">
-  <img src="./skills/text2html2png/assets/gallery/signup-funnel-en-neon.png" width="32.5%" alt="A five-stage signup funnel in the neon theme">
+  <img src="./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png" width="32.5%" alt="A five-stage signup funnel in the glass theme">
   <img src="./skills/text2html2png/assets/gallery/library-roadmap-en-editorial.png" width="32.5%" alt="A six-milestone plugin-API roadmap timeline in the editorial theme">
 </div>
 
 Most diagram tools ask you to draw. This one asks you to describe. You paste a plan, a spec, a meeting note, or a set of numbers; your agent picks the right chart, keeps your facts intact, and hands you a paste-ready image — backed by a self-contained HTML document you can restyle and keep. Carbon and ray.so do this for code snippets; this skill does it for any structured text. When you explicitly need the picture, it renders a tightly cropped PNG in the browser you already have.
 
 - **9 chart types** — flowchart, comparison, timeline, architecture, dashboard, Gantt, org chart, funnel, narrative brief
-- **7 visual themes** — warm, dark, minimal, editorial, neon, paper, glass
+- **5 visual themes** — warm, glass, minimal, editorial, paper
 - **A picture you can paste, a document you can keep** — the deliverable is one editable HTML file; say “also export a PNG” or pass `--png` when you want the image itself
 - **Measured, not hoped for** — a browser-based layout audit is a required step of the workflow and a CI gate for every published example
 - **Local-first** — no hosted rendering API, no API key, no telemetry, network blocked during render
@@ -60,7 +60,7 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 ## See the range
 
 <div align="center">
-  <img src="./assets/demo.gif" width="820" alt="Six real text2html2png outputs: a warm release flowchart, a glass KPI dashboard, a neon funnel, a warm org chart, a minimal comparison table, and a dark architecture map">
+  <img src="./assets/demo.gif" width="820" alt="Six real text2html2png outputs: a warm release flowchart, a glass KPI dashboard, a glass funnel, a warm org chart, a minimal comparison table, and a minimal architecture map">
 </div>
 
 Every frame above is a real committed example, not a mockup. The full set, each with the exact prompt that produced it, lives in the **[gallery](https://godvvvzzz.github.io/text2html2png/)**.
@@ -68,9 +68,9 @@ Every frame above is a real committed example, not a mockup. The full set, each 
 |  |  |
 |---|---|
 | **Gantt** · `paper`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="400" alt="An eight-week conference preparation Gantt chart in the paper theme"><br>[Prompt and HTML](./skills/text2html2png/examples/launch-plan-en.html) | **Dashboard** · `glass`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-en-glass.png" width="400" alt="A weekly support desk KPI dashboard in the glass theme"><br>[Prompt and HTML](./skills/text2html2png/examples/support-snapshot-en.html) |
-| **Org chart** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org-en-warm.png" width="400" alt="A fourteen-person product studio org chart in the warm theme"><br>[Prompt and HTML](./skills/text2html2png/examples/studio-org-en.html) | **Funnel** · `neon`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-en-neon.png" width="400" alt="A five-stage signup funnel in the neon theme"><br>[Prompt and HTML](./skills/text2html2png/examples/signup-funnel-en.html) |
+| **Org chart** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org-en-warm.png" width="400" alt="A fourteen-person product studio org chart in the warm theme"><br>[Prompt and HTML](./skills/text2html2png/examples/studio-org-en.html) | **Funnel** · `glass`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png" width="400" alt="A five-stage signup funnel in the glass theme"><br>[Prompt and HTML](./skills/text2html2png/examples/signup-funnel-en.html) |
 
-Also published: a [warm release flowchart](./skills/text2html2png/examples/release-flow-en.html), an [editorial roadmap timeline](./skills/text2html2png/examples/library-roadmap-en.html), a [minimal comparison table](./skills/text2html2png/examples/plan-comparison-en.html), two dark architecture maps — [a service topology](./skills/text2html2png/examples/service-architecture-en.html) and [the skill's own pipeline](./skills/text2html2png/examples/local-first-pipeline-en.html) — and a [warm narrative brief](./skills/text2html2png/examples/cafe-membership-en.html) that lays a whole product brief out as one page. Every example also ships in Chinese; all example data is synthetic — see [asset provenance](./ASSET_PROVENANCE.md).
+Also published: a [warm release flowchart](./skills/text2html2png/examples/release-flow-en.html), an [editorial roadmap timeline](./skills/text2html2png/examples/library-roadmap-en.html), a [minimal comparison table](./skills/text2html2png/examples/plan-comparison-en.html), two architecture maps — [a minimal service topology](./skills/text2html2png/examples/service-architecture-en.html) and [an editorial view of the skill's own pipeline](./skills/text2html2png/examples/local-first-pipeline-en.html) — and a [warm narrative brief](./skills/text2html2png/examples/cafe-membership-en.html) that lays a whole product brief out as one page. Every example also ships in Chinese; all example data is synthetic — see [asset provenance](./ASSET_PROVENANCE.md).
 
 ## What it makes
 
@@ -86,7 +86,7 @@ Also published: a [warm release flowchart](./skills/text2html2png/examples/relea
 | Funnel | Stage volumes and conversion you supply |
 | Narrative brief | Decision-first documents: PRDs, proposals, review notes |
 
-Any chart can use any theme. A shared style token contract, checked in CI, requires all seven themes to define the same 19 tokens, so `--style neon` on a Gantt chart is a supported request rather than a gamble. Ten of the 63 pairings ship as rendered examples; the rest are supported by the contract but not yet visually regression-tested.
+Any chart can use any theme. A shared style token contract, checked in CI, requires all five themes to define the same 19 tokens, so `--style glass` on a Gantt chart is a supported request rather than a gamble. Ten of the 45 pairings ship as rendered examples; the rest are supported by the contract but not yet visually regression-tested.
 
 ## Why the output is consistent
 
@@ -159,7 +159,7 @@ If you ask for Mermaid, draw.io, Excalidraw, or editable SVG, the skill delibera
 ├── docs/                         the published gallery
 ├── skills/text2html2png/
 │   ├── SKILL.md                  the skill contract the agent reads
-│   ├── references/               9 chart guides, 7 theme systems, shared contracts
+│   ├── references/               9 chart guides, 5 theme systems, shared contracts
 │   ├── examples/                 10 bilingual examples: per-locale HTML + fixtures
 │   ├── scripts/                  render, validate, audit, batch tooling
 │   └── tests/                    including a real Chrome smoke test
@@ -176,7 +176,7 @@ npm ci
 npm run check
 ```
 
-`npm run check` covers skill metadata, the seven-theme token contract, the example manifest, public-repo privacy patterns, safe-HTML validation, CLI argument handling, a real Chrome screenshot, and the layout audit of every published example.
+`npm run check` covers skill metadata, the five-theme token contract, the example manifest, public-repo privacy patterns, safe-HTML validation, CLI argument handling, a real Chrome screenshot, and the layout audit of every published example.
 
 The layout audit needs a browser that can actually start. In a container where the Chrome sandbox is unavailable, run it explicitly instead of through `npm run check`:
 

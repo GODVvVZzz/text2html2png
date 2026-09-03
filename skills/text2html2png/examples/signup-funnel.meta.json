@@ -3,10 +3,10 @@
   "title": "Landing page to activation",
   "chart": "funnel",
   "summary": "A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.",
-  "prompt": "Make a neon funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.",
+  "prompt": "Make a glass funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.",
   "width": 1120,
   "scale": 2,
-  "theme": "neon",
+  "theme": "glass",
   "locales": [
     "zh",
     "en"
