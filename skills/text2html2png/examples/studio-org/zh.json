@@ -20,8 +20,8 @@
         "emoji": "👤",
         "icon": "layers",
         "children": [
-          {"name": "产品设计", "role": "流程、界面、原型与代码", "meta": "3 人", "emoji": "👤", "icon": "image"},
-          {"name": "品牌设计", "role": "标识、演示文稿与页面", "meta": "1 人", "emoji": "👤", "icon": "megaphone"}
+          {"name": "产品设计", "role": "交互原型", "meta": "3 人", "emoji": "👤", "icon": "image"},
+          {"name": "品牌设计", "role": "品牌视觉", "meta": "1 人", "emoji": "👤", "icon": "megaphone"}
         ]
       },
       {
@@ -32,8 +32,8 @@
         "emoji": "👤",
         "icon": "code",
         "children": [
-          {"name": "前后端", "role": "客户端与服务", "meta": "2 人", "emoji": "👤", "icon": "code"},
-          {"name": "平台工程", "role": "构建与工具链", "meta": "1 人", "emoji": "👤", "icon": "package"}
+          {"name": "前后端", "role": "双端研发", "meta": "2 人", "emoji": "👤", "icon": "code"},
+          {"name": "平台工程", "role": "构建工具", "meta": "1 人", "emoji": "👤", "icon": "package"}
         ]
       },
       {
@@ -44,8 +44,8 @@
         "emoji": "👤",
         "icon": "flag",
         "children": [
-          {"name": "研究测试", "role": "访谈、可用性测试与文档", "meta": "2 人", "emoji": "👤", "icon": "chart"},
-          {"name": "交付统筹", "role": "排期与供应商", "meta": "1 人", "emoji": "👤", "icon": "check"}
+          {"name": "研究测试", "role": "用研测试", "meta": "2 人", "emoji": "👤", "icon": "chart"},
+          {"name": "交付统筹", "role": "排期统筹", "meta": "1 人", "emoji": "👤", "icon": "check"}
         ]
       }
     ]

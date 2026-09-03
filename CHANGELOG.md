@@ -28,6 +28,7 @@ All notable changes to the public project will be documented here.
 - READMEs rewritten around the differentiating chart types, with the quality-enforcement mechanism stated explicitly and an honest "use something else when" table.
 - Themes previously stacked on system fonts (Georgia, Avenir Next, Helvetica Neue); every theme now resolves brand faces from `scripts/pipeline/font-embed.mjs` and falls back to the system stack only when an npm package is missing, with a loud stderr warning.
 - The `glass` theme rebuilt around its original glassmorphism direction: a perceptible violet/sky/emerald gradient mist on the canvas, more translucent frosted cards with a top inner highlight, saturated violet/sky/emerald/amber/rose accents at the brightest values that still pass 4.5:1, Outfit for data figures instead of a monospace stack, and a frosted gradient takeaway banner.
+- The `warm` theme realigned with its original warm-paper direction: an SVG `feTurbulence` paper-grain texture layered over the canvas gradients, the accent palette moved to saturated burnt-orange/gold/teal/purple/steel-blue/brown/forest-green hues (calibrated to the brightest values that still pass 4.5:1), a dark-brown gradient takeaway banner, and sand-gold leaders and dashed step arrows instead of plain gray rules.
 
 ### Fixed
 

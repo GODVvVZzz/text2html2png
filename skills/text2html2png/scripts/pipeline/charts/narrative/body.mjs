@@ -120,6 +120,7 @@ function cardsMarkup(section) {
 }
 
 function stepsMarkup(section) {
+  const arrow = '<span class="nar-step-arrow" aria-hidden="true"><svg viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg"><line x1="1.5" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3.5 2.6"/><path d="M11 5.5 17 11l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
   return [
     '<ol class="nar-steps">',
     section.items
@@ -133,7 +134,7 @@ function stepsMarkup(section) {
             "</li>"
           ].join("\n")
       )
-      .join("\n"),
+      .join("\n" + arrow + "\n"),
     "</ol>"
   ].join("\n");
 }

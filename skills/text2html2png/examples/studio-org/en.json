@@ -32,7 +32,7 @@
         "emoji": "👤",
         "icon": "code",
         "children": [
-          {"name": "Frontend & backend", "role": "Apps, services, APIs", "meta": "×2", "emoji": "👤", "icon": "code"},
+          {"name": "Full-stack", "role": "Apps, services, APIs", "meta": "×2", "emoji": "👤", "icon": "code"},
           {"name": "Platform engineer", "role": "Build, deploy, tooling", "meta": "×1", "emoji": "👤", "icon": "package"}
         ]
       },
@@ -44,7 +44,7 @@
         "emoji": "👤",
         "icon": "flag",
         "children": [
-          {"name": "Research & content", "role": "Interviews, tests, docs", "meta": "×2", "emoji": "👤", "icon": "chart"},
+          {"name": "UX research", "role": "Interviews, tests, docs", "meta": "×2", "emoji": "👤", "icon": "chart"},
           {"name": "Delivery producer", "role": "Estimates, schedules", "meta": "×1", "emoji": "👤", "icon": "check"}
         ]
       }

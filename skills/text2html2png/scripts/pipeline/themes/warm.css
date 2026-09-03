@@ -1,6 +1,6 @@
 :root {
   --t-canvas: #faf6ee;
-  --t-canvas-image: radial-gradient(circle at 8% 4%, rgba(168, 80, 31, 0.08), transparent 24%), radial-gradient(circle at 94% 92%, rgba(47, 114, 132, 0.06), transparent 28%);
+  --t-canvas-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"), radial-gradient(circle at 8% 4%, rgba(179, 88, 31, 0.08), transparent 24%), radial-gradient(circle at 94% 92%, rgba(58, 122, 140, 0.06), transparent 28%);
   --t-surface: #fffdf8;
   --t-surface-strong: #ffffff;
   --t-surface-soft: #f4ead9;
@@ -8,18 +8,18 @@
   --t-text-secondary: #6a5a40;
   --t-text-muted: #806d50;
   --t-border: #dfd0b4;
-  --t-rule: #cdbb9a;
+  --t-rule: #c0a06a;
   --t-head-rule-image: #c9b48c;
-  --t-accent-1: #a8501f;
-  --t-accent-2: #8a6512;
-  --t-accent-3: #5e6e4c;
-  --t-accent-4: #7a3b45;
-  --t-accent-5: #4e5d7c;
-  --t-accent-6: #765433;
-  --t-accent-7: #3a7049;
+  --t-accent-1: #a8511c;
+  --t-accent-2: #8a661a;
+  --t-accent-3: #3a7a8c;
+  --t-accent-4: #6a3a8c;
+  --t-accent-5: #2c6e9e;
+  --t-accent-6: #7a5c38;
+  --t-accent-7: #3d7a4e;
   --t-on-accent: #ffffff;
-  --t-banner-bg: #4a2f13;
-  --t-banner-text: #fff7e8;
+  --t-banner-bg: linear-gradient(135deg, #3a2a10 0%, #5c3a18 100%);
+  --t-banner-text: #f5e8cc;
   --t-banner-accent: #f0c060;
   --t-font-display: "Playfair Display", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-body: "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -41,7 +41,7 @@
   --t-border-width: 1.5px;
   --t-border-style: solid;
   --t-card-shadow: 0 8px 26px rgba(72, 48, 18, 0.08);
-  --t-highlight-shadow: 0 0 0 4px rgba(168, 80, 31, 0.08);
+  --t-highlight-shadow: 0 0 0 4px rgba(179, 88, 31, 0.08);
   --t-backdrop: none;
   --t-leader-style: dotted;
   --t-leader-width: 1.5px;
