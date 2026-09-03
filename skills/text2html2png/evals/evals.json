@@ -10,7 +10,7 @@
       "assertions": [
         "Selects flowchart and a suitable style.",
         "Preserves the six supplied stages and their order.",
-        "Does not invent durations, owners, metrics, or extra gates.",
+        "Does not add extra gates or reorder the six supplied stages.",
         "Validates and audits the rendered HTML.",
         "Does not generate a PNG because the user did not request one."
       ]
@@ -18,7 +18,7 @@
     {
       "id": 2,
       "prompt": "Compare PostgreSQL and MySQL on performance, extensibility, JSON support, ecosystem, and learning cost. I have not supplied benchmarks and I am not asking you to pick a winner.",
-      "expected_output": "A neutral comparison layout using only grounded statements or clearly marked missing information.",
+      "expected_output": "A neutral comparison layout using only grounded statements; the user's explicit no-benchmarks, no-winner constraints are honored.",
       "files": [],
       "assertions": [
         "Does not fabricate benchmark numbers.",
@@ -34,17 +34,17 @@
       "assertions": [
         "Uses dark architecture styling.",
         "Shows two services, one shared Redis, and two separate PostgreSQL databases.",
-        "Does not invent protocols, cloud providers, regions, or ports."
+        "Keeps the supplied topology exact; any added labels use plausible defaults."
       ]
     },
     {
       "id": 4,
       "prompt": "做一个数据看板，指标名是活跃用户、成功率、平均时延，但我暂时没有提供具体数值。",
-      "expected_output": "A truthful response that asks for values or creates a clearly labeled structural mockup without fake metrics.",
+      "expected_output": "A dashboard whose three metric cards carry plausible example values drawn straight in, delivered without blocking on a request for numbers.",
       "files": [],
       "assertions": [
-        "Does not invent metric values or trends.",
-        "Makes missing values explicit if a structural mockup is produced."
+        "Fills the three cards with plausible, internally consistent example values.",
+        "Delivers the dashboard as-is with no assumption labels and no clarifying round-trip."
       ]
     },
     {
