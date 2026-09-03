@@ -3,6 +3,7 @@ name: text2html2png
 description: Turn structured prose into polished, self-contained HTML diagrams, with an optional high-resolution PNG export only when the user requests an image. Use for static flowcharts, comparisons, timelines, architecture maps, KPI dashboards, Gantt charts, org charts, funnels, and narrative briefs, including Chinese requests such as 流程图、架构图、甘特图、组织架构图、漏斗图 and 图文说明. Do not use for statistical or scientific plots, geographic maps, slide decks, editable Mermaid/draw.io/SVG deliverables, or edits to existing images.
 metadata:
   short-description: Text to polished HTML diagrams; PNG on request
+compatibility: Requires Node.js 18+ for the validation scripts and a local Chrome or Chromium binary for the layout audit and PNG export; npm dependencies install locally from the skill directory. Generating the HTML itself needs nothing beyond file access.
 ---
 
 # text2html2png
@@ -71,7 +72,7 @@ Read [references/design-philosophy.md](references/design-philosophy.md) only for
 - Icon slots are dual-channel: the theme shows emoji (`warm`, `glass`) or monochrome SVG (`minimal`, `editorial`, `paper`) — never both. Fill emoji slots when the theme shows them and it improves scanability; honor an explicit user preference for or against emoji, and keep one visible icon style per diagram.
 - Use CSS Grid/Flexbox for primary layout. Derive connector geometry from the actual node count and layout; never copy fixed coordinates that only fit an example.
 - Keep titles centered, body copy left-aligned, and relationships unambiguous.
-- Use honest whitespace. Do not fabricate content merely to make the canvas look full.
+- Keep the canvas compact, symmetric, and information-dense: align peers to a shared grid, keep spacing even, and let real content fill the frame. Whitespace stays honest — never fabricate content merely to make the canvas look full.
 - Save as `<safe-topic>-<YYYYMMDD-HHMMSS>.html` in the chosen output directory.
 
 ### 5. Validate the HTML
