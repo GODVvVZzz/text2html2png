@@ -4,7 +4,7 @@
   "chart": "architecture",
   "summary": "Four labelled layers with per-service data ownership and no invented infrastructure.",
   "prompt": "Create a minimal architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.",
-  "width": 920,
+  "width": 908,
   "scale": 2,
   "theme": "minimal",
   "locales": [

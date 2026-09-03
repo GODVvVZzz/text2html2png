@@ -8,7 +8,7 @@
     {"name": "访问落地页", "value": 48200, "accent": 2},
     {"name": "开始注册", "value": 18795, "accent": 4},
     {"name": "完成邮箱验证", "value": 12640, "accent": 7},
-    {"name": "完善个人资料", "value": 8930, "accent": 3},
+    {"name": "完善资料", "value": 8930, "accent": 3},
     {"name": "完成激活", "value": 8700, "accent": 6}
   ],
   "dropReasons": [

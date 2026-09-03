@@ -25,7 +25,7 @@
   --t-font-display: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-body: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "IBM Plex Mono", "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 31px;
+  --t-title-size: 22px;
   --t-title-weight: 700;
   --t-title-tracking: -0.03em;
   --t-title-transform: none;
@@ -50,5 +50,5 @@
   --t-svg-display: inline-flex;
   --t-lede-style: normal;
   --t-lede-font: var(--t-font-body);
-  --t-lede-size: var(--t-body-size);
+  --t-lede-size: 13px;
 }

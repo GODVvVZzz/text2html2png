@@ -9,7 +9,7 @@
     {"name": "Started signup", "value": 18795, "accent": 4},
     {"name": "Verified email", "value": 12640, "accent": 7},
     {"name": "Profile", "value": 8930, "accent": 3},
-    {"name": "Activated", "value": 8700, "accent": 6}
+    {"name": "Active", "value": 8700, "accent": 6}
   ],
   "dropReasons": [
     "29,405 dropped off",

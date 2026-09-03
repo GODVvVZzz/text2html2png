@@ -25,8 +25,8 @@
   --t-font-display: "Playfair Display", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-body: "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 34px;
-  --t-title-weight: 700;
+  --t-title-size: 24px;
+  --t-title-weight: 900;
   --t-title-tracking: -0.025em;
   --t-title-transform: none;
   --t-body-size: 14px;
@@ -50,5 +50,5 @@
   --t-svg-display: none;
   --t-lede-style: normal;
   --t-lede-font: var(--t-font-body);
-  --t-lede-size: var(--t-body-size);
+  --t-lede-size: 13px;
 }

@@ -25,7 +25,7 @@
   --t-font-display: "Cormorant Garamond", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-body: "Lora", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-data: "Libre Franklin", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", sans-serif;
-  --t-title-size: 38px;
+  --t-title-size: 32px;
   --t-title-weight: 700;
   --t-title-tracking: -0.025em;
   --t-title-transform: none;
@@ -50,5 +50,5 @@
   --t-svg-display: inline-flex;
   --t-lede-style: italic;
   --t-lede-font: var(--t-font-body);
-  --t-lede-size: var(--t-body-size);
+  --t-lede-size: 16px;
 }

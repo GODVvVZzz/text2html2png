@@ -7,7 +7,7 @@
   "metrics": [
     {"value": "3", "label": "Plan tiers", "detail": "Community, Team and Studio", "accent": 1, "emoji": "🗂️", "icon": "layers"},
     {"value": "6", "label": "Shared criteria", "detail": "Every tier measured on the same six rows", "accent": 3, "emoji": "📏", "icon": "check"},
-    {"value": "10", "label": "Billed months per year", "detail": "Annual price = monthly price × 10, per seat", "accent": 2, "emoji": "📅", "icon": "flag"}
+    {"value": "10", "label": "Billed months per year", "detail": "Annual price = monthly × 10, per seat", "accent": 2, "emoji": "📅", "icon": "flag"}
   ],
   "criteria": ["Seats included", "Active projects", "Storage", "Support response", "Price, monthly", "Price, annual"],
   "columns": [
@@ -30,7 +30,7 @@
     {
       "kicker": "Tier 2",
       "name": "Team",
-      "note": "Shared projects for a small group.",
+      "note": "Shared team projects.",
       "icon": "person",
       "emoji": "🤝",
       "tone": 2,

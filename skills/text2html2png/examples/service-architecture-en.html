@@ -118,7 +118,7 @@
   --t-font-display: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-body: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "IBM Plex Mono", "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 31px;
+  --t-title-size: 22px;
   --t-title-weight: 700;
   --t-title-tracking: -0.03em;
   --t-title-transform: none;
@@ -143,7 +143,7 @@
   --t-svg-display: inline-flex;
   --t-lede-style: normal;
   --t-lede-font: var(--t-font-body);
-  --t-lede-size: var(--t-body-size);
+  --t-lede-size: 13px;
 }
   </style>
   <style id="text2html2png-chart" data-chart="architecture">
@@ -171,11 +171,11 @@ body {
 }
 
 .wrap {
-  width: 1040px;
+  width: 860px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 30px 32px 26px;
+  gap: 12px;
+  padding: 24px 24px 20px;
   overflow: hidden;
   background: var(--t-surface);
   border: var(--t-border-width) var(--t-border-style) var(--t-border);
@@ -586,7 +586,7 @@ html:lang(zh-CN) .conn-label {
 </section>
 <footer class="footer">
 <div class="footer-label">connection direction</div>
-<p>Browser connects to API Gateway. API Gateway connects to Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis.</p>
+<p>Browser connects to API Gateway. API Gateway connects to Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis.</p>
 </footer>
 </main>
 </body>

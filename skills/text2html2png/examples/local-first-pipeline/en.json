@@ -17,7 +17,7 @@
       "tag": "Agent",
       "accent": 6,
       "nodes": [
-        {"name": "Select", "desc": "Choose one chart and one visual style.", "emoji": "✅", "icon": "check"},
+        {"name": "Select", "desc": "Pick one chart and one style.", "emoji": "✅", "icon": "check"},
         {"name": "Structure", "desc": "Organize the facts; add nothing.", "emoji": "🧱", "icon": "package"},
         {"name": "Compose", "desc": "Generate one self-contained HTML.", "emoji": "⌨️", "icon": "code"}
       ]

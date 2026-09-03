@@ -7,7 +7,7 @@
   "stats": [
     {"value": "1,284", "label": "工单接入量", "detail": "上周 1,206 · 增加 78 张", "accent": 1, "emoji": "📥", "icon": "package", "trend": {"direction": "up", "delta": "+6.5%"}},
     {"value": "42 分钟", "label": "首次响应中位数", "detail": "上周 55 分钟 · 快 13 分钟", "accent": 4, "emoji": "⏰", "icon": "person", "trend": {"direction": "down", "delta": "-23.6%"}},
-    {"value": "91.4%", "label": "SLA 内解决率", "detail": "1,194 / 1,306 张达成 24 小时目标 · 上周 88.9%", "accent": 2, "emoji": "✅", "icon": "check", "trend": {"direction": "up", "delta": "+2.5 pts"}},
+    {"value": "91.4%", "label": "SLA 内解决率", "detail": "1,194 / 1,306 张达标 · 上周 88.9%", "accent": 2, "emoji": "✅", "icon": "check", "trend": {"direction": "up", "delta": "+2.5 pts"}},
     {"value": "96", "label": "周末积压工单", "detail": "上周末 118 · 减少 22 张", "accent": 3, "emoji": "📋", "icon": "layers", "trend": {"direction": "down", "delta": "-18.6%"}}
   ],
   "panels": [

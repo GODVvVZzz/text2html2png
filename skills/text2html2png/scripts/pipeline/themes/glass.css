@@ -25,7 +25,7 @@
   --t-font-display: "Outfit", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-body: "Outfit", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "Outfit", "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 33px;
+  --t-title-size: 24px;
   --t-title-weight: 700;
   --t-title-tracking: -0.025em;
   --t-title-transform: none;
@@ -50,5 +50,5 @@
   --t-svg-display: none;
   --t-lede-style: normal;
   --t-lede-font: var(--t-font-body);
-  --t-lede-size: var(--t-body-size);
+  --t-lede-size: 13px;
 }
