@@ -6,5 +6,5 @@
   "locales": ["zh", "en"],
   "summary": "A decision-first product brief rendered as one long-form page: six numbered decision cards, a four-step customer flow, an impact table, a risk callout, and acceptance versus non-goal checklists.",
   "prompt": "把我们咖啡店会员小程序 2.0 的改版方案做成一张图文版说明图:先给结论(六项决策),然后是顾客一单的四步流程、对谁改变了什么的影响表、风险与依赖、验收标准和本次不做的事。用 warm 风格。",
-  "width": 1120
+  "width": 908
 }

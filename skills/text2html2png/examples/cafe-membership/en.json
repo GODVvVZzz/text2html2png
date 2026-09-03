@@ -17,7 +17,7 @@
         {"no": "03 · R3", "title": "One-scan checkout", "text": "A single scan earns stars and redeems rewards; it works offline.", "accent": 3},
         {"no": "04 · R4", "title": "Store value gifts", "text": "Load 200, get 20. Refundable, with the rules on the home page.", "accent": 4},
         {"no": "05 · R5", "title": "Birthday doubles", "text": "All purchases in the birthday week earn twice the stars.", "accent": 5},
-        {"no": "06 · R6", "title": "Trends, not profiles", "text": "The store dashboard shows sales trends only, never per-customer profiles.", "accent": 6}
+        {"no": "06 · R6", "title": "Trends, not profiles", "text": "The store dashboard shows trends only, not per-customer profiles.", "accent": 6}
       ]
     },
     {
@@ -27,8 +27,8 @@
       "emoji": "⭐️",
       "icon": "trend-up",
       "items": [
-        {"label": "Order", "text": "At the counter or in the app.", "emoji": "☕️", "icon": "package"},
-        {"label": "Earn", "text": "Stars land after one scan.", "emoji": "⭐️", "icon": "chart"},
+        {"label": "Order", "text": "In person at the counter, or in the app.", "emoji": "☕️", "icon": "package"},
+        {"label": "Earn", "text": "Stars are credited after one scan.", "emoji": "⭐️", "icon": "chart"},
         {"label": "Level up", "text": "90 days sets your tier.", "emoji": "📈", "icon": "trend-up"},
         {"label": "Redeem", "text": "Stars trade for treats.", "emoji": "🎁", "icon": "flag"}
       ]
@@ -65,7 +65,7 @@
       "items": [
         {"ok": true, "text": "A regular earns and redeems stars in a single scan"},
         {"ok": true, "text": "Tier changes on the 90-day total apply automatically"},
-        {"ok": true, "text": "Baristas keep recording offline; uploads resume on reconnect"},
+        {"ok": true, "text": "Baristas record offline; uploads resume on reconnect"},
         {"ok": true, "text": "Stored value refunds to the original payment method"}
       ]
     },

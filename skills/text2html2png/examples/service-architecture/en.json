@@ -43,5 +43,5 @@
     {"label": ""}
   ],
   "footerLabel": "connection direction",
-  "footer": "Browser connects to API Gateway. API Gateway connects to Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis."
+  "footer": "Browser connects to API Gateway. API Gateway connects to Auth Service and Order Service. Auth\u00A0Service uses PostgreSQL. Order\u00A0Service uses PostgreSQL and Redis."
 }

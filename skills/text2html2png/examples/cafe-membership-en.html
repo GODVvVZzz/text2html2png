@@ -209,8 +209,8 @@
   --t-font-display: "Playfair Display", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
   --t-font-body: "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 34px;
-  --t-title-weight: 700;
+  --t-title-size: 24px;
+  --t-title-weight: 900;
   --t-title-tracking: -0.025em;
   --t-title-transform: none;
   --t-body-size: 14px;
@@ -234,7 +234,7 @@
   --t-svg-display: none;
   --t-lede-style: normal;
   --t-lede-font: var(--t-font-body);
-  --t-lede-size: var(--t-body-size);
+  --t-lede-size: 13px;
 }
   </style>
   <style id="text2html2png-chart" data-chart="narrative">
@@ -262,11 +262,11 @@ body {
 }
 
 .wrap {
-  width: 1040px;
+  width: 860px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 30px 32px 26px;
+  gap: 12px;
+  padding: 24px 24px 20px;
   overflow: hidden;
   background: var(--t-surface);
   border: var(--t-border-width) var(--t-border-style) var(--t-border);
@@ -800,7 +800,7 @@ html:lang(zh-CN) h1 {
 <article class="nar-card" style="--card-accent: var(--t-accent-6);">
 <p class="nar-card-no">06 · R6</p>
 <h3 class="nar-card-title">Trends, not profiles</h3>
-<p class="nar-card-text">The store dashboard shows sales trends only, never per-customer profiles.</p>
+<p class="nar-card-text">The store dashboard shows trends only, not per-customer profiles.</p>
 </article>
 </div>
 </section>
@@ -817,13 +817,13 @@ html:lang(zh-CN) h1 {
 <li class="nar-step">
 <span class="nar-step-icon"><span class="sec-icon-emoji">☕️</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 4.5l11 6.2v10.6l-11 6.2-11-6.2V10.7l11-6.2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M5.4 10.9L16 17l10.6-6.1M16 17v10.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span></span>
 <p class="nar-step-label">Order</p>
-<p class="nar-step-text">At the counter or in the app.</p>
+<p class="nar-step-text">In person at the counter, or in the app.</p>
 </li>
 <span class="nar-step-arrow" aria-hidden="true"><svg viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg"><line x1="1.5" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3.5 2.6"/><path d="M11 5.5 17 11l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 <li class="nar-step">
 <span class="nar-step-icon"><span class="sec-icon-emoji">⭐️</span><span class="sec-icon-svg"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9.5 26V15.5M16 26V6.5M22.5 26V11M4 26.5h24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></span>
 <p class="nar-step-label">Earn</p>
-<p class="nar-step-text">Stars land after one scan.</p>
+<p class="nar-step-text">Stars are credited after one scan.</p>
 </li>
 <span class="nar-step-arrow" aria-hidden="true"><svg viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg"><line x1="1.5" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3.5 2.6"/><path d="M11 5.5 17 11l-6 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 <li class="nar-step">
@@ -878,7 +878,7 @@ html:lang(zh-CN) h1 {
 <ul class="nar-checks">
 <li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>A regular earns and redeems stars in a single scan</span></li>
 <li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Tier changes on the 90-day total apply automatically</span></li>
-<li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Baristas keep recording offline; uploads resume on reconnect</span></li>
+<li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Baristas record offline; uploads resume on reconnect</span></li>
 <li class="nar-check"><span class="nar-check-mark nar-check-yes"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l4 4 7.5-8.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Stored value refunds to the original payment method</span></li>
 </ul>
 </section>

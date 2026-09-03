@@ -4,7 +4,7 @@
   "chart": "flowchart",
   "summary": "Six sequential gates, each with an explicit exit condition.",
   "prompt": "Create a warm flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.",
-  "width": 1040,
+  "width": 908,
   "scale": 2,
   "theme": "warm",
   "locales": [

@@ -25,7 +25,7 @@
   --t-font-display: "Caveat", "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
   --t-font-body: "Nunito", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "Caveat", "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
-  --t-title-size: 38px;
+  --t-title-size: 32px;
   --t-title-weight: 700;
   --t-title-tracking: 0;
   --t-title-transform: none;
@@ -50,5 +50,5 @@
   --t-svg-display: inline-flex;
   --t-lede-style: normal;
   --t-lede-font: var(--t-font-display);
-  --t-lede-size: 17px;
+  --t-lede-size: 18px;
 }

@@ -4,7 +4,7 @@
   "chart": "architecture",
   "summary": "How the skill itself works, and where your content stops travelling.",
   "prompt": "Create an editorial architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.",
-  "width": 980,
+  "width": 908,
   "scale": 2,
   "theme": "editorial",
   "locales": [
