@@ -30,18 +30,23 @@ jobs:
           cache: npm
           cache-dependency-path: skills/text2html2png/package-lock.json
 
+      # --no-audit: npm ci submits the lockfile to the audit endpoint, which
+      # stalls behind rate limiting on shared CI egress IPs and can crash npm;
+      # the dedicated audit step below already covers vulnerabilities.
       - name: Install locked dependencies
-        run: npm ci --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
+        run: npm ci --no-audit --no-fund --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
 
-      # The CJK @fontsource packages are large; when a download stalls on a
-      # runner, npm dies with a bare "Exit handler never called!". Keep the
-      # real error around for diagnosis.
-      - name: Dump npm debug log on failure
+      # npm dies with a bare "Exit handler never called!" on stalled registry
+      # requests; keep the real error around for diagnosis.
+      - name: Dump npm debug logs on failure
         if: failure()
         shell: bash
         run: |
           cache="$(cygpath "$(npm config get cache)" 2>/dev/null || npm config get cache)"
-          ls -t "$cache"/_logs/*.log 2>/dev/null | head -1 | xargs -r tail -n 150
+          for f in $(ls -tr "$cache"/_logs/*.log 2>/dev/null | tail -2); do
+            echo "===== $f ====="
+            tail -n 120 "$f"
+          done
 
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
@@ -83,15 +88,18 @@ jobs:
       # The experiment lives outside the shippable skill package, so it is
       # verified here rather than from the skill's own scripts.
       - name: Install locked dependencies
-        run: npm ci --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
+        run: npm ci --no-audit --no-fund --fetch-retries=5 --fetch-retry-maxtimeout=120000 --fetch-timeout=600000
         working-directory: skills/text2html2png
 
-      - name: Dump npm debug log on failure
+      - name: Dump npm debug logs on failure
         if: failure()
         shell: bash
         run: |
           cache="$(cygpath "$(npm config get cache)" 2>/dev/null || npm config get cache)"
-          ls -t "$cache"/_logs/*.log 2>/dev/null | head -1 | xargs -r tail -n 150
+          for f in $(ls -tr "$cache"/_logs/*.log 2>/dev/null | tail -2); do
+            echo "===== $f ====="
+            tail -n 120 "$f"
+          done
 
       - name: Validate source orthogonality
         run: node experiments/theme-decoupling/scripts/validate-orthogonality.mjs
