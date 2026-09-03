@@ -1,0 +1,88 @@
+{
+  "id": "cafe-membership",
+  "locale": "en-US",
+  "eyebrow": "Product brief · café",
+  "title": "Café membership revamp",
+  "subtitle": "A revamp brief for the café membership app. It leads with the decisions, then flow, impact, and acceptance.",
+  "sections": [
+    {
+      "kind": "cards",
+      "eyebrow": "Decision-first",
+      "title": "The revamp in six decisions",
+      "emoji": "☕",
+      "icon": "flag",
+      "items": [
+        {"no": "01 · R1", "title": "Stars, not points", "text": "Every yuan spent earns one star; no thresholds, no expiry.", "accent": 1},
+        {"no": "02 · R2", "title": "Three tiers", "text": "Your rolling 90-day total sets silver, gold, or black-gold tiers.", "accent": 2},
+        {"no": "03 · R3", "title": "One-scan checkout", "text": "A single scan earns stars and redeems rewards; it works offline.", "accent": 3},
+        {"no": "04 · R4", "title": "Store value gifts", "text": "Load 200, get 20. Refundable, with the rules on the home page.", "accent": 4},
+        {"no": "05 · R5", "title": "Birthday doubles", "text": "All purchases in the birthday week earn twice the stars.", "accent": 5},
+        {"no": "06 · R6", "title": "Trends, not profiles", "text": "The store dashboard shows sales trends only, never per-customer profiles.", "accent": 6}
+      ]
+    },
+    {
+      "kind": "steps",
+      "eyebrow": "Customer flow",
+      "title": "One order, four steps",
+      "emoji": "⭐️",
+      "icon": "trend-up",
+      "items": [
+        {"label": "Order", "text": "At the counter or in the app.", "emoji": "☕️", "icon": "package"},
+        {"label": "Earn", "text": "Stars land after one scan.", "emoji": "⭐️", "icon": "chart"},
+        {"label": "Level up", "text": "The 90-day total promotes you.", "emoji": "📈", "icon": "trend-up"},
+        {"label": "Redeem", "text": "Trade stars for drinks and bakes.", "emoji": "🎁", "icon": "flag"}
+      ]
+    },
+    {
+      "kind": "table",
+      "eyebrow": "Impact",
+      "title": "What changes for whom",
+      "emoji": "🧾",
+      "icon": "chart",
+      "columns": ["Audience", "Today", "After the revamp"],
+      "rows": [
+        {"cells": ["Regulars", "Paper stamp cards, lost means gone", "Stars live in the app, visible forever"]},
+        {"cells": ["Baristas", "Stamp by hand, reconcile monthly", "One scan covers earning and redemption"]},
+        {"cells": ["Managers", "Manual membership counts at month end", "Live sales trends in the dashboard"]},
+        {"cells": ["Bookkeeping", "Stored value on paper ledgers", "Balances and gifts post automatically"]}
+      ]
+    },
+    {
+      "kind": "callout",
+      "eyebrow": "Dependency",
+      "title": "Risks and dependencies",
+      "tone": "warn",
+      "emoji": "⚠️",
+      "icon": "shield",
+      "text": "Paper stamp cards convert into the app by the end of October, running in parallel for two weeks. If conversion slips, the new rules start a week later; store events are unchanged."
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "Acceptance",
+      "title": "Definition of done",
+      "emoji": "✅",
+      "icon": "check",
+      "items": [
+        {"ok": true, "text": "A regular earns and redeems stars in a single scan"},
+        {"ok": true, "text": "Tier changes on the 90-day total apply automatically"},
+        {"ok": true, "text": "Baristas keep recording offline; uploads resume on reconnect"},
+        {"ok": true, "text": "Stored value refunds to the original payment method"}
+      ]
+    },
+    {
+      "kind": "checklist",
+      "eyebrow": "Boundary",
+      "title": "Non-goals for this revamp",
+      "emoji": "🚫",
+      "icon": "lock",
+      "items": [
+        {"ok": false, "text": "Delivery and takeout"},
+        {"ok": false, "text": "Social feeds and comments"},
+        {"ok": false, "text": "Cross-store shared points"},
+        {"ok": false, "text": "Ad slots and co-branding"}
+      ]
+    }
+  ],
+  "footerLabel": "Decision owners",
+  "footer": "R1–R3 product, R4–R5 store ops, R6 data. Payment compliance sign-off is required before R4 ships. All names and figures are synthetic sample data."
+}
