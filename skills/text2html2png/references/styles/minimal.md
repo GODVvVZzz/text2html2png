@@ -17,10 +17,7 @@ Display/title: `'IBM Plex Sans', 'Noto Sans SC', sans-serif` — weight 700
 Body: `'IBM Plex Sans', 'Noto Sans SC', sans-serif` — weight 400
 Numbers: `'IBM Plex Mono', monospace` — weight 600
 
-**Optional web fonts** (only when the user explicitly allows network access; otherwise use the local stack above):
-```html
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-```
+**Embedded at build time**: the pipeline loads these faces from npm (`@fontsource/ibm-plex-sans` 400/500/700, `@fontsource/ibm-plex-mono` 500/600, `@fontsource/noto-sans-sc`), subsets them to the chart's actual copy, and inlines them as data-URI `@font-face` — zero network requests, identical rendering on any machine.
 
 ---
 

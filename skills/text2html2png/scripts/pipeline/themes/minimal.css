@@ -21,9 +21,9 @@
   --t-banner-bg: #111111;
   --t-banner-text: #ffffff;
   --t-banner-accent: #ffffff;
-  --t-font-display: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
-  --t-font-body: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
-  --t-font-data: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+  --t-font-display: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-body: "IBM Plex Sans", "Noto Sans SC", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-data: "IBM Plex Mono", "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
   --t-title-size: 31px;
   --t-title-weight: 700;
   --t-title-tracking: -0.03em;

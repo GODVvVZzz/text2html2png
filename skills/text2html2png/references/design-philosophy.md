@@ -49,7 +49,7 @@ Prefer CSS Grid/Flexbox for primary structure. Use SVG only for connectors or sh
 - Keep card radii, border weights, and shadow depth consistent.
 - Use at most one icon language per diagram: inline SVG, geometric symbols, or text labels.
 - Avoid decorative gradients, glow, shadows, and textures that reduce legibility.
-- Use local font stacks by default. Web fonts are optional only when the user allows network access.
+- Use local font stacks by default; the pipeline embeds each theme's brand faces as data-URI subsets, so charts never load remote fonts.
 
 ## 6. Robust text behavior
 

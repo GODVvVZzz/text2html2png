@@ -23,7 +23,7 @@
 </div>
 
 <div align="center">
-  <img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="32.5%" alt="An eight-week conference Gantt chart in the paper theme, rendered in LXGW WenKai">
+  <img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="32.5%" alt="An eight-week conference Gantt chart in the paper theme, set in Caveat and Nunito">
   <img src="./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png" width="32.5%" alt="A five-stage signup funnel in the glass theme">
   <img src="./skills/text2html2png/assets/gallery/library-roadmap-en-editorial.png" width="32.5%" alt="A six-milestone plugin-API roadmap timeline in the editorial theme">
 </div>

@@ -17,10 +17,7 @@ Display/title: `'Outfit', 'Noto Sans SC', sans-serif` — weight 700
 Body: `'Outfit', 'Noto Sans SC', sans-serif` — weight 400-500
 Numbers: `'Outfit', sans-serif` — weight 800
 
-**Optional web fonts** (only when the user explicitly allows network access; otherwise use the local stack above):
-```html
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-```
+**Embedded at build time**: the pipeline loads these faces from npm (`@fontsource/outfit` 400/500/700/800, `@fontsource/noto-sans-sc`), subsets them to the chart's actual copy, and inlines them as data-URI `@font-face` — zero network requests, identical rendering on any machine.
 
 ---
 

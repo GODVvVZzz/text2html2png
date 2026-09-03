@@ -21,9 +21,9 @@
   --t-banner-bg: #fffaf0;
   --t-banner-text: #332b22;
   --t-banner-accent: #a54134;
-  --t-font-display: "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
-  --t-font-body: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --t-font-data: "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
+  --t-font-display: "Caveat", "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
+  --t-font-body: "Nunito", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --t-font-data: "Caveat", "LXGW WenKai", "Kaiti SC", STKaiti, cursive;
   --t-title-size: 36px;
   --t-title-weight: 700;
   --t-title-tracking: 0;

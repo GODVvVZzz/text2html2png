@@ -14,7 +14,7 @@
     {
       "kicker": "Tier 1",
       "name": "Community",
-      "note": "Self-hosted, for solo work and evaluation.",
+      "note": "Self-hosted, for solo use.",
       "icon": "lock",
       "emoji": "🏠",
       "tone": 3,
@@ -46,7 +46,7 @@
     {
       "kicker": "Tier 3",
       "name": "Studio",
-      "note": "Larger groups that need a response time.",
+      "note": "Bigger teams, faster replies.",
       "icon": "shield",
       "emoji": "🛡️",
       "tone": 1,

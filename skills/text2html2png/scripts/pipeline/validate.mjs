@@ -162,7 +162,7 @@ export function validateMarkup(markup, label = "markup") {
   if (failures.length) throw new Error(`${label}:\n- ${[...new Set(failures)].join("\n- ")}`);
 }
 
-// Removes the theme block AND the runtime-injected WenKai font block: both
+// Removes the theme block AND the runtime-injected font block: both
 // are theme/asset injection, never part of the chart structure that the
 // invariant hash and the markup scan reason about.
 export function stripThemeBlock(html) {

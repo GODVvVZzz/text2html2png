@@ -14,12 +14,9 @@ font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Georgia', serif;
 ```
 
 Display/title: `'Playfair Display', 'Noto Serif SC', serif` — weight 700-900
-Body: `'Noto Sans SC', 'Source Han Sans SC', sans-serif` — weight 400-500
+Body: `'Noto Sans SC', sans-serif` — weight 400-500
 
-**Optional web fonts** (only when the user explicitly allows network access; otherwise use the local stack above):
-```html
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
-```
+**Embedded at build time**: the pipeline loads these faces from npm (`@fontsource/playfair-display` 700/900, `@fontsource/noto-serif-sc`, `@fontsource/noto-sans-sc`), subsets them to the chart's actual copy, and inlines them as data-URI `@font-face` — zero network requests, identical rendering on any machine.
 
 ---
 
