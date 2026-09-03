@@ -67,7 +67,7 @@ Read [references/design-philosophy.md](references/design-philosophy.md) only for
 - Write a complete HTML document with all diagram CSS inline and one root `.wrap` element.
 - Treat user text as text: HTML-escape `& < > " '` before interpolation.
 - Do not include `<script>`, event-handler attributes, `javascript:` URLs, iframes, objects, or embeds.
-- Default to local font stacks and inline SVG shapes. Do not load remote fonts, images, scripts, or styles unless the user explicitly requests network-backed assets.
+- Default to local font stacks and inline SVG shapes. Do not load remote fonts, images, scripts, or styles unless the user explicitly requests network-backed assets. The template pipeline embeds each theme's brand fonts (subset to the actual copy) as data-URI `@font-face` at build time, so generated charts never need remote fonts.
 - Icon slots are dual-channel: the theme shows emoji (`warm`, `glass`) or monochrome SVG (`minimal`, `editorial`, `paper`) — never both. Fill emoji slots when the theme shows them and it improves scanability; honor an explicit user preference for or against emoji, and keep one visible icon style per diagram.
 - Use CSS Grid/Flexbox for primary layout. Derive connector geometry from the actual node count and layout; never copy fixed coordinates that only fit an example.
 - Keep titles centered, body copy left-aligned, and relationships unambiguous.

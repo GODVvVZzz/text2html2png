@@ -13,14 +13,11 @@
 font-family: 'Lora', 'Noto Serif SC', serif;  /* body */
 ```
 
-Display/title: `'Cormorant Garamond', 'Noto Serif SC', serif` — weight 700, italic for subtitles
+Display/title: `'Cormorant Garamond', 'Noto Serif SC', serif` — weight 700
 Body: `'Lora', 'Noto Serif SC', serif` — weight 400-500
 Auxiliary/labels: `'Libre Franklin', 'Noto Sans SC', sans-serif` — weight 500, all-caps, letter-spacing
 
-**Optional web fonts** (only when the user explicitly allows network access; otherwise use the local stack above):
-```html
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Lora:wght@400;500;600&family=Libre+Franklin:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
-```
+**Embedded at build time**: the pipeline loads these faces from npm (`@fontsource/cormorant-garamond` 600/700, `@fontsource/lora`, `@fontsource/libre-franklin`, `@fontsource/noto-serif-sc`, `@fontsource/noto-sans-sc`), subsets them to the chart's actual copy, and inlines them as data-URI `@font-face` — zero network requests, identical rendering on any machine.
 
 ---
 

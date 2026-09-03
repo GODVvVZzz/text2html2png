@@ -10,18 +10,15 @@
 ## Font Stack
 
 ```css
-font-family: 'Caveat', 'ZCOOL XiaoWei', cursive;       /* titles, annotations */
+font-family: 'Caveat', 'LXGW WenKai', cursive;            /* titles, annotations */
 font-family: 'Nunito', 'Noto Sans SC', sans-serif;       /* body */
 ```
 
-Display/title: `'Caveat', 'ZCOOL XiaoWei', cursive` — weight 700 (handwritten feel)
+Display/title: `'Caveat', 'LXGW WenKai', cursive` — weight 700 (handwritten feel)
 Body: `'Nunito', 'Noto Sans SC', sans-serif` — weight 400-600
 Annotations: `'Caveat', cursive` — weight 400
 
-**Optional web fonts** (only when the user explicitly allows network access; otherwise use the local stack above):
-```html
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Nunito:wght@400;500;600;700&family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
-```
+**Embedded at build time**: the pipeline loads these faces from npm (`@fontsource/caveat` 400/700, `@fontsource/nunito`, `@fontsource/lxgw-wenkai` 700 for the CJK handwriting, `@fontsource/noto-sans-sc`), subsets them to the chart's actual copy, and inlines them as data-URI `@font-face` — zero network requests, identical rendering on any machine.
 
 ---
 

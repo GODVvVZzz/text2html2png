@@ -15,7 +15,17 @@ All example content — names, numbers, dates, roles, and volumes — is synthet
 
 ## Fonts
 
-The `paper` theme uses LXGW WenKai as its display face. No font binary is committed: the font arrives as the npm dependency `@fontsource/lxgw-wenkai` and is subset at render time to exactly the codepoints in the user's copy. The committed `paper` example HTML therefore embeds small data-URI font subsets derived from that face. LXGW WenKai is copyright LXGW (with Klee by Fontworks as its base) and licensed under the SIL Open Font License 1.1; the license text is archived at [`skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt`](./skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt).
+Every theme ships brand typefaces. No font binary is committed: each face arrives as an npm `@fontsource` dependency, and the pipeline subsets it at render time to exactly the codepoints in the user's copy before inlining it as data-URI `@font-face` blocks. The committed example HTML therefore embeds small data-URI font subsets derived from those faces.
+
+| Theme | Display | Body / data |
+|---|---|---|
+| `warm` | Playfair Display, Noto Serif SC | Noto Sans SC |
+| `minimal` | IBM Plex Sans | IBM Plex Sans, IBM Plex Mono, Noto Sans SC |
+| `editorial` | Cormorant Garamond, Noto Serif SC | Lora, Libre Franklin, Noto Sans SC |
+| `paper` | Caveat, LXGW WenKai | Nunito, Noto Sans SC |
+| `glass` | Outfit | Outfit, Noto Sans SC |
+
+All of these families are licensed under the SIL Open Font License 1.1. LXGW WenKai is copyright LXGW (with Klee by Fontworks as its base); its license text is archived at [`skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt`](./skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt). The remaining faces are distributed by Google's `@fontsource` npm packages, whose `LICENSE` files accompany each package under `node_modules/@fontsource/<family>/`.
 
 ## Vector assets
 
@@ -23,4 +33,4 @@ The `paper` theme uses LXGW WenKai as its display face. No font binary is commit
 
 ## What is deliberately absent
 
-No company logos, private templates, browser screenshots, profile images, or proprietary fonts are included. The style references mention optional fonts by family name only, and remote fonts are never loaded unless the user explicitly passes `--allow-network`.
+No company logos, private templates, browser screenshots, profile images, or proprietary fonts are included. Brand fonts arrive as open-licensed npm dependencies and are always subset and embedded locally; remote fonts are never loaded unless the user explicitly passes `--allow-network`.

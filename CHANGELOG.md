@@ -16,6 +16,7 @@ All notable changes to the public project will be documented here.
 - Theme/chart orthogonality proof: one comparison structure, 45 identical theme tokens, Chinese and English fixtures, atomic restyling, and strict 2×7 visual validation.
 - A ninth chart type, the `narrative` brief: one page that lays a whole document out — decisions as accent cards, a process strip, an impact table, a risk callout, and ✓/✕ acceptance lists. Ships with a bilingual `cafe-membership` example, bringing coverage to 10 published examples across all 9 chart types and 45 chart×theme pairings.
 - An emoji icon channel in the warm and glass themes, mutually exclusive with the inline-SVG slots so a diagram shows exactly one icon language; empty emoji slots collapse instead of leaving a gap.
+- Embedded brand typefaces for every theme: warm is set in Playfair Display with Noto Serif SC, minimal in IBM Plex Sans/Mono, editorial in Cormorant Garamond, Lora, and Libre Franklin, paper in Caveat and Nunito, and glass in Outfit — with Noto Sans SC carrying CJK body copy throughout. All faces ship as OFL-licensed `@fontsource` npm dependencies; the pipeline subsets them to the chart's actual copy and inlines them as data-URI `@font-face`, so rendering stays offline and produces identical output on any machine.
 
 ### Changed
 
@@ -25,6 +26,7 @@ All notable changes to the public project will be documented here.
 - The link checker validates `.codex-plugin/plugin.json` asset and privacy-policy paths, not only Markdown links.
 - Plugin screenshots point at the canonical gallery renderings instead of duplicated copies.
 - READMEs rewritten around the differentiating chart types, with the quality-enforcement mechanism stated explicitly and an honest "use something else when" table.
+- Themes previously stacked on system fonts (Georgia, Avenir Next, Helvetica Neue); every theme now resolves brand faces from `scripts/pipeline/font-embed.mjs` and falls back to the system stack only when an npm package is missing, with a loud stderr warning.
 
 ### Fixed
 

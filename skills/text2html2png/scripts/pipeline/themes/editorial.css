@@ -21,9 +21,9 @@
   --t-banner-bg: #253b56;
   --t-banner-text: #f7f1e8;
   --t-banner-accent: #e4bd62;
-  --t-font-display: Georgia, "Songti SC", "STSong", serif;
-  --t-font-body: Georgia, "Songti SC", "STSong", serif;
-  --t-font-data: "Avenir Next", "Segoe UI", "PingFang SC", sans-serif;
+  --t-font-display: "Cormorant Garamond", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
+  --t-font-body: "Lora", "Noto Serif SC", Georgia, "Songti SC", "STSong", serif;
+  --t-font-data: "Libre Franklin", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", sans-serif;
   --t-title-size: 38px;
   --t-title-weight: 700;
   --t-title-tracking: -0.025em;

@@ -10,7 +10,7 @@ import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { renderScreenshot } from "./screenshot.mjs";
 import { auditLayout, formatReport } from "./audit-layout.mjs";
-import { buildWenKaiFaces } from "./subset-wenkai.mjs";
+import { buildThemeFontFaces, themeFontFamilies } from "./pipeline/font-embed.mjs";
 import {
   structureFingerprint,
   validateChartCss,
@@ -181,7 +181,7 @@ async function main() {
     const fullChartCss = sources.sharedCss + "\n" + chart.chartCss;
     validateChartCss(fullChartCss, sources.tokenContract);
     const css = await themeCss(example.theme);
-    const needsWenKai = css.includes("LXGW WenKai");
+    const fontFamilies = themeFontFamilies(css);
 
     const fixtures = {};
     for (const locale of example.locales) {
@@ -199,14 +199,17 @@ async function main() {
       if (fixture.id !== example.id) {
         throw new Error(`${example.id}/${locale}: fixture id must match the example id`);
       }
-      const fontCss = needsWenKai
-        ? await buildWenKaiFaces(fixtureStrings(fixture, []).join("\n"))
-        : { css: "", faces: [], totalBytes: 0 };
+      const fontCss = fontFamilies.length
+        ? await buildThemeFontFaces(css, fixtureStrings(fixture, []).join("\n"))
+        : { css: "", families: fontFamilies, faces: 0, totalBytes: 0, warnings: [] };
+      for (const warning of fontCss.warnings) {
+        console.error(`warn: ${example.id}-${locale}: ${warning}`);
+      }
       const body = chart.bodyMarkup(fixture);
       const html = template
         .replace("{{LANG}}", escapeAttr(fixture.locale ?? locale))
         .replace("{{DOCUMENT_TITLE}}", escapeAttr(fixture.title))
-        .replace("{{FONT_CSS}}", fontCss.css ? '<style id="text2html2png-fonts" data-font="LXGW WenKai">\n' + fontCss.css + "  </style>\n  " : "")
+        .replace("{{FONT_CSS}}", fontCss.css ? '<style id="text2html2png-fonts" data-font="' + escapeAttr(fontCss.families.join(", ")) + '">\n' + fontCss.css + "  </style>\n  " : "")
         .replace("{{THEME_ID}}", escapeAttr(example.theme))
         .replace("{{THEME_CSS}}", css.trim())
         .replace("{{CHART_ID}}", escapeAttr(example.chart))
@@ -226,7 +229,7 @@ async function main() {
       const htmlPath = example.htmlPathFor(locale);
       await writeFile(htmlPath, html, "utf8");
       generated.push({ example, locale, htmlPath, pngPath: example.pngPathFor(locale), fontBytes: fontCss.totalBytes });
-      const fontNote = fontCss.totalBytes ? ` fonts=1 face/${fontCss.totalBytes}B` : "";
+      const fontNote = fontCss.faces ? ` fonts=${fontCss.faces} faces/${fontCss.totalBytes}B` : "";
       console.log("built " + `${example.id}-${locale}.html` + fontNote);
     }
   }
