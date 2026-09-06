@@ -13,7 +13,7 @@
 [Summary Banner]
 ```
 
-Top row of hero numbers, followed by detail sections.
+Render the supplied one to eight KPIs, with at most four columns. Detail sections and trends are optional: omit them when the user has supplied neither breakdowns nor a comparison period. Zero is a valid metric value. The four-card example below illustrates a layout, not a required count.
 
 ---
 
@@ -232,5 +232,5 @@ Validated structure (all themes × zh/en, `build --render --audit` 56/56 green):
   every theme without literal colors.
 - Trend values and panel values use `font-variant-numeric: tabular-nums` for column-stable digits.
 - Themes must keep all 5 accents distinct ON THEIR OWN surfaces: a grey-blue
-  accent-3/accent-6 pair once read as one color inside a 4-up KPI row, so accent-3 moved to warm sand
+  accent-3/accent-6 pair once read as one color inside a 4-up KPI row, so accent-3 moved to clean sand
   (#d4a763) — adjacent KPI cards are the strictest accent-identity test in the suite.

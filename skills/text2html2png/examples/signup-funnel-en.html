@@ -363,7 +363,7 @@ html:lang(zh-CN) h1 {
   gap: 12px;
   justify-self: center;
   width: var(--bar-width);
-  min-width: 120px;
+  min-width: 170px;
   padding: 12px 16px;
   background: var(--tone);
   border-radius: var(--t-small-radius);
@@ -371,9 +371,9 @@ html:lang(zh-CN) h1 {
 }
 
 .funnel-stage-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
   color: var(--t-on-accent);
   font-size: 13px;
   font-weight: 700;

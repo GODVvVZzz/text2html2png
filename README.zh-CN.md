@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./skills/text2html2png/assets/logo.svg" width="720" alt="text2html2png">
-  <p><strong>把任何文字变成一张能直接粘贴的图。</strong><br>
-  每次渲染都是可编辑的 HTML;PNG 一句话就能导出,内容不出本机。</p>
+  <p><strong>把结构化文字变成一张能直接粘贴的图。</strong><br>
+  Agent 负责理解事实，确定性本地渲染器负责排版、HTML 与按需 PNG。</p>
   <p>
     <a href="./README.md">English</a>
     ·
@@ -23,15 +23,14 @@
 </div>
 
 <div align="center">
-  <img src="./skills/text2html2png/assets/gallery/launch-plan-zh-paper.png" width="32.5%" alt="paper 风格的八周会议筹备甘特图,以霞鹜文楷渲染">
-  <img src="./skills/text2html2png/assets/gallery/signup-funnel-zh-glass.png" width="32.5%" alt="glass 风格的五阶段注册漏斗">
-  <img src="./skills/text2html2png/assets/gallery/library-roadmap-zh-editorial.png" width="32.5%" alt="editorial 风格的六里程碑插件 API 路线图时间线">
+  <img src="./skills/text2html2png/assets/gallery/release-flow-zh-clean.png" width="820" alt="从结构化文字渲染的发布流水线">
 </div>
 
-大多数绘图工具要你动手画,这个只要你把事情说清楚。你把一份计划、一段规格、一次会议记录或一组数字贴进去;你的 agent 选择合适的图表类型,保持你给出的事实不变,交付一张能直接粘贴的图——图的底层是一份可以改样式、可以留档的自包含 HTML 文档。Carbon 和 ray.so 为代码片段做这件事,这个技能为任何结构化文字做这件事。需要图片时,它会用你本机已有的浏览器渲染一张裁切紧凑的 PNG。
+大多数绘图工具要你动手画，这个只要你把事情说清楚。Codex、Claude 或其他兼容 Agent 把内容整理成版本化 Diagram JSON；内置渲染器统一负责布局、字体、安全、HTML 与 PNG。同一份 JSON 会生成同一份 HTML，不再依赖 Agent 临场手写 CSS。
 
-- **9 种图表** — 流程图、对比、时间线、架构图、KPI 看板、甘特图、组织架构、漏斗、叙事长图
-- **5 套视觉风格** — warm、glass、minimal、editorial、paper
+- **先解决三个任务** — 解释系统、发布版本、汇报变化
+- **确定性内核** — Agent、案例与 CI 共用一份版本化 JSON 和一个渲染入口
+- **9 种图表、5 套视觉主题** — clean 是默认；内容需要氛围时仍可选择 warm 和 glass
 - **一张图能直接粘贴,一份文档能留下来** — 交付物是一份可编辑的 HTML 文件;说一句“同时导出 PNG”或传 `--png`,就能拿到图本身
 - **质量是量出来的,不是赌出来的** — 基于浏览器的版面质检既是工作流的必经步骤,也是每个已发布示例的 CI 门禁
 - **本机优先** — 无托管渲染 API、无 API Key、无遥测,渲染期间网络全部拦截
@@ -44,9 +43,16 @@ npx skills add GODVvVZzz/text2html2png -g -y
 
 然后用自然语言提出需求:
 
-> 把我们的上线计划做成甘特图:调研第 1–2 周,设计第 2–4 周,开发第 4–7 周,内测第 8 周。用 paper 风格。
+> 把我们的上线计划做成甘特图:调研第 1–2 周,设计第 2–4 周,开发第 4–7 周,内测第 8 周。用 notebook 风格。
 
 图表以一份可编辑的 `.html` 交付——改样式、改文案、进 Git 都行。说一句“顺便导出 PNG”或传 `--png`,就能同时拿到能直接粘贴的图。
+
+已有 Diagram JSON 时，无需 Agent 也能渲染：
+
+```bash
+cd skills/text2html2png
+npm run render -- --input examples/release-flow.diagram.json --html release.html --audit
+```
 
 `skills` CLI 会按你指定的 agent 放置技能。指定单个 agent:
 
@@ -57,20 +63,28 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 
 **环境要求:** 浏览器版面质检或按需导出 PNG 时,需要 Node.js 22.12+ 和任意 Chrome 系浏览器(Chrome、Chromium、Edge 或 Brave)。首次执行浏览器检查时,技能会在自己的目录里安装唯一的直接依赖 `puppeteer-core`(由提交的 lockfile 锁定版本)。它驱动你已装好的浏览器,不会额外下载浏览器。
 
-## 看看能做成什么样
+## 三个招牌场景
+
+本地交互试用：在 `skills/text2html2png` 运行 `npm run playground`，打开打印的地址即可修改案例、预览和下载。[阶段 1 与阶段 2 验收说明](./docs/ACCEPTANCE.zh-CN.md)。
+
+- **解释系统** — 用于 README、RFC 和技术评审的架构图。
+- **发布版本** — 顺序明确的发布闸门、路线图和上线计划。
+- **汇报变化** — 只使用已提供数据的 KPI 快照和运营周报。
+
+## 浏览更多案例
 
 <div align="center">
-  <img src="./assets/demo.gif" width="820" alt="六张真实输出:warm 发布流程图、glass KPI 看板、glass 漏斗、warm 组织架构、minimal 对比表、minimal 架构图">
+  <img src="./assets/demo.gif" width="820" alt="六张真实输出:clean 发布流程图、clean KPI 看板、clean 漏斗、clean 组织架构、clean 对比表、clean 架构图">
 </div>
 
 上面每一帧都是仓库里真实提交的示例,不是效果图。完整案例(含产出它的原始 prompt)在 **[案例画廊](https://godvvvzzz.github.io/text2html2png/)**。
 
 |  |  |
 |---|---|
-| **甘特图** · `paper`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-zh-paper.png" width="400" alt="paper 风格的八周会议筹备甘特图"><br>[Prompt 与 HTML](./skills/text2html2png/examples/launch-plan-zh.html) | **KPI 看板** · `glass`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-zh-glass.png" width="400" alt="glass 风格的客服周报看板"><br>[Prompt 与 HTML](./skills/text2html2png/examples/support-snapshot-zh.html) |
-| **组织架构** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org-zh-warm.png" width="400" alt="warm 风格的 14 人产品工作室组织架构"><br>[Prompt 与 HTML](./skills/text2html2png/examples/studio-org-zh.html) | **漏斗** · `glass`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-zh-glass.png" width="400" alt="glass 风格的五阶段注册漏斗"><br>[Prompt 与 HTML](./skills/text2html2png/examples/signup-funnel-zh.html) |
+| **甘特图** · `notebook`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-zh-notebook.png" width="400" alt="notebook 风格的八周会议筹备甘特图"><br>[Prompt 与 HTML](./skills/text2html2png/examples/launch-plan-zh.html) | **KPI 看板** · `clean`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-zh-clean.png" width="400" alt="clean 风格的客服周报看板"><br>[Prompt 与 HTML](./skills/text2html2png/examples/support-snapshot-zh.html) |
+| **组织架构** · `clean`<br><img src="./skills/text2html2png/assets/gallery/studio-org-zh-clean.png" width="400" alt="clean 风格的 14 人产品工作室组织架构"><br>[Prompt 与 HTML](./skills/text2html2png/examples/studio-org-zh.html) | **漏斗** · `clean`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-zh-clean.png" width="400" alt="clean 风格的五阶段注册漏斗"><br>[Prompt 与 HTML](./skills/text2html2png/examples/signup-funnel-zh.html) |
 
-另外还有:[warm 发布流程图](./skills/text2html2png/examples/release-flow-zh.html)、[editorial 路线图时间线](./skills/text2html2png/examples/library-roadmap-zh.html)、[minimal 方案对比表](./skills/text2html2png/examples/plan-comparison-zh.html),两张架构图 —— [minimal 服务拓扑](./skills/text2html2png/examples/service-architecture-zh.html) 和 [editorial 视角下的技能自身流水线](./skills/text2html2png/examples/local-first-pipeline-zh.html),以及把整份产品说明排成一页的 [warm 叙事长图](./skills/text2html2png/examples/cafe-membership-zh.html)。每个示例都同时提供英文版;所有示例数据均为合成数据,见[素材来源说明](./ASSET_PROVENANCE.md)。
+另外还有:[clean 发布流程图](./skills/text2html2png/examples/release-flow-zh.html)、[editorial 路线图时间线](./skills/text2html2png/examples/library-roadmap-zh.html)、[clean 方案对比表](./skills/text2html2png/examples/plan-comparison-zh.html),两张架构图 —— [clean 服务拓扑](./skills/text2html2png/examples/service-architecture-zh.html) 和 [editorial 视角下的技能自身流水线](./skills/text2html2png/examples/local-first-pipeline-zh.html),以及把整份产品说明排成一页的 [clean 叙事长图](./skills/text2html2png/examples/cafe-membership-zh.html)。每个示例都同时提供英文版;所有示例数据均为合成数据,见[素材来源说明](./ASSET_PROVENANCE.md)。
 
 ## 图表类型
 
@@ -86,11 +100,11 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 | 漏斗 | 你提供的各阶段量级与转化 |
 | 叙事长图 | 决策先行的图文说明:PRD、方案、复盘 |
 
-任意图表都可以搭配任意风格。统一的 style token contract 在 CI 中校验 5 套风格必须定义同样的 19 个 token,所以「甘特图 + glass」是被支持的请求,而不是碰运气。45 种组合中有 10 种已作为渲染示例发布,其余由 contract 保证兼容,但尚未纳入视觉回归。
+任意图表都可以搭配任意风格。统一的 style token contract 在 CI 中校验 5 套风格必须定义同样的 19 个 token,所以「甘特图 + warm」是被支持的请求,而不是碰运气。45 种组合中有 10 种已作为渲染示例发布,其余由 contract 保证兼容,但尚未纳入视觉回归。
 
 ## 输出为什么稳定
 
-模型手写 HTML 时看不见自己的错误。所以这个技能会在交付前用真实浏览器测量渲染结果,对那些「只看源码永远发现不了」的缺陷直接判失败:
+即使 HTML 由确定性渲染器生成，真实字体与浏览器布局仍可能暴露问题。因此技能会在交付前测量渲染结果，对源码校验看不到的缺陷直接判失败：
 
 ```bash
 cd skills/text2html2png
@@ -118,7 +132,7 @@ node scripts/audit-layout.mjs --html /path/to/diagram.html --width 1040
 
 这不是摆设:这项检查在本仓库原本已认为完工的示例里查出了真实缺陷 —— 一个有 9px 的文字,一个白字只有 3.2:1 对比度,还有一个图例被 aria-hidden 挡住了屏幕阅读器;它曾经存在的漏报(文字被压住、文字隐形)现在都有测试 fixture 覆盖。
 
-技能还会替你补上你没拍板的细节:不打「假设」标签、不来回追问,而是做出最合理的判断直接画进图里——交付的图拿来就能贴,哪一处不合意,说一声就改。
+技能会直接完成图表类型、布局和风格等表现决策，但不会虚构指标、日期、人员或依赖关系。缺少的事实会被省略或明确标注，而不是伪装成用户提供的信息。
 
 ## 隐私与安全
 
@@ -187,11 +201,11 @@ npm run check
 | `npm run audit:layout -- --html x.html --width 1040 --json` | 质检单个文档,输出机器可读结果 |
 | `node ../../scripts/build-gallery.mjs` | 重新生成画廊页与 prompt 索引 |
 
-已验证的[主题/图表正交性试验](./experiments/theme-decoupling/README.md)使用同一份 comparison 结构生成中英文各 7 个主题。试验 PNG 只用于开发评审;正常调用交付的是可编辑 HTML,只有你开口时才渲染 PNG。
+已验证的[主题/图表正交性试验](./experiments/theme-decoupling/README.md)使用同一份 comparison 结构生成中英文五套主题。试验 PNG 只用于开发评审；正常调用交付的是可编辑 HTML，只有你开口时才渲染 PNG。
 
 ## 路线图
 
-- JSON schema → 确定性渲染器,让版面不再依赖手写 CSS
+- 更完整的图表级 JSON 校验与版本迁移工具
 - SVG 导出
 - 针对 CJK 文本、超长标签和更多图表/风格组合的视觉回归基线
 - 权利与隐私均已确认的社区作品画廊

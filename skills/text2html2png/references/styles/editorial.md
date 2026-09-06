@@ -194,8 +194,8 @@ body {
 - **ALL-CAPS labels**: Sans-serif, tiny (9-10px), wide letter-spacing for category/section labels
 - **Thin rules**: 1px horizontal dividers separate sections (like a newspaper column)
 - **Symmetric layout**: Equal-width columns, same as all styles. Magazine feel comes from typography, not layout asymmetry.
-- **Muted warm palette**: Rust, navy, gold as accents on warm cream background
-- **Small border-radius**: 6px (tighter than warm's 10px for a more editorial feel)
+- **Muted folio palette**: Rust, navy, gold as accents on a warm cream background
+- **Small border-radius**: 6px (tighter than clean's 10px for a more editorial feel)
 
 ---
 

@@ -11,9 +11,9 @@
     :root {
       --ink: #f8fafc;
       --muted: #aab5c8;
-      --cyan: #38bdf8;
-      --violet: #a855f7;
-      --pink: #f472b6;
+      --cyan: #8eabff;
+      --violet: #8eabff;
+      --pink: #8eabff;
       --mint: #34d399;
       --panel: #151b30;
       --panel-2: #1c2440;
@@ -31,10 +31,7 @@
       height: 640px;
       padding: 56px;
       color: var(--ink);
-      background:
-        radial-gradient(circle at 6% 4%, rgba(56,189,248,.20), transparent 40%),
-        radial-gradient(circle at 94% 98%, rgba(168,85,247,.24), transparent 44%),
-        #0b1020;
+      background: #101827;
     }
 
     .mark { display: flex; align-items: center; gap: 13px; margin-bottom: 24px; }
@@ -43,8 +40,8 @@
       place-items: center;
       width: 48px;
       height: 48px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--cyan), var(--violet) 52%, var(--pink));
+      border-radius: 4px;
+      background: var(--cyan);
     }
     .glyph span {
       font-family: "SFMono-Regular", Consolas, monospace;
@@ -62,10 +59,7 @@
       letter-spacing: -1.5px;
     }
     .gradient {
-      background: linear-gradient(96deg, var(--cyan), var(--violet) 56%, var(--pink));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--cyan);
     }
     .lede {
       margin: 20px 0 0;
@@ -79,7 +73,7 @@
     .chip {
       padding: 8px 14px;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 3px;
       background: rgba(21,27,48,.92);
       color: #dde4f0;
       font-size: 15px;
@@ -91,7 +85,7 @@
       margin-top: 22px;
       padding: 13px 18px;
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 4px;
       background: #0f1526;
       color: #a7ebff;
       font-family: "SFMono-Regular", Consolas, monospace;
@@ -104,9 +98,9 @@
     .panel {
       padding: 16px 18px;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 4px;
       background: var(--panel);
-      box-shadow: 0 20px 44px rgba(0,0,0,.42);
+      box-shadow: none;
     }
     .panel-title {
       margin-bottom: 12px;
@@ -138,7 +132,7 @@
       margin-left: var(--start);
       width: var(--span);
       border-radius: 7px;
-      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      background: var(--cyan);
     }
 
     .funnel { display: grid; gap: 7px; }
@@ -149,7 +143,7 @@
       width: var(--span);
       padding: 7px 11px;
       border-radius: 8px;
-      background: linear-gradient(90deg, rgba(56,189,248,.9), rgba(168,85,247,.9));
+      background: var(--cyan);
       color: #0b1020;
       font-size: 12px;
       font-weight: 800;
@@ -163,11 +157,11 @@
         <div class="glyph"><span>&lt;&gt;</span></div>
         <div class="wordmark">text2html2png</div>
       </div>
-      <h1>Turn any text into<br><span class="gradient">a paste-ready diagram</span></h1>
-      <p class="lede">Every render is editable HTML you can restyle and keep; the PNG is one request away. Nothing leaves your machine.</p>
+      <h1>Turn structured text into<br><span class="gradient">a paste-ready diagram</span></h1>
+      <p class="lede">The agent structures the facts. One deterministic local renderer produces editable HTML and an optional PNG.</p>
       <div class="chips">
-        <div class="chip">8 chart types</div>
-        <div class="chip">7 visual themes</div>
+        <div class="chip">Codex + Claude</div>
+        <div class="chip">Deterministic HTML</div>
         <div class="chip">Local-first</div>
       </div>
       <div class="install">npx skills add GODVvVZzz/text2html2png -g</div>

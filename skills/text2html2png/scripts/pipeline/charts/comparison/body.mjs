@@ -4,8 +4,8 @@ import { iconSvg } from "../../icons.mjs";
 
 export function assertFixture(fixture) {
   if (!fixture.id || !fixture.locale || !fixture.title) throw new Error("Fixture is missing identity fields.");
-  if (!Array.isArray(fixture.metrics) || fixture.metrics.length !== 3) {
-    throw new Error(fixture.id + ": exactly three metrics are required.");
+  if (fixture.metrics !== undefined && (!Array.isArray(fixture.metrics) || fixture.metrics.length > 3)) {
+    throw new Error(fixture.id + ": optional metrics may contain up to three entries.");
   }
   if (!Array.isArray(fixture.criteria) || !fixture.criteria.length) {
     throw new Error(fixture.id + ": criteria are required.");
@@ -14,7 +14,7 @@ export function assertFixture(fixture) {
     throw new Error(fixture.id + ": comparison requires two or three columns.");
   }
   for (const column of fixture.columns) {
-    if (column.values.length !== fixture.criteria.length) {
+    if (!Array.isArray(column.values) || column.values.length !== fixture.criteria.length) {
       throw new Error(fixture.id + "/" + column.name + ": value count must match criteria count.");
     }
   }
@@ -22,7 +22,7 @@ export function assertFixture(fixture) {
 
 export function bodyMarkup(fixture) {
   const matrixRows = fixture.criteria.length + 1;
-  const metrics = metricsMarkup(fixture.metrics);
+  const metrics = fixture.metrics?.length ? metricsMarkup(fixture.metrics) : "";
 
   const rail = fixture.criteria.map(function (criterion) {
     return [
@@ -63,9 +63,7 @@ export function bodyMarkup(fixture) {
     '<p class="lede">' + escapeHtml(fixture.subtitle) + "</p>",
     '<div class="head-rule"></div>',
     "</header>",
-    '<section class="metrics" aria-label="' + escapeHtml(fixture.eyebrow) + '">',
-    metrics,
-    "</section>",
+    ...(metrics ? ['<section class="metrics" aria-label="' + escapeHtml(fixture.eyebrow) + '">', metrics, "</section>"] : []),
     '<section class="matrix" aria-label="' + escapeHtml(fixture.title) + '" style="--compare-count: ' + fixture.columns.length + "; --criteria-count: " + fixture.criteria.length + "; --matrix-rows: " + matrixRows + ';">',
     '<div class="rail">',
     '<div class="rail-head"><span>' + escapeHtml(fixture.locale === "zh-CN" ? "对照维度" : "Criteria") + "</span></div>",

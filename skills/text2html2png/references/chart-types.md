@@ -37,15 +37,15 @@ If none fits, ask what relationship the user wants to communicate rather than fo
 
 | Type | Strong defaults | Other valid styles |
 |---|---|---|
-| `flowchart` | warm, paper | all |
-| `comparison` | minimal, warm | all |
-| `timeline` | editorial, paper | all |
-| `architecture` | glass, minimal | all |
-| `dashboard` | glass, paper | all |
-| `gantt` | warm, minimal | all |
-| `org-chart` | minimal, glass | all |
-| `funnel` | glass, warm | all |
-| `narrative` | warm, glass | all |
+| `flowchart` | clean, notebook | all |
+| `comparison` | clean, editorial | all |
+| `timeline` | editorial, notebook | all |
+| `architecture` | clean, editorial | all |
+| `dashboard` | clean, notebook | all |
+| `gantt` | notebook, clean | all |
+| `org-chart` | clean, editorial | all |
+| `funnel` | clean, notebook | all |
+| `narrative` | editorial, notebook | all |
 
 These are defaults, not restrictions. An explicit user style always wins.
 
@@ -53,11 +53,11 @@ These are defaults, not restrictions. An explicit user style always wins.
 
 - Rephrase or group supplied content to improve clarity.
 - Content the user supplied is the backbone: keep their facts, numbers, and relationships.
-- Content the user has not decided is yours to decide: infer the most plausible value consistent with what was supplied and draw it straight in — no assumption labels, no clarifying round-trips. The user will correct any call they disagree with.
+- Decide presentation details directly, but do not turn missing facts into plausible-looking data. Omit them, label an explicitly requested placeholder, or ask one concise question when the relationship changes the chart's meaning.
 - Explicit user constraints always win: if the user says "no benchmarks" or "do not pick a winner", honor it.
 - Comparison charts may summarize trade-offs stated by the user; add a recommendation only when the user asked for one or left the choice open.
-- Funnel widths use supplied values; if none exist, infer plausible stage volumes consistent with the story instead of leaving the funnel unshaped.
-- Narrative sections follow the same rule: an unstated owner, metric, or date gets a sensible default rather than a placeholder.
+- Funnel widths require supplied values. If none exist, ask for them or choose a non-quantitative ordered flow instead of inventing volumes.
+- Narrative sections may reorganize supplied facts, but an unstated owner, metric, or date stays omitted or visibly unspecified.
 
 ## Ambiguous cases
 

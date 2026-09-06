@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./skills/text2html2png/assets/logo.svg" width="720" alt="text2html2png">
-  <p><strong>Turn any text into a paste-ready diagram.</strong><br>
-  Every render is editable HTML; PNG export is one request away. Nothing leaves your machine.</p>
+  <p><strong>Turn structured text into a diagram you can paste.</strong><br>
+  The agent structures the facts. One deterministic local renderer produces editable HTML and an optional PNG.</p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a>
     ·
@@ -23,15 +23,14 @@
 </div>
 
 <div align="center">
-  <img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="32.5%" alt="An eight-week conference Gantt chart in the paper theme, set in Caveat and Nunito">
-  <img src="./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png" width="32.5%" alt="A five-stage signup funnel in the glass theme">
-  <img src="./skills/text2html2png/assets/gallery/library-roadmap-en-editorial.png" width="32.5%" alt="A six-milestone plugin-API roadmap timeline in the editorial theme">
+  <img src="./skills/text2html2png/assets/gallery/release-flow-en-clean.png" width="820" alt="A release workflow rendered from structured text">
 </div>
 
-Most diagram tools ask you to draw. This one asks you to describe. You paste a plan, a spec, a meeting note, or a set of numbers; your agent picks the right chart, keeps your facts intact, and hands you a paste-ready image — backed by a self-contained HTML document you can restyle and keep. Carbon and ray.so do this for code snippets; this skill does it for any structured text. When you explicitly need the picture, it renders a tightly cropped PNG in the browser you already have.
+Most diagram tools ask you to draw. This one asks you to describe. Codex, Claude, or another compatible agent turns your material into versioned Diagram JSON; the bundled renderer owns layout, fonts, safety, HTML, and PNG export. Identical JSON produces identical HTML, so quality no longer depends on an agent improvising CSS.
 
-- **9 chart types** — flowchart, comparison, timeline, architecture, dashboard, Gantt, org chart, funnel, narrative brief
-- **5 visual themes** — warm, glass, minimal, editorial, paper
+- **Three jobs first** — explain a system, ship a release, or report what changed
+- **Deterministic core** — one versioned JSON input and one renderer used by agents, examples, and CI
+- **9 chart types, 5 visual themes** — clean is the default; warm and glass remain available when the subject benefits from more atmosphere
 - **A picture you can paste, a document you can keep** — the deliverable is one editable HTML file; say “also export a PNG” or pass `--png` when you want the image itself
 - **Measured, not hoped for** — a browser-based layout audit is a required step of the workflow and a CI gate for every published example
 - **Local-first** — no hosted rendering API, no API key, no telemetry, network blocked during render
@@ -44,9 +43,16 @@ npx skills add GODVvVZzz/text2html2png -g -y
 
 Then ask your agent, in plain language:
 
-> Turn our launch plan into a Gantt chart: research weeks 1–2, design weeks 2–4, build weeks 4–7, beta week 8. Use the paper theme.
+> Turn our launch plan into a Gantt chart: research weeks 1–2, design weeks 2–4, build weeks 4–7, beta week 8. Use the notebook theme.
 
 The chart arrives as an editable `.html` file — restyle it, tweak the copy, keep it in Git. Add “also export a PNG” or `--png` when you want the paste-ready image too.
+
+Already have Diagram JSON? Render it without an agent:
+
+```bash
+cd skills/text2html2png
+npm run render -- --input examples/release-flow.diagram.json --html release.html --audit
+```
 
 The `skills` CLI places the skill for the agent you name. To target one explicitly:
 
@@ -57,20 +63,28 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 
 **Requirements:** Node.js 22.12+ and any Chrome-family browser (Chrome, Chromium, Edge, or Brave) for browser layout auditing or optional PNG export. On the first browser-backed check the skill installs one direct dependency — `puppeteer-core`, pinned with a committed lockfile — inside its own folder. It drives the browser you already have instead of downloading one.
 
-## See the range
+## Three flagship jobs
+
+Try locally: run `npm run playground` inside `skills/text2html2png`, then open the printed localhost address. Load any of the nine examples, edit its JSON, preview the result, and download HTML or an audited PNG. No API key is needed; natural-language interpretation stays with your agent.
+
+- **Explain a system** — architecture maps for READMEs, RFCs, and technical reviews.
+- **Ship a release** — gates, timelines, and launch plans with explicit sequence.
+- **Report what changed** — KPI snapshots and concise operational updates using supplied data only.
+
+## Explore the range
 
 <div align="center">
-  <img src="./assets/demo.gif" width="820" alt="Six real text2html2png outputs: a warm release flowchart, a glass KPI dashboard, a glass funnel, a warm org chart, a minimal comparison table, and a minimal architecture map">
+  <img src="./assets/demo.gif" width="820" alt="Six real text2html2png outputs: a clean release flowchart, a clean KPI dashboard, a clean funnel, a clean org chart, a clean comparison table, and a clean architecture map">
 </div>
 
 Every frame above is a real committed example, not a mockup. The full set, each with the exact prompt that produced it, lives in the **[gallery](https://godvvvzzz.github.io/text2html2png/)**.
 
 |  |  |
 |---|---|
-| **Gantt** · `paper`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-en-paper.png" width="400" alt="An eight-week conference preparation Gantt chart in the paper theme"><br>[Prompt and HTML](./skills/text2html2png/examples/launch-plan-en.html) | **Dashboard** · `glass`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-en-glass.png" width="400" alt="A weekly support desk KPI dashboard in the glass theme"><br>[Prompt and HTML](./skills/text2html2png/examples/support-snapshot-en.html) |
-| **Org chart** · `warm`<br><img src="./skills/text2html2png/assets/gallery/studio-org-en-warm.png" width="400" alt="A fourteen-person product studio org chart in the warm theme"><br>[Prompt and HTML](./skills/text2html2png/examples/studio-org-en.html) | **Funnel** · `glass`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png" width="400" alt="A five-stage signup funnel in the glass theme"><br>[Prompt and HTML](./skills/text2html2png/examples/signup-funnel-en.html) |
+| **Gantt** · `notebook`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-en-notebook.png" width="400" alt="An eight-week conference preparation Gantt chart in the notebook theme"><br>[Prompt and HTML](./skills/text2html2png/examples/launch-plan-en.html) | **Dashboard** · `clean`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-en-clean.png" width="400" alt="A weekly support desk KPI dashboard in the clean theme"><br>[Prompt and HTML](./skills/text2html2png/examples/support-snapshot-en.html) |
+| **Org chart** · `clean`<br><img src="./skills/text2html2png/assets/gallery/studio-org-en-clean.png" width="400" alt="A fourteen-person product studio org chart in the clean theme"><br>[Prompt and HTML](./skills/text2html2png/examples/studio-org-en.html) | **Funnel** · `clean`<br><img src="./skills/text2html2png/assets/gallery/signup-funnel-en-clean.png" width="400" alt="A five-stage signup funnel in the clean theme"><br>[Prompt and HTML](./skills/text2html2png/examples/signup-funnel-en.html) |
 
-Also published: a [warm release flowchart](./skills/text2html2png/examples/release-flow-en.html), an [editorial roadmap timeline](./skills/text2html2png/examples/library-roadmap-en.html), a [minimal comparison table](./skills/text2html2png/examples/plan-comparison-en.html), two architecture maps — [a minimal service topology](./skills/text2html2png/examples/service-architecture-en.html) and [an editorial view of the skill's own pipeline](./skills/text2html2png/examples/local-first-pipeline-en.html) — and a [warm narrative brief](./skills/text2html2png/examples/cafe-membership-en.html) that lays a whole product brief out as one page. Every example also ships in Chinese; all example data is synthetic — see [asset provenance](./ASSET_PROVENANCE.md).
+Also published: a [clean release flowchart](./skills/text2html2png/examples/release-flow-en.html), an [editorial roadmap timeline](./skills/text2html2png/examples/library-roadmap-en.html), a [clean comparison table](./skills/text2html2png/examples/plan-comparison-en.html), two architecture maps — [a clean service topology](./skills/text2html2png/examples/service-architecture-en.html) and [an editorial view of the skill's own pipeline](./skills/text2html2png/examples/local-first-pipeline-en.html) — and a [clean narrative brief](./skills/text2html2png/examples/cafe-membership-en.html) that lays a whole product brief out as one page. Every example also ships in Chinese; all example data is synthetic — see [asset provenance](./ASSET_PROVENANCE.md).
 
 ## What it makes
 
@@ -86,11 +100,11 @@ Also published: a [warm release flowchart](./skills/text2html2png/examples/relea
 | Funnel | Stage volumes and conversion you supply |
 | Narrative brief | Decision-first documents: PRDs, proposals, review notes |
 
-Any chart can use any theme. A shared style token contract, checked in CI, requires all five themes to define the same 19 tokens, so `--style glass` on a Gantt chart is a supported request rather than a gamble. Ten of the 45 pairings ship as rendered examples; the rest are supported by the contract but not yet visually regression-tested.
+Any chart can use any theme. A shared style token contract, checked in CI, requires all three themes to define the same 19 tokens, so `--style clean` on a Gantt chart is a supported request rather than a gamble. Ten of the 27 pairings ship as rendered examples; the rest are supported by the contract but not yet visually regression-tested.
 
 ## Why the output is consistent
 
-A model writing HTML by hand cannot see its own mistakes. So the skill measures the rendered page in a real browser before delivery and fails on defects that a source review always misses:
+Even deterministic HTML can fail under real fonts and browser layout. The skill measures the rendered page before delivery and fails on defects that source validation cannot see:
 
 ```bash
 cd skills/text2html2png
@@ -118,7 +132,7 @@ Each finding names the element, the measured evidence, and one concrete repair, 
 
 This is not theatre. The audit found real defects in the examples this repository already considered finished — 9px labels in one, white text at a 3.2:1 contrast ratio in another, and a legend hidden from screen readers in a third — and the false negatives it once had, including buried and invisible text, are now covered by fixtures in the test suite.
 
-The skill also fills in what you have not decided. Instead of hedging with assumption labels or a round of questions, it makes the best reasonable call and draws it straight in — the chart arrives ready to paste, and anything you disagree with is one message away from being fixed.
+The skill makes layout and style decisions without a questionnaire, while keeping source facts separate from presentation judgment. Missing metrics, dates, people, and dependencies are never filled with plausible-looking fiction.
 
 ## Privacy and security
 
@@ -195,11 +209,11 @@ Useful individual commands:
 | `npm run audit:layout -- --html x.html --width 1040 --json` | Audit one document, machine-readable |
 | `node ../../scripts/build-gallery.mjs` | Regenerate the published gallery and prompt index |
 
-The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across every theme in Chinese and English (seven themes in the original experiment; the five that ship today). Its PNGs are development review artifacts; a normal call hands you the editable HTML and renders a PNG only when you ask.
+The validated [theme/chart orthogonality proof](./experiments/theme-decoupling/README.md) demonstrates one comparison structure restyled across the three shipped themes in Chinese and English. Its PNGs are development review artifacts; a normal call hands you the editable HTML and renders a PNG only when you ask.
 
 ## Roadmap
 
-- JSON schema → deterministic renderer, so layout stops depending on hand-written CSS
+- richer chart-specific JSON validation and migration tooling
 - SVG export
 - visual regression fixtures for CJK text, very long labels, and more chart/theme pairs
 - a community gallery with explicit rights and privacy confirmation

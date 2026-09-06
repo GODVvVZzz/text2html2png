@@ -88,6 +88,7 @@ Do not paste a `.card` rule and assume it applies automatically.
 
 - Do not truncate facts silently.
 - Wrap long labels; split dense content into logical groups when needed.
+- Do not strand one CJK character or a short word on the final line of a compact heading. This is a composition defect, not an overflow defect: revise the repeated component's available text width or layout for every peer rather than adding a label-specific break.
 - Widen the viewport before reducing text below a readable size.
 - Do not use empty decorative cards to fill space.
 - Do not use parent `opacity` for progress tracks when child fills must remain opaque; use alpha colors instead.
@@ -96,7 +97,7 @@ Do not paste a `.card` rule and assume it applies automatically.
 
 Every theme names its brand fonts in the `--t-font-*` tokens. At build time the pipeline resolves those families against `scripts/pipeline/font-embed.mjs`, subsets each face to the codepoints the copy actually uses, and inlines the results as data-URI `@font-face` (CJK families per unicode-range slice, Latin families as one face per weight). Rendering makes zero network requests and produces identical output on any machine, including offline. If a `@fontsource` package is missing at build time the family is skipped with a loud stderr warning and the theme's system-font fallbacks take over — degradation is explicit, never silent.
 
-Icon slots are dual-channel: a template may emit both an emoji span and a `currentColor` inline SVG, and the theme picks exactly one through `--t-emoji-display` / `--t-svg-display` — never both at once. The `warm` and `glass` themes show emoji; `minimal`, `editorial`, and `paper` show SVGs. An empty emoji slot collapses via the shared `:empty` rule, so a fixture without emoji glyphs never leaves a gap. Emoji are welcome when they improve scanning, friendliness, or match the user's requested visual language; prefer SVG-only themes when byte-for-byte cross-platform appearance matters.
+Icon slots are dual-channel: a template may emit both an emoji span and a `currentColor` inline SVG, and the theme picks exactly one through `--t-emoji-display` / `--t-svg-display` — never both at once. `clean`, `editorial`, and `notebook` show SVGs; `warm` and `glass` show emoji. An empty emoji slot collapses via the shared `:empty` rule, so a fixture without emoji glyphs never leaves a gap. Emoji are welcome when they improve scanning, friendliness, or match the user's requested visual language; prefer SVG-only themes when byte-for-byte cross-platform appearance matters.
 
 ## Pre-render checks
 

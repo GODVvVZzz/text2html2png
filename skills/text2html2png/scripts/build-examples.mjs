@@ -10,10 +10,9 @@ import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import {
   structureFingerprint,
-  validateChartCss,
-  validateMarkup,
   validatePipelineSources,
 } from "./pipeline/validate.mjs";
+import { renderDocument } from "./pipeline/render-document.mjs";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 export const skillDir = path.resolve(scriptDir, "..");
@@ -105,25 +104,8 @@ export function coverageReport(examples) {
   return {
     examples: examples.length,
     missingCharts: [...CHARTS].filter((chart) => !charts.has(chart)),
-    missingThemes: [...new Set(["warm", "minimal", "editorial", "paper", "glass"])].filter((theme) => !themes.has(theme)),
+    missingThemes: ["clean", "editorial", "notebook", "warm", "glass"].filter((theme) => !themes.has(theme)),
   };
-}
-
-// Collect every string in the fixture so the font subset covers all copy.
-function fixtureStrings(value, out) {
-  if (typeof value === "string") out.push(value);
-  else if (Array.isArray(value)) for (const item of value) fixtureStrings(item, out);
-  else if (value && typeof value === "object") for (const item of Object.values(value)) fixtureStrings(item, out);
-  return out;
-}
-
-function escapeAttr(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
 }
 
 async function main() {
@@ -134,15 +116,6 @@ async function main() {
   }
 
   const sources = await validatePipelineSources(pipelineDir);
-  const template = await readFile(path.join(pipelineDir, "template.html"), "utf8");
-  const themeCssCache = new Map();
-  async function themeCss(id) {
-    if (!themeCssCache.has(id)) {
-      themeCssCache.set(id, await readFile(path.join(pipelineDir, "themes", `${id}.css`), "utf8"));
-    }
-    return themeCssCache.get(id);
-  }
-
   const examples = await loadExamples();
   const selected = args.example ? examples.filter((example) => example.id === args.example) : examples;
   if (!selected.length) throw new Error("Unknown example: " + args.example);
@@ -154,35 +127,8 @@ async function main() {
     throw new Error("Themes without an example: " + report.missingThemes.join(", "));
   }
 
-  const chartCache = new Map();
-  async function loadChart(id) {
-    if (!chartCache.has(id)) {
-      const dir = path.join(pipelineDir, "charts", id);
-      const bodyModule = await import(pathToFileURL(path.join(dir, "body.mjs")).href);
-      if (typeof bodyModule.bodyMarkup !== "function" || typeof bodyModule.assertFixture !== "function") {
-        throw new Error(`charts/${id}: body.mjs must export assertFixture and bodyMarkup.`);
-      }
-      chartCache.set(id, {
-        dir,
-        bodyMarkup: bodyModule.bodyMarkup,
-        assertFixture: bodyModule.assertFixture,
-        chartCss: await readFile(path.join(dir, "chart.css"), "utf8"),
-      });
-    }
-    return chartCache.get(id);
-  }
-
   const generated = [];
-  // Imported lazily so manifest-only consumers (build-gallery) work in a
-  // checkout with no installed dependencies, which is how CI runs it.
-  const { buildThemeFontFaces, themeFontFamilies } = await import("./pipeline/font-embed.mjs");
   for (const example of selected) {
-    const chart = await loadChart(example.chart);
-    const fullChartCss = sources.sharedCss + "\n" + chart.chartCss;
-    validateChartCss(fullChartCss, sources.tokenContract);
-    const css = await themeCss(example.theme);
-    const fontFamilies = themeFontFamilies(css);
-
     const fixtures = {};
     for (const locale of example.locales) {
       try {
@@ -195,27 +141,20 @@ async function main() {
     let localeBaseline = null;
     for (const locale of example.locales) {
       const fixture = fixtures[locale];
-      chart.assertFixture(fixture);
       if (fixture.id !== example.id) {
         throw new Error(`${example.id}/${locale}: fixture id must match the example id`);
       }
-      const fontCss = fontFamilies.length
-        ? await buildThemeFontFaces(css, fixtureStrings(fixture, []).join("\n"))
-        : { css: "", families: fontFamilies, faces: 0, totalBytes: 0, warnings: [] };
-      for (const warning of fontCss.warnings) {
+      const rendered = await renderDocument({
+        schemaVersion: 1,
+        chart: example.chart,
+        theme: example.theme,
+        render: { width: example.width, padding: 24, scale: example.scale },
+        data: fixture,
+      }, { pipelineDir, legacyCanvas: true });
+      for (const warning of rendered.fontWarnings) {
         console.error(`warn: ${example.id}-${locale}: ${warning}`);
       }
-      const body = chart.bodyMarkup(fixture);
-      const html = template
-        .replace("{{LANG}}", escapeAttr(fixture.locale ?? locale))
-        .replace("{{DOCUMENT_TITLE}}", escapeAttr(fixture.title))
-        .replace("{{FONT_CSS}}", fontCss.css ? '<style id="text2html2png-fonts" data-font="' + escapeAttr(fontCss.families.join(", ")) + '">\n' + fontCss.css + "  </style>\n  " : "")
-        .replace("{{THEME_ID}}", escapeAttr(example.theme))
-        .replace("{{THEME_CSS}}", css.trim())
-        .replace("{{CHART_ID}}", escapeAttr(example.chart))
-        .replace("{{CHART_CSS}}", fullChartCss.trim())
-        .replace("{{BODY}}", body);
-      validateMarkup(html, `${example.id}-${locale}-${example.theme}`);
+      const html = rendered.html;
 
       // structureFingerprint normalizes lang/title/text, so zh and en may
       // differ only in copy — the structure outside the theme block must be
@@ -228,8 +167,8 @@ async function main() {
 
       const htmlPath = example.htmlPathFor(locale);
       await writeFile(htmlPath, html, "utf8");
-      generated.push({ example, locale, htmlPath, pngPath: example.pngPathFor(locale), fontBytes: fontCss.totalBytes });
-      const fontNote = fontCss.faces ? ` fonts=${fontCss.faces} faces/${fontCss.totalBytes}B` : "";
+      generated.push({ example, locale, htmlPath, pngPath: example.pngPathFor(locale), fontBytes: rendered.fontBytes });
+      const fontNote = rendered.fontBytes ? ` fonts/${rendered.fontBytes}B` : "";
       console.log("built " + `${example.id}-${locale}.html` + fontNote);
     }
   }

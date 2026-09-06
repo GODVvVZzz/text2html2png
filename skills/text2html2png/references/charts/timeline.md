@@ -198,7 +198,7 @@ Validated structure (all themes × zh/en, `build --render --audit` 42/42 green):
   Chrome clamps a flex item's base size to its padding-box, so a padded card skews the dot off
   the axis.)
 - The central axis is `border-left: var(--t-leader-width) var(--t-leader-style) var(--t-rule)`
-  on `.timeline::before` — themes that style leaders as dotted/dashed (warm, paper) get a
+  on `.timeline::before` — themes that style leaders as dotted/dashed (clean, notebook) get a
   hand-drawn axis for free.
 - Dots: `border-radius: 50%` is the one allowed geometric constant in chart CSS (validator
   exemption); the ring uses `outline: 2px solid var(--tone)` instead of a raw box-shadow.

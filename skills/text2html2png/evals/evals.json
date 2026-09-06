@@ -5,7 +5,7 @@
     {
       "id": 1,
       "prompt": "帮我把发布流程画成图：产品确认范围 → 开发 → 代码评审 → 测试 → 灰度 → 全量上线。",
-      "expected_output": "A complete warm flowchart delivered as safe HTML without blocking on a style questionnaire or generating an unrequested PNG.",
+      "expected_output": "A complete clean flowchart delivered as safe HTML without blocking on a style questionnaire or generating an unrequested PNG.",
       "files": [],
       "assertions": [
         "Selects flowchart and a suitable style.",
@@ -28,11 +28,11 @@
     },
     {
       "id": 3,
-      "prompt": "Create a glass architecture diagram: Web client → API gateway → User service and Order service. Both services use Redis; each has its own PostgreSQL database.",
+      "prompt": "Create a clean architecture diagram: Web client → API gateway → User service and Order service. Both services use Redis; each has its own PostgreSQL database.",
       "expected_output": "A layered architecture diagram with the exact supplied components and relationships.",
       "files": [],
       "assertions": [
-        "Uses glass architecture styling.",
+        "Uses clean architecture styling.",
         "Shows two services, one shared Redis, and two separate PostgreSQL databases.",
         "Keeps the supplied topology exact; any added labels use plausible defaults."
       ]
@@ -40,11 +40,11 @@
     {
       "id": 4,
       "prompt": "做一个数据看板，指标名是活跃用户、成功率、平均时延，但我暂时没有提供具体数值。",
-      "expected_output": "A dashboard whose three metric cards carry plausible example values drawn straight in, delivered without blocking on a request for numbers.",
+      "expected_output": "A dashboard structure that preserves the three requested metric names without presenting invented values as facts.",
       "files": [],
       "assertions": [
-        "Fills the three cards with plausible, internally consistent example values.",
-        "Delivers the dashboard as-is with no assumption labels and no clarifying round-trip."
+        "Does not fabricate values for the three metrics.",
+        "Uses an honest missing-data treatment or asks one concise question if values are required for meaning."
       ]
     },
     {
@@ -66,6 +66,19 @@
         "Produces the HTML deliverable first.",
         "Exports a PNG at the requested scale.",
         "Preserves the three supplied stages without adding steps."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "把开源库的发布流水线画成一张可直接粘贴的 PNG：版本冻结 → 测试矩阵 → RC 预发布 → 签名构建 → 正式发布 → 公告与文档。每一步附一句简短说明，整体要专业、克制。",
+      "expected_output": "A validated horizontal or grouped release-flow image whose compact Chinese headings have natural line breaks and no orphaned final character.",
+      "files": [],
+      "assertions": [
+        "Preserves all six supplied stages and their order.",
+        "Produces editable HTML and the explicitly requested PNG.",
+        "No compact Chinese heading leaves a single character stranded on its final line.",
+        "Changes shared component geometry rather than inserting a label-specific manual line break.",
+        "Passes the layout audit in strict mode."
       ]
     }
   ]

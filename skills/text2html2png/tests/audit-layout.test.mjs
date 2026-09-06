@@ -113,6 +113,19 @@ test("accepts a decorative shape that its own container intentionally clips", as
   assert.equal(report.findings.length, 0, formatReport(report));
 });
 
+test("detects an orphaned final CJK character in a short heading", async (context) => {
+  const browser = await browserIsUsable();
+  if (!browser.usable) {
+    context.skip(browser.reason);
+    return;
+  }
+
+  const report = await auditLayout({ ...auditOptions, width: 520, html: fixture("cjk-orphan.html") });
+  const orphan = report.findings.find((finding) => finding.rule === "TEXT_ORPHANED_SHORT_LINE");
+  assert.ok(orphan, `expected TEXT_ORPHANED_SHORT_LINE, got ${report.findings.map((f) => f.rule).join(", ")}`);
+  assert.match(orphan.evidence, /one character stranded/);
+});
+
 test("names the capture root when it is missing", async (context) => {
   const browser = await browserIsUsable();
   if (!browser.usable) {

@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "properties": {
     "style": {
-      "enum": ["warm", "minimal", "editorial", "paper", "glass"]
+      "enum": ["clean", "editorial", "notebook", "warm", "glass"]
     },
     "chart": {
       "enum": ["auto", "flowchart", "comparison", "timeline", "architecture", "dashboard", "gantt", "org-chart", "funnel", "narrative"]

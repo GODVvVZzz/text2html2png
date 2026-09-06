@@ -1,9 +1,9 @@
-# minimal — 极简黑白
+# clean — 清晰制图
 
-**Tone**: 正式、克制、权威
+**Tone**: 正式、克制、精确
 **Best for**: 领导汇报、PPT 辅助、正式文档、简历、提案
 **Layout**: Compact, symmetric, full (same as all styles)
-**Background color**: `#ffffff`
+**Background color**: `#f4f6f8`
 
 ---
 
@@ -25,29 +25,29 @@ Numbers: `'IBM Plex Mono', monospace` — weight 600
 
 ```css
 :root {
-  /* Base — the identity is "no colour": a seven-step grey ramp cycles
-     through chart accents, and emphasis comes from weight and borders. */
-  --bg: #ffffff;
+  /* One engineering-blue accent. Structure and scale carry meaning;
+     colour never rotates merely to make peer items look different. */
+  --bg: #f4f6f8;
   --card-bg: #ffffff;
-  --text-primary: #111111;
-  --text-secondary: #484848;
-  --text-muted: #6b6b6b;
-  --border-base: #e0e0e0;
-  --border-strong: #111111;
-  --accent: #111111;
-  --accent-blue: #111111;
-  --arrow-color: #b8b8b8;
-  --rule-color: #b8b8b8;
-  --s1: #111111;
-  --s2: #2b2b2b;
-  --s3: #444444;
-  --s4: #5c5c5c;
-  --s5: #747474;
-  --s6: #333333;
-  --s7: #515151;
-  --success: #2b2b2b;
-  --minor: #5c5c5c;
-  --critical: #111111;
+  --text-primary: #15171a;
+  --text-secondary: #454b55;
+  --text-muted: #6b7280;
+  --border-base: #d9ddd8;
+  --border-strong: #15171a;
+  --accent: #2457d6;
+  --accent-blue: #2457d6;
+  --arrow-color: #aeb6c2;
+  --rule-color: #aeb6c2;
+  --s1: #2457d6;
+  --s2: #2457d6;
+  --s3: #2457d6;
+  --s4: #2457d6;
+  --s5: #2457d6;
+  --s6: #2457d6;
+  --s7: #2457d6;
+  --success: #2457d6;
+  --minor: #2457d6;
+  --critical: #2457d6;
 }
 ```
 
@@ -58,7 +58,7 @@ Numbers: `'IBM Plex Mono', monospace` — weight 600
 ```css
 body {
   font-family: 'IBM Plex Sans', 'Noto Sans SC', sans-serif;
-  background: #ffffff;
+  background: #f4f6f8;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -80,7 +80,7 @@ body {
 ### Title
 ```css
 .page-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
@@ -96,7 +96,7 @@ body {
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border-base);
-  border-radius: 8px;
+  border-radius: 3px;
   padding: 14px 16px;
 }
 ```
@@ -158,16 +158,16 @@ body {
 
 ## Design Rules
 
-- **No color**: Everything is black, white, and grays. No accent colors.
+- **One accent**: Engineering blue is the only decorative accent. Additional colours require semantic meaning.
 - **No shadows**: Clean, flat design.
 - **No textures**: Pure white background.
-- **No gradients**: Solid fills only.
+- **No decorative gradients**: The short calibration rule below the heading is the sole patterned element.
 - **Emphasis via weight**: Use font-weight 700 and border-left 3px for emphasis, not color.
 - **Grid alignment**: All elements must align to an implicit grid. No offset elements.
-- **Small border-radius**: 8px for cards (not 10px), 4px for small elements.
+- **Small border-radius**: 4px for the frame, 3px for cards and small elements.
 
 ---
 
 ## Special Effects
 
-None. The power of minimal style comes from the absence of decoration. Every pixel must serve a purpose.
+A restrained calibration rule below the heading references the product's measured, browser-audited output. It is the only signature device; every other pixel serves reading and comparison.

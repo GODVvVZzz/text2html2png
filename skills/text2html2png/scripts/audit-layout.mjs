@@ -28,6 +28,7 @@ const RULES = {
   FONT_SMALL_FOR_PROSE: "warning",
   LOW_CONTRAST: "warning",
   TEXT_OVERLAP: "warning",
+  TEXT_ORPHANED_SHORT_LINE: "warning",
   EMPTY_FILLER: "warning",
   ARIA_HIDDEN_TEXT: "warning",
   EXTREME_ASPECT_RATIO: "warning",
@@ -284,6 +285,40 @@ function collectFindings(options) {
     return bounds;
   }
 
+  // Short display labels can be technically visible yet visibly broken, such as
+  // a four-character CJK heading wrapping 3+1. Measure glyph lines so the audit
+  // can reject that composition without hard-coding any particular phrase.
+  function shortLabelLines(element, text) {
+    const compact = text.replace(/\s+/g, "");
+    const cjk = compact.match(/[\u3400-\u9fff\uf900-\ufaff]/g) ?? [];
+    const tag = element.tagName.toLowerCase();
+    const labelLike = /^h[1-6]$/.test(tag)
+      || /(?:^|[-_])(title|name|label)(?:$|[-_])/.test(element.className || "");
+    if (!labelLike || compact.length < 3 || compact.length > 12 || cjk.length / compact.length < 0.6) return [];
+
+    const lines = [];
+    for (const node of element.childNodes) {
+      if (node.nodeType !== Node.TEXT_NODE) continue;
+      for (let index = 0; index < node.textContent.length; index += 1) {
+        const character = node.textContent[index];
+        if (/\s/.test(character)) continue;
+        const range = document.createRange();
+        range.setStart(node, index);
+        range.setEnd(node, index + 1);
+        const rect = range.getBoundingClientRect();
+        range.detach?.();
+        if (rect.width <= 0 || rect.height <= 0) continue;
+        let line = lines.find((entry) => Math.abs(entry.top - rect.top) <= 2);
+        if (!line) {
+          line = { top: rect.top, characters: [] };
+          lines.push(line);
+        }
+        if (/[\u3400-\u9fff\uf900-\ufaffA-Za-z0-9]/.test(character)) line.characters.push(character);
+      }
+    }
+    return lines.sort((a, b) => a.top - b.top);
+  }
+
   // Text hidden underneath an opaque sibling reads as a rendering failure but is
   // invisible to geometry checks, so hit-test the text box against what is on top.
   // Partial burial is just as damaging as total burial, so this samples a grid and
@@ -468,6 +503,19 @@ function collectFindings(options) {
         text: label(text),
         evidence: `${text.length} characters of body copy at ${fontSize.toFixed(1)}px, below the ${options.minBodyFont}px comfort threshold.`,
         fix: "Raise body copy to at least 12px, shorten the sentence, or widen the viewport.",
+      });
+    }
+
+    const labelLines = shortLabelLines(element, text);
+    if (labelLines.length > 1
+      && labelLines.at(-1).characters.length === 1
+      && labelLines.at(-2).characters.length >= 2) {
+      findings.push({
+        rule: "TEXT_ORPHANED_SHORT_LINE",
+        target: path,
+        text: label(text),
+        evidence: `Short label wraps across ${labelLines.length} lines with one character stranded on the final line.`,
+        fix: "Rework the repeated component: widen its text measure, remove or reposition a nonessential icon, reduce columns, or switch layout direction. Do not special-case this label with a manual break.",
       });
     }
 

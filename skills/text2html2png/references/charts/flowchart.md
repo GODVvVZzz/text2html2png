@@ -8,8 +8,28 @@
 
 | Condition | Direction | Wrap Width |
 |-----------|-----------|-----------|
-| Steps ≤ 7, short descriptions (≤ 30 chars each) | **Horizontal** | 960px |
-| Steps > 7, or long descriptions | **Vertical** | 860px |
+| Steps fit with readable titles and descriptions after the text-space check below | **Horizontal** | 960–1040px |
+| Titles become awkward, descriptions become narrow columns, or the flow has more than 7 steps | **Vertical or grouped** | 860px |
+
+### Text-space check
+
+Before committing to a horizontal row, estimate each step's usable width:
+
+```text
+step width = (content width - connector widths) / step count
+title width = step width - card padding - any side-by-side icon and gap
+```
+
+Judge the result in the content's actual script, not by character count alone. Short CJK titles should remain on one line when space permits; when they wrap, avoid a single-character final line (`3+1`). Prefer balanced breaks such as `2+2` for four characters and `3+2` or `2+3` for five. These are quality examples, not fixed line-break instructions.
+
+If the title width is insufficient, change the component in this order:
+
+1. Remove a decorative icon or place it above the title.
+2. Widen the canvas or reduce horizontal padding and connector lanes within readable limits.
+3. Group steps into phases or switch to a vertical flow.
+4. Shorten wording only when meaning is preserved.
+
+Do not reduce title type below the normal readable size, and do not insert a one-off `<br>` merely to rescue one fixture.
 
 ---
 
@@ -178,11 +198,11 @@ Use horizontal row → vertical arrow → horizontal sub-row → vertical arrow 
 
 ## Key Rules
 
-1. **Icon + title on same line** (flex row, gap 6px) — never stack them vertically
+1. Put the icon beside the title only when the text-space check leaves a natural title measure. Otherwise omit the icon or place it above the title.
 2. Card gap: 8-10px (horizontal), 0 with arrow dividers (vertical)
 3. Arrow area: 24px width (horizontal) or 24px height (vertical)
-4. Color cycling: Each step uses next accent color from style's palette
-5. Top stats row + bottom banner make the chart feel complete, not bare
+4. Use colour changes only when they communicate a real category or state; sequence is already expressed by position, numbering, and arrows.
+5. Stats and summary banners are optional. Include them only when the source contains information that belongs there.
 6. Step numbers: Optional but recommended for vertical layouts (01, 02, 03...)
 
 ---
@@ -201,10 +221,12 @@ Validated structure (all themes × zh/en, `build --render --audit` 28/28 green):
 - Arrows are `<span class="arrow">` (28px) holding an inline SVG line + chevron drawn with
   `currentColor`; the span colors itself from `color-mix(in srgb, var(--t-accent-1) 60%, transparent)`.
   No literal colors, no dashed strokes.
-- Icons are monochrome inline SVGs using `currentColor` (shared `chart/icons.mjs`); the emoji
-  channel exists but every theme sets `--t-emoji-display: none`.
-- Step numbers use the label token pair (`--t-label-*`); themes must keep all five accents
-  legible as text on their own surfaces — the strict audit enforces 4.5:1.
+- Icons use one channel per theme: clean, editorial, and notebook use monochrome inline SVGs;
+  warm and glass use emoji. A diagram never renders both channels at once.
+- Step numbers use the label token pair (`--t-label-*`); the active accent must remain
+  legible on its surface — the strict audit enforces 4.5:1.
+- Treat an orphaned last line in a short title as a failed composition even when the automated
+  audit passes. Rework the shared step geometry; never special-case the offending title.
 - Optional stats row reuses the comparison `.metrics` skeleton (exactly 3 entries).
 - `structureFingerprint` must be identical across all themes and both locales; zh/en fixtures
   share one DOM.

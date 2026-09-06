@@ -5,20 +5,20 @@ const TREND_DIRECTIONS = ["up", "down", "flat"];
 
 export function assertFixture(fixture) {
   if (!fixture.id || !fixture.locale || !fixture.title) throw new Error("Fixture is missing identity fields.");
-  if (!Array.isArray(fixture.stats) || fixture.stats.length !== 4) {
-    throw new Error(fixture.id + ": a dashboard needs exactly four KPI stats.");
+  if (!Array.isArray(fixture.stats) || fixture.stats.length < 1 || fixture.stats.length > 8) {
+    throw new Error(fixture.id + ": a dashboard needs one to eight KPI stats.");
   }
   for (const stat of fixture.stats) {
-    if (!stat.value || !stat.label) throw new Error(fixture.id + ": every stat needs a value and a label.");
+    if (stat.value === undefined || stat.value === null || stat.value === "" || !stat.label) throw new Error(fixture.id + ": every stat needs a value and a label.");
     if (!stat.icon) throw new Error(fixture.id + "/" + stat.label + ": every stat needs an icon.");
-    if (!stat.trend || !TREND_DIRECTIONS.includes(stat.trend.direction) || !stat.trend.delta) {
+    if (stat.trend !== undefined && (!stat.trend || !TREND_DIRECTIONS.includes(stat.trend.direction) || !stat.trend.delta)) {
       throw new Error(fixture.id + "/" + stat.label + ": every stat needs an up/down/flat trend with a delta.");
     }
   }
-  if (!Array.isArray(fixture.panels) || fixture.panels.length < 2 || fixture.panels.length > 3) {
-    throw new Error(fixture.id + ": a dashboard needs two or three detail panels.");
+  if (fixture.panels !== undefined && (!Array.isArray(fixture.panels) || fixture.panels.length > 3)) {
+    throw new Error(fixture.id + ": a dashboard supports up to three detail panels.");
   }
-  for (const panel of fixture.panels) {
+  for (const panel of fixture.panels ?? []) {
     if (!panel.title) throw new Error(fixture.id + ": every panel needs a title.");
     if (!panel.rows || !panel.rows.length) throw new Error(fixture.id + "/" + panel.title + ": panels need rows.");
     for (const row of panel.rows) {
@@ -41,7 +41,7 @@ function statMarkup(stat) {
     "</span>",
     '<span class="metric-label">' + escapeHtml(stat.label) + "</span>",
     '<span class="metric-detail">' + escapeHtml(stat.detail) + "</span>",
-    '<span class="metric-trend">' + iconSvg("trend-" + trend.direction) + "<span>" + escapeHtml(trend.delta) + "</span></span>",
+    ...(trend ? ['<span class="metric-trend">' + iconSvg("trend-" + trend.direction) + "<span>" + escapeHtml(trend.delta) + "</span></span>"] : []),
     "</article>"
   ].join("\n");
 }
@@ -87,12 +87,14 @@ export function bodyMarkup(fixture) {
     '<p class="lede">' + escapeHtml(fixture.subtitle) + "</p>",
     '<div class="head-rule"></div>',
     "</header>",
-    '<section class="metrics dash-grid" aria-label="' + escapeHtml(fixture.eyebrow) + '" style="--stat-count: ' + fixture.stats.length + ';">',
+    '<section class="metrics dash-grid" aria-label="' + escapeHtml(fixture.eyebrow) + '" style="--stat-count: ' + Math.min(4, fixture.stats.length) + ';">',
     fixture.stats.map(statMarkup).join("\n"),
     "</section>",
-    '<section class="dash-panels" aria-label="' + escapeHtml(fixture.title) + '" style="--panel-count: ' + fixture.panels.length + ';">',
-    fixture.panels.map(panelMarkup).join("\n"),
-    "</section>",
+    ...(fixture.panels?.length ? [
+      '<section class="dash-panels" aria-label="' + escapeHtml(fixture.title) + '" style="--panel-count: ' + fixture.panels.length + ';">',
+      fixture.panels.map(panelMarkup).join("\n"),
+      "</section>",
+    ] : []),
     '<footer class="footer">',
     '<div class="footer-label">' + escapeHtml(fixture.footerLabel) + "</div>",
     "<p>" + escapeHtml(fixture.footer) + "</p>",

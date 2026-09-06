@@ -239,7 +239,7 @@ Add drop-off reasons next to each transition:
 3. **White text on colored bars**: Stage name and number are white on accent-colored backgrounds
 4. **Percentage labels on the side**: Large font (18px), next to each bar
 5. **Drop indicators between stages**: Show a percentage only when it can be computed from supplied values
-6. **Color gradient**: Each stage uses a different accent color, getting warmer/darker as funnel narrows
+6. **Colour restraint**: Use one accent for the funnel; introduce a second tone only when it communicates a real stage state.
 7. **Min-width on bars**: At least 80px even for small percentages (so text remains readable)
 8. Drop height: 20px between stages
 9. Bar border-radius: 6px (slightly rounded, not pill-shaped)

@@ -27,13 +27,18 @@ test("five themes expose one identical token contract", async () => {
   assert.equal(result.tokenCount, 52);
 });
 
-test("icon slots are single-channel: warm shows emoji, minimal shows SVG", async () => {
-  const warm = themeDefinitions(await readFile(path.join(themesDir, "warm.css"), "utf8"), "warm");
-  assert.equal(warm.get("--t-emoji-display"), "inline-flex");
-  assert.equal(warm.get("--t-svg-display"), "none");
-  const minimal = themeDefinitions(await readFile(path.join(themesDir, "minimal.css"), "utf8"), "minimal");
-  assert.equal(minimal.get("--t-emoji-display"), "none");
-  assert.equal(minimal.get("--t-svg-display"), "inline-flex");
+test("clean uses a single SVG icon channel", async () => {
+  const clean = themeDefinitions(await readFile(path.join(themesDir, "clean.css"), "utf8"), "clean");
+  assert.equal(clean.get("--t-emoji-display"), "none");
+  assert.equal(clean.get("--t-svg-display"), "inline-flex");
+});
+
+test("warm and glass use one emoji channel", async () => {
+  for (const id of ["warm", "glass"]) {
+    const theme = themeDefinitions(await readFile(path.join(themesDir, id + ".css"), "utf8"), id);
+    assert.equal(theme.get("--t-emoji-display"), "inline-flex");
+    assert.equal(theme.get("--t-svg-display"), "none");
+  }
 });
 
 test("chart CSS rejects a literal color outside the theme", () => {
@@ -46,20 +51,23 @@ test("chart CSS rejects a literal color outside the theme", () => {
 test("build keeps source invariant across themes and DOM invariant across locales", async () => {
   const output = await mkdtemp(path.join(os.tmpdir(), "t2h-theme-proof-"));
   await run(process.execPath, [buildScript, "--out", output]);
+  const zhClean = await readFile(path.join(output, "comparison-zh-clean.html"), "utf8");
+  const zhNotebook = await readFile(path.join(output, "comparison-zh-notebook.html"), "utf8");
   const zhWarm = await readFile(path.join(output, "comparison-zh-warm.html"), "utf8");
-  const zhPaper = await readFile(path.join(output, "comparison-zh-paper.html"), "utf8");
-  const enWarm = await readFile(path.join(output, "comparison-en-warm.html"), "utf8");
-  assert.equal(stripThemeBlock(zhWarm), stripThemeBlock(zhPaper));
-  assert.equal(structureFingerprint(zhWarm), structureFingerprint(enWarm));
+  const enClean = await readFile(path.join(output, "comparison-en-clean.html"), "utf8");
+  assert.equal(stripThemeBlock(zhClean), stripThemeBlock(zhNotebook));
+  assert.equal(stripThemeBlock(zhClean), stripThemeBlock(zhWarm));
+  assert.equal(structureFingerprint(zhClean), structureFingerprint(enClean));
+  assert.match(zhClean, /--t-emoji-display: none/);
+  assert.match(zhClean, /col-icon-svg/);
   assert.match(zhWarm, /📊/);
-  assert.match(zhWarm, /col-icon-svg/);
 });
 
 test("every discovered chart renders through the same theme pipeline", async () => {
   const output = await mkdtemp(path.join(os.tmpdir(), "t2h-multichart-proof-"));
   await run(process.execPath, [buildScript, "--out", output]);
-  const zhFlow = await readFile(path.join(output, "flowchart-zh-warm.html"), "utf8");
-  const enFlow = await readFile(path.join(output, "flowchart-en-glass.html"), "utf8");
+  const zhFlow = await readFile(path.join(output, "flowchart-zh-clean.html"), "utf8");
+  const enFlow = await readFile(path.join(output, "flowchart-en-clean.html"), "utf8");
   assert.equal(structureFingerprint(zhFlow), structureFingerprint(enFlow));
   assert.match(zhFlow, /step-icon-svg/);
   assert.match(zhFlow, /class="arrow"/);
@@ -67,8 +75,8 @@ test("every discovered chart renders through the same theme pipeline", async () 
 
 test("restyle changes only the canonical theme block", async () => {
   const output = await mkdtemp(path.join(os.tmpdir(), "t2h-restyle-proof-"));
-  await run(process.execPath, [buildScript, "--out", output, "--theme", "warm", "--locale", "zh"]);
-  const input = path.join(output, "comparison-zh-warm.html");
+  await run(process.execPath, [buildScript, "--out", output, "--theme", "clean", "--locale", "zh"]);
+  const input = path.join(output, "comparison-zh-clean.html");
   const target = path.join(output, "comparison-zh-editorial.html");
   await restyle({ html: input, theme: "editorial", out: target, force: false });
   const before = await readFile(input, "utf8");

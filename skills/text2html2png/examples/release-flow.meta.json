@@ -3,10 +3,10 @@
   "title": "From idea to production",
   "chart": "flowchart",
   "summary": "Six sequential gates, each with an explicit exit condition.",
-  "prompt": "Create a warm flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.",
+  "prompt": "Create a clean flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.",
   "width": 908,
   "scale": 2,
-  "theme": "warm",
+  "theme": "clean",
   "locales": [
     "zh",
     "en"

@@ -59,7 +59,7 @@ Prefer CSS Grid/Flexbox for primary structure. Use SVG only for connectors or sh
 - Avoid decorative gradients, glow, shadows, and textures that reduce legibility.
 - Use local font stacks by default; the pipeline embeds each theme's brand faces as data-URI subsets, so charts never load remote fonts.
 
-Beware the default AI look: a warm cream canvas with a high-contrast serif display and one terracotta accent. The built-in themes intentionally inherit such directions from their original specs — that is a grounded choice, not a default. When designing a new theme or a bespoke variation, derive the palette and type from the subject's own world instead of reaching for that look.
+Beware the default AI look: a clean cream canvas with a high-contrast serif display and one terracotta accent. The built-in themes intentionally inherit such directions from their original specs — that is a grounded choice, not a default. When designing a new theme or a bespoke variation, derive the palette and type from the subject's own world instead of reaching for that look.
 
 ## 6. Robust text behavior
 

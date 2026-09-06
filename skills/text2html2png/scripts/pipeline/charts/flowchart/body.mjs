@@ -4,8 +4,8 @@ import { iconSvg } from "../../icons.mjs";
 
 export function assertFixture(fixture) {
   if (!fixture.id || !fixture.locale || !fixture.title) throw new Error("Fixture is missing identity fields.");
-  if (fixture.direction && fixture.direction !== "horizontal") {
-    throw new Error(fixture.id + ": only the horizontal direction is implemented in the pipeline so far.");
+  if (fixture.direction && !["horizontal", "vertical"].includes(fixture.direction)) {
+    throw new Error(fixture.id + ": direction must be horizontal or vertical.");
   }
   if (!Array.isArray(fixture.steps) || fixture.steps.length < 2 || fixture.steps.length > 7) {
     throw new Error(fixture.id + ": a horizontal flow needs two to seven steps.");
@@ -59,7 +59,7 @@ export function bodyMarkup(fixture) {
     '<div class="head-rule"></div>',
     "</header>",
     ...optionalMetrics,
-    '<section class="flow" aria-label="' + escapeHtml(fixture.title) + '">',
+    '<section class="flow' + (fixture.direction === "vertical" ? ' flow-vertical' : '') + '" aria-label="' + escapeHtml(fixture.title) + '">',
     steps,
     "</section>",
     '<footer class="footer">',

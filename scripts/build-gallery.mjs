@@ -87,30 +87,36 @@ function page(examples, coverage) {
   const sorted = [...examples].sort((a, b) => chartRank(a.chart) - chartRank(b.chart) || a.id.localeCompare(b.id));
   const charts = CHART_ORDER.length - coverage.missingCharts.length;
   const styles = 5 - coverage.missingThemes.length;
+  const byId = new Map(examples.map((example) => [example.id, example]));
+  const hero = byId.get("release-flow") ?? sorted[0];
+  const featured = [
+    ["service-architecture", "Explain a system", "Turn an architecture description into a README-ready system map."],
+    ["release-flow", "Ship a release", "Make gates, owners, and sequence obvious before production."],
+    ["support-snapshot", "Report what changed", "Turn supplied KPIs into a compact weekly snapshot."],
+  ].map(([id, title, copy]) => ({ example: byId.get(id), title, copy })).filter((item) => item.example);
 
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>text2html2png gallery — every diagram type, rendered locally</title>
-<meta name="description" content="Every published text2html2png example: the prompt, the editable HTML, and the rendered PNG. ${charts} chart types across ${styles} visual themes.">
-<meta property="og:title" content="text2html2png gallery">
-<meta property="og:description" content="Every published example: the prompt, the editable HTML, and the rendered PNG.">
+<title>text2html2png — turn structured text into a diagram you can paste</title>
+<meta name="description" content="Turn a release plan, architecture description, or KPI update into browser-audited editable HTML and an optional PNG. Local-first and built for Codex and Claude.">
+<meta property="og:title" content="text2html2png">
+<meta property="og:description" content="From structured text to a diagram you can paste — editable, browser-audited, and local-first.">
 <meta property="og:image" content="https://raw.githubusercontent.com/${REPO_SLUG}/main/assets/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   :root {
-    --bg: #0b1020;
-    --panel: #141a2e;
-    --panel-2: #1b2340;
-    --line: #2a3350;
-    --ink: #f4f7fc;
-    --muted: #a8b3c7;
-    --cyan: #38bdf8;
-    --violet: #a855f7;
-    --pink: #f472b6;
+    --bg: #f7f8fa;
+    --panel: #ffffff;
+    --panel-2: #eef2f7;
+    --line: #cfd6e4;
+    --ink: #172033;
+    --muted: #657086;
+    --blue: #2457d6;
+    --green: #19704a;
   }
   html { scroll-behavior: smooth; }
   body {
@@ -118,20 +124,17 @@ function page(examples, coverage) {
     background: var(--bg);
     color: var(--ink);
     font: 16px/1.6 "Avenir Next", "Segoe UI", "PingFang SC", system-ui, sans-serif;
-    background-image:
-      radial-gradient(circle at 6% 0%, rgba(56,189,248,.14), transparent 38%),
-      radial-gradient(circle at 96% 100%, rgba(168,85,247,.16), transparent 42%);
-    background-repeat: no-repeat;
   }
-  a { color: var(--cyan); }
-  .shell { max-width: 1220px; margin: 0 auto; padding: 56px 24px 80px; }
+  a { color: var(--blue); }
+  .shell { max-width: 1240px; margin: 0 auto; padding: 40px 24px 80px; }
+  .hero { display: grid; grid-template-columns: minmax(0,.78fr) minmax(520px,1.22fr); align-items: center; gap: 54px; min-height: 560px; }
 
   header .eyebrow {
-    color: var(--muted);
+    color: var(--blue);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: .16em;
-    text-transform: uppercase;
+    text-transform: none;
   }
   h1 {
     margin: 12px 0 0;
@@ -139,20 +142,19 @@ function page(examples, coverage) {
     line-height: 1.08;
     letter-spacing: -1.4px;
   }
-  h1 span {
-    background: linear-gradient(96deg, var(--cyan), var(--violet) 56%, var(--pink));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .lede { max-width: 720px; margin: 18px 0 0; color: #cdd6e5; font-size: 19px; }
+  .lede { max-width: 620px; margin: 18px 0 0; color: var(--muted); font-size: 19px; }
+  .hero-demo { border-left: 1px solid var(--line); padding-left: 28px; }
+  .prompt { margin: 0 0 14px; padding: 14px 16px; border: 1px solid var(--line); background: #fff; color: #39445a; font: 13px/1.55 "SFMono-Regular", Consolas, monospace; }
+  .prompt::before { content: "Source text"; display: block; margin-bottom: 7px; color: var(--blue); font: 700 11px/1.2 "Avenir Next", sans-serif; }
+  .hero-shot { display: block; border: 1px solid var(--line); background: #fff; }
+  .hero-shot img { display: block; width: 100%; }
 
   .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
   .facts li {
     padding: 8px 14px;
     border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgba(20,26,46,.85);
+    border-left: 2px solid var(--line);
+    background: transparent;
     font-size: 14px;
     font-weight: 600;
   }
@@ -164,9 +166,9 @@ function page(examples, coverage) {
     margin: 26px 0 0;
     padding: 14px 18px;
     border: 1px solid var(--line);
-    border-radius: 12px;
-    background: #0f1526;
-    color: #a7ebff;
+    border-radius: 4px;
+    background: #172033;
+    color: #ffffff;
     font-family: "SFMono-Regular", Consolas, monospace;
     font-size: 15px;
     overflow-x: auto;
@@ -180,6 +182,12 @@ function page(examples, coverage) {
     letter-spacing: -.4px;
   }
   .section-note { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
+  .jobs { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 24px; }
+  .job { border-top: 3px solid var(--blue); background: var(--panel); }
+  .job img { display: block; width: 100%; border-bottom: 1px solid var(--line); }
+  .job-copy { padding: 18px; }
+  .job h3 { margin: 0; font-size: 20px; }
+  .job p { margin: 7px 0 0; color: var(--muted); font-size: 14px; }
 
   /* Diagram aspect ratios range from 0.8 to 2.2, so an equal-height grid leaves
      large dead zones under the wide cards. Masonry columns pack them tightly
@@ -194,7 +202,7 @@ function page(examples, coverage) {
     break-inside: avoid;
     margin: 0 0 22px;
     border: 1px solid var(--line);
-    border-radius: 18px;
+    border-radius: 4px;
     background: var(--panel);
     overflow: hidden;
   }
@@ -204,25 +212,25 @@ function page(examples, coverage) {
   .tags { display: flex; flex-wrap: wrap; gap: 7px; }
   .tag {
     padding: 4px 10px;
-    border-radius: 999px;
+    border-radius: 2px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .04em;
   }
-  .tag.chart { background: rgba(56,189,248,.16); color: #9adcff; }
-  .tag.theme { background: rgba(168,85,247,.18); color: #dcc0ff; }
-  .tag.size { background: rgba(148,163,184,.16); color: #cbd5e1; }
+  .tag.chart { background: #e9efff; color: #244a9f; }
+  .tag.theme { background: #edf3ef; color: #276044; }
+  .tag.size { background: #eef1f5; color: #586174; }
   .card h3 { margin: 0; font-size: 20px; letter-spacing: -.3px; }
-  .summary { margin: 0; color: #c3cddc; font-size: 15px; }
+  .summary { margin: 0; color: var(--muted); font-size: 15px; }
   details { border-top: 1px solid var(--line); padding-top: 12px; }
   details summary { cursor: pointer; color: var(--muted); font-size: 14px; font-weight: 600; }
   blockquote {
     margin: 12px 0 0;
     padding: 12px 14px;
-    border-left: 3px solid var(--violet);
+    border-left: 3px solid var(--blue);
     border-radius: 0 8px 8px 0;
-    background: #10162a;
-    color: #d6deec;
+    background: #eef2f7;
+    color: #39445a;
     font-size: 14px;
   }
   .links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 2px; font-size: 14px; font-weight: 600; }
@@ -231,7 +239,7 @@ function page(examples, coverage) {
     margin: 64px 0 0;
     padding: 26px 28px;
     border: 1px solid var(--line);
-    border-radius: 18px;
+    border-radius: 4px;
     background: var(--panel);
   }
   .repro h2 { margin-top: 0; }
@@ -239,26 +247,28 @@ function page(examples, coverage) {
     margin: 0;
     padding: 16px 18px;
     border-radius: 12px;
-    background: #0f1526;
-    color: #d7e3f4;
+    background: #172033;
+    color: #eef3ff;
     font-family: "SFMono-Regular", Consolas, monospace;
     font-size: 14px;
     overflow-x: auto;
   }
   footer { margin-top: 56px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-demo { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; } .jobs { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="shell">
-  <header>
-    <p class="eyebrow">text2html2png gallery</p>
-    <h1>Every example, with the <span>prompt that made it</span></h1>
-    <p class="lede">These are real outputs of the skill, rendered locally in Chrome from the HTML committed next to them. Every figure is synthetic: no customer, employee, or company data appears anywhere.</p>
+  <header class="hero">
+    <div>
+    <p class="eyebrow">For Codex, Claude, and compatible agents</p>
+    <h1>Turn structured text into a diagram you can paste.</h1>
+    <p class="lede">Explain a system, ship a release, or report what changed. The agent structures the facts; one deterministic local renderer produces editable HTML and an optional PNG.</p>
     <ul class="facts">
-      <li>${examples.length} published examples</li>
-      <li>${charts}/${CHART_ORDER.length} chart types</li>
-      <li>${styles}/5 visual themes</li>
-      <li>Layout-audited in CI</li>
+      <li>Facts stay grounded</li>
+      <li>Browser-audited</li>
+      <li>HTML + optional PNG</li>
+      <li>Local-first</li>
     </ul>
     <code class="install">npx skills add ${REPO_SLUG} -g -y</code>
     <p class="header-links">
@@ -266,12 +276,22 @@ function page(examples, coverage) {
       <a href="${BLOB_BASE}/README.md">README</a>
       <a href="${BLOB_BASE}/skills/text2html2png/SKILL.md">SKILL.md</a>
       <a href="${BLOB_BASE}/PRIVACY.md">Privacy</a>
-    </p>
+    </p></div>
+    <div class="hero-demo">
+      <blockquote class="prompt">${escapeHtml(hero.prompt)}</blockquote>
+      <a class="hero-shot" href="gallery/${hero.id}-en-${hero.theme}.png"><img src="gallery/${hero.id}-en-${hero.theme}.png" alt="${escapeHtml(hero.title)}"></a>
+    </div>
   </header>
 
   <main>
-    <h2>The gallery</h2>
-    <p class="section-note">Open any prompt to see exactly what was asked for. Nothing here was hand-corrected after rendering beyond fixes the layout audit demanded.</p>
+    <h2>Three jobs, one workflow</h2>
+    <p class="section-note">Start with the work you need to communicate, not a chart taxonomy.</p>
+    <div class="jobs">
+${featured.map(({example, title, copy}) => `      <article class="job"><img src="gallery/${example.id}-en-${example.theme}.png" alt="${escapeHtml(example.title)}"><div class="job-copy"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(copy)}</p></div></article>`).join("\n")}
+    </div>
+
+    <h2>Explore every example</h2>
+    <p class="section-note">Every image links to its exact prompt, editable HTML, and full-resolution PNG.</p>
     <div class="grid">
 ${sorted.map(card).join("\n")}
     </div>
@@ -301,7 +321,7 @@ node scripts/build-gallery.mjs   # rebuilds this page and the images on it</pre>
 function promptsMarkdown(examples, coverage) {
   const sorted = [...examples].sort((a, b) => chartRank(a.chart) - chartRank(b.chart) || a.id.localeCompare(b.id));
   const charts = CHART_ORDER.length - coverage.missingCharts.length;
-  const styles = 5 - coverage.missingThemes.length;
+  const styles = 3 - coverage.missingThemes.length;
 
   const lines = [
     "<!-- Generated by scripts/build-gallery.mjs. Edit the example .meta.json files instead. -->",
