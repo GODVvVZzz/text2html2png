@@ -24,12 +24,12 @@ height=600
 seconds_per_frame=1.5
 
 frames=(
-  launch-plan-en-notebook
-  support-snapshot-en-clean
-  signup-funnel-en-clean
-  studio-org-en-clean
-  plan-comparison-en-clean
+  release-flow-en-clean
   service-architecture-en-clean
+  support-snapshot-en-clean
+  signup-funnel-en-glass
+  library-roadmap-en-editorial
+  launch-plan-en-notebook
 )
 
 work="$(mktemp -d)"
