@@ -41,7 +41,7 @@
 
 每种迁移完成时跑:`build --render --audit` 全矩阵 + 正交性校验,`structureFingerprint` 跨主题一致仍是一票否决项。
 
-## 3. 字体方案生产化(paper 的文楷)
+## 3. 字体方案生产化(notebook 的文楷)
 
 实验阶段的做法:按 fixture 字符从 lxgw-wenkai-webfont 分片挑片 + 二次子集化,17 片约 78KB 内联。生产化必须改成**动态子集**:
 
@@ -55,7 +55,7 @@
 ## 4. 示例与画廊重做
 
 - 9 个现有示例全部迁到新管线:每示例输出中英两版,复用同一 DOM(实验已验证的 fixture 模式)
-- 画廊只放第一梯队主题:minimal、editorial、dark、neon、warm(修复后)+ paper(文楷版);glass 视最终视觉定
+- 画廊只放三套主题：clean、editorial、notebook；旧主题不再生成，也不再维护兼容别名。
 - 每个示例的 meta 补 `theme` 与 `locale` 字段,渲染产物命名 `<name>-<locale>-<theme>.png`
 - 示例即画廊素材:挑 3 张做 README 首屏,挑 1 张做 demo 动图分镜
 

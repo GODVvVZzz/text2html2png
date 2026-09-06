@@ -44,7 +44,7 @@
         {"cells": ["Regulars", "Paper stamp cards, lost means gone", "Stars live in the app, visible forever"]},
         {"cells": ["Baristas", "Stamp by hand, reconcile monthly", "One scan covers earning and redemption"]},
         {"cells": ["Managers", "Manual membership counts at month end", "Live sales trends in the dashboard"]},
-        {"cells": ["Bookkeeping", "Stored value on paper ledgers", "Balances and gifts post automatically"]}
+        {"cells": ["Bookkeeping", "Stored value on notebook ledgers", "Balances and gifts post automatically"]}
       ]
     },
     {

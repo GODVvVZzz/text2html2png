@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "chart": "flowchart",
+  "theme": "clean",
+  "render": {"width": 1040, "padding": 24, "scale": 2},
+  "data": {
+    "id": "release-flow-quickstart",
+    "locale": "en",
+    "eyebrow": "Release workflow",
+    "title": "From scope freeze to release notes",
+    "subtitle": "Six explicit gates keep every release reproducible and reversible.",
+    "steps": [
+      {"num": "01", "name": "Scope freeze", "detail": "Accept fixes only.", "accent": 1, "emoji": "", "icon": "lock"},
+      {"num": "02", "name": "Test matrix", "detail": "Run supported environments.", "accent": 1, "emoji": "", "icon": "check"},
+      {"num": "03", "name": "Release candidate", "detail": "Collect final feedback.", "accent": 1, "emoji": "", "icon": "flag"},
+      {"num": "04", "name": "Signed build", "detail": "Verify reproducible artifacts.", "accent": 1, "emoji": "", "icon": "shield"},
+      {"num": "05", "name": "Publish", "detail": "Tag and distribute.", "accent": 1, "emoji": "", "icon": "package"},
+      {"num": "06", "name": "Release notes", "detail": "Document the change.", "accent": 1, "emoji": "", "icon": "megaphone"}
+    ],
+    "footerLabel": "Release rule",
+    "footer": "A failed gate stops the release; it never moves a broken artifact forward."
+  }
+}

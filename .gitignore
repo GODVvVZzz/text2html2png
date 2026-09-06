@@ -6,7 +6,10 @@ dist/
 coverage/
 *.tmp
 *.log
+output/
+.playwright-cli/
 skills/text2html2png/tests/output/
+skills/text2html2png-workspace/
 
 # Local agent state
 .claude/

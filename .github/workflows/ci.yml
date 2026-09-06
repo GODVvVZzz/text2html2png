@@ -55,6 +55,17 @@ jobs:
       - name: Inspect package allowlist
         run: npm pack --dry-run
 
+      - name: Exercise public JSON renderer
+        run: node scripts/render.mjs --input examples/release-flow.diagram.json --html public-cli-smoke.html --png public-cli-smoke.png --audit --json
+
+      - name: Upload public renderer preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: renderer-preview-${{ matrix.os }}
+          path: |
+            skills/text2html2png/public-cli-smoke.html
+            skills/text2html2png/public-cli-smoke.png
+
   plugin-manifest:
     name: Plugin manifest
     runs-on: ubuntu-latest

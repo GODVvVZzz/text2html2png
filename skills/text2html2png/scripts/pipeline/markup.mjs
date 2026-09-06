@@ -1,5 +1,5 @@
 export function escapeHtml(value) {
-  return String(value)
+  return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -8,7 +8,7 @@ export function escapeHtml(value) {
 }
 
 export function renderRichText(value) {
-  const source = String(value);
+  const source = String(value ?? "");
   let result = "";
   let cursor = 0;
   for (const match of source.matchAll(/<strong>([\s\S]*?)<\/strong>/gi)) {

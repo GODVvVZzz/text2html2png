@@ -1,6 +1,6 @@
 /* Narrative chart: a decision-first long-form page of numbered sections.
    Every color, radius, border, and typeface comes from the shared theme
-   tokens, so the layout restyles atomically across all seven themes. */
+   tokens, so the layout restyles atomically across all three themes. */
 
 .nar-sections {
   display: grid;

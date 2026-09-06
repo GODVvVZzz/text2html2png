@@ -14,7 +14,7 @@ body:
     id: combination
     attributes:
       label: Chart and style
-      placeholder: architecture × glass
+      placeholder: architecture × clean
     validations:
       required: true
   - type: textarea

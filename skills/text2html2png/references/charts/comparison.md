@@ -2,6 +2,8 @@
 
 方案 PK、优劣比较、技术选型、A vs B 对比。
 
+The renderer accepts comparison columns and criteria without headline metrics. Include optional `data.metrics` only when the source provides them; up to three are supported.
+
 ---
 
 ## Layout
@@ -15,7 +17,7 @@
 [Optional sourced verdict or neutral summary]
 ```
 
-Two columns side by side, each with its own color theme.
+Place columns side by side with equal visual weight. Give columns distinct colours only when the colours encode categories supplied by the user; a neutral comparison should use one shared treatment.
 
 ---
 
@@ -166,5 +168,5 @@ When comparing pros and cons of a single topic:
 3. Win/lose markers: Use ✓/✗ or colored text, not elaborate badges
 4. **Recommendation badge** only when the user asks for a choice and supplies decision criteria
 5. Bottom banner may summarize sourced trade-offs; do not invent a winner
-6. Column headers use different accent colors from the style's palette
+6. When the user does not ask for a winner, keep column colour, contrast, area, type, badges, and icon treatment symmetrical. Brand-coloured or stronger accents can silently imply preference even when both columns are the same size.
 7. Gap between columns: 10-12px, never less than 8px

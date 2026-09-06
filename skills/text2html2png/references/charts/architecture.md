@@ -197,7 +197,7 @@ Validated structure (all themes × zh/en, `build --render --audit` 84/84 green):
   stays inside the viewport (no absolute positioning).
 - Per-layer accent via `--tone`: node cards tint their background with `color-mix(in srgb,
   var(--tone) 6%, var(--t-surface-strong))` and their border with a 60% tone mix — 45% was too
-  faint on light glass surfaces. Nodes are `flex: 1 1 0` with a max-width, so every layer's cards
+  faint on light clean surfaces. Nodes are `flex: 1 1 0` with a max-width, so every layer's cards
   are equal width regardless of node count.
 - The connector is one measurement-free vertical stem + solid arrowhead SVG (stroke/fill on
   `currentColor`, `.conn-center` colored by `--t-rule`), centered in the timeline column; the

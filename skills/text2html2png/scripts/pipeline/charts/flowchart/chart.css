@@ -3,6 +3,18 @@
   align-items: stretch;
 }
 
+.flow-vertical { flex-direction: column; }
+.flow-vertical .arrow { width: 100%; height: 32px; }
+.flow-vertical .arrow svg { transform: rotate(90deg); }
+.flow-vertical .step { flex: auto; }
+
+@media (max-width: 760px) {
+  .flow { flex-direction: column; }
+  .flow .arrow { width: 100%; height: 32px; }
+  .flow .arrow svg { transform: rotate(90deg); }
+  .flow .step { flex: auto; }
+}
+
 .step {
   position: relative;
   flex: 1;

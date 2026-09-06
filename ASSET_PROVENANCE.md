@@ -19,10 +19,10 @@ Every theme ships brand typefaces. No font binary is committed: each face arrive
 
 | Theme | Display | Body / data |
 |---|---|---|
-| `warm` | Playfair Display, Noto Serif SC | Noto Sans SC |
-| `minimal` | IBM Plex Sans | IBM Plex Sans, IBM Plex Mono, Noto Sans SC |
+| `clean` | IBM Plex Sans | IBM Plex Sans, IBM Plex Mono, Noto Sans SC |
 | `editorial` | Cormorant Garamond, Noto Serif SC | Lora, Libre Franklin, Noto Sans SC |
-| `paper` | Caveat, LXGW WenKai | Nunito, Noto Sans SC |
+| `notebook` | Caveat, LXGW WenKai | Nunito, Noto Sans SC |
+| `warm` | Playfair Display, Noto Serif SC | Noto Sans SC |
 | `glass` | Outfit | Outfit, Noto Sans SC |
 
 All of these families are licensed under the SIL Open Font License 1.1. LXGW WenKai is copyright LXGW (with Klee by Fontworks as its base); its license text is archived at [`skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt`](./skills/text2html2png/LICENSES/lxgw-wenkai-OFL.txt). The remaining faces are distributed by Google's `@fontsource` npm packages, whose `LICENSE` files accompany each package under `node_modules/@fontsource/<family>/`.

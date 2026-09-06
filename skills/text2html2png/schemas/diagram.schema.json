@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GODVvVZzz/text2html2png/schemas/diagram.schema.json",
+  "title": "text2html2png diagram",
+  "description": "Versioned input for the deterministic HTML and PNG renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "chart", "theme", "data"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "chart": {
+      "enum": ["flowchart", "comparison", "timeline", "architecture", "dashboard", "gantt", "org-chart", "funnel", "narrative"]
+    },
+    "theme": {"enum": ["clean", "editorial", "notebook", "warm", "glass"]},
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "width": {"type": "integer", "minimum": 480, "maximum": 2000, "default": 920},
+        "padding": {"type": "integer", "minimum": 0, "maximum": 160, "default": 24},
+        "scale": {"type": "number", "minimum": 1, "maximum": 4, "default": 2}
+      }
+    },
+    "data": {
+      "type": "object",
+      "required": ["id", "locale", "title"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "locale": {"type": "string", "minLength": 2, "maxLength": 35},
+        "title": {"type": "string", "minLength": 1, "maxLength": 160}
+      },
+      "additionalProperties": true
+    }
+  }
+}

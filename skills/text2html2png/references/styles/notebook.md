@@ -1,4 +1,4 @@
-# paper — 手绘纸质感
+# notebook — 手绘纸质感
 
 **Tone**: 亲切、教学、手工感
 **Best for**: 教学说明、操作手册、笔记风格、知识整理、入门教程
@@ -26,7 +26,7 @@ Annotations: `'Caveat', cursive` — weight 400
 
 ```css
 :root {
-  /* Base — ruled-notebook paper: horizontal pencil-grey lines at a 27px
+  /* Base — ruled-notebook notebook: horizontal pencil-grey lines at a 27px
      pitch, showing through the translucent note cards. */
   --bg: #f5f0e6;
   --bg-texture: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(138, 126, 104, 0.14) 27px, rgba(138, 126, 104, 0.14) 28px);
@@ -213,7 +213,7 @@ body {
 
 ## Special Effects
 
-- Ruled-line paper texture on background (via repeating-linear-gradient)
+- Ruled-line notebook texture on background (via repeating-linear-gradient)
 - Dashed borders on cards
 - Slight rotation on annotation text
 - Curved pencil-stroke arrows (SVG with quadratic curves)

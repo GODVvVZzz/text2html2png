@@ -34,7 +34,8 @@ const textExtensions = new Set([
 
 const forbidden = [
   ["private host marker", /https?:\/\/[^\s/]*(?:internal|intranet|corp)\.[^\s/)"']+/i],
-  ["private network address", /https?:\/\/(?:10\.|127\.0\.0\.1|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.)/],
+  // Loopback URLs are public local-development instructions, not private LAN identifiers.
+  ["private network address", /https?:\/\/(?:10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.)/],
   ["user home path", /(?:\/Users\/[A-Za-z0-9._-]+\/|\/home\/[A-Za-z0-9._-]+\/)/],
   ["secret assignment", /(?:api[_-]?key|client[_-]?secret|password|access[_-]?token)\s*[:=]\s*["'][^"']{8,}["']/i],
   ["private key", /-----BEGIN [A-Z ]*PRIVATE KEY-----/],

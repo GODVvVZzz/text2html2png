@@ -4,6 +4,15 @@
   gap: 10px;
 }
 
+@media (max-width: 760px) {
+  .dash-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wrap .dash-panels { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .dash-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
 .metric-trend {
   display: flex;
   align-items: center;

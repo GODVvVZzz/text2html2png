@@ -2,41 +2,41 @@
 
 # Public example prompts
 
-10 examples covering 9/9 chart types and 5/5 visual themes.
+10 examples covering 9/9 chart types and 3/5 visual themes.
 All example content is synthetic. Every example ships in English and Chinese, rendered from one shared DOM.
 
 | Example | Chart | Theme | Files |
 |---|---|---|---|
-| From idea to production | Flowchart | `warm` | [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-warm.png) |
-| Choosing a plan | Comparison | `minimal` | [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-minimal.png) |
+| From idea to production | Flowchart | `clean` | [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-clean.png) |
+| Choosing a plan | Comparison | `clean` | [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-clean.png) |
 | Six milestones to a plugin API | Timeline | `editorial` | [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png) |
 | A local-first diagram pipeline | Architecture | `editorial` | [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-editorial.png) |
-| Service Architecture | Architecture | `minimal` | [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-minimal.png) |
-| Support desk weekly snapshot | Dashboard | `glass` | [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-glass.png) |
-| Community conference preparation plan | Gantt | `paper` | [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-paper.png) |
+| Service Architecture | Architecture | `clean` | [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-clean.png) |
+| Support desk weekly snapshot | Dashboard | `clean` | [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-clean.png) |
+| Community conference preparation plan | Gantt | `notebook` | [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-notebook.png) |
 | A fourteen-person product studio | Org chart | `warm` | [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png) |
 | Landing page to activation | Funnel | `glass` | [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-glass.png) |
-| Café membership revamp brief | Narrative brief | `warm` | [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-warm.png) |
+| Café membership revamp brief | Narrative brief | `clean` | [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-clean.png) |
 
 ## From idea to production
 
-`flowchart` × `warm` · rendered at 908px
+`flowchart` × `clean` · rendered at 908px
 
-> Create a warm flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.
+> Create a clean flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.
 
 Six sequential gates, each with an explicit exit condition.
 
-Output: [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-warm.png)
+Output: [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-clean.png)
 
 ## Choosing a plan
 
-`comparison` × `minimal` · rendered at 908px
+`comparison` × `clean` · rendered at 908px
 
-> Make a minimal comparison of three plans — Community, Team, Studio — on the same criteria: seats included, active projects, storage, support response, monthly price, annual price. Community: 3 seats, 5 projects, 2 GB, community forum only, $0; describe it as self-hosted, for solo work and evaluation. Team: 25 seats, 50 projects, 100 GB, 1 business day, $18 per seat monthly, $180 per seat annually; describe it as shared projects for a small group. Studio: unlimited seats and projects, 1 TB, 4 hours, $49 per seat monthly, $490 per seat annually; describe it as for larger groups that need a response time. Annual billing charges ten months per seat. Close with a short "how to read it" note: seats and projects are hard caps, support response is the target time to a first reply during business hours and Community has no target, and the ten-month rule is why $18 becomes $180 and $49 becomes $490. Title it "Choosing a plan" and do not declare a winner.
+> Make a clean comparison of three plans — Community, Team, Studio — on the same criteria: seats included, active projects, storage, support response, monthly price, annual price. Community: 3 seats, 5 projects, 2 GB, community forum only, $0; describe it as self-hosted, for solo work and evaluation. Team: 25 seats, 50 projects, 100 GB, 1 business day, $18 per seat monthly, $180 per seat annually; describe it as shared projects for a small group. Studio: unlimited seats and projects, 1 TB, 4 hours, $49 per seat monthly, $490 per seat annually; describe it as for larger groups that need a response time. Annual billing charges ten months per seat. Close with a short "how to read it" note: seats and projects are hard caps, support response is the target time to a first reply during business hours and Community has no target, and the ten-month rule is why $18 becomes $180 and $49 becomes $490. Title it "Choosing a plan" and do not declare a winner.
 
 Three plan tiers aligned row by row on one shared set of criteria, with no invented winner.
 
-Output: [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-minimal.png)
+Output: [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-clean.png)
 
 ## Six milestones to a plugin API
 
@@ -60,39 +60,39 @@ Output: [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-fi
 
 ## Service Architecture
 
-`architecture` × `minimal` · rendered at 908px
+`architecture` × `clean` · rendered at 908px
 
-> Create a minimal architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.
+> Create a clean architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.
 
 Four labelled layers with per-service data ownership and no invented infrastructure.
 
-Output: [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-minimal.png)
+Output: [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-clean.png)
 
 ## Support desk weekly snapshot
 
-`dashboard` × `glass` · rendered at 908px
+`dashboard` × `clean` · rendered at 908px
 
-> Build a glass dashboard for our weekly support desk snapshot, week 32 (Mon 2026-08-03 to Sun 2026-08-09): 1,284 tickets received against 1,206 the prior week, first-response median 42 min against 55 min, 1,194 of 1,306 resolutions inside the 24 h SLA target against 88.9% the prior week, and 96 tickets open at week end against 118. Add a per-channel intake breakdown with median first response (email 528 / 66 min, in-app chat 431 / 11 min, phone 196 / 4 min, community forum 129 / 148 min) and the open backlog by age (51 under 24 h, 29 at 1 to 3 days, 12 at 4 to 7 days, 4 over 7 days). Do not invent any figure beyond these.
+> Build a clean dashboard for our weekly support desk snapshot, week 32 (Mon 2026-08-03 to Sun 2026-08-09): 1,284 tickets received against 1,206 the prior week, first-response median 42 min against 55 min, 1,194 of 1,306 resolutions inside the 24 h SLA target against 88.9% the prior week, and 96 tickets open at week end against 118. Add a per-channel intake breakdown with median first response (email 528 / 66 min, in-app chat 431 / 11 min, phone 196 / 4 min, community forum 129 / 148 min) and the open backlog by age (51 under 24 h, 29 at 1 to 3 days, 12 at 4 to 7 days, 4 over 7 days). Do not invent any figure beyond these.
 
 A four-KPI weekly support snapshot where every delta, share, and total is derived from the stated intake, resolution, and backlog counts.
 
-Output: [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-glass.png)
+Output: [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-clean.png)
 
 ## Community conference preparation plan
 
-`gantt` × `paper` · rendered at 908px
+`gantt` × `notebook` · rendered at 908px
 
-> Draw a paper-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis.
+> Draw a notebook-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis.
 
 Seven workstreams on an eight-week axis, with deliberate overlaps and three dated milestones.
 
-Output: [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-paper.png)
+Output: [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-notebook.png)
 
 ## A fourteen-person product studio
 
 `org-chart` × `warm` · rendered at 908px
 
-> Draw a warm org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.
+> Draw a clean org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.
 
 A three-level reporting tree where grouped practitioner cards and headcount badges add up to the stated total.
 
@@ -102,7 +102,7 @@ Output: [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm
 
 `funnel` × `glass` · rendered at 908px
 
-> Make a glass funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
+> Make a clean funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
 
 A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.
 
@@ -110,10 +110,10 @@ Output: [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-e
 
 ## Café membership revamp brief
 
-`narrative` × `warm` · rendered at 908px
+`narrative` × `clean` · rendered at 908px
 
-> 把我们咖啡店会员小程序 2.0 的改版方案做成一张图文版说明图:先给结论(六项决策),然后是顾客一单的四步流程、对谁改变了什么的影响表、风险与依赖、验收标准和本次不做的事。用 warm 风格。
+> 把我们咖啡店会员小程序 2.0 的改版方案做成一张图文版说明图:先给结论(六项决策),然后是顾客一单的四步流程、对谁改变了什么的影响表、风险与依赖、验收标准和本次不做的事。用 clean 风格。
 
 A decision-first product brief rendered as one long-form page: six numbered decision cards, a four-step customer flow, an impact table, a risk callout, and acceptance versus non-goal checklists.
 
-Output: [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-warm.png)
+Output: [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-clean.png)

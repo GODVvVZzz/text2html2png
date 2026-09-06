@@ -30,6 +30,8 @@
     "check:privacy": "node scripts/privacy-check.mjs",
     "check:skill": "node scripts/validate-skill.mjs",
     "check:styles": "node scripts/validate-style-contract.mjs",
+    "render": "node scripts/render.mjs",
+    "playground": "node scripts/playground.mjs",
     "audit:layout": "node scripts/audit-layout.mjs",
     "render:examples": "node scripts/build-examples.mjs --render --force",
     "screenshot": "node scripts/screenshot.mjs",

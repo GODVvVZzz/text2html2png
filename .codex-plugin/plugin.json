@@ -28,18 +28,18 @@
     "privacyPolicyURL": "https://github.com/GODVvVZzz/text2html2png/blob/main/PRIVACY.md",
     "defaultPrompt": [
       "Turn this process into a polished HTML flowchart.",
-      "Map this system as a glass architecture diagram and export a PNG.",
+      "Map this system as a clean architecture diagram and export a PNG.",
       "Compare these options in a clear visual matrix."
     ],
-    "brandColor": "#7C3AED",
+    "brandColor": "#2457D6",
     "composerIcon": "./assets/icon.svg",
     "logo": "./assets/logo.svg",
     "logoDark": "./assets/logo-dark.svg",
     "screenshots": [
-      "./skills/text2html2png/assets/gallery/launch-plan-en-paper.png",
-      "./skills/text2html2png/assets/gallery/support-snapshot-en-glass.png",
-      "./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png",
-      "./skills/text2html2png/assets/gallery/studio-org-en-warm.png"
+      "./skills/text2html2png/assets/gallery/launch-plan-en-notebook.png",
+      "./skills/text2html2png/assets/gallery/support-snapshot-en-clean.png",
+      "./skills/text2html2png/assets/gallery/signup-funnel-en-clean.png",
+      "./skills/text2html2png/assets/gallery/studio-org-en-clean.png"
     ]
   }
 }

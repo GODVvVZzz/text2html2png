@@ -4,7 +4,7 @@ Status: **PASS**
 
 This experiment validates the architectural claim the whole skill stands on:
 
-> Any chart can keep one semantic DOM and one structural CSS file while five themes change only a canonical `:root` token block.
+> Any chart can keep one semantic DOM and one structural CSS file while three themes change only a canonical `:root` token block.
 
 It started as a narrow proof on the comparison chart and now covers every chart type: each chart ships a bilingual fixture pair in `chart/<id>/`, and every chart × theme × locale document is built and fingerprint-checked on CI.
 
@@ -23,20 +23,18 @@ The five themes are deliberately different visual languages:
 
 | Theme | Direction |
 |---|---|
-| `warm` | warm archive folio |
-| `minimal` | Swiss-style ink grid |
+| `clean` | Swiss-style ink grid |
 | `editorial` | journal folio |
-| `paper` | functional field notebook; handwriting is limited to display text |
-| `glass` | optical proof sheet with cobalt, teal, and amber |
+| `notebook` | functional field notebook; handwriting is limited to display text |
 
-Two development-only themes (`dark`, `neon`) were removed from the shipping skill; the proof now tracks the five that ship.
+Two development-only themes (`dark`, `neon`) were removed from the shipping skill; the proof now tracks all five shipped themes.
 
 ## Boundary
 
 - `themes/*.css` contains exactly one `:root` rule and no chart selectors.
 - Each `charts/<chart>/chart.css` in the skill pipeline owns layout and references theme values only through `var(--t-*)`.
 - Inline SVG uses `currentColor`; no literal SVG fills or strokes are allowed.
-- The DOM contains emoji and SVG alternatives. `warm` and `glass` show emoji by default, the other themes show monochrome SVG, and the two channels are structurally equivalent.
+- The DOM contains emoji and SVG alternatives. `clean`, `editorial`, and `notebook` show monochrome SVG; `warm` and `glass` show emoji, and the two channels are structurally equivalent.
 - Font families, radii, shadows, backdrop effects, and every literal colour belong to the theme.
 - Restyling atomically replaces only `<style id="text2html2png-theme">...</style>`.
 
@@ -81,7 +79,7 @@ Restyle one generated HTML file:
 
 ```bash
 node experiments/theme-decoupling/scripts/restyle.mjs \
-  --html ../theme-decoupling-output/comparison-zh-warm.html \
+  --html ../theme-decoupling-output/comparison-zh-clean.html \
   --theme editorial \
   --out ../theme-decoupling-output/comparison-zh-restyled-editorial.html
 ```

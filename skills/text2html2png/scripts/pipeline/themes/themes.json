@@ -1,7 +1,7 @@
 [
+  {"id":"clean","name":"Clean technical","background":"#f4f6f8"},
+  {"id":"editorial","name":"Editorial folio","background":"#f8f5f0"},
+  {"id":"notebook","name":"Field notebook","background":"#f5f0e6"},
   {"id":"warm","name":"Warm archive","background":"#faf6ee"},
-  {"id":"minimal","name":"Ink grid","background":"#ffffff"},
-  {"id":"editorial","name":"Editorial folio","background":"#f7f1e8"},
-  {"id":"paper","name":"Field notebook","background":"#f3ecd9"},
   {"id":"glass","name":"Optical proof sheet","background":"#e8eaf0"}
 ]
