@@ -113,7 +113,7 @@ test("accepts a decorative shape that its own container intentionally clips", as
   assert.equal(report.findings.length, 0, formatReport(report));
 });
 
-test("detects an orphaned final CJK character in a short heading", async (context) => {
+test("detects natural CJK orphan wrapping without flagging balanced or single-line headings", async (context) => {
   const browser = await browserIsUsable();
   if (!browser.usable) {
     context.skip(browser.reason);
@@ -121,9 +121,13 @@ test("detects an orphaned final CJK character in a short heading", async (contex
   }
 
   const report = await auditLayout({ ...auditOptions, width: 520, html: fixture("cjk-orphan.html") });
-  const orphan = report.findings.find((finding) => finding.rule === "TEXT_ORPHANED_SHORT_LINE");
-  assert.ok(orphan, `expected TEXT_ORPHANED_SHORT_LINE, got ${report.findings.map((f) => f.rule).join(", ")}`);
-  assert.match(orphan.evidence, /one character stranded/);
+  // The fixture embeds a fixed CJK font. At 16px, its four glyphs wrap 3+1
+  // in 49px, 2+2 in 33px, and stay on one line in 65px on every runner.
+  const orphans = report.findings.filter((finding) => finding.rule === "TEXT_ORPHANED_SHORT_LINE");
+  assert.equal(orphans.length, 1, formatReport(report));
+  assert.match(orphans[0].target, /#orphan(?:\b|$)/);
+  assert.match(orphans[0].evidence, /2 lines with one character stranded/);
+  assert.equal(report.errors, 0, formatReport(report));
 });
 
 test("names the capture root when it is missing", async (context) => {

@@ -2,17 +2,32 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'">
   <title>中文孤字测试</title>
   <style>
-    body { margin: 0; background: #fff; color: #111; font-family: sans-serif; }
-    .wrap { width: 280px; padding: 24px; }
-    .step-name { width: 49px; margin: 0; font-size: 16px; line-height: 1.4; }
+    /* Noto Sans SC 700, SIL OFL 1.1; four-glyph subset generated from
+       @fontsource/noto-sans-sc using buildThemeFontFaces. Embedded so the
+       natural line breaks do not depend on the runner's system fonts. */
+@font-face {
+  font-family: "Noto Sans SC";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  unicode-range: U+d,U+3e,U+5f,U+7c,U+a0,U+a9,U+4e09-4e0b,U+4e0d-4e0e,U+4e13,U+4e1a,U+4e2a,U+4e3a-4e3b,U+4e4b,U+4e86,U+4e8e,U+4ea7,U+4eba,U+4ee4-4ee5,U+4eec,U+4f1a,U+4f4d,U+4f53,U+4f5c,U+4f60,U+4fe1,U+5165,U+5168,U+516c,U+5173,U+5176,U+5185,U+51fa,U+5206,U+5230,U+5236,U+524d,U+529b,U+52a0-52a1,U+52a8,U+5316,U+533a,U+53cb,U+53d1,U+53ef,U+53f7-53f8,U+5408,U+540c-540e,U+544a,U+548c,U+54c1,U+56de,U+56fd-56fe,U+5728,U+5730,U+5907,U+5916,U+591a,U+5927,U+5929,U+597d,U+5982,U+5b50,U+5b66,U+5b89,U+5b9a,U+5b9e,U+5ba2,U+5bb6,U+5bf9,U+5c0f,U+5de5,U+5e02,U+5e73-5e74,U+5e7f,U+5ea6,U+5f00,U+5f0f,U+5f53,U+5f55,U+5fae,U+5fc3,U+6027,U+606f,U+60a8,U+60c5,U+610f,U+6210-6211,U+6237,U+6240,U+624b,U+6280,U+62a5,U+63a5,U+63a8,U+63d0,U+6536,U+6570,U+6587,U+65b9,U+65e0,U+65f6,U+660e,U+662d,U+662f,U+66f4,U+6700,U+670d,U+672c,U+673a,U+6743,U+6765,U+679c,U+682a,U+6b21,U+6b63,U+6cbb,U+6cd5,U+6ce8,U+6d3b,U+70ed,U+7247-7248,U+7269,U+7279,U+73b0,U+7406,U+751f,U+7528,U+7535,U+767b,U+76f8,U+770b,U+77e5,U+793e,U+79d1,U+7ad9,U+7b49,U+7c7b,U+7cfb,U+7ebf,U+7ecf,U+7f8e,U+8005,U+8054,U+80fd,U+81ea,U+85cf,U+884c,U+8868,U+8981,U+89c6,U+8bba,U+8bdd,U+8bf4,U+8bf7,U+8d44,U+8fc7,U+8fd8-8fd9,U+8fdb,U+901a,U+9053,U+90e8,U+91d1,U+957f,U+95e8,U+95ee,U+95f4,U+9762,U+9875,U+9898,U+9996,U+9ad8,U+ff01,U+ff08-ff09;
+  src: url(data:font/woff2;base64,d09GMgABAAAAAANkABEAAAAABogAAAMIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGx4cQAZgP1NUQVQqADQRCAqCIIIeCwYAATYCJAMGBCAFhEIHIAwHFyQYBhtUBREVnLvIfixkc4qt8wOddkkeGEuQnYN4Xo+al/zN2jrArFAC7O+6RQAcbZNtqVzDLW2eRPsDh/rE5fS3Dnud03HN5jwPZFMXUECRdNmYAg+YphaJZe0KiylFJEked7WPTdrucyUigAVeeCFFJVVNmKEAensBEMCCHHIwmFMRg2dOGkPI8ElDR2dqxMBxI4HRwEBqzMAp4w4BpI+V/ky7gwloq7Q2oDKfl34kSDFolhpU3Ix58osKavGbVBa+Sp/QuwLUCvEbYIgpgOarfQT8MBAEMwRwQgAvtOnDR0wRATQEQOy0OwBogA44oSOAEwo/QKEQmFTW2ztsa28iAIk8q7bC96AAc6AvsAYsyDVzpZRhb2dtZd/fGqvBnR5mqVk09XSLfqgteFGkcdtO3XI5/1oi4y1Dm19ImradO+fymmhteilp3nLmjNOrZsvw9/6uSx4+HyAi8rbdgi7/M6woSxqZtK5v5dhKywVjSsbM3d39aGy/DYmx4xbnm6x3WBO04NmqDxbX+rqPt5qlZqT8XemUUGJvf6y9a/2FQanzlmx+0hI+f3f9G5slp+NdxtQ/nLmtLvrJ08v7m1Jnnan/4D43b1TBiHzrXU77rSr0EPcl5Wqb7Sqn0eGT6vOMTU5bQlcaJ93TXh70m2W3WM1LAQABNDGW52d79LfN+m+m638APlwIOg7wedP115j3/NC/6RMQDDQABNSKni+g/8EcQ/+GQIm44RDcIqtxBPs9gntmziR0RJkDeyRp80KAOPAaZmLB6xTwmFdEsYc3YRQJnEEIVjoRrCCzO/GZrWbMknS8N2PzIfXwOX7TrBYPTRn9sR+ypgZNUhRDvGl+arKQS2ZAqtMTNSYOyStS4OYY44onEpNIy5wqupYqIANUARhsU3Ac+9Ph4X8pmLtenDEhq3aoqNfcVYamwj5qAgQmHcfWk+WlTSXC/3hS2FQyK8CSjSm8ccB+xgguTT3CnVQI9KeZ+hBpaQdA72IS0tUb0rv0glordpt/PVb/dbO3j1oDqGKdkfoAAA==) format("woff2");
+}
+    body { margin: 0; background: #fff; color: #111; font-family: "Noto Sans SC", sans-serif; }
+    .wrap { width: 280px; padding: 24px; display: grid; gap: 16px; }
+    .step-name { width: 49px; margin: 0; font-size: 16px; font-weight: 700; line-height: 1.4; }
+    #balanced { width: 33px; }
+    #single-line { width: 65px; }
   </style>
 </head>
 <body>
   <main class="wrap" aria-label="中文孤字测试">
-    <h2 class="step-name">版本冻结</h2>
+    <h2 id="orphan" class="step-name">版本冻结</h2>
+    <h2 id="balanced" class="step-name">版本冻结</h2>
+    <h2 id="single-line" class="step-name">版本冻结</h2>
   </main>
 </body>
 </html>
