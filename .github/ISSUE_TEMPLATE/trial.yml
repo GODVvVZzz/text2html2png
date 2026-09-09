@@ -1,0 +1,76 @@
+name: First-use feedback / 首次试用反馈
+description: Tell us whether your own task worked, including failures.
+title: '[Trial] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢试用。此反馈会公开，请使用脱敏或合成内容。失败案例同样有帮助，不需要提供个人信息。
+        This feedback is public. Use redacted or synthetic content; failures are welcome.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment / 使用环境
+      description: OS, Node version, skill version, agent and model (if known).
+      placeholder: macOS / Node 22 / v1.1.0 / agent and model
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Where did you find it? / 从哪里看到
+      options:
+        - 小红书 / Xiaohongshu
+        - 抖音 / Douyin
+        - GitHub
+        - Friend or colleague / 朋友或同事
+        - Other / 其他
+  - type: textarea
+    id: task
+    attributes:
+      label: Your task / 想完成什么
+      description: Paste a safe-to-share prompt, or describe the task. Do not include private documents.
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome / 使用结果
+      options:
+        - First result was usable / 首次结果可用
+        - Usable after changes / 修改后可用
+        - Installed but could not produce a usable result / 已安装但未能完成
+        - Could not install / 安装失败
+        - Only viewed examples / 只浏览了示例
+    validations:
+      required: true
+  - type: input
+    id: effort
+    attributes:
+      label: Time and retries / 时间与修改次数
+      description: Approximate time from starting setup to a usable result, attempts, and whether the author helped. Unknown is fine.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Output or failure / 产物或失败信息
+      description: Attach a safe-to-share image or error. Were facts omitted, relationships wrong, or text hard to read?
+  - type: dropdown
+    id: use
+    attributes:
+      label: Did you use the output? / 是否实际使用
+      options:
+        - Put it in a document or shared it / 已放入文档或分享
+        - Kept it for later / 已保存，尚未使用
+        - Did not use it / 未使用
+  - type: textarea
+    id: followup
+    attributes:
+      label: Later follow-up / 后续补充
+      description: You can return to this issue later and note whether you used the skill again and why.
+  - type: checkboxes
+    id: permission
+    attributes:
+      label: Optional showcase permission / 可选展示授权
+      options:
+        - label: You may feature the content I attached here in the project gallery with attribution to this issue. / 允许项目案例页引用此处附件并注明本 issue。
+          required: false

@@ -37,6 +37,9 @@ export function createPlaygroundServer() {
       const definition = JSON.parse(body);
       if (req.url === "/render") {
         const result = await renderDocument(definition);
+        if (result.fontWarnings.length) {
+          throw new Error(`Theme fonts are missing. Run: node scripts/setup.mjs --theme ${result.input.theme}\nThen update the preview again.`);
+        }
         return reply(200, "text/html; charset=utf-8", result.html);
       }
       const dir = await mkdtemp(path.join(tmpdir(), "diagram-preview-"));

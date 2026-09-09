@@ -18,7 +18,7 @@ The renderer does not upload your input or output. Node.js generates HTML and em
 |---|---|
 | Browser layout audit or PNG export | None. Page JavaScript is disabled and every request the page attempts is aborted. |
 | Generating or validating HTML | None after the local runtime and font dependencies are installed. |
-| First-time dependency install | Yes — `npm ci --omit=dev` fetches the locked runtime dependencies, including `puppeteer-core`, `subset-font`, and `@fontsource` font packages, from your configured npm registry. |
+| First-time dependency install | Yes — `scripts/setup.mjs` fetches the locked runtime and selected theme fonts from your configured npm registry. A full `npm ci` installs all optional theme fonts for development. |
 | Optional remote fonts or images | Only through an explicit `--allow-network` flag on the lower-level browser tools. The public `render.mjs` entry point does not enable network access. |
 
 There is no update check, no version ping, and no usage beacon. The skill never contacts a server owned by the project.
@@ -34,7 +34,7 @@ The skill writes only:
 - `<topic>.html` in the output directory you specify;
 - a Diagram JSON source beside the HTML;
 - `<topic>.png` only when you explicitly request PNG/image output;
-- `node_modules/` inside the skill directory when dependencies are installed, including before first-time HTML generation.
+- `node_modules/` for the runtime and `.runtime-fonts/` for fonts installed by theme, inside the skill directory.
 
 The PNG renderer refuses to overwrite an existing image unless `--force` is passed, and it writes through a temporary file so an interrupted render cannot corrupt an existing image.
 

@@ -64,7 +64,7 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 
 需要改图时，让 Agent 修改 JSON 后重新生成。HTML 是可独立打开的产物，JSON 是用于后续修改和复现的源文件。
 
-**环境要求：** 生成 HTML 需要 Node.js 22.12+；工作流要求的浏览器版面检查和可选 PNG 导出还需要本机 Chrome、Chromium、Edge 或 Brave。首次渲染前，Agent 会在已安装的技能目录内运行 `npm ci --omit=dev`，按 lockfile 安装字体、`subset-font`、`puppeteer-core` 等依赖。它使用现有浏览器，不额外下载浏览器。首次安装需要联网。
+**环境要求：** 生成 HTML 需要 Node.js 22.12+；工作流要求的浏览器版面检查和可选 PNG 导出还需要本机 Chrome、Chromium、Edge 或 Brave。首次渲染前，Agent 会运行 `node scripts/setup.mjs --theme clean`，安装锁定的运行时和所选主题的字体；换主题时再增装需要的字体。它使用现有浏览器，不额外下载浏览器。首次安装需要联网。
 
 ## 不通过 Agent 也能试用渲染器
 
@@ -75,7 +75,7 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 ```bash
 git clone https://github.com/GODVvVZzz/text2html2png.git
 cd text2html2png/skills/text2html2png
-npm ci
+node scripts/setup.mjs --theme clean
 npm run playground
 ```
 
@@ -94,6 +94,12 @@ npm run render -- --input ../../docs/examples/service-architecture-zh.diagram.js
 ```
 
 `--png` 会先执行严格版面检查。`--force` 明确允许覆盖已有产物；使用新文件名时可省略。如果没有自动找到浏览器，可传入 `--chrome /path/to/browser` 或设置 `CHROME_PATH`。
+
+## 遇到安装问题或想参与试用
+
+在已安装的技能目录运行 `node scripts/setup.mjs --check --theme clean`，查看 Node、运行时、字体和浏览器状态。使用其他主题时替换 `clean`；开发全部主题仍使用 `npm ci`。
+
+[首次试用反馈](https://github.com/GODVvVZzz/text2html2png/issues/new?template=trial.yml) · [质量证据与 24 个固定评测任务](./docs/QUALITY.zh-CN.md)。目前没有独立 Agent 成功率或竞品胜出结论。
 
 ## 还能做哪些图
 

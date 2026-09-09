@@ -7,7 +7,7 @@ description: Turn prose and Chinese technical notes into polished, self-containe
 
 Turn the user's content into versioned Diagram JSON, then use the bundled deterministic renderer to create an editable, self-contained HTML diagram. Render a tightly cropped, high-resolution PNG only when the user explicitly requests PNG, an image file, a screenshot, or passes `--png`.
 
-Rendering HTML requires Node.js 22.12+ and the local npm dependencies. Browser layout audits and PNG export also require a local Chrome or Chromium binary. Resolve the directory containing this `SKILL.md` as `SKILL_DIR`; install missing dependencies there with `npm ci --omit=dev`, never globally.
+Rendering HTML requires Node.js 22.12+ and the local npm dependencies. Browser layout audits and PNG export also require a local Chrome or Chromium binary. Resolve the directory containing this `SKILL.md` as `SKILL_DIR`; install missing dependencies there with `node scripts/setup.mjs --theme <selected-style>`, never globally. Setup installs the locked runtime and only that theme’s font packages. Use `node scripts/setup.mjs --check --theme <selected-style>` for read-only diagnostics; use `--theme all` only when all themes are needed. A full `npm ci` remains available for development.
 
 Do not generate a PNG merely because this skill is named `text2html2png`, or because the user generally asks to “draw a diagram.” HTML is the default deliverable.
 

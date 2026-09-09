@@ -1,6 +1,6 @@
 {
   "skill_name": "text2html2png",
-  "dataset_note": "All prompts are synthetic public test cases.",
+  "dataset_note": "24 synthetic prompts for end-to-end agent evaluation. These are tasks and review criteria, not measured results. Never infer agent success from renderer-only tests.",
   "evals": [
     {
       "id": 1,
@@ -34,7 +34,7 @@
       "assertions": [
         "Uses clean architecture styling.",
         "Shows two services, one shared Redis, and two separate PostgreSQL databases.",
-        "Keeps the supplied topology exact; any added labels use plausible defaults."
+        "Keeps shared Redis versus separate PostgreSQL ownership explicit; does not imply arbitrary node routing is supported."
       ]
     },
     {
@@ -54,7 +54,7 @@
       "files": [],
       "assertions": [
         "Recognizes the statistical/scientific plotting boundary.",
-        "Does not force the request into one of the eight static diagram types."
+        "Does not force a statistical request into a static diagram template."
       ]
     },
     {
@@ -80,6 +80,177 @@
         "Changes shared component geometry rather than inserting a label-specific manual line break.",
         "Passes the layout audit in strict mode."
       ]
+    },
+    {
+      "id": 8,
+      "prompt": "请做一张 clean 风格 KPI 图，只放两个指标：失败请求 0 次、待处理任务 7 个。没有历史数据。",
+      "expected_output": "A grounded dashboard response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Exactly two metrics, including numeric zero.",
+        "No fabricated trend or percentage."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "做一个方案对比图：A 每月 30 元，支持 3 个项目；B 每月 60 元，支持 10 个项目。两者都可导出 CSV。不要推荐赢家。",
+      "expected_output": "A grounded comparison response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Preserves prices, capacities and common CSV support.",
+        "Equal visual emphasis and no invented recommendation."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Use editorial style for this timeline: 2028 Q1 prototype; 2028 Q3 private beta; 2029 Q2 public launch. Dates are targets and may change.",
+      "expected_output": "A grounded timeline response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Preserves all three dates and their order.",
+        "Keeps the uncertainty note visible."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "请用 notebook 风格画周计划：调研第 1–2 周，设计第 2–3 周，开发第 3–6 周，测试第 6 周。允许重叠，不补任务依赖。",
+      "expected_output": "A grounded gantt response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Correct task spans and overlaps.",
+        "No invented dependency or calendar date."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "请画团队层级：负责人下有研发组和设计组。研发组 3 人，设计组 2 人；组内人员姓名未知。不要把组长算成额外人员。",
+      "expected_output": "A grounded org-chart response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Preserves the two groups and their stated counts.",
+        "No fabricated names or extra headcount."
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "画转化漏斗：访问 1000 人，注册 400 人，激活 100 人。显示每阶段占访问者比例，同时导出 PNG。",
+      "expected_output": "A grounded funnel response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Shares are 100%, 40%, and 10%.",
+        "PNG is delivered and no unsupported business conclusion is added."
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "将这段提案做成一页图文：建议先试点两周，再决定是否推广；原因是当前没有完整反馈；风险是培训成本未知；本轮不改计费系统。",
+      "expected_output": "A grounded narrative response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Retains the two-week pilot, missing evidence, risk and non-goal.",
+        "Does not turn the tentative proposal into a confirmed outcome."
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "把这三个中文长标题做成流程图，同时导出 PNG：跨团队需求澄清与验收标准确认 → 兼容性回归与异常场景验证 → 发布观察与问题追踪。",
+      "expected_output": "A grounded flowchart response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "All three full labels remain visible and ordered.",
+        "No orphaned final CJK heading character; font size is not shrunk to conceal crowding."
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "Create an architecture overview: client calls the catalog service; the service reads its own PostgreSQL and an optional cache. A cache failure falls back to PostgreSQL.",
+      "expected_output": "A grounded architecture response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Optional cache and failure fallback remain explicit.",
+        "Does not imply the cache is mandatory or that all reads pass through it."
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "画审批流程：金额小于 1000 时主管审批，否则主管和财务都审批；驳回后返回申请人修改。请保留分支和回路。",
+      "expected_output": "A grounded boundary response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Preserves the threshold, conditional branch, and rejection loop.",
+        "Uses a representation that can express the relationships or clearly explains the limitation; never flattens it into a misleading chain."
+      ]
+    },
+    {
+      "id": 18,
+      "prompt": "请给我一个可在 draw.io 中继续拖拽编辑的架构图源文件，不要 HTML。",
+      "expected_output": "A grounded boundary response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Routes to the requested editable format instead of substituting HTML.",
+        "Does not claim PNG or HTML is a draw.io source file."
+      ]
+    },
+    {
+      "id": 19,
+      "prompt": "做一个图文说明，原文包含字面量：<script>alert(\"example\")</script>、$100、A & B。它们只是文字，不要执行。",
+      "expected_output": "A grounded narrative response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Special characters and dollar amounts remain literal text.",
+        "Output has no executable script or remote request."
+      ]
+    },
+    {
+      "id": 20,
+      "prompt": "请用 glass 风格画三阶段流程：Collect → Review → Publish。只交付 HTML 和 JSON，不要生成图片。",
+      "expected_output": "A grounded flowchart response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Uses glass while preserving the three steps.",
+        "Does not export PNG."
+      ]
+    },
+    {
+      "id": 21,
+      "prompt": "用 warm 风格比较两个发布策略：全量发布维护简单、回滚范围大；分批发布观察更细、流程更长。没有性能数据。",
+      "expected_output": "A grounded comparison response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Preserves both stated tradeoffs without invented metrics.",
+        "Uses warm and keeps neutral visual emphasis."
+      ]
+    },
+    {
+      "id": 22,
+      "prompt": "同一个流程在窄版文档中展示：设计 → 开发 → 评审 → 测试 → 上线。输出宽度 520px 的 HTML，同时导出 PNG。",
+      "expected_output": "A grounded flowchart response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Uses the requested width and preserves the five stages.",
+        "No clipping, overlap, or hidden facts in the exported image."
+      ]
+    },
+    {
+      "id": 23,
+      "prompt": "请把变更说明做成图文摘要：新增离线导出；移除旧登录入口；修复中文标题裁切；已知限制是不支持自定义节点连线。不要写提升百分比。",
+      "expected_output": "A grounded narrative response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "All three changes and the known limitation remain visible.",
+        "No fabricated improvement percentage."
+      ]
+    },
+    {
+      "id": 24,
+      "prompt": "画架构总览：入口 A 只调用服务 X，入口 B 只调用服务 Y；X、Y 共用一个 Redis，但各有一个独立数据库。共 7 个组件。",
+      "expected_output": "A grounded architecture response respecting all supplied facts and output constraints.",
+      "files": [],
+      "assertions": [
+        "Exactly two entry points, two services, one shared Redis and two databases.",
+        "The exclusive callers and shared-versus-private ownership are explicit."
+      ]
     }
-  ]
+  ],
+  "dataset_version": "1.1.0"
 }

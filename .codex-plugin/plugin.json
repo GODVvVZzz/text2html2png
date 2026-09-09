@@ -1,12 +1,12 @@
 {
   "name": "text2html2png",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Turn structured text into polished HTML diagrams, with optional PNG export on request.",
   "author": {
     "name": "GODVvVZzz",
     "url": "https://github.com/GODVvVZzz"
   },
-  "homepage": "https://github.com/GODVvVZzz/text2html2png",
+  "homepage": "https://godvvvzzz.github.io/text2html2png/",
   "repository": "https://github.com/GODVvVZzz/text2html2png",
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,7 @@
     "developerName": "GODVvVZzz",
     "category": "Productivity",
     "capabilities": [],
-    "websiteURL": "https://github.com/GODVvVZzz/text2html2png",
+    "websiteURL": "https://godvvvzzz.github.io/text2html2png/",
     "privacyPolicyURL": "https://github.com/GODVvVZzz/text2html2png/blob/main/PRIVACY.md",
     "defaultPrompt": [
       "Turn this process into a polished HTML flowchart.",

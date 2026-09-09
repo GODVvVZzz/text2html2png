@@ -24,3 +24,6 @@ skills/text2html2png-workspace/
 Thumbs.db
 .idea/
 .vscode/
+
+# Per-theme font cache created by setup
+.runtime-fonts/
