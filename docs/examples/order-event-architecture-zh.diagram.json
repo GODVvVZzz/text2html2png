@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "chart": "architecture",
+  "theme": "clean",
+  "render": {
+    "width": 1040,
+    "padding": 24,
+    "scale": 2
+  },
+  "data": {
+    "id": "order-event-architecture",
+    "locale": "zh-CN",
+    "eyebrow": "合成技术案例 · 架构分组图",
+    "title": "订单事件架构：同步受理，异步协作",
+    "subtitle": "层间箭头仅表示分组层级；具体依赖、事件方向与数据归属以节点文字为准。",
+    "layers": [
+      {
+        "tag": "入口",
+        "accent": 1,
+        "nodes": [
+          {
+            "name": "商城前端",
+            "desc": "同步调用订单服务，创建订单。",
+            "icon": "code"
+          },
+          {
+            "name": "支付平台",
+            "desc": "携带回调 ID，同步调用回调服务。",
+            "icon": "shield"
+          }
+        ]
+      },
+      {
+        "tag": "服务",
+        "accent": 1,
+        "nodes": [
+          {
+            "name": "订单状态维护与可靠事件发布",
+            "desc": "订单服务：写订单库，异步发布 OrderCreated；消费 PaymentConfirmed，在同一事务更新支付状态与已消费事件 ID。",
+            "icon": "package"
+          },
+          {
+            "name": "支付回调幂等处理与事件发布",
+            "desc": "回调服务：写回调库，事务提交后确认接收；按回调 ID 去重，异步发布 PaymentConfirmed。",
+            "icon": "shield"
+          },
+          {
+            "name": "库存预留与重复事件去重",
+            "desc": "库存消费者：异步消费 OrderCreated，在同一事务写入库存预留结果与已消费事件 ID。",
+            "icon": "layers"
+          }
+        ]
+      },
+      {
+        "tag": "资源",
+        "accent": 1,
+        "nodes": [
+          {
+            "name": "订单库",
+            "desc": "PostgreSQL；仅订单服务读写。订单与 outbox 同一事务提交；保存消费去重记录。",
+            "icon": "lock"
+          },
+          {
+            "name": "回调库",
+            "desc": "独立 PostgreSQL；仅回调服务读写。回调 ID 与 outbox 同一事务提交。",
+            "icon": "lock"
+          },
+          {
+            "name": "库存库",
+            "desc": "独立 PostgreSQL；仅库存消费者读写。保存预留结果和消费去重记录。",
+            "icon": "lock"
+          },
+          {
+            "name": "业务事件队列",
+            "desc": "至少一次投递。OrderCreated → 库存消费者；PaymentConfirmed → 订单服务。",
+            "icon": "layers"
+          }
+        ]
+      }
+    ],
+    "connectors": [
+      {
+        "label": "分组层级 · 非节点连线"
+      },
+      {
+        "label": "分组层级 · 非节点连线"
+      }
+    ],
+    "footerLabel": "可靠性边界",
+    "footer": "订单与回调服务各自从 outbox 重试失败发布。回调按回调 ID 去重；订单与库存消费按事件 ID 去重。至少一次投递不等于恰好一次处理；图中没有逐节点连线或串行调用链。"
+  }
+}

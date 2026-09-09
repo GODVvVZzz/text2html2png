@@ -4,21 +4,96 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>text2html2png · 本地试用</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f7f8fa;color:#172033;font:16px/1.6 system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{margin:0;font-size:28px}p{color:#657086}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}button,select{font:inherit;padding:8px 14px;border:1px solid #cfd6e4;border-radius:4px;background:white;color:#172033}button{cursor:pointer}button.primary{background:#2457d6;color:white}button:disabled{opacity:.5;cursor:wait}.workspace{display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,2fr);gap:20px}textarea{width:100%;min-height:660px;resize:vertical;padding:16px;border:1px solid #cfd6e4;font:14px/1.6 ui-monospace,monospace}iframe{width:100%;height:720px;border:1px solid #cfd6e4;background:white}#status{white-space:pre-wrap;overflow-wrap:anywhere}a{color:#2457d6} :focus-visible{outline:3px solid #2457d6;outline-offset:3px}@media(max-width:800px){.workspace{grid-template-columns:1fr}textarea{min-height:300px}main{padding:16px}}
+*{box-sizing:border-box}body{margin:0;background:#f7f8fa;color:#172033;font:16px/1.6 system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{margin:0;font-size:28px}p{color:#657086}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}button,select{font:inherit;padding:8px 14px;border:1px solid #cfd6e4;border-radius:4px;background:white;color:#172033}button{cursor:pointer}button.primary{background:#2457d6;color:white}button:disabled,select:disabled,textarea:disabled{opacity:.6;cursor:wait}.workspace{display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,2fr);gap:20px}textarea{width:100%;min-height:660px;resize:vertical;padding:16px;border:1px solid #cfd6e4;font:14px/1.6 ui-monospace,monospace}iframe{width:100%;height:720px;border:1px solid #cfd6e4;background:white}#status{white-space:pre-wrap;overflow-wrap:anywhere}a{color:#2457d6} :focus-visible{outline:3px solid #2457d6;outline-offset:3px}@media(max-width:800px){.workspace{grid-template-columns:1fr}textarea{min-height:300px}main{padding:16px}}
 </style>
-<main><h1>把内容变成可直接使用的图</h1><p>选择一个案例，修改 JSON，查看同一渲染器生成的效果。所有处理都在本机完成；这是结构化数据试用，文字理解由你的 Agent 完成。</p>
-<div class="toolbar"><label>案例 <select id="example"><option value="flowchart">发布流程</option><option value="architecture">系统架构</option><option value="dashboard">KPI 看板</option><option value="comparison">方案对比</option><option value="timeline">时间线</option><option value="gantt">甘特图</option><option value="org-chart">组织架构</option><option value="funnel">漏斗</option><option value="narrative">图文说明</option></select></label><button id="load">载入案例</button><button class="primary" id="render">更新预览</button><button id="html" disabled>下载 HTML</button><button id="png">导出 PNG</button></div>
-<label>风格 <select id="theme"><option value="warm">暖色 · Warm</option><option value="glass">玻璃 · Glass</option><option value="clean">简洁 · Clean</option><option value="editorial">杂志 · Editorial</option><option value="notebook">笔记 · Notebook</option></select></label>
+<main><h1>本地 JSON 试用：预览并导出图表</h1><p>选择案例，修改左侧 Diagram JSON，再更新预览。可下载完整 JSON 保留修改，并导出 HTML 或 PNG。所有处理都在本机完成；这里接受结构化 JSON，文字理解由你的 Agent 完成。</p>
+<div class="toolbar"><label>案例 <select id="example"><option value="architecture">订单事件架构</option><option value="flowchart">发布流程</option><option value="dashboard">KPI 看板</option><option value="comparison">方案对比</option><option value="timeline">时间线</option><option value="gantt">甘特图</option><option value="org-chart">组织架构</option><option value="funnel">漏斗</option><option value="narrative">图文说明</option></select></label><button id="load">载入案例</button><button class="primary" id="render">更新预览</button><button id="json" disabled>下载 JSON</button><button id="html" disabled>下载 HTML</button><button id="png">导出 PNG</button></div>
+<label>风格 <select id="theme"><option value="" disabled hidden>请检查 JSON 中的 theme</option><option value="clean" selected>简洁 · Clean</option><option value="editorial">杂志 · Editorial</option><option value="notebook">笔记 · Notebook</option><option value="warm">暖色 · Warm</option><option value="glass">玻璃 · Glass</option></select></label>
 <p id="status" role="status" aria-live="polite">正在载入案例…</p>
 <div class="workspace"><label>Diagram JSON<textarea id="input" spellcheck="false"></textarea></label><div>渲染效果<iframe id="preview" title="图表预览" sandbox=""></iframe></div></div></main>
 <script>
-const $=id=>document.getElementById(id);let lastHtml='';
-$('input').addEventListener('input',()=>{lastHtml='';$('html').disabled=true;$('status').textContent='内容已修改，请更新预览后下载 HTML。'});
-function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-async function request(route){const data=JSON.parse($('input').value),response=await fetch(route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});if(!response.ok)throw Error(await response.text());return response}
-async function busy(work){for(const b of document.querySelectorAll('button'))b.disabled=true;try{await work()}catch(e){$('status').textContent=e.message}finally{for(const b of document.querySelectorAll('button'))b.disabled=false;$('html').disabled=!lastHtml}}
-async function preview(){ $('status').textContent='正在渲染…';lastHtml=await(await request('/render')).text();$('preview').srcdoc=lastHtml;$('status').textContent='预览已更新。PNG 导出还会执行浏览器布局审计。' }
-$('theme').onchange=()=>busy(async()=>{lastHtml='';const data=JSON.parse($('input').value);data.theme=$('theme').value;$('input').value=JSON.stringify(data,null,2);await preview()});
-$('load').onclick=()=>busy(async()=>{if($('input').value&&!confirm('载入案例将替换编辑区的内容，继续吗？'))return;const r=await fetch('/example/'+$('example').value);$('input').value=JSON.stringify(await r.json(),null,2);await preview()});
-$('render').onclick=()=>busy(preview);$('html').onclick=()=>download(new Blob([lastHtml],{type:'text/html'}),'diagram.html');$('png').onclick=()=>busy(async()=>{$('status').textContent='正在审计并导出 PNG…';download(await(await request('/png')).blob(),'diagram.png');$('status').textContent='PNG 已导出，布局审计通过。'});busy(async()=>{const r=await fetch('/example/flowchart');$('input').value=JSON.stringify(await r.json(),null,2);await preview()});
+const $ = id => document.getElementById(id);
+let lastHtml = '', retainedInput = '', inFlight = false;
+
+function syncTheme() {
+  let theme = '';
+  try { theme = JSON.parse($('input').value).theme; } catch {}
+  $('theme').value = [...$('theme').options].some(option => option.value === theme) ? theme : '';
+}
+function controls() {
+  for (const control of document.querySelectorAll('button, select, textarea')) control.disabled = inFlight;
+  $('html').disabled = inFlight || !lastHtml;
+  $('json').disabled = inFlight || !$('input').value.trim();
+}
+function invalidatePreview() {
+  lastHtml = '';
+  $('preview').srcdoc = '';
+  controls();
+}
+$('input').addEventListener('input', () => {
+  invalidatePreview();
+  syncTheme();
+  $('status').textContent = 'JSON 已修改，请更新预览。下载 JSON 可保留当前修改。';
+});
+function download(blob, name) {
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+async function checkedResponse(response) {
+  if (!response.ok) throw Error(await response.text() || `请求失败（${response.status}）`);
+  return response;
+}
+async function request(route) {
+  const data = JSON.parse($('input').value);
+  return checkedResponse(await fetch(route, {
+    method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+  }));
+}
+async function busy(work) {
+  if (inFlight) return;
+  inFlight = true; controls();
+  try { await work(); }
+  catch (error) { $('status').textContent = error.message; }
+  finally { inFlight = false; syncTheme(); controls(); }
+}
+async function preview() {
+  invalidatePreview();
+  $('status').textContent = '正在渲染…';
+  lastHtml = await (await request('/render')).text();
+  $('preview').srcdoc = lastHtml;
+  $('status').textContent = '预览已更新。PNG 仅在点击导出时生成，并执行浏览器布局审计。';
+}
+async function loadExample() {
+  const response = await checkedResponse(await fetch('/example/' + $('example').value));
+  const definition = await response.json();
+  $('input').value = JSON.stringify(definition, null, 2);
+  retainedInput = $('input').value;
+  syncTheme();
+  await preview();
+}
+$('theme').onchange = () => busy(async () => {
+  const data = JSON.parse($('input').value);
+  data.theme = $('theme').value;
+  $('input').value = JSON.stringify(data, null, 2);
+  await preview();
+});
+$('load').onclick = () => busy(async () => {
+  if ($('input').value !== retainedInput && !confirm('当前修改尚未下载为 JSON，载入案例会替换这些内容。继续吗？')) return;
+  await loadExample();
+});
+$('render').onclick = () => busy(preview);
+$('json').onclick = () => busy(async () => {
+  const data = JSON.parse($('input').value);
+  download(new Blob([JSON.stringify(data, null, 2) + '\n'], {type: 'application/json'}), 'diagram.json');
+  retainedInput = $('input').value;
+  $('status').textContent = '已下载完整 Diagram JSON，可再次用于渲染。';
+});
+$('html').onclick = () => download(new Blob([lastHtml], {type: 'text/html'}), 'diagram.html');
+$('png').onclick = () => busy(async () => {
+  $('status').textContent = '正在审计并导出 PNG…';
+  download(await (await request('/png')).blob(), 'diagram.png');
+  $('status').textContent = 'PNG 已导出，布局审计通过。';
+});
+busy(loadExample);
 </script></html>

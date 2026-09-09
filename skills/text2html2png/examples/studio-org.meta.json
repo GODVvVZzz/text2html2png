@@ -3,12 +3,13 @@
   "title": "A fourteen-person product studio",
   "chart": "org-chart",
   "summary": "A three-level reporting tree where grouped practitioner cards and headcount badges add up to the stated total.",
-  "prompt": "Draw a clean org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.",
+  "prompt": "Draw a warm org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.",
   "width": 908,
   "scale": 2,
   "theme": "warm",
   "locales": [
     "zh",
     "en"
-  ]
+  ],
+  "promptZh": "请用 warm 风格画 14 人产品工作室的组织架构，只用职位不写姓名。工作室负责人负责方向、客户组合和招聘；三位专业负责人向其汇报。设计负责人负责产品和品牌的设计质量，团队含负责人共 5 人：2 位产品设计师（流程、页面、原型）、1 位品牌设计师（视觉识别、演示稿、网站页面）、1 位设计技术专家（可运行原型、UI 代码）。工程负责人负责技术方向、评审、发布，团队含负责人共 4 人：前端工程师（客户端、共享 UI 代码）、后端工程师（服务、数据模型、API）、平台工程师（构建、部署、工具）。交付负责人负责范围、排期、客户沟通，团队含负责人共 4 人：用户研究员（访谈、可用性测试）、技术写作者（产品文档、交接）、交付制作人（估算、排期、供应商）。标明每个分支人数与工作室总人数。"
 }

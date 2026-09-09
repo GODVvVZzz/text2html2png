@@ -3,12 +3,13 @@
   "title": "Landing page to activation",
   "chart": "funnel",
   "summary": "A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.",
-  "prompt": "Make a clean funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.",
+  "prompt": "Make a glass funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.",
   "width": 908,
   "scale": 2,
   "theme": "glass",
   "locales": [
     "zh",
     "en"
-  ]
+  ],
+  "promptZh": "请用 glass 风格画 30 天注册队列的漏斗：48,200 人访问落地页，18,795 人开始注册，12,640 人验证邮箱，8,930 人完善资料，8,700 人完成激活。每个阶段显示占全部访问者的比例，相邻阶段显示转化率和流失人数，全部从给定数量计算。不要补充数据不支持的结论。"
 }

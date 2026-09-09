@@ -2,118 +2,195 @@
 
 # Public example prompts
 
-10 examples covering 9/9 chart types and 3/5 visual themes.
-All example content is synthetic. Every example ships in English and Chinese, rendered from one shared DOM.
+11 examples covering 9/9 chart types and 5/5 visual themes.
+All example content is synthetic. English and Chinese outputs use the same chart renderer.
 
-| Example | Chart | Theme | Files |
-|---|---|---|---|
-| From idea to production | Flowchart | `clean` | [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-clean.png) |
-| Choosing a plan | Comparison | `clean` | [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-clean.png) |
-| Six milestones to a plugin API | Timeline | `editorial` | [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png) |
-| A local-first diagram pipeline | Architecture | `editorial` | [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-editorial.png) |
-| Service Architecture | Architecture | `clean` | [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-clean.png) |
-| Support desk weekly snapshot | Dashboard | `clean` | [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-clean.png) |
-| Community conference preparation plan | Gantt | `notebook` | [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-notebook.png) |
-| A fourteen-person product studio | Org chart | `warm` | [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png) |
-| Landing page to activation | Funnel | `glass` | [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-glass.png) |
-| Café membership revamp brief | Narrative brief | `clean` | [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-clean.png) |
+Browse the [English gallery](../../../docs/index.html) or [中文案例页](../../../docs/zh.html) for previews and downloads.
 
-## From idea to production
-
-`flowchart` × `clean` · rendered at 908px
-
-> Create a clean flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.
-
-Six sequential gates, each with an explicit exit condition.
-
-Output: [HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-clean.png)
-
-## Choosing a plan
-
-`comparison` × `clean` · rendered at 908px
-
-> Make a clean comparison of three plans — Community, Team, Studio — on the same criteria: seats included, active projects, storage, support response, monthly price, annual price. Community: 3 seats, 5 projects, 2 GB, community forum only, $0; describe it as self-hosted, for solo work and evaluation. Team: 25 seats, 50 projects, 100 GB, 1 business day, $18 per seat monthly, $180 per seat annually; describe it as shared projects for a small group. Studio: unlimited seats and projects, 1 TB, 4 hours, $49 per seat monthly, $490 per seat annually; describe it as for larger groups that need a response time. Annual billing charges ten months per seat. Close with a short "how to read it" note: seats and projects are hard caps, support response is the target time to a first reply during business hours and Community has no target, and the ten-month rule is why $18 becomes $180 and $49 becomes $490. Title it "Choosing a plan" and do not declare a winner.
-
-Three plan tiers aligned row by row on one shared set of criteria, with no invented winner.
-
-Output: [HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-clean.png)
-
-## Six milestones to a plugin API
-
-`timeline` × `editorial` · rendered at 908px
-
-> Draw an editorial timeline of the public roadmap for our open-source charting library, subtitled "first render to extensible core", six milestones: 2031 Q2 v0.1 first render (line and bar marks from a plain number array, one canvas target, no interaction or theming); 2031 Q4 v0.4 scales and axes (linear, time, ordinal scales with tick labels derived from the data range); 2032 Q1 v0.7 interaction layer (hover, tooltip, range selection, keyboard reachable and announced to screen readers); 2032 Q3 v1.0 stable API (semantic versioning starts, mark/scale/theme contracts frozen for 1.x); 2033 Q1 v1.4 server rendering (same definition renders to static SVG without a browser, for documents and email digests); 2033 Q3 v2.0 plugin API (marks, scales, and themes ship as separate packages, so the core stops growing with every new chart). Close with a note that quarters are targets, not commitments, that scope moves before a date does, and that every milestone ships from the main branch.
-
-An alternating milestone timeline where every version, quarter, and scope note is taken from the request, with nothing added between milestones.
-
-Output: [HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png)
-
-## A local-first diagram pipeline
-
-`architecture` × `editorial` · rendered at 908px
-
-> Create an editorial architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.
-
-How the skill itself works, and where your content stops travelling.
-
-Output: [HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-editorial.png)
-
-## Service Architecture
-
-`architecture` × `clean` · rendered at 908px
-
-> Create a clean architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.
-
-Four labelled layers with per-service data ownership and no invented infrastructure.
-
-Output: [HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-clean.png)
-
-## Support desk weekly snapshot
-
-`dashboard` × `clean` · rendered at 908px
-
-> Build a clean dashboard for our weekly support desk snapshot, week 32 (Mon 2026-08-03 to Sun 2026-08-09): 1,284 tickets received against 1,206 the prior week, first-response median 42 min against 55 min, 1,194 of 1,306 resolutions inside the 24 h SLA target against 88.9% the prior week, and 96 tickets open at week end against 118. Add a per-channel intake breakdown with median first response (email 528 / 66 min, in-app chat 431 / 11 min, phone 196 / 4 min, community forum 129 / 148 min) and the open backlog by age (51 under 24 h, 29 at 1 to 3 days, 12 at 4 to 7 days, 4 over 7 days). Do not invent any figure beyond these.
-
-A four-KPI weekly support snapshot where every delta, share, and total is derived from the stated intake, resolution, and backlog counts.
-
-Output: [HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-clean.png)
-
-## Community conference preparation plan
-
-`gantt` × `notebook` · rendered at 908px
-
-> Draw a notebook-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis.
-
-Seven workstreams on an eight-week axis, with deliberate overlaps and three dated milestones.
-
-Output: [HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-notebook.png)
-
-## A fourteen-person product studio
-
-`org-chart` × `warm` · rendered at 908px
-
-> Draw a clean org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.
-
-A three-level reporting tree where grouped practitioner cards and headcount badges add up to the stated total.
-
-Output: [HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png)
-
-## Landing page to activation
-
-`funnel` × `glass` · rendered at 908px
-
-> Make a clean funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
-
-A five-stage signup funnel where every share, stage-to-stage conversion rate, and drop-off count is computed from the five stated stage volumes.
-
-Output: [HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-glass.png)
+The Diagram JSON downloads contain the complete versioned input for `scripts/render.mjs`. Natural-language prompts are interpreted by your agent and can produce different wording or grouping.
 
 ## Café membership revamp brief
 
-`narrative` × `clean` · rendered at 908px
+`narrative` × `clean`
+
+### 中文
 
 > 把我们咖啡店会员小程序 2.0 的改版方案做成一张图文版说明图:先给结论(六项决策),然后是顾客一单的四步流程、对谁改变了什么的影响表、风险与依赖、验收标准和本次不做的事。用 clean 风格。
 
-A decision-first product brief rendered as one long-form page: six numbered decision cards, a four-step customer flow, an impact table, a risk callout, and acceptance versus non-goal checklists.
+[HTML](cafe-membership-zh.html) · [PNG](../assets/gallery/cafe-membership-zh-clean.png) · [Diagram JSON](../../../docs/examples/cafe-membership-zh.diagram.json)
 
-Output: [HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-clean.png)
+### English
+
+> Create a clean narrative brief for the café membership mini-app 2.0 redesign: lead with six decisions, then a four-step customer order flow, an impact table explaining what changes for whom, risks and dependencies, acceptance criteria, and non-goals.
+
+[HTML](cafe-membership-en.html) · [PNG](../assets/gallery/cafe-membership-en-clean.png) · [Diagram JSON](../../../docs/examples/cafe-membership-en.diagram.json)
+
+
+## Community conference preparation plan
+
+`gantt` × `notebook`
+
+### 中文
+
+> 请用 notebook 风格画社区大会筹备甘特图，共八周，第一周从 2027 年 4 月 5 日星期一开始。场地和日期确认：第 1–2 周；议题征集：第 3–5 周，在场地确认后开始；议题评审和排期：第 5–6 周；讲者确认：第 7 周，在评审后进行；售票和推广：第 3–8 周；志愿者招募和培训：第 5–7 周；彩排与大会周：第 8 周，在志愿者培训后进行。里程碑：第 5 周末征集截止，第 6 周末发布议程，5 月 29 日星期六开场。使用周序号坐标轴。
+
+[HTML](launch-plan-zh.html) · [PNG](../assets/gallery/launch-plan-zh-notebook.png) · [Diagram JSON](../../../docs/examples/launch-plan-zh.diagram.json)
+
+### English
+
+> Draw a notebook-style Gantt chart for our eight-week community conference run-up, weeks starting Mon Apr 5 2027. Venue and date lock W1-W2. Call for talks open W3-W5, starting after the venue is locked. Talk review and scheduling W5-W6. Speaker confirmations W7, after review. Tickets and promotion W3-W8. Volunteer recruiting and briefing W5-W7. Walkthrough and event week W8, after the volunteer briefing. Milestones: call for talks closes end of W5, schedule published end of W6, doors open Sat May 29. Show a week-number axis.
+
+[HTML](launch-plan-en.html) · [PNG](../assets/gallery/launch-plan-en-notebook.png) · [Diagram JSON](../../../docs/examples/launch-plan-en.diagram.json)
+
+
+## Six milestones to a plugin API
+
+`timeline` × `editorial`
+
+### 中文
+
+> 请用 editorial 风格画开源图表库的路线图，副标题“从首次渲染到可扩展内核”，包含六个里程碑：2031 Q2 v0.1 首次渲染（数值数组生成折线和柱形，仅一个画布，无交互和主题）；2031 Q4 v0.4 比例尺与坐标轴（线性、时间、序数比例尺，刻度标签由数据范围决定）；2032 Q1 v0.7 交互层（悬停、提示框、范围选择，键盘可达并向屏幕阅读器播报）；2032 Q3 v1.0 稳定 API（开始语义化版本管理，1.x 冻结图元、比例尺和主题契约）；2033 Q1 v1.4 服务端渲染（同一份定义无需浏览器即可生成静态 SVG，用于文档和邮件摘要）；2033 Q3 v2.0 插件 API（图元、比例尺、主题独立打包，新增图表不再扩大内核）。结尾说明季度是目标而非承诺，优先调整范围而非日期，每个里程碑都从主分支发布。
+
+[HTML](library-roadmap-zh.html) · [PNG](../assets/gallery/library-roadmap-zh-editorial.png) · [Diagram JSON](../../../docs/examples/library-roadmap-zh.diagram.json)
+
+### English
+
+> Draw an editorial timeline of the public roadmap for our open-source charting library, subtitled "first render to extensible core", six milestones: 2031 Q2 v0.1 first render (line and bar marks from a plain number array, one canvas target, no interaction or theming); 2031 Q4 v0.4 scales and axes (linear, time, ordinal scales with tick labels derived from the data range); 2032 Q1 v0.7 interaction layer (hover, tooltip, range selection, keyboard reachable and announced to screen readers); 2032 Q3 v1.0 stable API (semantic versioning starts, mark/scale/theme contracts frozen for 1.x); 2033 Q1 v1.4 server rendering (same definition renders to static SVG without a browser, for documents and email digests); 2033 Q3 v2.0 plugin API (marks, scales, and themes ship as separate packages, so the core stops growing with every new chart). Close with a note that quarters are targets, not commitments, that scope moves before a date does, and that every milestone ships from the main branch.
+
+[HTML](library-roadmap-en.html) · [PNG](../assets/gallery/library-roadmap-en-editorial.png) · [Diagram JSON](../../../docs/examples/library-roadmap-en.diagram.json)
+
+
+## From agent input to local rendering
+
+`architecture` × `editorial`
+
+### 中文
+
+> 用 editorial 风格的分层架构总览解释 text2html2png：提示词与原始事实进入所选 Agent；Agent 可能使用远程服务，对话适用该服务的隐私设置。Agent 选择图表和风格，保留原始事实，编写 Diagram JSON。本地 Node.js 生成并校验自包含 HTML，本地 Chrome 审计布局。默认输出 HTML，只有明确要求时才导出 PNG。渲染器无遥测，默认阻断浏览器网络请求。请明确区分 Agent 处理和本地渲染，不要声称整个对话都留在本机。
+
+[HTML](local-first-pipeline-zh.html) · [PNG](../assets/gallery/local-first-pipeline-zh-editorial.png) · [Diagram JSON](../../../docs/examples/local-first-pipeline-zh.diagram.json)
+
+### English
+
+> Create an editorial layered architecture overview explaining text2html2png. A prompt and source facts enter the chosen agent, which may use a remote service under its own privacy settings. The agent selects a chart and style, preserves the supplied facts, and writes Diagram JSON. The local Node.js runtime generates and validates self-contained HTML, and local Chrome audits the layout. HTML is the default output; PNG is exported only on explicit request. The renderer has no telemetry and blocks browser network requests by default. Clearly distinguish agent processing from local rendering; do not claim the whole conversation stays on the machine.
+
+[HTML](local-first-pipeline-en.html) · [PNG](../assets/gallery/local-first-pipeline-en-editorial.png) · [Diagram JSON](../../../docs/examples/local-first-pipeline-en.diagram.json)
+
+
+## Order Events: Requests, Ownership, and Delivery
+
+`architecture` × `clean`
+
+### 中文
+
+> 请把下面这个合成订单系统案例整理成 clean 风格的架构分组图，同时导出 PNG。这是用于说明的设计案例，不是真实客户系统，也没有性能测试数据。分入口、服务、资源三层：商城前端同步调用订单服务创建订单；支付平台携带回调 ID，同步调用支付回调服务。订单服务独占读写自己的 PostgreSQL 订单库，订单记录与 outbox 记录在同一事务提交，再由该服务的发布器向事件队列发送 OrderCreated；它还从队列消费 PaymentConfirmed，在同一事务内更新支付状态并记录已消费事件 ID。回调服务独占读写另一套 PostgreSQL 回调库，回调 ID 与 outbox 记录在同一事务提交，提交后确认接收，再由该服务的发布器向同一队列发送 PaymentConfirmed。库存消费者从队列接收 OrderCreated，独占读写第三套 PostgreSQL 库存库，在同一事务内写入库存预留结果和已消费事件 ID。队列至少一次投递：OrderCreated 只交给库存消费者，PaymentConfirmed 只交给订单服务；发布失败从各自 outbox 重试；回调 ID 用于回调去重，已消费事件 ID 用于消费去重。请保留三套数据库的独占归属、同步与异步依赖和这些可靠性边界。层间箭头只表示分组层级，不能表示逐节点连线或串行调用链。不要补充网关、云厂商、吞吐量、延迟或恰好一次保证。
+
+[HTML](order-event-architecture-zh.html) · [PNG](../assets/gallery/order-event-architecture-zh-clean.png) · [Diagram JSON](../../../docs/examples/order-event-architecture-zh.diagram.json)
+
+### English
+
+> Create a clean architecture grouping diagram for this synthetic order-system case, and also export PNG. This is an illustrative design, not a real customer system or a benchmark. Use three layers: entry points, services, and resources. The storefront synchronously calls the order service to create an order. The payment platform synchronously calls the payment callback service with a callback ID. The order service alone reads and writes its own PostgreSQL database: it commits an order and its outbox record together, then its publisher sends OrderCreated to the event queue. It also consumes PaymentConfirmed from that queue, updating payment status and recording the consumed event ID in one transaction. The callback service alone reads and writes a separate PostgreSQL database: it commits the callback ID and its outbox record together, acknowledges after commit, and its publisher sends PaymentConfirmed to the same queue. The inventory consumer receives OrderCreated and alone reads and writes a third PostgreSQL database, committing the reservation and consumed event ID together. Queue delivery is at least once: OrderCreated goes only to the inventory consumer; PaymentConfirmed goes only to the order service. Failed publishing is retried from each service's outbox. Callback IDs deduplicate callbacks; consumed event IDs deduplicate consumption. Mark all three databases and their exclusive owners, keep synchronous and asynchronous relationships explicit, and retain these delivery boundaries. Layer arrows indicate grouping only, not node-to-node wiring or a serial call chain. Do not add a gateway, cloud vendor, throughput, latency, or an exactly-once guarantee.
+
+[HTML](order-event-architecture-en.html) · [PNG](../assets/gallery/order-event-architecture-en-clean.png) · [Diagram JSON](../../../docs/examples/order-event-architecture-en.diagram.json)
+
+
+## Choosing a plan
+
+`comparison` × `clean`
+
+### 中文
+
+> 请用 clean 风格对比 Community、Team、Studio 三个套餐，按席位数、活跃项目、存储、支持响应、月付价格、年付价格逐项对齐。Community：3 席位、5 项目、2 GB、仅社区论坛支持、免费，自托管，适合个人工作和评估。Team：25 席位、50 项目、100 GB、1 个工作日响应、每席位每月 $18、每席位每年 $180，适合小团队共享项目。Studio：不限席位和项目、1 TB、4 小时响应、每席位每月 $49、每席位每年 $490，适合需要响应时效的大团队。年付按每席位十个月计费。附阅读说明：席位和项目为硬上限；响应时间指工作时间内首次回复目标，Community 没有目标；十个月规则解释 $18 对应 $180、$49 对应 $490。标题为“选择一个套餐”，不要选出赢家。
+
+[HTML](plan-comparison-zh.html) · [PNG](../assets/gallery/plan-comparison-zh-clean.png) · [Diagram JSON](../../../docs/examples/plan-comparison-zh.diagram.json)
+
+### English
+
+> Make a clean comparison of three plans — Community, Team, Studio — on the same criteria: seats included, active projects, storage, support response, monthly price, annual price. Community: 3 seats, 5 projects, 2 GB, community forum only, $0; describe it as self-hosted, for solo work and evaluation. Team: 25 seats, 50 projects, 100 GB, 1 business day, $18 per seat monthly, $180 per seat annually; describe it as shared projects for a small group. Studio: unlimited seats and projects, 1 TB, 4 hours, $49 per seat monthly, $490 per seat annually; describe it as for larger groups that need a response time. Annual billing charges ten months per seat. Close with a short "how to read it" note: seats and projects are hard caps, support response is the target time to a first reply during business hours and Community has no target, and the ten-month rule is why $18 becomes $180 and $49 becomes $490. Title it "Choosing a plan" and do not declare a winner.
+
+[HTML](plan-comparison-en.html) · [PNG](../assets/gallery/plan-comparison-en-clean.png) · [Diagram JSON](../../../docs/examples/plan-comparison-en.diagram.json)
+
+
+## From idea to production
+
+`flowchart` × `clean`
+
+### 中文
+
+> 请用 clean 风格画发布流程图：计划 → 开发 → 评审 → 测试 → 灰度 → 正式上线。内容保持简洁，说明每个阶段必须通过才能进入下一阶段。
+
+[HTML](release-flow-zh.html) · [PNG](../assets/gallery/release-flow-zh-clean.png) · [Diagram JSON](../../../docs/examples/release-flow-zh.diagram.json)
+
+### English
+
+> Create a clean flowchart for our release process: Plan → Build → Review → Test → Canary → Production. Keep it concise and show that every gate must pass before the next stage.
+
+[HTML](release-flow-en.html) · [PNG](../assets/gallery/release-flow-en-clean.png) · [Diagram JSON](../../../docs/examples/release-flow-en.diagram.json)
+
+
+## Service Architecture
+
+`architecture` × `clean`
+
+### 中文
+
+> 请用 clean 风格画一张架构图：浏览器连接 API 网关，网关连接认证服务和订单服务。认证服务使用自己独立的 PostgreSQL；订单服务使用另一套独立的 PostgreSQL 和自己的 Redis。按客户端、接入、服务、数据四层展示，用节点说明标明服务与数据存储的归属。不要补充云厂商、协议、端口或指标。
+
+[HTML](service-architecture-zh.html) · [PNG](../assets/gallery/service-architecture-zh-clean.png) · [Diagram JSON](../../../docs/examples/service-architecture-zh.diagram.json)
+
+### English
+
+> Create a clean architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses its own PostgreSQL database. Order Service uses a separate PostgreSQL database and its own Redis. Show client, entry, service, and data layers, with ownership stated in node descriptions. Do not add cloud providers, protocols, ports, or metrics.
+
+[HTML](service-architecture-en.html) · [PNG](../assets/gallery/service-architecture-en-clean.png) · [Diagram JSON](../../../docs/examples/service-architecture-en.diagram.json)
+
+
+## Landing page to activation
+
+`funnel` × `glass`
+
+### 中文
+
+> 请用 glass 风格画 30 天注册队列的漏斗：48,200 人访问落地页，18,795 人开始注册，12,640 人验证邮箱，8,930 人完善资料，8,700 人完成激活。每个阶段显示占全部访问者的比例，相邻阶段显示转化率和流失人数，全部从给定数量计算。不要补充数据不支持的结论。
+
+[HTML](signup-funnel-zh.html) · [PNG](../assets/gallery/signup-funnel-zh-glass.png) · [Diagram JSON](../../../docs/examples/signup-funnel-zh.diagram.json)
+
+### English
+
+> Make a glass funnel for our 30-day signup cohort: 48,200 visited the landing page, 18,795 started signup, 12,640 verified their email, 8,930 completed a profile, and 8,700 activated. For each stage show its share of all visitors, and between stages show the conversion rate and how many people dropped off, both computed from those volumes. Add nothing that the numbers do not support.
+
+[HTML](signup-funnel-en.html) · [PNG](../assets/gallery/signup-funnel-en-glass.png) · [Diagram JSON](../../../docs/examples/signup-funnel-en.diagram.json)
+
+
+## A fourteen-person product studio
+
+`org-chart` × `warm`
+
+### 中文
+
+> 请用 warm 风格画 14 人产品工作室的组织架构，只用职位不写姓名。工作室负责人负责方向、客户组合和招聘；三位专业负责人向其汇报。设计负责人负责产品和品牌的设计质量，团队含负责人共 5 人：2 位产品设计师（流程、页面、原型）、1 位品牌设计师（视觉识别、演示稿、网站页面）、1 位设计技术专家（可运行原型、UI 代码）。工程负责人负责技术方向、评审、发布，团队含负责人共 4 人：前端工程师（客户端、共享 UI 代码）、后端工程师（服务、数据模型、API）、平台工程师（构建、部署、工具）。交付负责人负责范围、排期、客户沟通，团队含负责人共 4 人：用户研究员（访谈、可用性测试）、技术写作者（产品文档、交接）、交付制作人（估算、排期、供应商）。标明每个分支人数与工作室总人数。
+
+[HTML](studio-org-zh.html) · [PNG](../assets/gallery/studio-org-zh-warm.png) · [Diagram JSON](../../../docs/examples/studio-org-zh.diagram.json)
+
+### English
+
+> Draw a warm org chart for a 14-person product studio using role titles only, no names. A studio lead owns direction, client mix, and hiring. Three discipline leads report to them. Design lead, craft quality across product and brand work, 5 including the lead: two product designers (flows, screens, and prototypes), a brand designer (identity, decks, and site pages), a design technologist (living prototypes and UI code). Engineering lead, technical direction, review, and releases, 4 including the lead: a frontend engineer (client apps and shared UI code), a backend engineer (services, data models, and APIs), a platform engineer (build, deploy, and tooling). Delivery lead, scope, schedule, and client communication, 4 including the lead: a user researcher (interviews and usability tests), a technical writer (product docs and handover), a delivery producer (estimates, schedules, vendors). Show headcount per branch and the studio total.
+
+[HTML](studio-org-en.html) · [PNG](../assets/gallery/studio-org-en-warm.png) · [Diagram JSON](../../../docs/examples/studio-org-en.diagram.json)
+
+
+## Support desk weekly snapshot
+
+`dashboard` × `clean`
+
+### 中文
+
+> 请用 clean 风格制作客服周报看板，时间为 2026 年第 32 周（8 月 3 日星期一至 8 月 9 日星期日）。收到 1,284 张工单，上周 1,206；首次响应中位数 42 分钟，上周 55 分钟；1,306 张已解决工单中，1,194 张在 24 小时 SLA 目标内，上周达标率 88.9%；周末未结 96 张，上周 118。按渠道展示接单量和首次响应中位数：邮件 528 / 66 分钟、应用内聊天 431 / 11 分钟、电话 196 / 4 分钟、社区论坛 129 / 148 分钟。未结工单账龄：不足 24 小时 51 张、1–3 天 29 张、4–7 天 12 张、超过 7 天 4 张。不得虚构其他数字。
+
+[HTML](support-snapshot-zh.html) · [PNG](../assets/gallery/support-snapshot-zh-clean.png) · [Diagram JSON](../../../docs/examples/support-snapshot-zh.diagram.json)
+
+### English
+
+> Build a clean dashboard for our weekly support desk snapshot, week 32 (Mon 2026-08-03 to Sun 2026-08-09): 1,284 tickets received against 1,206 the prior week, first-response median 42 min against 55 min, 1,194 of 1,306 resolutions inside the 24 h SLA target against 88.9% the prior week, and 96 tickets open at week end against 118. Add a per-channel intake breakdown with median first response (email 528 / 66 min, in-app chat 431 / 11 min, phone 196 / 4 min, community forum 129 / 148 min) and the open backlog by age (51 under 24 h, 29 at 1 to 3 days, 12 at 4 to 7 days, 4 over 7 days). Do not invent any figure beyond these.
+
+[HTML](support-snapshot-en.html) · [PNG](../assets/gallery/support-snapshot-en-clean.png) · [Diagram JSON](../../../docs/examples/support-snapshot-en.diagram.json)

@@ -2,35 +2,37 @@
 
 Use this reference when turning source material into renderer input. The agent owns meaning; the renderer owns layout.
 
-```json
-{
-  "schemaVersion": 1,
-  "chart": "flowchart",
-  "theme": "clean",
-  "render": {"width": 1040, "padding": 24, "scale": 2},
-  "data": {
-    "id": "release-flow",
-    "locale": "zh-CN",
-    "title": "发布流水线"
-  }
-}
-```
+## Start from a valid input
 
-`chart` and `theme` are explicit so rendering never guesses. `clean` is the default visual treatment; `editorial`, `notebook`, `warm`, and `glass` are intentional alternatives. `data` follows the selected chart reference and the checked examples under `examples/<id>/<locale>.json`. Validate the envelope against `schemas/diagram.schema.json`; the chart module validates its own semantic data.
+Use `examples/release-flow.diagram.json` for a complete runnable input. For a Chinese technical diagram, [charts/architecture.md](charts/architecture.md) includes a complete JSON example and the limits of its relationship model.
 
-Render HTML:
+The `examples/<id>/<locale>.json` files contain chart data only. Wrap their contents under `data`; do not pass them directly to `render.mjs`.
+
+| Envelope field | Value |
+|---|---|
+| `schemaVersion` | `1` |
+| `chart` | An explicit supported chart, such as `architecture`. |
+| `theme` | An explicit supported style, normally `clean`. |
+| `render` | Optional `width` (default 920), `padding` (24), and `scale` (2). |
+| `data` | Identity fields `id`, `locale`, `title`, plus the chosen chart's supported content fields. |
+
+`chart` and `theme` are explicit so rendering never guesses. `clean` is the default visual treatment; `editorial`, `notebook`, `warm`, and `glass` are intentional alternatives. Validate the envelope against `schemas/diagram.schema.json`; the chart module validates its own supported structure. Check the current chart's `assertFixture` and `bodyMarkup` in `scripts/pipeline/charts/<chart>/body.mjs` when field names or limits are unclear. Extra fields inside `data` may be ignored, so a valid input alone does not prove all source facts were rendered.
+
+Render HTML with browser QA (no PNG is created):
 
 ```bash
-node "${SKILL_DIR}/scripts/render.mjs" --input diagram.json --html diagram.html
+node "${SKILL_DIR}/scripts/render.mjs" --input diagram.json --html diagram.html --audit
 ```
 
-Audit and render PNG only when requested:
+Add PNG only when the user requests an image:
 
 ```bash
 node "${SKILL_DIR}/scripts/render.mjs" --input diagram.json --html diagram.html --png diagram.png --audit
 ```
 
-The same JSON produces the same HTML in Codex, Claude Code, and other compatible agents. PNG pixels additionally depend on the installed Chrome and platform font rasterizer.
+Both commands fail on audit warnings as well as errors. They refuse to replace existing outputs without `--force`; use that flag when iterating on this session's generated files or when replacement is explicitly requested. Background comes from the selected theme automatically, while viewport, padding, and PNG scale come from `render`.
+
+The same JSON, runtime, and installed font dependencies produce the same HTML across compatible agents. PNG pixels additionally depend on the installed Chrome, available fallback fonts, and platform font rasterizer.
 
 ## Sparse input
 

@@ -3,12 +3,13 @@
   "title": "Service Architecture",
   "chart": "architecture",
   "summary": "Four labelled layers with per-service data ownership and no invented infrastructure.",
-  "prompt": "Create a clean architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses PostgreSQL. Order Service uses PostgreSQL and Redis. Do not add cloud providers, protocols, ports, or metrics.",
+  "prompt": "Create a clean architecture diagram: Browser → API Gateway → Auth Service and Order Service. Auth Service uses its own PostgreSQL database. Order Service uses a separate PostgreSQL database and its own Redis. Show client, entry, service, and data layers, with ownership stated in node descriptions. Do not add cloud providers, protocols, ports, or metrics.",
   "width": 908,
   "scale": 2,
   "theme": "clean",
   "locales": [
     "zh",
     "en"
-  ]
+  ],
+  "promptZh": "请用 clean 风格画一张架构图：浏览器连接 API 网关，网关连接认证服务和订单服务。认证服务使用自己独立的 PostgreSQL；订单服务使用另一套独立的 PostgreSQL 和自己的 Redis。按客户端、接入、服务、数据四层展示，用节点说明标明服务与数据存储的归属。不要补充云厂商、协议、端口或指标。"
 }

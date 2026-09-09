@@ -1,6 +1,6 @@
 # Rendering contract
 
-Apply this contract to every chart/style combination. The chart and style references provide examples; this file defines the shared invariants.
+Apply this contract to every chart/style combination. Generate through `scripts/render.mjs`; the chart and style references are explanatory examples, not alternate HTML templates. The current implementation lives in `scripts/pipeline/`.
 
 ## Required HTML structure
 
@@ -22,67 +22,43 @@ Apply this contract to every chart/style combination. The chart and style refere
 ```
 
 - One `.wrap` root is required for measurement and clipping.
-- No scripts, frames, forms, or plugins. External stylesheets or media are allowed only when the user explicitly requests network-backed assets.
+- No scripts, frames, forms, plugins, or external stylesheets/media in the default generated document. The public render entry point does not enable network access.
 - Add `lang` matching the dominant content language.
 - HTML-escape all user text before interpolation.
 - Use semantic headings and `aria-label` where SVG meaning is not otherwise exposed.
 
 ## Style token contract
 
-Every selected style must define all of these tokens:
+Each theme in `scripts/pipeline/themes/` defines the same 48 `--t-*` tokens in one `:root` rule. The authoritative list is `REQUIRED_THEME_TOKENS` in `scripts/pipeline/validate.mjs`; examples include `--t-canvas`, `--t-text`, `--t-surface`, `--t-accent-1`, and the font/spacing/surface tokens. Do not introduce the older `--bg`, `--card-bg`, or `--s1` vocabulary from illustrative reference snippets into generated output.
 
-```css
-:root {
-  --bg: #fff;
-  --card-bg: #fff;
-  --text-primary: #111;
-  --text-secondary: #555;
-  --text-muted: #777;
-  --border-base: #ddd;
-  --accent: #2563eb;
-  --accent-blue: #2563eb;
-  --arrow-color: #64748b;
-  --success: #16803c;
-  --minor: #a16207;
-  --critical: #b42318;
-  --s1: #2563eb;
-  --s2: #0f766e;
-  --s3: #7c3aed;
-  --s4: #c2410c;
-  --s5: #be123c;
-  --s6: #4f46e5;
-  --s7: #3f6212;
-}
-```
-
-Chart-specific custom properties such as `--bar-color`, `--progress`, or `--stage-width` may be set inline on individual elements.
+Keep visual choices in theme tokens and geometry in shared/chart CSS. Chart CSS must not contain literal colours. Inline properties are restricted to the structural and accent allowlists in `validate.mjs`; do not add arbitrary inline CSS. The public renderer validates this contract automatically.
 
 ## Primary surfaces
 
-The visual treatment used for a style's generic `.card` must also be reflected on the selected chart's primary surfaces:
+Apply the selected theme's surface tokens consistently to the chart's primary surfaces. Do not paste a generic `.card` rule and assume it applies automatically:
 
-- flowchart: `.step-card`
+- flowchart: `.step`
 - comparison: `.compare-col`
 - timeline: `.tl-card`
 - architecture: `.node`
-- dashboard: `.stat-card`, `.detail-card`
+- dashboard: `.metric`, `.panel`
 - Gantt: `.gantt-row`
 - org chart: `.org-node`
 - funnel: `.funnel-stage`
-
-Do not paste a `.card` rule and assume it applies automatically.
+- narrative: `.nar-card`, `.nar-callout`, `.nar-table`
 
 ## Layout and connectors
 
 - Prefer Grid/Flexbox for nodes and layers.
 - Treat coordinates in chart references as illustrative.
-- For repeated nodes, derive widths and connector centers from the node count:
+- When implementing node-specific connectors, derive widths and connector centers from the node count:
   - peer width = available row width / peer count;
   - connector center = node left + node width / 2;
   - parent connector spans the first and last child centers.
 - Keep SVG connectors behind opaque or sufficiently solid node surfaces.
 - Arrowheads must remain inside the measured `.wrap` bounds.
 - Use `min-height` for connector lanes rather than a fixed height when labels can wrap.
+- Match the actual chart's relationship model. Architecture uses one shared layer-level arrow; it does not support node-specific edge routing. Geometry checks cannot establish whether a dependency is true.
 
 ## Content and overflow
 
@@ -95,7 +71,7 @@ Do not paste a `.card` rule and assume it applies automatically.
 
 ## Embedded fonts and icons
 
-Every theme names its brand fonts in the `--t-font-*` tokens. At build time the pipeline resolves those families against `scripts/pipeline/font-embed.mjs`, subsets each face to the codepoints the copy actually uses, and inlines the results as data-URI `@font-face` (CJK families per unicode-range slice, Latin families as one face per weight). Rendering makes zero network requests and produces identical output on any machine, including offline. If a `@fontsource` package is missing at build time the family is skipped with a loud stderr warning and the theme's system-font fallbacks take over — degradation is explicit, never silent.
+Every theme names its brand fonts in the `--t-font-*` tokens. At build time the pipeline resolves those families against `scripts/pipeline/font-embed.mjs`, subsets each face to the codepoints the copy actually uses, and inlines the results as data-URI `@font-face` (CJK families per unicode-range slice, Latin families as one face per weight). Rendering makes zero network requests after dependencies are installed. The same runtime, input, and font dependencies produce the same HTML; PNG rasterization can vary with Chrome, fallback fonts, and platform. If a `@fontsource` package is missing at build time the family is skipped with a stderr warning and the theme's system-font fallbacks take over. Restore missing dependencies before claiming a fully checked result.
 
 Icon slots are dual-channel: a template may emit both an emoji span and a `currentColor` inline SVG, and the theme picks exactly one through `--t-emoji-display` / `--t-svg-display` — never both at once. `clean`, `editorial`, and `notebook` show SVGs; `warm` and `glass` show emoji. An empty emoji slot collapses via the shared `:empty` rule, so a fixture without emoji glyphs never leaves a gap. Emoji are welcome when they improve scanning, friendliness, or match the user's requested visual language; prefer SVG-only themes when byte-for-byte cross-platform appearance matters.
 

@@ -1,14 +1,17 @@
 {
   "id": "local-first-pipeline",
-  "title": "A local-first diagram pipeline",
+  "title": "From agent input to local rendering",
   "chart": "architecture",
-  "summary": "How the skill itself works, and where your content stops travelling.",
-  "prompt": "Create an editorial architecture diagram explaining how text2html2png works: a prompt enters the agent; the agent selects the chart, structures the facts, and applies a visual style; local validation produces editable HTML; Chrome renders the final PNG. Emphasize that data stays local.",
+  "summary": "The agent handles source text under its own privacy settings; Diagram JSON is rendered into local files.",
+  "prompt": "Create an editorial layered architecture overview explaining text2html2png. A prompt and source facts enter the chosen agent, which may use a remote service under its own privacy settings. The agent selects a chart and style, preserves the supplied facts, and writes Diagram JSON. The local Node.js runtime generates and validates self-contained HTML, and local Chrome audits the layout. HTML is the default output; PNG is exported only on explicit request. The renderer has no telemetry and blocks browser network requests by default. Clearly distinguish agent processing from local rendering; do not claim the whole conversation stays on the machine.",
   "width": 908,
   "scale": 2,
   "theme": "editorial",
   "locales": [
     "zh",
     "en"
-  ]
+  ],
+  "titleZh": "从 Agent 输入到本地渲染",
+  "summaryZh": "原文按所选 Agent 的隐私设置处理；Diagram JSON 在本机渲染为文件。",
+  "promptZh": "用 editorial 风格的分层架构总览解释 text2html2png：提示词与原始事实进入所选 Agent；Agent 可能使用远程服务，对话适用该服务的隐私设置。Agent 选择图表和风格，保留原始事实，编写 Diagram JSON。本地 Node.js 生成并校验自包含 HTML，本地 Chrome 审计布局。默认输出 HTML，只有明确要求时才导出 PNG。渲染器无遥测，默认阻断浏览器网络请求。请明确区分 Agent 处理和本地渲染，不要声称整个对话都留在本机。"
 }

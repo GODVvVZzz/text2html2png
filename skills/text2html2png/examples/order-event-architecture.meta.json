@@ -1,0 +1,14 @@
+{
+  "id": "order-event-architecture",
+  "title": "Order Events: Requests, Ownership, and Delivery",
+  "titleZh": "订单事件架构：同步受理，异步协作",
+  "chart": "architecture",
+  "summary": "A synthetic technical case with synchronous requests, asynchronous event routes, explicit database ownership, and delivery boundaries. Arrows indicate layers, not individual dependencies.",
+  "summaryZh": "合成技术案例：保留同步请求、异步事件路由、数据库归属和投递边界。层间箭头只标层级，具体依赖以节点文字为准。",
+  "prompt": "Create a clean architecture grouping diagram for this synthetic order-system case, and also export PNG. This is an illustrative design, not a real customer system or a benchmark. Use three layers: entry points, services, and resources. The storefront synchronously calls the order service to create an order. The payment platform synchronously calls the payment callback service with a callback ID. The order service alone reads and writes its own PostgreSQL database: it commits an order and its outbox record together, then its publisher sends OrderCreated to the event queue. It also consumes PaymentConfirmed from that queue, updating payment status and recording the consumed event ID in one transaction. The callback service alone reads and writes a separate PostgreSQL database: it commits the callback ID and its outbox record together, acknowledges after commit, and its publisher sends PaymentConfirmed to the same queue. The inventory consumer receives OrderCreated and alone reads and writes a third PostgreSQL database, committing the reservation and consumed event ID together. Queue delivery is at least once: OrderCreated goes only to the inventory consumer; PaymentConfirmed goes only to the order service. Failed publishing is retried from each service's outbox. Callback IDs deduplicate callbacks; consumed event IDs deduplicate consumption. Mark all three databases and their exclusive owners, keep synchronous and asynchronous relationships explicit, and retain these delivery boundaries. Layer arrows indicate grouping only, not node-to-node wiring or a serial call chain. Do not add a gateway, cloud vendor, throughput, latency, or an exactly-once guarantee.",
+  "promptZh": "请把下面这个合成订单系统案例整理成 clean 风格的架构分组图，同时导出 PNG。这是用于说明的设计案例，不是真实客户系统，也没有性能测试数据。分入口、服务、资源三层：商城前端同步调用订单服务创建订单；支付平台携带回调 ID，同步调用支付回调服务。订单服务独占读写自己的 PostgreSQL 订单库，订单记录与 outbox 记录在同一事务提交，再由该服务的发布器向事件队列发送 OrderCreated；它还从队列消费 PaymentConfirmed，在同一事务内更新支付状态并记录已消费事件 ID。回调服务独占读写另一套 PostgreSQL 回调库，回调 ID 与 outbox 记录在同一事务提交，提交后确认接收，再由该服务的发布器向同一队列发送 PaymentConfirmed。库存消费者从队列接收 OrderCreated，独占读写第三套 PostgreSQL 库存库，在同一事务内写入库存预留结果和已消费事件 ID。队列至少一次投递：OrderCreated 只交给库存消费者，PaymentConfirmed 只交给订单服务；发布失败从各自 outbox 重试；回调 ID 用于回调去重，已消费事件 ID 用于消费去重。请保留三套数据库的独占归属、同步与异步依赖和这些可靠性边界。层间箭头只表示分组层级，不能表示逐节点连线或串行调用链。不要补充网关、云厂商、吞吐量、延迟或恰好一次保证。",
+  "width": 1040,
+  "scale": 2,
+  "theme": "clean",
+  "locales": ["zh", "en"]
+}

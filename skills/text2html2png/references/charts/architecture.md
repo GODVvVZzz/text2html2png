@@ -1,212 +1,68 @@
-# Architecture — 架构拓扑
+# Architecture — 分层架构总览
 
-系统组件、服务依赖、模块划分、网络拓扑、微服务架构。
+Use `architecture` for a top-down overview with 2–4 layers and 1–4 nodes per layer. Read the current example at `examples/service-architecture/zh.json` or `en.json`; those files contain the `data` object, which must be wrapped in a Diagram JSON envelope.
 
----
+## Input contract
 
-## Layout
+The current renderer is `scripts/pipeline/charts/architecture/body.mjs`. Supply:
 
-```
-[Title]
-[Layer Label]  [Node A] [Node B] [Node C]
-               ├────────┼────────┤
-[Layer Label]  [Node D] [Node E]
-               ├────────┤
-[Layer Label]  [Node F]
-[Banner]
-```
+| Field | Meaning |
+|---|---|
+| `id`, `locale`, `title` | Required identity; use `zh-CN` for Chinese content. |
+| `eyebrow`, `subtitle` | Optional context shown above/below the title. |
+| `layers` | 2–4 layers in top-to-bottom order. |
+| `layers[].tag` | Required visible layer name. |
+| `layers[].accent` | Required integer 1–7 selecting a theme accent. |
+| `layers[].nodes` | 1–4 nodes per layer. |
+| `nodes[].name` | Required component name; preserve source identifiers. |
+| `nodes[].icon` | Required shared icon, for example `code`, `shield`, `package`, `lock`, or `layers`; see `scripts/pipeline/icons.mjs`. |
+| `nodes[].emoji` | Optional emoji used by warm and glass. |
+| `nodes[].desc` | Optional visible responsibility, dependency, or constraint. |
+| `connectors` | Optional array with exactly `layers.length - 1` entries. |
+| `connectors[].label` | Required string; use `""` for an unlabelled arrow. |
+| `footerLabel`, `footer` | Visible source constraints or a concise explanation of the diagram's arrows. |
 
-Top-down layered architecture with nodes and connectors between layers.
+For example, the source “浏览器通过 HTTPS 调用 API 网关；API 网关鉴权后同步调用订单服务” can become:
 
----
-
-## HTML Structure
-
-**Critical**: Layer labels must use flex row layout inside `.wrap`. Never use `position: absolute` for labels — they will render outside the viewport on screenshot.
-
-```html
-<div class="wrap">
-  <div class="page-title">System Architecture</div>
-  <div class="page-sub">Microservices Overview</div>
-
-  <!-- Layer 1 -->
-  <div class="layer">
-    <div class="layer-tag">Access</div>
-    <div class="layer-nodes">
-      <div class="node" style="--node-color: var(--accent-blue, var(--s3));">
-        <div class="node-icon">🌐</div>
-        <div class="node-name">API Gateway</div>
-        <div class="node-desc">Rate limiting, auth</div>
-      </div>
-      <div class="node" style="--node-color: var(--accent-blue, var(--s3));">
-        <div class="node-icon">📱</div>
-        <div class="node-name">Mobile BFF</div>
-        <div class="node-desc">iOS/Android adapter</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Connector row -->
-  <div class="conn-row">
-    <div class="conn-spacer"></div>
-    <div class="conn-center">
-      <svg width="200" height="28" viewBox="0 0 200 28">
-        <line x1="60" y1="0" x2="60" y2="20" stroke="currentColor" stroke-width="1.5"/>
-        <line x1="140" y1="0" x2="140" y2="20" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M55 18l5 8 5-8" fill="currentColor"/>
-        <path d="M135 18l5 8 5-8" fill="currentColor"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Layer 2 -->
-  <div class="layer">
-    <div class="layer-tag">Service</div>
-    <div class="layer-nodes">
-      <div class="node" style="--node-color: var(--s4);">...</div>
-      <div class="node" style="--node-color: var(--s4);">...</div>
-      <div class="node" style="--node-color: var(--s4);">...</div>
-    </div>
-  </div>
-
-  <!-- ... more layers ... -->
-
-  <div class="banner">Deployed on Kubernetes with auto-scaling</div>
-</div>
-```
-
----
-
-## CSS
-
-```css
-.layer {
-  display: flex;
-  align-items: center;
-}
-.layer-tag {
-  width: 52px;
-  flex-shrink: 0;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-align: right;
-  padding-right: 10px;
-  line-height: 1.3;
-}
-.layer-nodes {
-  flex: 1;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.node {
-  background: var(--card-bg);
-  border: 1.5px solid var(--node-color);
-  border-radius: 10px;
-  padding: 12px 14px;
-  text-align: center;
-  min-width: 120px;
-  max-width: 180px;
-}
-.node-icon { font-size: 20px; margin-bottom: 4px; }
-.node-name { font-size: 13px; font-weight: 700; }
-.node-desc { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
-
-/* Connector row */
-.conn-row {
-  display: flex;
-  align-items: center;
-}
-.conn-spacer {
-  width: 52px;
-  flex-shrink: 0;
-}
-.conn-center {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 20px;
-  padding: 4px 0;
-  color: var(--border-base);
+```json
+{
+  "schemaVersion": 1,
+  "chart": "architecture",
+  "theme": "clean",
+  "render": {"width": 1040, "padding": 24, "scale": 2},
+  "data": {
+    "id": "order-request",
+    "locale": "zh-CN",
+    "title": "订单请求链路",
+    "layers": [
+      {"tag": "客户端", "accent": 1, "nodes": [
+        {"name": "浏览器", "icon": "code", "desc": "通过 HTTPS 调用 API 网关"}
+      ]},
+      {"tag": "接入层", "accent": 6, "nodes": [
+        {"name": "API 网关", "icon": "shield", "desc": "鉴权后同步调用订单服务"}
+      ]},
+      {"tag": "服务层", "accent": 2, "nodes": [
+        {"name": "订单服务", "icon": "package"}
+      ]}
+    ],
+    "connectors": [{"label": "HTTPS"}, {"label": "鉴权后 · 同步调用"}]
+  }
 }
 ```
 
----
+## Relationship fidelity
 
-## Variants
+- Each adjacent pair of layers receives one shared downward arrow. The renderer draws that arrow even when `connectors` is omitted. These are layer-level connectors, not edges anchored to individual cards.
+- There are no `edges`, node IDs for routing, branches, feedback loops, sidecars, or bidirectional connectors in this chart contract. Unknown fields may be ignored; they do not add visible relationships.
+- Use this layout only when the layer ordering has source support. Do not infer that every node in one layer calls every node in the next, or that adjacent cards communicate with one another.
+- For a layered overview with different node dependencies, name the exact source and target in node descriptions, connector labels, or the footer. Preserve synchronous/asynchronous behavior, failure conditions, shared/private storage, and negative constraints when supplied. Label the view “分层总览” and explain that arrows summarize layer direction if needed.
+- If exact topology is the user's main need, use a supported narrative relationship table or clearly scoped diagrams when they preserve the requested meaning. A narrative table can use three columns: `来源`, `目标`, `关系 / 条件`; follow that chart's own limits. Do not force sparse input into its minimum section count or invent facts to fill it. For an explicit editable topology format, use the corresponding diagram tool.
+- Do not duplicate a shared resource into private-looking copies, or merge separately owned resources just because their product names match. Use visible qualifiers only when the source establishes them.
 
-### Single-Column Stack
+## Layout and review
 
-For simple 3-layer architectures, skip layer labels and center everything:
+Start at width 1040 when node names are long or a layer has four peers. Use the same width for browser QA and export. Keep layer labels inside `.wrap`; the renderer aligns layers and connectors with an 88px gutter. Cards in a layer share the same accent and available width.
 
-```css
-.layer { justify-content: center; }
-.layer-tag { display: none; }
-```
+Keep protocol spelling verbatim (`gRPC`, `HTTPS`) and avoid abbreviating distinct service names into identical headings. If Chinese headings strand a final character, adjust width or split the view while preserving relationships. Do not repair generated HTML or shrink all type to hide crowding.
 
-### Node Groups
-
-Group related nodes with a subtle background:
-```css
-.node-group {
-  background: rgba(0,0,0,0.03);
-  border-radius: 12px;
-  padding: 8px;
-  display: flex;
-  gap: 8px;
-}
-```
-
-### Protocol Labels on Connectors
-
-Add labels supplied by the user, such as protocols, beside connector lines. Derive `x` from the actual connector center:
-```html
-<text x="{connector_center_x}" y="14" text-anchor="middle" font-size="9" fill="var(--text-muted)">{protocol}</text>
-```
-
----
-
-## Key Rules
-
-1. **Layer tags inside `.wrap`**: Use flex layout with 52px left column for tags — NEVER absolute positioning
-2. **Connector row matches layer structure**: Same `conn-spacer` (52px) + `conn-center` pattern
-3. **Nodes centered within each layer**: `justify-content: center` on `.layer-nodes`
-4. **Consistent node width**: Use `min-width`/`max-width` to keep nodes similar sizes
-5. **Color by layer**: All nodes in same layer share one accent color
-6. **SVG connectors**: Lines + arrowheads, color matches `--border-base` or accent for key paths
-7. Layer gap: 0 (connectors handle spacing)
-8. **Connectors follow the universal rule** (see `design-philosophy.md` → Connectors & Labels): arrows must always be complete; labels go beside the arrow, not overlapping it; use `min-height` + `padding` on `.conn-center`, not fixed `height`
-
----
-
-## Pipeline migration note (theme-decoupling)
-
-Architecture is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/architecture/`
-(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
-snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
-
-Validated structure (all themes × zh/en, `build --render --audit` 84/84 green):
-
-- `.arch` stacks layers and connector rows; each is the same two-column grid
-  (`88px minmax(0, 1fr)`), so layer tags and connectors share one fixed gutter and everything
-  stays inside the viewport (no absolute positioning).
-- Per-layer accent via `--tone`: node cards tint their background with `color-mix(in srgb,
-  var(--tone) 6%, var(--t-surface-strong))` and their border with a 60% tone mix — 45% was too
-  faint on light clean surfaces. Nodes are `flex: 1 1 0` with a max-width, so every layer's cards
-  are equal width regardless of node count.
-- The connector is one measurement-free vertical stem + solid arrowhead SVG (stroke/fill on
-  `currentColor`, `.conn-center` colored by `--t-rule`), centered in the timeline column; the
-  protocol label sits BESIDE the arrow, never on it.
-- Protocol labels are data, not labels: `.conn-label` uses the label font/size/weight/tracking
-  tokens but NO `text-transform` — the theme uppercase treatment turned "gRPC" into "GRPC" and
-  proper nouns must survive verbatim.
-- Do not wrap connector rows in `aria-hidden`: the audit fails visible text inside hidden
-  subtrees (WARN throws in strict mode). The decorative SVG carries its own `aria-hidden`.
-- Layer accents must differ in hue family per theme — a grey-blue accent-6 once read as the same
-  color as accent-1 on tinted card borders, so accent-6 moved to magenta (#c77bd8). Thin tinted
-  borders are a stricter accent-identity test than large text blocks.
+Compare the rendered result with the source: every component appears, every dependency is visible, conditions remain attached to the right relationship, and no connector implies an unsupported call. The browser audit checks geometry and readability; it cannot establish this semantic accuracy.
