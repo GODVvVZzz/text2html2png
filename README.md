@@ -64,7 +64,7 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 
 To revise a diagram, ask your agent to update the JSON and regenerate it. The HTML is a standalone output; the JSON is the reusable source.
 
-**Requirements:** Node.js 22.12+ to render HTML; a local Chrome, Chromium, Edge, or Brave installation for the required browser layout check and optional PNG export. Before the first render, the agent runs `npm ci --omit=dev` inside the installed skill directory. This installs the lockfile's dependencies, including fonts, `subset-font`, and `puppeteer-core`. It uses your existing browser without downloading another one. The first install needs network access.
+**Requirements:** Node.js 22.12+ to render HTML; a local Chrome, Chromium, Edge, or Brave installation for the required browser layout check and optional PNG export. Before the first render, the agent runs `node scripts/setup.mjs --theme clean` inside the installed skill directory. This installs the locked runtime and only the selected theme's font packages. Run setup with another theme name when switching themes. It uses your existing browser without downloading another one. The first install needs network access.
 
 ## Try the renderer without an agent
 
@@ -75,7 +75,7 @@ To revise a diagram, ask your agent to update the JSON and regenerate it. The HT
 ```bash
 git clone https://github.com/GODVvVZzz/text2html2png.git
 cd text2html2png/skills/text2html2png
-npm ci
+node scripts/setup.mjs --theme clean
 npm run playground
 ```
 
@@ -194,3 +194,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution checks, [acceptance no
 ## License
 
 MIT. See [LICENSE](./LICENSE).
+
+## First-use feedback and evaluation
+
+Run `node scripts/setup.mjs --check --theme clean` inside the installed skill for read-only environment diagnostics. Setup installs the locked runtime and only the selected theme’s fonts; use another theme name when needed. `npm ci` still installs all themes for development.
+
+[Report your first-use result](https://github.com/GODVvVZzz/text2html2png/issues/new?template=trial.yml) · [Evaluation protocol and 24 fixed tasks](./docs/QUALITY.zh-CN.md). No independent agent success rate or competitive win is claimed.

@@ -9,6 +9,7 @@ Every image in this repository is either an original vector mark made for this p
 | `skills/text2html2png/assets/gallery/*.png` | Rendered locally in Chrome from the matching bilingual `skills/text2html2png/examples/<id>-<locale>.html`, named `<id>-<locale>-<theme>.png` using the width and scale recorded in each `*.meta.json`. Regenerate with `npm run render:examples`. |
 | `docs/gallery/*.png` | Full-resolution English and Chinese copies of the skill gallery, using each example's recorded scale. Run `node scripts/build-gallery.mjs --skip-render` to copy the committed PNGs; omit the flag to render them in Chrome again. |
 | `docs/examples/*` | Downloadable copies of the generated HTML and complete versioned Diagram JSON, built from the example metadata and locale fixtures. Regenerate with `node scripts/build-gallery.mjs --skip-render`. |
+| `docs/media/*.png` | Composed from the committed release-flow PNG and project-written copy in HTML; rendered with `node scripts/build-media.mjs`. Source HTML is included beside each image. |
 | `assets/social-card.png` | Rendered from `assets/social-card.html` with the project's own renderer at 1280×640. |
 | `assets/demo.gif` | Assembled from six committed gallery PNGs by `scripts/build-demo-animation.sh` (requires ffmpeg). Every frame is a real rendering, not a mockup. |
 

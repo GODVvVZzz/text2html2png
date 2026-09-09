@@ -66,6 +66,26 @@ jobs:
             skills/text2html2png/public-cli-smoke.html
             skills/text2html2png/public-cli-smoke.png
 
+  first-install:
+    name: First install ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - name: Install selected fonts and render in an isolated skill copy
+        run: node scripts/smoke-install.mjs --out install-smoke.json
+      - name: Upload measured installation result
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-install-${{ matrix.os }}
+          path: install-smoke.json
+
   plugin-manifest:
     name: Plugin manifest
     runs-on: ubuntu-latest

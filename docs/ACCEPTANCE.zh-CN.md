@@ -6,7 +6,7 @@
 
 ```bash
 cd skills/text2html2png
-npm ci
+node scripts/setup.mjs --theme clean
 npm run playground
 ```
 
@@ -61,6 +61,6 @@ npm run render -- --input examples/release-flow.diagram.json --html release.html
 - 本地试用服务不是公共托管服务，不能直接暴露到互联网。
 - 九类输入的完整 JSON Schema、精确架构边连接和所有边界密度尚未全部覆盖。
 - 独立 Agent 样例不能替代实际 Codex 与 Claude 两端安装测试。
-- GitHub Pages、npm 和 Release 的公开发布尚未执行。
+- GitHub Pages 已启用；公开版本见 GitHub Releases。npm 包仍未公开发布。
 
 反馈可直接在对话里给出，无需下载评测 JSON。

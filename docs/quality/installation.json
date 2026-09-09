@@ -1,0 +1,18 @@
+{
+  "kind": "isolated-install-smoke",
+  "measuredAt": "2026-09-09T05:02:37.841Z",
+  "node": "26.0.0",
+  "platform": "darwin",
+  "cleanInstallMs": 8891,
+  "cleanInstalledFileBytes": 108351809,
+  "cleanFonts": [
+    "ibm-plex-mono",
+    "ibm-plex-sans",
+    "noto-sans-sc"
+  ],
+  "incrementalGlassSetup": "passed",
+  "cleanHtmlAndPngAudit": "passed",
+  "note": "One automated local runtime check; not an end-to-end agent evaluation or user success-rate measurement. npm cache and network affect elapsed time.",
+  "allThemesInstalledFileBytes": 262978710,
+  "comparisonNote": "File bytes in local dependency directories only; excludes browser and npm cache. Existing full install versus a clean-theme isolated install with the same runtime lockfile. One macOS observation, not a download-size or speed benchmark."
+}
