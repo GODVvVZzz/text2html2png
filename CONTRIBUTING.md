@@ -78,3 +78,14 @@ Do not add rules that cause the agent to invent data for visual completeness.
 - Keep unrelated formatting and generated files out of the diff.
 
 By contributing, you agree that your contribution is licensed under the MIT License.
+
+## Public and local material
+
+Commit product code, tests, portable skill resources, usage and contributor
+documentation, public examples, reproducible evaluation evidence, and generic
+project branding. These should help people use, verify, or contribute to the tool.
+
+Store maintainer-only campaign drafts, platform-specific post copy and covers,
+recording scripts, launch schedules, growth targets, channel analytics, and raw
+unpublished feedback under `.local/`. It is ignored by Git and is never part of
+GitHub Pages or release packages. Public demos must not link to these files.

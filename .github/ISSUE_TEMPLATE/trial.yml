@@ -15,16 +15,6 @@ body:
       placeholder: macOS / Node 22 / v1.1.0 / agent and model
     validations:
       required: true
-  - type: dropdown
-    id: source
-    attributes:
-      label: Where did you find it? / 从哪里看到
-      options:
-        - 小红书 / Xiaohongshu
-        - 抖音 / Douyin
-        - GitHub
-        - Friend or colleague / 朋友或同事
-        - Other / 其他
   - type: textarea
     id: task
     attributes:

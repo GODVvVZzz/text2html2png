@@ -28,7 +28,7 @@ async function bytes(dir) {
 }
 try {
   await cp(path.join(repo, 'skills/text2html2png'), copy, { recursive: true,
-    filter: file => !file.split(path.sep).some(p => ['node_modules', '.runtime-fonts', 'output'].includes(p)) });
+    filter: file => !file.split(path.sep).some(p => ['node_modules', '.runtime-fonts', '.local', 'output'].includes(p)) });
   const started = performance.now();
   await run(['scripts/setup.mjs', '--theme', 'clean']);
   const cleanMs = Math.round(performance.now() - started);

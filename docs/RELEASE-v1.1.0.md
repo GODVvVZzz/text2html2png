@@ -4,7 +4,7 @@ Turn technical notes into clear, shareable diagrams, with editable HTML, version
 - **Smaller first install:** `node scripts/setup.mjs --theme clean` installs the locked runtime and only clean's three font packages. Add another theme when needed; `--check` diagnoses the environment without installing anything. A full `npm ci` remains available for development.
 - **Measured first-use checks:** CI installs an isolated skill copy, adds a second theme, and renders audited HTML and PNG. Installation measurements are scoped to that test and are not user success rates.
 - **24 fixed evaluation tasks:** a results recorder keeps unrun tasks and pending reviews explicit. No independent agent success rate or competitive superiority is claimed.
-- **Feedback and media:** a first-use issue form, a labelled example presentation, and reusable portrait / landscape assets.
+- **Feedback and product demo:** a first-use issue form and a labelled example walkthrough with reusable diagram source files.
 - **Diagram reliability:** shared public rendering for the gallery and JSON downloads, clearer architecture relationship boundaries, and a portable embedded-font CJK orphan test.
 
 Install from GitHub:

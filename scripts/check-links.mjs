@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..");
-const ignored = new Set([".git", "node_modules", "dist"]);
+const ignored = new Set([".git", "node_modules", "dist", ".local"]);
 
 async function walk(directory) {
   const files = [];

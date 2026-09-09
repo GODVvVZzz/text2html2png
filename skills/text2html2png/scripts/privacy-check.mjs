@@ -26,7 +26,7 @@ export function defaultScanRoot() {
 }
 
 const defaultRoot = defaultScanRoot();
-const ignoredDirectories = new Set([".git", "node_modules", "dist", "coverage"]);
+const ignoredDirectories = new Set([".git", "node_modules", "dist", "coverage", ".local"]);
 const textExtensions = new Set([
   ".md", ".json", ".mjs", ".js", ".ts", ".css", ".html", ".yml", ".yaml",
   ".txt", ".svg", ".gitignore", ".gitattributes",
@@ -92,7 +92,7 @@ function usage() {
   node scripts/privacy-check.mjs --path <file-or-directory>
 
 Without a path, scans the repository containing this skill. Binary files and
-the .git, node_modules, dist, and coverage directories are skipped.`);
+the .git, node_modules, dist, coverage, and .local directories are skipped.`);
 }
 
 function parseArgs(argv) {

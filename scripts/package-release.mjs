@@ -15,6 +15,6 @@ await mkdir(out); // Refuse to mix a new release with a previous package.
 for (const entry of new Set(['package.json', 'LICENSE', 'LICENSES/', ...pkg.files])) {
   if (path.isAbsolute(entry) || entry.split('/').includes('..')) throw Error('Invalid package entry: ' + entry);
   await cp(path.join(skill, entry), path.join(out, entry), { recursive: true,
-    filter: file => !file.split(path.sep).some(part => ['node_modules', '.runtime-fonts', 'output', '.DS_Store'].includes(part)) });
+    filter: file => !file.split(path.sep).some(part => ['node_modules', '.runtime-fonts', '.local', 'output', '.DS_Store'].includes(part)) });
 }
 console.log(`Packaged v${pkg.version}: ${out}`);
