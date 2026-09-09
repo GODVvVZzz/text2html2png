@@ -15,26 +15,27 @@ Thanks for helping make text2html2png more useful and trustworthy.
 
 An example is a marketing asset and a regression fixture at the same time, so it has a hard bar. Unless stated otherwise, run these commands from `skills/text2html2png`:
 
-1. Create `examples/<id>.html` following [`references/rendering-contract.md`](skills/text2html2png/references/rendering-contract.md) exactly: inline CSS, one `.wrap` root, the CSP meta tag, no scripts or remote assets.
-2. Create `examples/<id>.meta.json` with `id`, `title`, `chart`, `style`, `summary`, `prompt`, `width`, `background`, and `scale`. The `prompt` must plausibly produce the diagram you built.
+1. Create `examples/<id>/zh.json` and `en.json` with the chart's data fields. Follow the [Diagram JSON reference](skills/text2html2png/references/diagram-json.md) and a checked example. The shared renderer produces the HTML; do not hand-write generated files.
+2. Create `examples/<id>.meta.json` with `id`, `title`, `chart`, `theme`, `locales: ["zh", "en"]`, `summary`, `prompt`, `width`, and `scale`. Add `promptZh` for the Chinese request, and optionally `titleZh` and `summaryZh` for localized gallery copy. Record the exact facts used by the fixtures; use the same theme in the request and metadata.
 3. Every visible string must be traceable to the recorded `prompt`. If the diagram shows a subtitle, a scope line, or a reading note, the prompt has to ask for it. This is not automated — reviewers check it by hand — and it is the same no-invention rule the skill applies to real user content.
 4. Content must be entirely synthetic and internally consistent. Percentages must match the numbers they derive from, totals must add up, dates must not contradict each other. Use role titles rather than personal names.
 5. Reach zero errors **and** zero warnings:
 
    ```bash
-   node scripts/validate-html.mjs --html examples/<id>.html
-   node scripts/audit-layout.mjs --html examples/<id>.html --width <width> --strict
+   node scripts/build-examples.mjs --example <id> --check --audit
    ```
 
-   Fix the HTML. Do not lower a threshold with a flag and do not edit the auditor to make an example pass.
+   Fix the JSON or shared renderer, then regenerate. Do not lower a threshold with a flag and do not edit the auditor to make an example pass.
 6. Render it and regenerate the gallery:
 
    ```bash
-   npm run render:examples -- --only <id>
-   node ../../scripts/build-gallery.mjs
+   node scripts/build-examples.mjs --example <id> --render --force
+   node ../../scripts/build-gallery.mjs --skip-render
    ```
 
 7. Look at the PNG. The audit measures geometry and colour; it cannot tell you that a label is wrong, a flow direction is ambiguous, or a number is implausible.
+
+The gallery downloads must reproduce the same HTML through `scripts/render.mjs`. The test suite checks this for both languages. Regenerate gallery downloads whenever a fixture or renderer changes.
 
 ## Before opening a pull request
 

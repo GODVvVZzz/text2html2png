@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "chart": "architecture",
+  "theme": "editorial",
+  "render": {
+    "width": 908,
+    "padding": 24,
+    "scale": 2
+  },
+  "data": {
+    "id": "local-first-pipeline",
+    "locale": "en-US",
+    "eyebrow": "Architecture",
+    "title": "From agent input to local rendering",
+    "subtitle": "The agent handles your source; Diagram JSON becomes local files.",
+    "layers": [
+      {
+        "tag": "Input",
+        "accent": 1,
+        "nodes": [
+          {
+            "name": "Prompt",
+            "desc": "The diagram goal, audience, and preferred format.",
+            "emoji": "💬",
+            "icon": "megaphone"
+          },
+          {
+            "name": "Source facts",
+            "desc": "Steps, parts, dates, and metrics.",
+            "emoji": "📋",
+            "icon": "layers"
+          }
+        ]
+      },
+      {
+        "tag": "Agent",
+        "accent": 6,
+        "nodes": [
+          {
+            "name": "Select",
+            "desc": "Pick one chart and one style.",
+            "emoji": "✅",
+            "icon": "check"
+          },
+          {
+            "name": "Structure",
+            "desc": "Organize the facts; add nothing.",
+            "emoji": "🧱",
+            "icon": "package"
+          },
+          {
+            "name": "JSON",
+            "desc": "Write reproducible Diagram JSON.",
+            "emoji": "⌨️",
+            "icon": "code"
+          }
+        ]
+      },
+      {
+        "tag": "Local",
+        "accent": 2,
+        "nodes": [
+          {
+            "name": "HTML",
+            "desc": "Node.js generates and validates self-contained HTML.",
+            "emoji": "🛡",
+            "icon": "shield"
+          },
+          {
+            "name": "Layout audit",
+            "desc": "Local Chrome checks text and layout.",
+            "emoji": "🖥",
+            "icon": "image"
+          },
+          {
+            "name": "Output files",
+            "desc": "HTML by default; PNG on explicit request.",
+            "emoji": "🖼",
+            "icon": "code"
+          }
+        ]
+      }
+    ],
+    "connectors": [
+      {
+        "label": "Agent privacy settings"
+      },
+      {
+        "label": "Diagram JSON → local"
+      }
+    ],
+    "footerLabel": "Processing boundary",
+    "footer": "The agent may use a remote service. The renderer has no telemetry and blocks browser network requests by default."
+  }
+}

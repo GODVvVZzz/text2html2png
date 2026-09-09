@@ -125,14 +125,14 @@ jobs:
         with:
           node-version: "22.14.0"
 
-      # Regenerates the page and the prompt index from the example manifest
-      # without re-rendering images, then fails if either is stale.
+      # Rebuilds both locales and copies committed downloadable artifacts;
+      # no Chrome or installed dependencies are needed here.
       - name: Regenerate gallery text output
         run: node scripts/build-gallery.mjs --skip-render
 
       - name: Fail if generated files are out of date
         run: |
-          if ! git diff --exit-code -- docs/index.html skills/text2html2png/examples/prompts.md; then
-            echo "::error::Run 'node scripts/build-gallery.mjs' and commit the result."
+          if ! git diff --exit-code -- docs skills/text2html2png/examples/prompts.md || [ -n "$(git ls-files --others --exclude-standard -- docs)" ]; then
+            echo "::error::Run 'node scripts/build-gallery.mjs --skip-render' and commit the result."
             exit 1
           fi

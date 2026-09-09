@@ -150,7 +150,7 @@ async function main() {
         theme: example.theme,
         render: { width: example.width, padding: 24, scale: example.scale },
         data: fixture,
-      }, { pipelineDir, legacyCanvas: true });
+      }, { pipelineDir });
       for (const warning of rendered.fontWarnings) {
         console.error(`warn: ${example.id}-${locale}: ${warning}`);
       }

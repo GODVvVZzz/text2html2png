@@ -2,40 +2,84 @@
   "id": "local-first-pipeline",
   "locale": "en-US",
   "eyebrow": "Architecture",
-  "title": "A local-first diagram pipeline",
-  "subtitle": "Structured content becomes an editable visual without leaving the machine.",
+  "title": "From agent input to local rendering",
+  "subtitle": "The agent handles your source; Diagram JSON becomes local files.",
   "layers": [
     {
       "tag": "Input",
       "accent": 1,
       "nodes": [
-        {"name": "Prompt", "desc": "The diagram goal, audience, and preferred format.", "emoji": "💬", "icon": "megaphone"},
-        {"name": "Source facts", "desc": "Steps, parts, dates, and metrics.", "emoji": "📋", "icon": "layers"}
+        {
+          "name": "Prompt",
+          "desc": "The diagram goal, audience, and preferred format.",
+          "emoji": "💬",
+          "icon": "megaphone"
+        },
+        {
+          "name": "Source facts",
+          "desc": "Steps, parts, dates, and metrics.",
+          "emoji": "📋",
+          "icon": "layers"
+        }
       ]
     },
     {
       "tag": "Agent",
       "accent": 6,
       "nodes": [
-        {"name": "Select", "desc": "Pick one chart and one style.", "emoji": "✅", "icon": "check"},
-        {"name": "Structure", "desc": "Organize the facts; add nothing.", "emoji": "🧱", "icon": "package"},
-        {"name": "Compose", "desc": "Generate one self-contained HTML.", "emoji": "⌨️", "icon": "code"}
+        {
+          "name": "Select",
+          "desc": "Pick one chart and one style.",
+          "emoji": "✅",
+          "icon": "check"
+        },
+        {
+          "name": "Structure",
+          "desc": "Organize the facts; add nothing.",
+          "emoji": "🧱",
+          "icon": "package"
+        },
+        {
+          "name": "JSON",
+          "desc": "Write reproducible Diagram JSON.",
+          "emoji": "⌨️",
+          "icon": "code"
+        }
       ]
     },
     {
-      "tag": "Runtime",
+      "tag": "Local",
       "accent": 2,
       "nodes": [
-        {"name": "Validate", "desc": "No scripts, no network access.", "emoji": "🛡", "icon": "shield"},
-        {"name": "Render", "desc": "Measure the layout in a local Chrome-family browser.", "emoji": "🖥", "icon": "image"},
-        {"name": "HTML + PNG", "desc": "Edit the source or paste the high-resolution image anywhere.", "emoji": "🖼", "icon": "code"}
+        {
+          "name": "HTML",
+          "desc": "Node.js generates and validates self-contained HTML.",
+          "emoji": "🛡",
+          "icon": "shield"
+        },
+        {
+          "name": "Layout audit",
+          "desc": "Local Chrome checks text and layout.",
+          "emoji": "🖥",
+          "icon": "image"
+        },
+        {
+          "name": "Output files",
+          "desc": "HTML by default; PNG on explicit request.",
+          "emoji": "🖼",
+          "icon": "code"
+        }
       ]
     }
   ],
   "connectors": [
-    {"label": ""},
-    {"label": ""}
+    {
+      "label": "Agent privacy settings"
+    },
+    {
+      "label": "Diagram JSON → local"
+    }
   ],
-  "footerLabel": "Local by default",
-  "footer": "No telemetry · no hosted API · network requests blocked"
+  "footerLabel": "Processing boundary",
+  "footer": "The agent may use a remote service. The renderer has no telemetry and blocks browser network requests by default."
 }

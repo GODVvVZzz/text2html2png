@@ -3,19 +3,20 @@ import http from "node:http";
 import { readFile, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { run } from "./render.mjs";
 import { renderDocument } from "./pipeline/render-document.mjs";
 import { writeFile } from "node:fs/promises";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const port = Number(process.env.PORT ?? 4318);
-if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("PORT must be 1024–65535");
-const examples = { flowchart: "release-flow", architecture: "service-architecture", dashboard: "support-snapshot", comparison: "plan-comparison", timeline: "library-roadmap", gantt: "launch-plan", "org-chart": "studio-org", funnel: "signup-funnel", narrative: "cafe-membership" };
-let rendering = false;
-const server = http.createServer(async (req, res) => {
+const examples = { flowchart: "release-flow", architecture: "order-event-architecture", dashboard: "support-snapshot", comparison: "plan-comparison", timeline: "library-roadmap", gantt: "launch-plan", "org-chart": "studio-org", funnel: "signup-funnel", narrative: "cafe-membership" };
+
+export function createPlaygroundServer() {
+  let rendering = false;
+  const server = http.createServer(async (req, res) => {
   const reply = (status, type, body) => { res.writeHead(status, { "Content-Type": type, "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }); res.end(body); };
   try {
+    const port = server.address().port;
     if (req.headers.host !== `127.0.0.1:${port}`) return reply(403, "text/plain", "Use the printed localhost address.");
     if (req.method === "GET" && req.url === "/") return reply(200, "text/html; charset=utf-8", await readFile(path.join(root, "assets/playground.html")));
     const match = /^\/example\/([a-z-]+)$/.exec(req.url);
@@ -47,4 +48,11 @@ const server = http.createServer(async (req, res) => {
     } finally { rendering = false; }
   } catch (error) { reply(400, "text/plain; charset=utf-8", error.message); }
 });
-server.listen(port, "127.0.0.1", () => console.log(`Playground: http://127.0.0.1:${port}`));
+  return server;
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1] || "").href) {
+  const port = Number(process.env.PORT ?? 4318);
+  if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("PORT must be 1024–65535");
+  createPlaygroundServer().listen(port, "127.0.0.1", () => console.log(`Playground: http://127.0.0.1:${port}`));
+}

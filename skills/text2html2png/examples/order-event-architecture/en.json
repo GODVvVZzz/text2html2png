@@ -1,0 +1,42 @@
+{
+  "id": "order-event-architecture",
+  "locale": "en-US",
+  "eyebrow": "Synthetic Technical Case",
+  "title": "Order Events: Requests, Ownership, and Delivery",
+  "subtitle": "Arrows indicate layer grouping only. Node text defines specific dependencies, event routes, and data ownership.",
+  "layers": [
+    {
+      "tag": "Entry",
+      "accent": 1,
+      "nodes": [
+        {"name": "Storefront", "desc": "Synchronously calls the order service to create an order.", "icon": "code"},
+        {"name": "Payment Platform", "desc": "Synchronously calls the callback service with a callback ID.", "icon": "shield"}
+      ]
+    },
+    {
+      "tag": "Services",
+      "accent": 1,
+      "nodes": [
+        {"name": "Order State and Event Publishing", "desc": "Order service: writes Order DB; publishes OrderCreated asynchronously; consumes PaymentConfirmed, committing payment status and consumed event ID together.", "icon": "package"},
+        {"name": "Callback Deduplication and Events", "desc": "Callback service: writes Callback DB; acknowledges after commit; deduplicates by callback ID; publishes PaymentConfirmed asynchronously.", "icon": "shield"},
+        {"name": "Inventory Reservation and Deduplication", "desc": "Inventory consumer: receives OrderCreated asynchronously; commits reservation and consumed event ID together.", "icon": "layers"}
+      ]
+    },
+    {
+      "tag": "Resources",
+      "accent": 1,
+      "nodes": [
+        {"name": "Order DB", "desc": "PostgreSQL; only the order service reads and writes it. Order and outbox commit together; stores consumed event IDs.", "icon": "lock"},
+        {"name": "Callback DB", "desc": "Separate PostgreSQL; only the callback service reads and writes it. Callback ID and outbox commit together.", "icon": "lock"},
+        {"name": "Inventory DB", "desc": "Separate PostgreSQL; only the inventory consumer reads and writes it. Stores reservations and consumed event IDs.", "icon": "lock"},
+        {"name": "Business Event Queue", "desc": "At-least-once delivery. OrderCreated → inventory consumer; PaymentConfirmed → order service.", "icon": "layers"}
+      ]
+    }
+  ],
+  "connectors": [
+    {"label": "Layer grouping only"},
+    {"label": "Layer grouping only"}
+  ],
+  "footerLabel": "Delivery Boundaries",
+  "footer": "Order and callback services retry failed publishing from their own outboxes. Callback IDs deduplicate callbacks; event IDs deduplicate order and inventory consumption. At-least-once delivery is not an exactly-once processing guarantee. Arrows are not node wiring or a serial call chain."
+}
