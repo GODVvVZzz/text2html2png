@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Layouts use the committed real diagram PNG; no image-generation service.
+// Build the public website Open Graph preview from a committed diagram.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -7,15 +7,13 @@ import puppeteer from '../skills/text2html2png/node_modules/puppeteer-core/lib/p
 import { findChrome } from '../skills/text2html2png/scripts/screenshot.mjs';
 import { buildThemeFontFaces } from '../skills/text2html2png/scripts/pipeline/font-embed.mjs';
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const out = path.join(repo, 'docs/media');
+const out = path.join(repo, 'docs/brand');
 await mkdir(out, { recursive: true });
 const diagram = (await readFile(path.join(repo, 'skills/text2html2png/assets/gallery/release-flow-zh-clean.png'))).toString('base64');
 const copy = 'text2html2png 把技术说明变成清晰的图 开源 Agent 技能 原始需求 计划 开发 评审 测试 灰度 正式上线 每个阶段通过后进入下一步 实际渲染结果 PNG 直接分享 HTML 独立查看 JSON 修改复用 合成案例演示 图表由本地渲染器生成 需要已安装技能的 Agent 与本地运行环境 图交出去，源文件留下来 改一处文案，继续用 JSON 重新生成 github.com/GODVvVZzz/text2html2png → ·';
 const font = await buildThemeFontFaces('--t-font-body: "Noto Sans SC", "IBM Plex Sans";', copy);
 if (font.warnings.length) throw Error(font.warnings.join('\n'));
 const configs = [
-  { id: 'xiaohongshu-cover', width: 1080, height: 1440 },
-  { id: 'douyin-cover', width: 1080, height: 1920 },
   { id: 'github-preview', width: 1200, height: 630 },
 ];
 const browser = await puppeteer.launch({ executablePath: await findChrome(), headless: true });
@@ -36,7 +34,7 @@ ${tall ? ".poster{gap:30px}h1{font-size:88px}.intro{font-size:32px}.source{font-
     await page.goto(pathToFileURL(file).href);
     await page.evaluate(() => document.fonts.ready);
     const overflow = await page.$eval('.poster', element => element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth);
-    if (overflow) throw Error('Media layout overflows: ' + config.id);
+    if (overflow) throw Error('Social preview layout overflows: ' + config.id);
     await page.screenshot({ path: path.join(out, config.id + '.png') });
     await page.close();
     console.log('Built ' + config.id);

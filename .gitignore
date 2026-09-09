@@ -27,3 +27,6 @@ Thumbs.db
 
 # Per-theme font cache created by setup
 .runtime-fonts/
+
+# Maintainer-only drafts, campaign assets, plans and raw feedback
+/.local/

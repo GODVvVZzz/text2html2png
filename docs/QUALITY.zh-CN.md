@@ -48,6 +48,6 @@ node scripts/evaluate.mjs --results output/trial.json
 
 ## 真实用户试用
 
-[填写首次试用反馈](https://github.com/GODVvVZzz/text2html2png/issues/new?template=trial.yml)。表单记录发现渠道、安装环境、任务、结果、耗时、修改和实际使用情况。用户可一周后在同一 issue 补充是否复用。
+[填写首次试用反馈](https://github.com/GODVvVZzz/text2html2png/issues/new?template=trial.yml)。表单记录安装环境、任务、结果、耗时、修改和实际使用情况。用户可一周后在同一 issue 补充是否复用。
 
-先收集 20 位目标用户自己的任务；“至少 16 人无需作者介入完成”是建议的内部验收线，不是行业标准。目前没有真实用户成功率。未授权内容不进入公开案例页；社媒曝光、stars 和 clone 不当作活跃用户数。
+目前没有真实用户成功率。公开评测应注明样本范围、运行环境、失败情况与数据来源；只收录获得授权并经过脱敏的案例。
