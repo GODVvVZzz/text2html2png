@@ -7,8 +7,8 @@ import { createPlaygroundServer } from "../scripts/playground.mjs";
 import { findChrome } from "../scripts/screenshot.mjs";
 import { browserIsUsable } from "./helpers/browser.mjs";
 
-async function localServer(context) {
-  const server = createPlaygroundServer();
+async function localServer(context, options) {
+  const server = createPlaygroundServer(options);
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
   context.after(() => new Promise((resolve, reject) => {
@@ -17,6 +17,22 @@ async function localServer(context) {
   }));
   return `http://127.0.0.1:${server.address().port}`;
 }
+
+test("missing theme fonts block preview and PNG export with a setup instruction", async context => {
+  let exports = 0;
+  const base = await localServer(context, {
+    render: async () => ({ input: { theme: "notebook" }, fontWarnings: ["missing notebook font"], html: "fallback" }),
+    exportDiagram: async () => { exports++; },
+  });
+  for (const route of ["/render", "/png"]) {
+    const response = await fetch(base + route, {
+      method: "POST", headers: { Origin: base, "Content-Type": "application/json" }, body: "{}",
+    });
+    assert.equal(response.status, 400);
+    assert.match(await response.text(), /node scripts\/setup\.mjs --theme notebook/);
+  }
+  assert.equal(exports, 0, "PNG must not silently use fallback fonts");
+});
 
 test("playground serves the architecture example and preserves local request boundaries", async context => {
   const base = await localServer(context);
