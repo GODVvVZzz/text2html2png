@@ -11,7 +11,7 @@ import { writeFile } from "node:fs/promises";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const examples = { flowchart: "release-flow", architecture: "order-event-architecture", dashboard: "support-snapshot", comparison: "plan-comparison", timeline: "library-roadmap", gantt: "launch-plan", "org-chart": "studio-org", funnel: "signup-funnel", narrative: "cafe-membership" };
 
-export function createPlaygroundServer() {
+export function createPlaygroundServer({ render = renderDocument, exportDiagram = run } = {}) {
   let rendering = false;
   const server = http.createServer(async (req, res) => {
   const reply = (status, type, body) => { res.writeHead(status, { "Content-Type": type, "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }); res.end(body); };
@@ -35,17 +35,17 @@ export function createPlaygroundServer() {
         if (Buffer.byteLength(body) > 256000) return reply(413, "text/plain", "Diagram JSON exceeds 256 KB.");
       }
       const definition = JSON.parse(body);
+      const result = await render(definition);
+      if (result.fontWarnings.length) {
+        throw new Error(`Theme fonts are missing. Run: node scripts/setup.mjs --theme ${result.input.theme}\nThen update the preview again.`);
+      }
       if (req.url === "/render") {
-        const result = await renderDocument(definition);
-        if (result.fontWarnings.length) {
-          throw new Error(`Theme fonts are missing. Run: node scripts/setup.mjs --theme ${result.input.theme}\nThen update the preview again.`);
-        }
         return reply(200, "text/html; charset=utf-8", result.html);
       }
       const dir = await mkdtemp(path.join(tmpdir(), "diagram-preview-"));
       try {
       await writeFile(path.join(dir, "input.json"), JSON.stringify(definition));
-      await run(["--input", path.join(dir, "input.json"), "--html", path.join(dir, "output.html"), "--png", path.join(dir, "output.png")]);
+      await exportDiagram(["--input", path.join(dir, "input.json"), "--html", path.join(dir, "output.html"), "--png", path.join(dir, "output.png")]);
       return reply(200, "image/png", await readFile(path.join(dir, "output.png")));
       } finally { await rm(dir, { recursive: true, force: true }); }
     } finally { rendering = false; }
