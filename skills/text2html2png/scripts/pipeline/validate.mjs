@@ -7,6 +7,7 @@
 import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
+import { cssIdentifier, cssText, htmlAttribute, htmlDocument, htmlNodes, literalCssColors, parseCss, pureThemeReference, styleText, walkCss } from "../document-syntax.mjs";
 
 export const REQUIRED_THEME_TOKENS = [
   "--t-canvas", "--t-canvas-image", "--t-surface", "--t-surface-strong",
@@ -25,97 +26,78 @@ export const REQUIRED_THEME_TOKENS = [
   "--t-head-rule-image",
 ];
 
-function stripComments(source) {
-  return source.replace(/\/\*[\s\S]*?\*\//g, "").trim();
-}
-
 // Fonts are an asset-loading concern, not styling: an embedded @font-face may
 // only declare descriptors and a data: URI source, never selectors or colors.
-function extractFontFaces(source, label) {
-  const faces = [];
-  const rest = source.replace(/@font-face\s*\{[^}]*\}/g, (block) => {
-    faces.push(block);
-    return "";
-  });
-  for (const face of faces) {
-    const body = face.replace(/^@font-face\s*\{/, "").replace(/\}$/, "");
-    // The data: URI contains semicolons, so src must be lifted out before
-    // the remaining descriptors can be split on ";".
-    let rest = body;
-    let sawSrc = false;
-    rest = rest.replace(/src\s*:\s*[\s\S]*?(?=font-family|font-style|font-weight|font-display|unicode-range|$)/, (srcDecl) => {
-      sawSrc = true;
-      const normalized = srcDecl.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\s+/g, "");
-      if (!/^src:url\(["']?data:font\/(woff2?|ttf|otf);base64,[A-Za-z0-9+/=]+["']?\)format\(["']?(woff2|woff|truetype|opentype)["']?\);?$/i.test(normalized)) {
-        throw new Error(`${label}: @font-face src must be an inline data: URI font`);
-      }
-      return "";
-    });
-    if (!sawSrc) throw new Error(`${label}: @font-face is missing a src descriptor`);
-    for (const declaration of rest.split(";").map((s) => s.trim()).filter(Boolean)) {
-      const [, property = ""] = declaration.match(/^([a-z-]+)\s*:/i) ?? [];
-      if (!["font-family", "font-style", "font-weight", "font-display", "unicode-range"].includes(property)) {
-        throw new Error(`${label}: forbidden descriptor in @font-face: ${property || declaration.slice(0, 40)}`);
-      }
+function validateFontFace(face, label) {
+  const seen = new Set();
+  for (const declaration of face.block?.children ?? []) {
+    const property = declaration.type === "Declaration" ? cssIdentifier(declaration.property).toLowerCase() : "";
+    if (!["src", "font-family", "font-style", "font-weight", "font-display", "unicode-range"].includes(property) || declaration.important || seen.has(property)) {
+      throw new Error(`${label}: forbidden or duplicate descriptor in @font-face: ${property || declaration.type}`);
+    }
+    seen.add(property);
+    if (property !== "src") continue;
+    const values = declaration.value.children.toArray();
+    const format = values[1];
+    const formatArgs = format?.type === "Function" ? format.children.toArray() : [];
+    if (values.length !== 2 || values[0].type !== "Url" || !/^data:font\/(woff2?|ttf|otf);base64,[A-Za-z0-9+/=]+$/i.test(values[0].value)
+      || format?.type !== "Function" || cssIdentifier(format.name).toLowerCase() !== "format" || formatArgs.length !== 1
+      || !["String", "Identifier"].includes(formatArgs[0].type) || !["woff2", "woff", "truetype", "opentype"].includes(formatArgs[0].value ?? cssIdentifier(formatArgs[0].name))) {
+      throw new Error(`${label}: @font-face src must be an inline data: URI font with a supported format`);
     }
   }
-  return rest.trim();
+  if (!seen.has("src")) throw new Error(`${label}: @font-face is missing a src descriptor`);
 }
 
 export function themeDefinitions(source, label = "theme") {
-  const clean = stripComments(source);
-  const rest = extractFontFaces(clean, label);
-  const match = rest.match(/^:root\s*\{([\s\S]*)\}\s*$/);
-  if (!match) {
+  const rules = [];
+  for (const node of parseCss(source).children) {
+    if (node.type === "Comment") continue;
+    if (node.type === "Atrule" && cssIdentifier(node.name).toLowerCase() === "font-face" && !node.prelude && node.block) validateFontFace(node, label);
+    else rules.push(node);
+  }
+  if (rules.length !== 1 || rules[0].type !== "Rule" || cssText(rules[0].prelude).toLowerCase() !== ":root") {
     throw new Error(`${label}: theme CSS must contain exactly one :root rule (plus optional @font-face) and no component selectors.`);
   }
 
   const definitions = new Map();
-  for (const entry of match[1].matchAll(/(--t-[a-z0-9-]+)\s*:\s*([^;]+);/gi)) {
-    if (definitions.has(entry[1])) throw new Error(`${label}: duplicate token ${entry[1]}.`);
-    definitions.set(entry[1], entry[2].trim());
+  for (const declaration of rules[0].block.children) {
+    const property = declaration.type === "Declaration" ? cssIdentifier(declaration.property) : "";
+    if (!/^--t-[a-z0-9-]+$/.test(property) || declaration.important || !cssText(declaration.value).trim()) {
+      throw new Error(`${label}: unexpected content inside :root: ${cssText(declaration).slice(0, 80)}`);
+    }
+    if (definitions.has(property)) throw new Error(`${label}: duplicate token ${property}.`);
+    definitions.set(property, cssText(declaration.value));
   }
-
-  const residue = match[1].replace(/--t-[a-z0-9-]+\s*:\s*[^;]+;/gi, "").trim();
-  if (residue) throw new Error(`${label}: unexpected content inside :root: ${residue.slice(0, 80)}`);
-
   const missing = REQUIRED_THEME_TOKENS.filter((token) => !definitions.has(token));
   if (missing.length) throw new Error(`${label}: missing tokens: ${missing.join(", ")}`);
   return definitions;
 }
 
-function themedPropertyViolations(source) {
+function themedPropertyViolations(ast) {
   const failures = [];
-  const checks = [
-    ["font-family", /font-family\s*:\s*([^;]+);/gi],
-    ["border-radius", /border-radius\s*:\s*([^;]+);/gi],
-    ["box-shadow", /box-shadow\s*:\s*([^;]+);/gi],
-    ["text-shadow", /text-shadow\s*:\s*([^;]+);/gi],
-    ["backdrop-filter", /(?<!-webkit-)backdrop-filter\s*:\s*([^;]+);/gi],
-    ["-webkit-backdrop-filter", /-webkit-backdrop-filter\s*:\s*([^;]+);/gi]
-  ];
-  for (const [property, pattern] of checks) {
-    for (const match of source.matchAll(pattern)) {
-      const value = match[1].trim();
-      const tokenShaped = /^var\(--t-[a-z0-9-]+\)$/i.test(value);
-      const geometric = property === "border-radius" && value === "50%";
-      if (!tokenShaped && !geometric) {
-        failures.push(property + " must use a theme token");
-      }
+  const themed = new Set(["font-family", "border-radius", "box-shadow", "text-shadow", "backdrop-filter", "-webkit-backdrop-filter"]);
+  walkCss(ast, { visit: "Declaration", enter(declaration) {
+    const property = cssIdentifier(declaration.property).toLowerCase();
+    if (themed.has(property) && !pureThemeReference(declaration.value) && !(property === "border-radius" && cssText(declaration.value) === "50%")) {
+      failures.push(property + " must use a theme token");
     }
-  }
+  } });
   return failures;
 }
 
 export function validateChartCss(source, themeTokenSet) {
   const failures = [];
-  const clean = stripComments(source);
-  const literalColor = /#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(|oklch\(|\blab\(|\blch\(/gi;
-  const matches = clean.match(literalColor) ?? [];
-  if (matches.length) failures.push(`literal colors outside the theme block: ${[...new Set(matches)].join(", ")}`);
-  failures.push(...themedPropertyViolations(clean));
+  const ast = parseCss(source);
+  const colors = literalCssColors(ast);
+  if (colors.length) failures.push(`literal colors outside the theme block: ${colors.join(", ")}`);
+  failures.push(...themedPropertyViolations(ast));
 
-  const referenced = new Set([...clean.matchAll(/var\((--t-[a-z0-9-]+)\)/gi)].map((match) => match[1]));
+  const referenced = new Set();
+  walkCss(ast, { visit: "Function", enter(node) {
+    const first = node.children.first;
+    if (cssIdentifier(node.name).toLowerCase() === "var" && first?.type === "Identifier" && cssIdentifier(first.name).startsWith("--t-")) referenced.add(cssIdentifier(first.name));
+  } });
   const unknown = [...referenced].filter((token) => !themeTokenSet.has(token));
   if (unknown.length) failures.push(`chart references undefined theme tokens: ${unknown.join(", ")}`);
   if (!referenced.size) failures.push("chart CSS does not reference the theme contract");
@@ -136,25 +118,34 @@ const ACCENT_INLINE_VARS = ["--tone", "--metric-accent", "--step-accent", "--car
 
 export function validateMarkup(markup, label = "markup") {
   const failures = [];
-  const literalColor = /#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(|oklch\(/gi;
-  const stripped = stripThemeBlock(markup);
-  if (literalColor.test(stripped)) failures.push("literal color outside the theme block");
-
-  for (const match of stripped.matchAll(/\b(?:fill|stroke)=["']([^"']+)["']/gi)) {
-    if (!/^(?:currentColor|none|var\(--t-[a-z0-9-]+\))$/i.test(match[1])) {
-      failures.push(`unsafe SVG color value: ${match[1]}`);
+  for (const node of htmlNodes(htmlDocument(markup))) {
+    if (!node.tagName) continue;
+    if (node.tagName === "style" && !["text2html2png-theme", "text2html2png-fonts"].includes(htmlAttribute(node, "id"))) {
+      if (literalCssColors(parseCss(styleText(node))).length) failures.push("literal color outside the theme block");
     }
-  }
-
-  for (const match of stripped.matchAll(/style=["']([^"']+)["']/gi)) {
-    for (const declaration of match[1].split(";").map((value) => value.trim()).filter(Boolean)) {
-      const [, property = "", value = ""] = declaration.match(/^([^:]+):(.+)$/) ?? [];
-      if (property.startsWith("--t-") || ACCENT_INLINE_VARS.includes(property)) {
-        if (!/^var\(--t-[a-z0-9-]+\)$/i.test(value.trim())) {
-          failures.push(`inline theme property must be a pure var(): ${declaration}`);
+    for (const attribute of node.attrs) {
+      const name = attribute.name.toLowerCase();
+      if (["fill", "stroke"].includes(name)) {
+        const value = parseCss(attribute.value, "value");
+        if (!["currentcolor", "none"].includes(cssText(value).toLowerCase()) && !pureThemeReference(value)) failures.push(`unsafe SVG color value: ${attribute.value}`);
+      }
+      if (name !== "style") continue;
+      const declarations = parseCss(attribute.value, "declarationList");
+      if (literalCssColors(declarations).length) failures.push("literal color outside the theme block");
+      for (const declaration of declarations.children) {
+        if (declaration.type !== "Declaration") {
+          failures.push("unexpected inline CSS: " + declaration.type);
+          continue;
         }
-      } else if (!STRUCTURAL_INLINE_VARS.includes(property)) {
-        failures.push(`unexpected inline style property: ${property || declaration}`);
+        const property = cssIdentifier(declaration.property);
+        if (property.startsWith("--t-") || ACCENT_INLINE_VARS.includes(property)) {
+          if (declaration.important || !pureThemeReference(declaration.value)) failures.push(`inline theme property must be a pure var(): ${cssText(declaration)}`);
+        } else if (STRUCTURAL_INLINE_VARS.includes(property)) {
+          const values = declaration.value.children.toArray();
+          if (declaration.important || values.length !== 1 || !["Number", "Percentage"].includes(values[0].type) || !Number.isFinite(Number(values[0].value))) failures.push(`inline geometry must be a finite number or percentage: ${cssText(declaration)}`);
+        } else {
+          failures.push(`unexpected inline style property: ${property}`);
+        }
       }
     }
   }

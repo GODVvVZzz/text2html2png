@@ -1,273 +1,58 @@
 # Funnel — 漏斗图
 
-转化率、筛选流程、销售漏斗、用户旅程、招聘流程。
+Use a funnel for a sequence of measured, non-increasing stage volumes, such as acquisition, qualification, or recruitment. Supply the actual values; the renderer never enlarges a narrow stage to make its label fit.
 
-The percentages below are synthetic layout examples. Replace them only with values supplied by the user; without values, use equal-width stages and omit conversion claims.
+## Input contract
 
----
+The renderer is `scripts/pipeline/charts/funnel/body.mjs`. Wrap the chart data under `data` in a Diagram JSON envelope with `schemaVersion: 1`, `chart: "funnel"`, and a supported `theme`.
 
-## Layout
+| Field | Meaning |
+|---|---|
+| `id`, `locale`, `title` | Required identity. Use `zh-CN` or `en-US` for the corresponding generated labels. |
+| `eyebrow`, `subtitle` | Optional context. |
+| `stages` | Three to six stages in source order. |
+| `stages[].name` | Required non-empty stage name. |
+| `stages[].value` | Required finite, non-negative number, no larger than the preceding stage. Zero and fractional values are supported. |
+| `stages[].accent` | Optional theme accent integer from 1 to 7. |
+| `dropReasons` | Optional string array, exactly one fewer entry than `stages`. Empty strings are allowed. Include causes only when supplied by the source. |
+| `footerLabel`, `footer` | Optional source-supported summary; the footer is shown only when `footer` is supplied. |
 
-```
-[Title]
-┌─────────────────────────────────┐  100%  Stage 1
-│                                 │
-└────────────────────────────┐    │
-     ┌───────────────────────┘    │
-     │                       │    65%   Stage 2
-     └──────────────────┐    │
-          ┌─────────────┘    │
-          │             │    38%   Stage 3
-          └────────┐    │
-               ┌───┘    │
-               │   │    12%   Stage 4
-               └───┘
-[Summary Banner]
-```
-
-Centered trapezoids with decreasing width, labels on the side.
-
----
-
-## HTML Structure
-
-```html
-<div class="wrap">
-  <div class="page-title">User Acquisition Funnel</div>
-  <div class="page-sub">March 2026 — Conversion Analysis</div>
-
-  <div class="funnel">
-    <div class="funnel-stage" style="--stage-width: 100%; --stage-color: var(--s1);">
-      <div class="funnel-bar">
-        <div class="funnel-bar-inner">
-          <span class="funnel-stage-name">Page Views</span>
-          <span class="funnel-stage-num">125,000</span>
-        </div>
-      </div>
-      <div class="funnel-meta">
-        <div class="funnel-pct">100%</div>
-      </div>
-    </div>
-
-    <div class="funnel-drop">
-      <span class="funnel-drop-text">-35% drop</span>
-    </div>
-
-    <div class="funnel-stage" style="--stage-width: 65%; --stage-color: var(--s2);">
-      <div class="funnel-bar">
-        <div class="funnel-bar-inner">
-          <span class="funnel-stage-name">Sign-ups</span>
-          <span class="funnel-stage-num">81,250</span>
-        </div>
-      </div>
-      <div class="funnel-meta">
-        <div class="funnel-pct">65%</div>
-        <div class="funnel-conv">Conv: 65%</div>
-      </div>
-    </div>
-
-    <div class="funnel-drop">
-      <span class="funnel-drop-text">-42% drop</span>
-    </div>
-
-    <div class="funnel-stage" style="--stage-width: 38%; --stage-color: var(--s3);">
-      <div class="funnel-bar">
-        <div class="funnel-bar-inner">
-          <span class="funnel-stage-name">Active Users</span>
-          <span class="funnel-stage-num">47,500</span>
-        </div>
-      </div>
-      <div class="funnel-meta">
-        <div class="funnel-pct">38%</div>
-        <div class="funnel-conv">Conv: 58%</div>
-      </div>
-    </div>
-
-    <div class="funnel-drop">
-      <span class="funnel-drop-text">-68% drop</span>
-    </div>
-
-    <div class="funnel-stage" style="--stage-width: 12%; --stage-color: var(--s4);">
-      <div class="funnel-bar">
-        <div class="funnel-bar-inner">
-          <span class="funnel-stage-name">Paid</span>
-          <span class="funnel-stage-num">15,000</span>
-        </div>
-      </div>
-      <div class="funnel-meta">
-        <div class="funnel-pct">12%</div>
-        <div class="funnel-conv">Conv: 32%</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="banner">Overall conversion: <em>12%</em> — Focus area: Sign-up → Active (42% drop)</div>
-</div>
-```
-
----
-
-## CSS
-
-```css
-.funnel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.funnel-stage {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  justify-content: center;
-}
-
-.funnel-bar {
-  width: var(--stage-width);
-  flex: 0 1 var(--stage-width);
-  min-width: 80px;
-  background: var(--stage-color);
-  border-radius: 6px;
-  padding: 12px 16px;
-  transition: width 0.3s ease;
-}
-.funnel-bar-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.funnel-stage-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-}
-.funnel-stage-num {
-  font-size: 14px;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.funnel-meta {
-  flex: 0 0 80px;
-  text-align: left;
-}
-.funnel-pct {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-.funnel-conv {
-  font-size: 10px;
-  color: var(--text-muted);
-}
-
-/* Drop indicator */
-.funnel-drop {
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.funnel-drop-text {
-  font-size: 10px;
-  color: var(--text-muted);
-  font-weight: 500;
+```json
+{
+  "schemaVersion": 1,
+  "chart": "funnel",
+  "theme": "clean",
+  "data": {
+    "id": "signup-conversion",
+    "locale": "zh-CN",
+    "title": "注册转化",
+    "stages": [
+      {"name": "访问", "value": 1000},
+      {"name": "注册", "value": 400},
+      {"name": "激活", "value": 100}
+    ]
+  }
 }
 ```
 
----
+## Values and rates
 
-## Variants
+- Bar width is exactly `stage.value / first.value * 100%`, subject to browser pixel precision. The bars share a full-width track and remain centered. No minimum width, padding, or percentage clamp distorts the ratio.
+- Names, counts, and percentage labels are outside the bars. A tiny or zero-width bar never hides its data labels. A positive ratio below a display pixel can be invisible as a bar; its non-zero count and rate remain visible.
+- Right-hand shares use the first stage as denominator. Between stages, conversion uses `current / previous`; drop-off uses `(previous - current) / previous`.
+- Percentages display at most two decimal places. A positive percentage below `0.01%` is labelled `<0.01%`; a percentage between `99.99%` and `100%` is labelled `>99.99%`. Label rounding never changes bar geometry.
+- A positive stage followed by zero has `0%` conversion and `100%` drop-off. Following a zero stage, rates are undefined; the diagram states that the preceding denominator is zero.
+- An all-zero funnel is valid. Every bar has zero width; shares display `—`, with an explicit explanation that the first stage is zero. Non-increasing validation means a first value of zero cannot be followed by a positive value.
+- Negative numbers, increasing stages, missing values, numeric strings, `NaN`, and infinities are rejected. If measurements are absent, ask for them or use a non-quantitative flowchart; do not invent equal counts or conversion claims.
 
-### Centered Trapezoid Style
+## Layout and review
 
-True trapezoid shapes using clip-path:
-```css
-.funnel-bar.trapezoid {
-  clip-path: polygon(
-    calc(50% - var(--stage-width) / 2) 0%,
-    calc(50% + var(--stage-width) / 2) 0%,
-    calc(50% + var(--next-width) / 2) 100%,
-    calc(50% - var(--next-width) / 2) 100%
-  );
-}
+All five themes use the same data geometry and theme tokens. Labels wrap outside the bars; transition rows expand for longer Chinese or English explanations. At narrow widths the stage name appears above its count and share.
+
+Review the rendered result against the source, including counts, stage order, denominator, and supplied reasons. A layout audit checks visibility and geometry, not whether the underlying cohort or drop-off explanation is valid. Keep every supplied stage, including stages with zero conversions.
+
+Run the regression checks from the skill directory:
+
+```bash
+node --test tests/chart-inputs.test.mjs tests/funnel-browser.test.mjs
 ```
-
-### Horizontal Funnel
-
-For landscape layouts, use left-to-right stage cards. Keep text horizontal; do not rotate the vertical funnel:
-```css
-.funnel.horizontal {
-  flex-direction: row;
-  align-items: stretch;
-  gap: 10px;
-}
-.funnel.horizontal .funnel-stage {
-  flex: 1;
-  width: auto;
-  flex-direction: column;
-}
-.funnel.horizontal .funnel-bar {
-  width: 100%;
-  min-height: var(--stage-height, 84px);
-}
-.funnel.horizontal .funnel-meta {
-  flex-basis: auto;
-  text-align: center;
-}
-```
-
-### With Reasons
-
-Add drop-off reasons next to each transition:
-```html
-<div class="funnel-drop">
-  <span class="funnel-drop-text">-35% drop</span>
-  <span class="funnel-drop-reason">Main cause: complex form</span>
-</div>
-```
-
----
-
-## Key Rules
-
-1. **Bars decrease in width only when values are supplied**: Derive `--stage-width` from source values; otherwise use equal widths
-2. **Centered alignment**: All bars centered horizontally, creating symmetric funnel shape
-3. **White text on colored bars**: Stage name and number are white on accent-colored backgrounds
-4. **Percentage labels on the side**: Large font (18px), next to each bar
-5. **Drop indicators between stages**: Show a percentage only when it can be computed from supplied values
-6. **Colour restraint**: Use one accent for the funnel; introduce a second tone only when it communicates a real stage state.
-7. **Min-width on bars**: At least 80px even for small percentages (so text remains readable)
-8. Drop height: 20px between stages
-9. Bar border-radius: 6px (slightly rounded, not pill-shaped)
-
----
-
-## Pipeline migration note (theme-decoupling)
-
-Funnel is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/funnel/`
-(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
-snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
-
-Validated structure (all themes × zh/en, `build --render --audit` 112/112 green; bar-width
-accuracy measured at ≤0.22% deviation from theory in subagent review):
-
-- Bars are width-driven solids: each stage sets a structural inline var `--bar-width` derived from
-  `value / firstValue` (clamped 18–100%). `assertFixture` enforces every stage ≥18% of the first so
-  on-bar text always fits; `min-width: 120px` guards narrow tails.
-- On-accent text (`name` + `num` in `--t-on-accent`) may only sit on elements whose OWN declared
-  background is the tone color — the audit resolves computed backgrounds and cannot see
-  pseudo-element fills.
-- Centering baseline trap (the one systematic bug found): `.funnel-stage` as flex with centered
-  [bar + fixed label column] squeezes the 100% bar (its region excludes the label column) while
-  narrower bars are width-% of the FULL row — bars read ~8% too wide relative to the 100% bar.
-  Fix: `.funnel-stage` is a two-column grid `minmax(0, 1fr) 64px` and the bar uses
-  `justify-self: center`. Every bar is then a width-% child of the same 1fr bar region, so all
-  bars share one centering baseline and label percentages align in the fixed column.
-- Drop rows between stages carry the delta (data font, tabular-nums, sign reflects shrink vs
-  growth) plus a reason string; reason text is 12px — the audit's minBodyFont floor.
-- Adjacent stages reuse the strictest accent-identity test: stage accents cycle and must remain
-  hue-distinct per theme (see the accent fixes noted in the dashboard/architecture guides).

@@ -4,6 +4,34 @@ All notable changes to the public project will be documented here.
 
 ## [Unreleased]
 
+No pending changes.
+
+## [1.2.0] - 2026-09-12
+
+### Runtime reliability update
+
+- Parse HTML and CSS with their grammars: issue numbers, code snippets and text such as `online=12` are preserved while real scripts, event attributes and external/local resources remain blocked.
+- Reject unsupported nested chart fields with a JSON path instead of silently dropping content. Existing published Diagram JSON remains supported; inputs carrying extra metadata must move it outside the renderer input.
+- Render funnel bars at their supplied proportions, including rates below 18%, fractional values and zero. Labels live outside the bars, and zero denominators are explicitly undefined.
+- Allow short narrative briefs with one section and optional eyebrows, icons and footer; no filler sections are required.
+- Subset fonts from generated visible text, including calculated numbers, labels and uppercase glyphs used by theme transforms.
+- Keep the browser viewport fixed during PNG capture, including centered content and documents taller than the viewport. Audit/raster failures preserve existing output files.
+- Check installed runtime, transitive dependencies and fonts against the lockfile; repair stale installations while retaining previously installed theme fonts.
+- Start the local playground with `npm start`, which checks and installs the clean-theme runtime first.
+- Require the full CI workflow on the tagged commit before releasing a skill package. Validate public dependency URLs before installation and packaging; project npm configuration uses the public registry.
+
+## [1.1.1] - 2026-09-09
+
+- Stop playground preview and PNG export when selected theme fonts are missing. See [release notes](docs/RELEASE-v1.1.1.md).
+
+## [1.1.0] - 2026-09-09
+
+- Selective font installation, bilingual gallery, first-use checks and a 24-task evaluation recorder. See [release notes](docs/RELEASE-v1.1.0.md).
+
+## Earlier development notes
+
+These entries describe development leading up to the v1.1 releases; some intermediate chart and theme counts are historical.
+
 ### Added
 
 - Post-render layout audit (`scripts/audit-layout.mjs`): measures the rendered page in a real browser and fails on content pushed outside the capture area, clipped or truncated text, connectors escaping their `viewBox`, type below 10px, low contrast, colliding labels, empty filler boxes, and unreadable aspect ratios. Every finding reports the element, the measured evidence, and one repair.

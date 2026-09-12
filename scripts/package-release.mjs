@@ -3,9 +3,11 @@
 import { cp, mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validatePublicLockfile } from '../skills/text2html2png/scripts/validate-lockfile.mjs';
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const skill = path.join(repo, 'skills/text2html2png');
 const pkg = JSON.parse(await readFile(path.join(skill, 'package.json'), 'utf8'));
+validatePublicLockfile(JSON.parse(await readFile(path.join(skill, 'package-lock.json'), 'utf8')));
 const plugin = JSON.parse(await readFile(path.join(repo, '.codex-plugin/plugin.json'), 'utf8'));
 const expected = process.argv[2]?.replace(/^v/, '');
 if (!expected || expected !== pkg.version || expected !== plugin.version) throw Error('Release tag, runtime, and plugin versions must match.');

@@ -4,6 +4,8 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { renderDocument, validateDiagramDefinition } from "../scripts/pipeline/render-document.mjs";
+import { validateHtmlSource } from "../scripts/validate-html.mjs";
+import { validateChartCss, validateMarkup, REQUIRED_THEME_TOKENS } from "../scripts/pipeline/validate.mjs";
 
 const skillDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -53,4 +55,24 @@ test("render width controls the canvas and invalid accents fail early", async ()
   assert.ok(result.html.includes("width: 992px; max-width: 100%"));
   input.data.layers[0].accent = 99;
   assert.throws(() => validateDiagramDefinition(input), /accent integer/);
+});
+
+test("issue numbers and code examples survive both renderer and browser safety validation", async () => {
+  const input = await definition();
+  input.data.title = "Release #1234 / Order #abcdef / online=12";
+  input.data.layers[0].nodes[0].desc = 'CSS: rgb(1,2,3); <script>alert("example")</script>; $100; A & B; javascript: is text';
+  const { html } = await renderDocument(input);
+  assert.ok(html.includes(input.data.title));
+  assert.match(html, /&lt;script&gt;alert\(&quot;example&quot;\)&lt;\/script&gt;/);
+  assert.deepEqual(validateHtmlSource(html), []);
+});
+
+test("theme validation examines real CSS and attributes while preserving prose", () => {
+  assert.doesNotThrow(() => validateMarkup('<main class="wrap">#1234 rgb(1,2,3) fill="red" style="color:red"</main>'));
+  assert.throws(() => validateMarkup('<main style="color: #fff">x</main>'), /color|style/);
+  assert.throws(() => validateMarkup('<svg><path fill="#fff"/></svg>'), /SVG color/);
+  assert.throws(() => validateMarkup('<main style="--bar-width: url(https://example.test)">x</main>'), /geometry/);
+  const tokens = new Set(REQUIRED_THEME_TOKENS);
+  assert.doesNotThrow(() => validateChartCss('#abc { color: var(--t-text); content: "#fff rgba(1,2,3)"; }', tokens));
+  assert.throws(() => validateChartCss('.x { color: rgb(1,2,3); }', tokens), /literal colors/);
 });

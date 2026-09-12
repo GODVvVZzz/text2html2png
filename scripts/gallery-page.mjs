@@ -90,8 +90,7 @@ export function galleryPage(examples, locale) {
 <section id="start" class="start"><h2>${w.install}</h2><div class="steps"><article><h3>1. ${w.step1}</h3><p>${w.setup}</p><div class="command"><code id="install-command">${installCommand}</code><button class="copy" data-copy="install-command">${w.copyInstall}</button></div></article><article><h3>2. ${w.step2}</h3><p>${w.stepCopy}</p><p>${w.output}</p></article></div>
 <details class="local"><summary>${w.local}</summary><p>${w.localNote}</p><pre><code>git clone https://github.com/GODVvVZzz/text2html2png.git
 cd text2html2png/skills/text2html2png
-node scripts/setup.mjs --theme clean
-npm run playground</code></pre></details></section>
+npm start</code></pre></details></section>
 <section class="proof"><h2>${w.proof}</h2><div class="proof-items">${w.proofs.map(([title, text]) => `<article><h3>${title}</h3><p>${text}</p></article>`).join('')}</div><p class="boundary">${w.boundary}</p><div class="file-links"><a href="quality.html">${w.quality}</a><a href="${repo}/issues/new?template=trial.yml">${w.feedback}</a><a href="present.html">${w.demoLink}</a></div></section>
 <section id="examples"><h2>${w.examples}</h2><p class="section-note">${w.examplesNote}</p><div class="gallery-grid">${examples.map(e => {
     const copy = localize(e, locale), a = assets(e, locale);

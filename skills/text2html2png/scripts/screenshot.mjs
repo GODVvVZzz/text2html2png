@@ -2,7 +2,7 @@
 
 import { randomUUID } from "node:crypto";
 import { constants as fsConstants } from "node:fs";
-import { access, mkdir, rename, stat, unlink } from "node:fs/promises";
+import { access, link, mkdir, rename, stat, unlink } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
@@ -222,8 +222,8 @@ export async function renderScreenshot(args) {
     const box = await page.$eval(args.selector, (element) => {
       const rect = element.getBoundingClientRect();
       return {
-        x: rect.x,
-        y: rect.y,
+        x: rect.x + window.scrollX,
+        y: rect.y + window.scrollY,
         width: Math.max(rect.width, element.scrollWidth),
         height: Math.max(rect.height, element.scrollHeight),
       };
@@ -237,10 +237,10 @@ export async function renderScreenshot(args) {
 
     const clipX = Math.max(0, Math.floor(box.x - args.padding));
     const clipY = Math.max(0, Math.floor(box.y - args.padding));
-    const clipWidth = Math.ceil(box.width + args.padding * 2);
-    const clipHeight = Math.ceil(box.height + args.padding * 2);
+    const clipWidth = Math.ceil(box.x + box.width + args.padding) - clipX;
+    const clipHeight = Math.ceil(box.y + box.height + args.padding) - clipY;
     const viewportWidth = Math.max(Math.ceil(args.width), clipX + clipWidth + 2);
-    const viewportHeight = Math.max(1, clipY + clipHeight + 2);
+    const viewportHeight = Math.max(1000, clipY + clipHeight + 2);
     const renderPixels = viewportWidth * viewportHeight * args.scale * args.scale;
     if (renderPixels > MAX_RENDER_PIXELS) {
       throw new Error(
@@ -248,13 +248,10 @@ export async function renderScreenshot(args) {
       );
     }
 
-    await page.setViewport({
-      width: viewportWidth,
-      height: viewportHeight,
-      deviceScaleFactor: args.scale,
-    });
-    await new Promise((resolve) => setTimeout(resolve, 100));
-
+    // Preserve the audited viewport. Resizing it after measuring the element
+    // moves vh/flex/grid content and invalidates the capture coordinates.
+    // Chrome can capture the document surface outside the viewport without
+    // reflowing the page. The allocation guard above includes that surface.
     await page.screenshot({
       path: tempPath,
       type: "png",
@@ -264,11 +261,13 @@ export async function renderScreenshot(args) {
         width: clipWidth,
         height: clipHeight,
       },
-      captureBeyondViewport: false,
+      captureBeyondViewport: true,
     });
 
-    if (args.force && await outputExists(outPath)) await unlink(outPath);
-    await rename(tempPath, outPath);
+    // A second renderer may have published this path after the preflight.
+    // link provides atomic no-clobber publication; rename replaces atomically.
+    if (args.force) await rename(tempPath, outPath);
+    else await link(tempPath, outPath);
     return outPath;
   } finally {
     await browser.close();

@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { validateChartCss, validateMarkup, validatePipelineSources } from "./validate.mjs";
+import { markupText } from "../document-syntax.mjs";
+import { validateDataFields } from "./input-fields.mjs";
 
 const moduleDir = path.dirname(fileURLToPath(import.meta.url));
 export const defaultPipelineDir = moduleDir;
@@ -14,13 +16,6 @@ function escapeAttr(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
-}
-
-function strings(value, out = []) {
-  if (typeof value === "string") out.push(value);
-  else if (Array.isArray(value)) for (const item of value) strings(item, out);
-  else if (value && typeof value === "object") for (const item of Object.values(value)) strings(item, out);
-  return out;
 }
 
 export function validateDiagramDefinition(input) {
@@ -101,15 +96,22 @@ async function loadTheme(pipeline, id) {
 
 export async function renderDocument(definition, options = {}) {
   const input = validateDiagramDefinition(definition);
+  validateDataFields(input.chart, input.data);
   const pipeline = await loadPipeline(options.pipelineDir ?? defaultPipelineDir);
   const chart = await loadChart(pipeline, input.chart);
   const themeCss = await loadTheme(pipeline, input.theme);
   chart.assertFixture(input.data);
+  const body = chart.bodyMarkup(input.data);
 
   const { buildThemeFontFaces, themeFontFamilies } = await import("./font-embed.mjs");
   const families = themeFontFamilies(themeCss);
+  const visibleCopy = markupText(body);
+  // CSS transforms are applied after HTML generation. Include uppercase
+  // glyphs for the theme's label/title treatment as well as calculated copy.
+  const fontCopy = /--t-(?:title|label)-transform:\s*(?:uppercase|capitalize)/.test(themeCss)
+    ? visibleCopy + "\n" + visibleCopy.toUpperCase() : visibleCopy;
   const fontCss = families.length
-    ? await buildThemeFontFaces(themeCss, strings(input.data).join("\n"))
+    ? await buildThemeFontFaces(themeCss, fontCopy)
     : { css: "", families, faces: 0, totalBytes: 0, warnings: [] };
   const fontBlock = fontCss.css
     ? '<style id="text2html2png-fonts" data-font="' + escapeAttr(fontCss.families.join(", ")) + '">\n' + fontCss.css + "  </style>\n  "
@@ -122,7 +124,7 @@ export async function renderDocument(definition, options = {}) {
     THEME_CSS: themeCss.trim(),
     CHART_ID: escapeAttr(input.chart),
     CHART_CSS: chart.chartCss.trim() + (options.legacyCanvas ? "" : `\n.wrap { width: ${input.render.width - 48}px; max-width: 100%; flex-shrink: 0; }`),
-    BODY: chart.bodyMarkup(input.data),
+    BODY: body,
   };
   // A single callback substitution preserves literal dollar signs and template
   // markers in source copy instead of interpreting them as replacement syntax.
