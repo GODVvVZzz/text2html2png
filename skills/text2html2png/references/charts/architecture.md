@@ -53,7 +53,7 @@ For example, the source “浏览器通过 HTTPS 调用 API 网关；API 网关�
 ## Relationship fidelity
 
 - Each adjacent pair of layers receives one shared downward arrow. The renderer draws that arrow even when `connectors` is omitted. These are layer-level connectors, not edges anchored to individual cards.
-- There are no `edges`, node IDs for routing, branches, feedback loops, sidecars, or bidirectional connectors in this chart contract. Unknown fields may be ignored; they do not add visible relationships.
+- There are no `edges`, node IDs for routing, branches, feedback loops, sidecars, or bidirectional connectors in this chart contract. Unsupported fields are rejected with their JSON path; they cannot add visible relationships.
 - Use this layout only when the layer ordering has source support. Do not infer that every node in one layer calls every node in the next, or that adjacent cards communicate with one another.
 - For a layered overview with different node dependencies, name the exact source and target in node descriptions, connector labels, or the footer. Preserve synchronous/asynchronous behavior, failure conditions, shared/private storage, and negative constraints when supplied. Label the view “分层总览” and explain that arrows summarize layer direction if needed.
 - If exact topology is the user's main need, use a supported narrative relationship table or clearly scoped diagrams when they preserve the requested meaning. A narrative table can use three columns: `来源`, `目标`, `关系 / 条件`; follow that chart's own limits. Do not force sparse input into its minimum section count or invent facts to fill it. For an explicit editable topology format, use the corresponding diagram tool.

@@ -7,7 +7,7 @@ description: Turn prose and Chinese technical notes into polished, self-containe
 
 Turn the user's content into versioned Diagram JSON, then use the bundled deterministic renderer to create an editable, self-contained HTML diagram. Render a tightly cropped, high-resolution PNG only when the user explicitly requests PNG, an image file, a screenshot, or passes `--png`.
 
-Rendering HTML requires Node.js 22.12+ and the local npm dependencies. Browser layout audits and PNG export also require a local Chrome or Chromium binary. Resolve the directory containing this `SKILL.md` as `SKILL_DIR`; install missing dependencies there with `node scripts/setup.mjs --theme <selected-style>`, never globally. Setup installs the locked runtime and only that theme’s font packages. Use `node scripts/setup.mjs --check --theme <selected-style>` for read-only diagnostics; use `--theme all` only when all themes are needed. A full `npm ci` remains available for development.
+Rendering HTML requires Node.js 22.12+ and the local npm dependencies. Browser layout audits and PNG export also require a local Chrome or Chromium binary. Resolve the directory containing this `SKILL.md` as `SKILL_DIR`; run `node scripts/setup.mjs --theme <selected-style>` there before rendering, never globally. Setup checks locked dependency versions, repairs stale installations, and installs that theme's fonts while preserving already installed themes. Use `node scripts/setup.mjs --check --theme <selected-style>` for read-only diagnostics; use `--theme all` only when all themes are needed. A full `npm ci` remains available for development.
 
 Do not generate a PNG merely because this skill is named `text2html2png`, or because the user generally asks to “draw a diagram.” HTML is the default deliverable.
 
@@ -72,7 +72,7 @@ Read [references/design-philosophy.md](references/design-philosophy.md) only for
 
 Read [references/diagram-json.md](references/diagram-json.md), then create a `schemaVersion: 1` input using a matching checked example and the selected chart reference. Example locale files contain only `data`, not a complete render input. The agent owns facts, wording, grouping, chart choice, and theme choice. The renderer owns HTML structure, CSS, geometry, fonts, escaping, and export; do not hand-write a parallel document when the renderer supports the chart. Treat HTML/CSS snippets in older chart/style references as illustrative; the current JSON contract and `scripts/pipeline/` implementation take precedence.
 
-- Check the JSON against the source in both directions: every distinct source fact has a visible destination, and every assertion in the diagram has source support. Do not place facts in unknown JSON fields: the renderer may ignore them without error.
+- Check the JSON against the source in both directions: every distinct source fact has a visible destination, and every assertion in the diagram has source support. Unsupported fields are rejected with their JSON path. Correct the field or select a representation that displays the fact; never drop a relationship just to make validation pass.
 - Match visual emphasis to decision intent. Neutral peers receive equal colour, contrast, area, typography, and annotation weight.
 - Use one consistent icon language and omit nonessential icons when they squeeze labels.
 - Save `<topic>.diagram.json` beside `<topic>.html` so the user can reproduce the result or change its theme. Use a new output path unless replacing an artifact generated in this session or explicitly requested by the user.
@@ -84,7 +84,7 @@ Render through the one public entry point:
 node "${SKILL_DIR}/scripts/render.mjs" --input <diagram.json> --html <diagram.html>
 ```
 
-Add `--audit` for browser QA and `--png <diagram.png>` only when the user requested an image. Both options run a strict audit: any warning or error blocks success, and PNG export is stopped. Never edit generated HTML to fix layout; revise the JSON or shared renderer and render again. Use `--force` only for an authorized replacement, including a generated file from the current iteration.
+Add `--audit` for browser QA and `--png <diagram.png>` only when the user requested an image. Both options run a strict audit: any warning or error blocks success, and PNG export is stopped. Auditing and rasterization finish before publishing the requested outputs; a failed audit leaves earlier outputs intact, including with `--force`. Missing theme fonts also block CLI delivery with a setup command. Never edit generated HTML to fix layout; revise the JSON or shared renderer and render again. Use `--force` only for an authorized replacement, including a generated file from the current iteration.
 
 ### 5. Validate the HTML
 

@@ -16,20 +16,20 @@ function assertSection(fixture, section, index) {
   if (!section || !SECTION_KINDS.includes(section.kind)) {
     fail(fixture, where, "kind must be one of " + SECTION_KINDS.join(", ") + ".");
   }
-  if (!section.eyebrow || !section.title) fail(fixture, where, "every section needs an eyebrow and a title.");
-  if (section.eyebrow.length > 24) fail(fixture, where, "eyebrow must stay under 24 characters (label type).");
+  if (!section.title) fail(fixture, where, "every section needs a title.");
+  if ((section.eyebrow?.length ?? 0) > 24) fail(fixture, where, "eyebrow must stay under 24 characters (label type).");
 
   if (section.kind === "cards") {
-    if (!Array.isArray(section.items) || section.items.length < 3 || section.items.length > 6) {
-      fail(fixture, where, "cards need three to six items.");
+    if (!Array.isArray(section.items) || section.items.length < 1 || section.items.length > 6) {
+      fail(fixture, where, "cards need one to six items.");
     }
     for (const item of section.items) {
       if (!item.no || !item.title || !item.text) fail(fixture, where, "every card needs no, title, and text.");
     }
   }
   if (section.kind === "steps") {
-    if (!Array.isArray(section.items) || section.items.length < 3 || section.items.length > 5) {
-      fail(fixture, where, "steps need three to five items.");
+    if (!Array.isArray(section.items) || section.items.length < 1 || section.items.length > 5) {
+      fail(fixture, where, "steps need one to five items.");
     }
     for (const item of section.items) {
       if (!item.label || !item.text) fail(fixture, where, "every step needs a label and text.");
@@ -40,8 +40,8 @@ function assertSection(fixture, section, index) {
     if (!Array.isArray(section.columns) || section.columns.length < 2 || section.columns.length > 3) {
       fail(fixture, where, "tables need two or three columns.");
     }
-    if (!Array.isArray(section.rows) || section.rows.length < 3 || section.rows.length > 6) {
-      fail(fixture, where, "tables need three to six rows.");
+    if (!Array.isArray(section.rows) || section.rows.length < 1 || section.rows.length > 6) {
+      fail(fixture, where, "tables need one to six rows.");
     }
     for (const row of section.rows) {
       if (!Array.isArray(row.cells) || row.cells.length !== section.columns.length) {
@@ -59,8 +59,8 @@ function assertSection(fixture, section, index) {
     }
   }
   if (section.kind === "checklist") {
-    if (!Array.isArray(section.items) || section.items.length < 3 || section.items.length > 6) {
-      fail(fixture, where, "checklists need three to six items.");
+    if (!Array.isArray(section.items) || section.items.length < 1 || section.items.length > 6) {
+      fail(fixture, where, "checklists need one to six items.");
     }
     for (const item of section.items) {
       if (typeof item.text !== "string" || !item.text) fail(fixture, where, "every check needs text.");
@@ -72,17 +72,14 @@ export function assertFixture(fixture) {
   if (!fixture.id || !fixture.locale || !fixture.title) {
     throw new Error("Fixture is missing identity fields.");
   }
-  if (!Array.isArray(fixture.sections) || fixture.sections.length < 4 || fixture.sections.length > 7) {
-    throw new Error(fixture.id + ": a narrative needs four to seven sections.");
+  if (!Array.isArray(fixture.sections) || fixture.sections.length < 1 || fixture.sections.length > 7) {
+    throw new Error(fixture.id + ": a narrative needs one to seven sections.");
   }
   fixture.sections.forEach((section, index) => assertSection(fixture, section, index));
-  if (!fixture.footerLabel || !fixture.footer) {
-    throw new Error(fixture.id + ": a narrative needs footerLabel and footer.");
-  }
 }
 
 function iconSlot(emoji, icon) {
-  return '<span class="sec-icon-emoji">' + escapeHtml(emoji) + '</span><span class="sec-icon-svg">' + iconSvg(icon) + "</span>";
+  return '<span class="sec-icon-emoji">' + escapeHtml(emoji) + '</span><span class="sec-icon-svg">' + (icon ? iconSvg(icon) : "") + "</span>";
 }
 
 function sectionHead(section, index) {
@@ -90,9 +87,9 @@ function sectionHead(section, index) {
   return [
     '<header class="sec-head">',
     '<span class="sec-no">' + no + "</span>",
-    '<span class="sec-icon">' + iconSlot(section.emoji, section.icon) + "</span>",
+    section.icon || section.emoji ? '<span class="sec-icon">' + iconSlot(section.emoji, section.icon) + "</span>" : "",
     '<div class="sec-titles">',
-    '<p class="sec-eyebrow">' + escapeHtml(section.eyebrow) + "</p>",
+    section.eyebrow ? '<p class="sec-eyebrow">' + escapeHtml(section.eyebrow) + "</p>" : "",
     "<h2>" + escapeHtml(section.title) + "</h2>",
     "</div>",
     "</header>"
@@ -128,7 +125,7 @@ function stepsMarkup(section) {
         (item) =>
           [
             '<li class="nar-step">',
-            '<span class="nar-step-icon">' + iconSlot(item.emoji, item.icon) + "</span>",
+            item.icon || item.emoji ? '<span class="nar-step-icon">' + iconSlot(item.emoji, item.icon) + "</span>" : "",
             '<p class="nar-step-label">' + escapeHtml(item.label) + "</p>",
             '<p class="nar-step-text">' + escapeHtml(item.text) + "</p>",
             "</li>"
@@ -196,18 +193,18 @@ export function bodyMarkup(fixture) {
   return [
     '<main class="wrap" aria-label="' + escapeHtml(fixture.title) + '">',
     '<header class="head">',
-    '<p class="eyebrow">' + escapeHtml(fixture.eyebrow) + "</p>",
+    fixture.eyebrow ? '<p class="eyebrow">' + escapeHtml(fixture.eyebrow) + "</p>" : "",
     "<h1>" + escapeHtml(fixture.title) + "</h1>",
-    '<p class="lede">' + escapeHtml(fixture.subtitle) + "</p>",
+    fixture.subtitle ? '<p class="lede">' + escapeHtml(fixture.subtitle) + "</p>" : "",
     '<div class="head-rule"></div>',
     "</header>",
     '<div class="nar-sections">',
     fixture.sections.map(sectionMarkup).join("\n"),
     "</div>",
-    '<footer class="footer">',
+    ...(fixture.footer ? ['<footer class="footer">',
     '<div class="footer-label">' + escapeHtml(fixture.footerLabel) + "</div>",
     "<p>" + escapeHtml(fixture.footer) + "</p>",
-    "</footer>",
+    "</footer>"] : []),
     "</main>"
   ].join("\n");
 }

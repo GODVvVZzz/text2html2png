@@ -4,12 +4,27 @@ on:
   push:
     branches: ["main"]
   pull_request:
+  workflow_call:
 
 permissions:
   contents: read
 
 jobs:
+  dependency-sources:
+    name: Public dependency sources
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - name: Reject non-public tarball URLs before dependency installation
+        run: node skills/text2html2png/scripts/validate-lockfile.mjs
+
   check:
+    needs: dependency-sources
     name: Node ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -22,6 +37,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -67,6 +84,7 @@ jobs:
             skills/text2html2png/public-cli-smoke.png
 
   first-install:
+    needs: dependency-sources
     name: First install ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -75,6 +93,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22.14.0"
@@ -91,6 +111,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22.14.0"
@@ -104,10 +126,13 @@ jobs:
         run: node scripts/check-links.mjs
 
   theme-orthogonality:
+    needs: dependency-sources
     name: Theme / chart orthogonality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22.14.0"
@@ -141,6 +166,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22.14.0"

@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, access } from 'node:fs/promises';
+import { readFile, access, cp, mkdir, mkdtemp, rm } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import puppeteer from 'puppeteer-core';
@@ -12,6 +14,18 @@ import { galleryPage, escapeHtml } from '../../../scripts/gallery-page.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const docs = path.join(repo, 'docs');
+
+test('gallery metadata imports work in a checkout without installed renderer dependencies', async () => {
+  const isolated = await mkdtemp(path.join(tmpdir(), 'diagram-gallery-import-'));
+  try {
+    for (const relative of ['scripts/build-gallery.mjs', 'scripts/gallery-page.mjs', 'skills/text2html2png/scripts/build-examples.mjs']) {
+      await mkdir(path.dirname(path.join(isolated, relative)), { recursive: true });
+      await cp(path.join(repo, relative), path.join(isolated, relative));
+    }
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e', "const m = await import('./scripts/build-gallery.mjs'); if (typeof m.buildGallery !== 'function') process.exit(1)"], { cwd: isolated, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+  } finally { await rm(isolated, { recursive: true, force: true }); }
+});
 
 test('downloaded Diagram JSON reproduces the published HTML in both languages', async () => {
   for (const example of await loadExamples()) {

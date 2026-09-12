@@ -70,13 +70,12 @@ npx skills add GODVvVZzz/text2html2png -g -a claude-code -y
 
 **无需安装：** 打开[案例页](https://godvvvzzz.github.io/text2html2png/zh.html)，对照原文与成图、切换中英文，下载 HTML、PNG 和完整 Diagram JSON。这是已生成案例的静态展示页；页面不会调用模型，也不会把新输入的自然语言生成图。
 
-**本地修改：** 克隆仓库、安装依赖并启动 playground：
+**本地修改：** 克隆仓库后运行一条启动命令，自动检查并安装锁定的运行时和 clean 主题字体：
 
 ```bash
 git clone https://github.com/GODVvVZzz/text2html2png.git
 cd text2html2png/skills/text2html2png
-node scripts/setup.mjs --theme clean
-npm run playground
+npm start
 ```
 
 打开终端打印的地址，选择九种图表中的一个案例，编辑 **Diagram JSON**，预览并下载 HTML 或通过版面检查的 PNG。playground 和渲染器不需要模型 API Key；自然语言理解由你使用的 Agent 完成。

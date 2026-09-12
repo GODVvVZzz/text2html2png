@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { randomUUID } from "node:crypto";
-import { link, mkdir, readFile, realpath, rename, stat, unlink, writeFile } from "node:fs/promises";
+import { link, mkdir, mkdtemp, readFile, realpath, rename, rm, stat, unlink, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
@@ -83,31 +84,48 @@ export async function run(argv) {
   try { definition = JSON.parse(await readFile(path.resolve(options.input), "utf8")); }
   catch (error) { throw new Error("Cannot read diagram JSON: " + error.message); }
   const result = await renderDocument(definition);
-  for (const warning of result.fontWarnings) console.error("warn: " + warning);
-  const html = await atomicWrite(options.html, result.html, options.force);
-
-  if (options.audit || options.png) {
-    const { auditLayout, formatReport } = await import("./audit-layout.mjs");
-    const report = await auditLayout({
-      html, width: result.input.render.width, scale: 1, selector: ".wrap",
-      padding: result.input.render.padding, minFont: 10, minBodyFont: 12,
-      minContrast: 4.5, overlap: 0.35, chrome: options.chrome,
-      allowNetwork: false, noSandbox: options.noSandbox,
-    });
-    if (report.errors || report.warnings) throw new Error(formatReport(report));
+  if (result.fontWarnings.length) {
+    throw new Error(`Theme fonts are incomplete. Run: node scripts/setup.mjs --theme ${result.input.theme}\n${result.fontWarnings.join("\n")}`);
   }
+  if (options.png && path.extname(options.png).toLowerCase() !== ".png") throw new Error("--png must end in .png.");
+  // Finish validation and rasterization before replacing any user-visible
+  // artifact. An audit/browser failure must leave an earlier good result intact.
+  const staging = await mkdtemp(path.join(tmpdir(), "diagram-render-"));
+  try {
+    const candidate = path.join(staging, "diagram.html");
+    await writeFile(candidate, result.html, "utf8");
+    if (options.audit || options.png) {
+      const { auditLayout, formatReport } = await import("./audit-layout.mjs");
+      const report = await auditLayout({
+        html: candidate, width: result.input.render.width, scale: 1, selector: ".wrap",
+        padding: result.input.render.padding, minFont: 10, minBodyFont: 12,
+        minContrast: 4.5, overlap: 0.35, chrome: options.chrome,
+        allowNetwork: false, noSandbox: options.noSandbox,
+      });
+      if (report.errors || report.warnings) throw new Error(formatReport(report));
+    }
 
-  let png = null;
-  if (options.png) {
-    const { renderScreenshot } = await import("./screenshot.mjs");
-    png = await renderScreenshot({
-      html, out: path.resolve(options.png), bg: "auto", width: result.input.render.width,
-      padding: result.input.render.padding, scale: result.input.render.scale,
-      selector: ".wrap", chrome: options.chrome, allowNetwork: false,
-      noSandbox: options.noSandbox, force: options.force,
-    });
+    let pngBytes = null;
+    if (options.png) {
+      const { renderScreenshot } = await import("./screenshot.mjs");
+      const renderedPng = await renderScreenshot({
+        html: candidate, out: path.join(staging, "diagram.png"), bg: "auto", width: result.input.render.width,
+        padding: result.input.render.padding, scale: result.input.render.scale,
+        selector: ".wrap", chrome: options.chrome, allowNetwork: false,
+        noSandbox: options.noSandbox, force: false,
+      });
+      pngBytes = await readFile(renderedPng);
+    }
+    // Recheck both destinations after the potentially slow browser work.
+    for (const target of targets) {
+      if (!options.force && await exists(target)) throw new Error("Output already exists: " + target + ". Pass --force to replace it.");
+    }
+    const html = await atomicWrite(options.html, result.html, options.force);
+    const png = pngBytes ? await atomicWrite(options.png, pngBytes, options.force) : null;
+    return { html, png, chart: result.input.chart, theme: result.input.theme };
+  } finally {
+    await rm(staging, { recursive: true, force: true });
   }
-  return { html, png, chart: result.input.chart, theme: result.input.theme };
 }
 
 async function main() {

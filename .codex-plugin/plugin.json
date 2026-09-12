@@ -1,6 +1,6 @@
 {
   "name": "text2html2png",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Turn structured text into polished HTML diagrams, with optional PNG export on request.",
   "author": {
     "name": "GODVvVZzz",
@@ -38,8 +38,8 @@
     "screenshots": [
       "./skills/text2html2png/assets/gallery/launch-plan-en-notebook.png",
       "./skills/text2html2png/assets/gallery/support-snapshot-en-clean.png",
-      "./skills/text2html2png/assets/gallery/signup-funnel-en-clean.png",
-      "./skills/text2html2png/assets/gallery/studio-org-en-clean.png"
+      "./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png",
+      "./skills/text2html2png/assets/gallery/studio-org-en-warm.png"
     ]
   }
 }
