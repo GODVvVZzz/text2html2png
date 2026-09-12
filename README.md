@@ -70,13 +70,12 @@ To revise a diagram, ask your agent to update the JSON and regenerate it. The HT
 
 **No installation:** open the [example gallery](https://godvvvzzz.github.io/text2html2png/) to compare source prompts with finished diagrams, switch between Chinese and English, and download HTML, PNG, or complete Diagram JSON. This is a static showcase of prepared examples; it does not send prompts to a model or generate diagrams from new prose.
 
-**Edit locally:** clone the repository, install dependencies, and start the playground:
+**Edit locally:** clone the repository and start the playground. The start command checks and installs the locked runtime and clean-theme fonts:
 
 ```bash
 git clone https://github.com/GODVvVZzz/text2html2png.git
 cd text2html2png/skills/text2html2png
-node scripts/setup.mjs --theme clean
-npm run playground
+npm start
 ```
 
 Open the address printed in the terminal. Load one of the nine chart examples, edit its **Diagram JSON**, preview it, and download HTML or an audited PNG. The playground and renderer need no model API key; natural-language interpretation happens in your agent.

@@ -8,11 +8,6 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import {
-  structureFingerprint,
-  validatePipelineSources,
-} from "./pipeline/validate.mjs";
-import { renderDocument } from "./pipeline/render-document.mjs";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 export const skillDir = path.resolve(scriptDir, "..");
@@ -115,6 +110,10 @@ async function main() {
     return;
   }
 
+  // Gallery metadata consumers must also work in a fresh checkout without
+  // npm dependencies. Load parsing and rendering only when actually building.
+  const { structureFingerprint, validatePipelineSources } = await import("./pipeline/validate.mjs");
+  const { renderDocument } = await import("./pipeline/render-document.mjs");
   const sources = await validatePipelineSources(pipelineDir);
   const examples = await loadExamples();
   const selected = args.example ? examples.filter((example) => example.id === args.example) : examples;
