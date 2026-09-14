@@ -6,7 +6,7 @@ All notable changes to the public project will be documented here.
 
 No pending changes.
 
-## [1.2.0] - 2026-09-12
+## [1.2.0] - 2026-09-14
 
 ### Runtime reliability update
 
