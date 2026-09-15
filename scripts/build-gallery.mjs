@@ -6,7 +6,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadExamples, coverageReport } from '../skills/text2html2png/scripts/build-examples.mjs';
-import { galleryPage, localize } from './gallery-page.mjs';
+import { galleryPage, presentPage, localize } from './gallery-page.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const docsDir = path.join(repoRoot, 'docs');
@@ -34,7 +34,7 @@ export function promptsMarkdown(examples, coverage) {
     for (const locale of example.locales) {
       const copy = localize(example, locale);
       lines.push(`### ${locale === 'zh' ? '中文' : 'English'}`, '',
-        `> ${copy.prompt.replaceAll('\n', '\n> ')}`, '',
+        copy.prompt.split('\n').map(line => line.trimEnd() ? `> ${line.trimEnd()}` : '>').join('\n'), '',
         `[HTML](${example.id}-${locale}.html) · [PNG](../assets/gallery/${example.id}-${locale}-${example.theme}.png) · [Diagram JSON](../../../docs/examples/${example.id}-${locale}.diagram.json)`, '');
     }
   }
@@ -69,6 +69,7 @@ export async function buildGallery({ skipRender = false } = {}) {
   }
   await writeFile(path.join(docsDir, 'index.html'), galleryPage(examples, 'en'));
   await writeFile(path.join(docsDir, 'zh.html'), galleryPage(examples, 'zh'));
+  await writeFile(path.join(docsDir, 'present.html'), presentPage(examples));
   await writeFile(path.join(skillDir, 'examples/prompts.md'), promptsMarkdown(examples, coverage));
   console.log(`Built English and Chinese galleries with ${examples.length} examples and complete HTML / PNG / Diagram JSON downloads.`);
 }

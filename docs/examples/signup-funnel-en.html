@@ -85,33 +85,33 @@
   </style>
     <style id="text2html2png-theme" data-theme="glass">
 :root {
-  --t-canvas: #e8eaf0;
-  --t-canvas-image: radial-gradient(at 20% 20%, rgba(109, 40, 217, 0.13) 0%, transparent 45%), radial-gradient(at 80% 30%, rgba(3, 105, 161, 0.13) 0%, transparent 45%), radial-gradient(at 50% 80%, rgba(4, 120, 87, 0.09) 0%, transparent 45%);
-  --t-surface: rgba(255, 255, 255, 0.46);
-  --t-surface-strong: rgba(255, 255, 255, 0.72);
-  --t-surface-soft: rgba(240, 244, 250, 0.62);
-  --t-text: #1e2030;
-  --t-text-secondary: #4d5570;
-  --t-text-muted: #63697f;
-  --t-border: rgba(255, 255, 255, 0.62);
+  --t-canvas: #101831;
+  --t-canvas-image: radial-gradient(at 8% 6%, rgba(117, 86, 219, 0.32) 0%, transparent 48%), radial-gradient(at 96% 80%, rgba(29, 141, 168, 0.24) 0%, transparent 48%);
+  --t-surface: rgba(23, 33, 62, 0.88);
+  --t-surface-strong: #202e50;
+  --t-surface-soft: #28375a;
+  --t-text: #f4f7ff;
+  --t-text-secondary: #c4d0e8;
+  --t-text-muted: #acbddc;
+  --t-border: rgba(182, 207, 255, 0.28);
   --t-node-border: color-mix(in srgb, var(--tone) 60%, var(--t-border));
-  --t-rule: rgba(30, 32, 48, 0.16);
-  --t-head-rule-image: rgba(109, 40, 217, 0.3);
-  --t-accent-1: #6d28d9;
-  --t-accent-2: #0369a1;
-  --t-accent-3: #047857;
-  --t-accent-4: #a16207;
-  --t-accent-5: #be123c;
-  --t-accent-6: #1d4ed8;
-  --t-accent-7: #0f766e;
-  --t-on-accent: #ffffff;
-  --t-banner-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.13) 0%, rgba(3, 105, 161, 0.11) 100%);
-  --t-banner-text: #383d52;
-  --t-banner-accent: #6d28d9;
+  --t-rule: #7185af;
+  --t-head-rule-image: linear-gradient(90deg, #bea6ff, #72d5f4);
+  --t-accent-1: #bea6ff;
+  --t-accent-2: #72d5f4;
+  --t-accent-3: #7bdfbb;
+  --t-accent-4: #f0ce85;
+  --t-accent-5: #ffa8c2;
+  --t-accent-6: #94b8ff;
+  --t-accent-7: #78dad5;
+  --t-on-accent: #14203b;
+  --t-banner-bg: #26375b;
+  --t-banner-text: #ecf2ff;
+  --t-banner-accent: #bfc7ff;
   --t-font-display: "Outfit", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-body: "Outfit", "Noto Sans SC", "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --t-font-data: "Outfit", "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
-  --t-title-size: 24px;
+  --t-title-size: 32px;
   --t-title-weight: 700;
   --t-title-tracking: -0.025em;
   --t-title-transform: none;
@@ -127,8 +127,8 @@
   --t-small-radius: 8px;
   --t-border-width: 1px;
   --t-border-style: solid;
-  --t-card-shadow: 0 10px 26px rgba(30, 32, 48, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  --t-highlight-shadow: 0 0 0 4px rgba(109, 40, 217, 0.08);
+  --t-card-shadow: 0 14px 32px rgba(4, 9, 24, 0.24), inset 0 1px 0 rgba(218, 230, 255, 0.12);
+  --t-highlight-shadow: 0 0 0 4px rgba(190, 166, 255, 0.14);
   --t-backdrop: blur(12px);
   --t-leader-style: solid;
   --t-leader-width: 1px;
@@ -344,13 +344,19 @@ html:lang(zh-CN) h1 {
   line-height: 1.5;
 }
 
+/* Thick, centered measures make the contraction itself the focal point. */
+.head { padding: 6px 12px 2px; }
+.head h1 { font-size: calc(var(--t-title-size) + 8px); }
+.head-rule { display: none; }
+
 .funnel {
   display: flex;
   flex-direction: column;
 }
 
 .funnel-note {
-  margin: 0 0 4px;
+  margin: 0 0 10px;
+  text-align: center;
   color: var(--t-text-secondary);
   font-size: 12px;
   line-height: 1.5;
@@ -359,7 +365,7 @@ html:lang(zh-CN) h1 {
 .funnel-stage {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .funnel-stage-heading {
@@ -373,7 +379,7 @@ html:lang(zh-CN) h1 {
   min-width: 0;
   overflow-wrap: anywhere;
   color: var(--t-text);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.5;
 }
@@ -385,7 +391,7 @@ html:lang(zh-CN) h1 {
   gap: 20px;
   color: var(--t-text);
   font-family: var(--t-font-data);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -398,12 +404,17 @@ html:lang(zh-CN) h1 {
 .funnel-pct {
   min-width: 7ch;
   text-align: right;
+  color: var(--tone);
 }
 
 .funnel-track {
   display: flex;
   justify-content: center;
-  height: 16px;
+  height: 40px;
+  background-image: linear-gradient(90deg, var(--t-rule), var(--t-rule));
+  background-size: 1px 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .funnel-bar {
@@ -420,7 +431,7 @@ html:lang(zh-CN) h1 {
   align-items: baseline;
   justify-content: center;
   gap: 4px 12px;
-  padding: 12px 0;
+  padding: 10px 0 13px;
 }
 
 .funnel-drop-text,
@@ -438,6 +449,8 @@ html:lang(zh-CN) h1 {
 }
 
 @media (max-width: 600px) {
+  .head { padding-left: 0; padding-right: 0; }
+  .funnel-track { height: 32px; }
   .funnel-stage-heading {
     grid-template-columns: minmax(0, 1fr);
     gap: 2px;

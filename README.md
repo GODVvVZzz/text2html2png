@@ -19,6 +19,16 @@
 
 An agent skill for turning system descriptions, release plans, and technical notes into static visuals. Your agent organizes the content; a local renderer builds the diagram, embeds its fonts, and checks its layout in a browser.
 
+## See what you can make
+
+|  |  |
+|---|---|
+| **See conversion drop-offs** · `glass`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/signup-funnel-en.html"><img src="./skills/text2html2png/assets/gallery/signup-funnel-en-glass.png" width="400" alt="See conversion drop-offs · glass"></a> | **Plan a launch** · `notebook`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/launch-plan-en.html"><img src="./skills/text2html2png/assets/gallery/launch-plan-en-notebook.png" width="400" alt="Plan a launch · notebook"></a> |
+| **Tell a roadmap story** · `editorial`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/library-roadmap-en.html"><img src="./skills/text2html2png/assets/gallery/library-roadmap-en-editorial.png" width="400" alt="Tell a roadmap story · editorial"></a> | **Map a product studio** · `warm`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/studio-org-en.html"><img src="./skills/text2html2png/assets/gallery/studio-org-en-warm.png" width="400" alt="Map a product studio · warm"></a> |
+| **Report supplied KPIs** · `clean`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/support-snapshot-en.html"><img src="./skills/text2html2png/assets/gallery/support-snapshot-en-clean.png" width="400" alt="Report supplied KPIs · clean"></a> | **Compare plans** · `clean`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/plan-comparison-en.html"><img src="./skills/text2html2png/assets/gallery/plan-comparison-en-clean.png" width="400" alt="Compare plans · clean"></a> |
+
+Every example includes Chinese and English fixtures. All example data is synthetic; see [asset provenance](./ASSET_PROVENANCE.md). Browse the [gallery](https://godvvvzzz.github.io/text2html2png/) for the source prompts and downloadable outputs.
+
 ## One paragraph in, a system overview out
 
 Copy this prompt into an agent with the skill installed:
@@ -94,14 +104,7 @@ npm run render -- --input ../../docs/examples/service-architecture-en.diagram.js
 
 `--png` also runs the strict layout audit. `--force` explicitly replaces an existing output; omit it for new filenames. Use `--chrome /path/to/browser` or `CHROME_PATH` if browser discovery needs help.
 
-## More than architecture
-
-|  |  |
-|---|---|
-| **Explain a release process** · `clean`<br><img src="./skills/text2html2png/assets/gallery/release-flow-en-clean.png" width="400" alt="A release workflow in the clean theme"><br>[HTML preview](https://godvvvzzz.github.io/text2html2png/examples/release-flow-en.html) | **Report supplied KPIs** · `clean`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-en-clean.png" width="400" alt="A weekly support KPI dashboard in the clean theme"><br>[HTML preview](https://godvvvzzz.github.io/text2html2png/examples/support-snapshot-en.html) |
-| **Compare technical options** · `clean`<br><img src="./skills/text2html2png/assets/gallery/plan-comparison-en-clean.png" width="400" alt="A comparison table in the clean theme"><br>[HTML preview](https://godvvvzzz.github.io/text2html2png/examples/plan-comparison-en.html) | **Plan a launch** · `notebook`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-en-notebook.png" width="400" alt="A launch plan Gantt chart in the notebook theme"><br>[HTML preview](https://godvvvzzz.github.io/text2html2png/examples/launch-plan-en.html) |
-
-Every example includes Chinese and English fixtures. All example data is synthetic; see [asset provenance](./ASSET_PROVENANCE.md). Browse the [gallery](https://godvvvzzz.github.io/text2html2png/) for the source prompts and downloadable outputs.
+## Supported diagrams
 
 | Chart | Best for |
 |---|---|

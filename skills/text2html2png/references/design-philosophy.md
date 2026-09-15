@@ -11,16 +11,16 @@ If the source is sparse, make a smaller composition. Intentional whitespace is b
 ## 2. Clear hierarchy
 
 - Main title > subtitle > section/card title > body > auxiliary label.
-- Center the page title and summary; left-align paragraphs and descriptions.
+- Align the title with the chart's reading direction. A centered title suits a symmetric tree; a left-aligned title suits a report or brief. Left-align paragraphs and descriptions.
 - Keep one obvious reading order.
 - Use size, weight, spacing, and shape in addition to color.
 - Body text and essential labels should meet WCAG AA contrast where practical.
 
-## 3. Compact, symmetric, information-dense
+## 3. Compact, structured, information-dense
 
 Aim for high information density: the frame should feel tight and composed, with real content doing the filling. Density comes from organizing the facts the user gave you — never from inventing more.
 
-- Keep the composition symmetric: equal-width peer cards, even gaps, balanced margins, one shared alignment grid.
+- Keep equivalent peers equal in visual weight, with even gaps and a shared alignment grid. Use the structure the subject needs: a matrix, a reading strip, a timeline, or sections with a title column.
 - Compact the composition before enlarging it; a small dense diagram beats a large sparse one.
 - Large empty zones are defects. Fix them by tightening the layout or reframing content, not by adding filler.
 - If the source is genuinely sparse, shrink the canvas; intentional whitespace beats stretched content.
@@ -73,7 +73,7 @@ Beware the default AI look: a clean cream canvas with a high-contrast serif disp
 - No clipping, overlap, or off-canvas shadow.
 - No connector crosses text or terminates ambiguously.
 - Equivalent items align.
-- The composition is symmetric and dense — no dead zones, no filler.
+- The composition is balanced and dense — no dead zones, no filler.
 - The reading order is obvious without a legend.
 - Meaning survives grayscale.
 - Every number and claim is grounded in the source.

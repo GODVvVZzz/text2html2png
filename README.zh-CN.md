@@ -19,6 +19,16 @@
 
 一个把系统描述、发布计划和技术笔记做成静态图的 Agent 技能。Agent 整理内容，本地渲染器完成排版、嵌入字体，再用浏览器检查结果。
 
+## 先看成图
+
+|  |  |
+|---|---|
+| **看清转化流失** · `glass`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/signup-funnel-zh.html"><img src="./skills/text2html2png/assets/gallery/signup-funnel-zh-glass.png" width="400" alt="看清转化流失 · glass"></a> | **安排上线计划** · `notebook`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/launch-plan-zh.html"><img src="./skills/text2html2png/assets/gallery/launch-plan-zh-notebook.png" width="400" alt="安排上线计划 · notebook"></a> |
+| **讲清演进路线** · `editorial`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/library-roadmap-zh.html"><img src="./skills/text2html2png/assets/gallery/library-roadmap-zh-editorial.png" width="400" alt="讲清演进路线 · editorial"></a> | **理清团队分工** · `warm`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/studio-org-zh.html"><img src="./skills/text2html2png/assets/gallery/studio-org-zh-warm.png" width="400" alt="理清团队分工 · warm"></a> |
+| **汇报已有指标** · `clean`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/support-snapshot-zh.html"><img src="./skills/text2html2png/assets/gallery/support-snapshot-zh-clean.png" width="400" alt="汇报已有指标 · clean"></a> | **对齐方案差异** · `clean`<br><a href="https://godvvvzzz.github.io/text2html2png/examples/plan-comparison-zh.html"><img src="./skills/text2html2png/assets/gallery/plan-comparison-zh-clean.png" width="400" alt="对齐方案差异 · clean"></a> |
+
+每个案例都提供中英文源数据。案例数据均为合成数据，见[素材来源说明](./ASSET_PROVENANCE.md)。完整 prompt 和可下载产物见[案例页](https://godvvvzzz.github.io/text2html2png/zh.html)。
+
 ## 输入一段话，得到系统总览
 
 安装技能后，把下面这段话发给 Agent：
@@ -100,14 +110,7 @@ npm run render -- --input ../../docs/examples/service-architecture-zh.diagram.js
 
 [首次试用反馈](https://github.com/GODVvVZzz/text2html2png/issues/new?template=trial.yml) · [质量证据与 24 个固定评测任务](./docs/QUALITY.zh-CN.md)。目前没有独立 Agent 成功率或竞品胜出结论。
 
-## 还能做哪些图
-
-|  |  |
-|---|---|
-| **解释发布流程** · `clean`<br><img src="./skills/text2html2png/assets/gallery/release-flow-zh-clean.png" width="400" alt="clean 风格的发布流程图"><br>[直接预览 HTML](https://godvvvzzz.github.io/text2html2png/examples/release-flow-zh.html) | **汇报已有指标** · `clean`<br><img src="./skills/text2html2png/assets/gallery/support-snapshot-zh-clean.png" width="400" alt="clean 风格的客服周报看板"><br>[直接预览 HTML](https://godvvvzzz.github.io/text2html2png/examples/support-snapshot-zh.html) |
-| **对齐方案差异** · `clean`<br><img src="./skills/text2html2png/assets/gallery/plan-comparison-zh-clean.png" width="400" alt="clean 风格的方案对比表"><br>[直接预览 HTML](https://godvvvzzz.github.io/text2html2png/examples/plan-comparison-zh.html) | **安排上线计划** · `notebook`<br><img src="./skills/text2html2png/assets/gallery/launch-plan-zh-notebook.png" width="400" alt="notebook 风格的上线计划甘特图"><br>[直接预览 HTML](https://godvvvzzz.github.io/text2html2png/examples/launch-plan-zh.html) |
-
-每个案例都提供中英文源数据。案例数据均为合成数据，见[素材来源说明](./ASSET_PROVENANCE.md)。完整 prompt 和可下载产物见[案例页](https://godvvvzzz.github.io/text2html2png/zh.html)。
+## 支持的图表
 
 | 图表 | 适用场景 |
 |---|---|

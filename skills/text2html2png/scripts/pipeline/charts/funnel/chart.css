@@ -1,10 +1,16 @@
+/* Thick, centered measures make the contraction itself the focal point. */
+.head { padding: 6px 12px 2px; }
+.head h1 { font-size: calc(var(--t-title-size) + 8px); }
+.head-rule { display: none; }
+
 .funnel {
   display: flex;
   flex-direction: column;
 }
 
 .funnel-note {
-  margin: 0 0 4px;
+  margin: 0 0 10px;
+  text-align: center;
   color: var(--t-text-secondary);
   font-size: 12px;
   line-height: 1.5;
@@ -13,7 +19,7 @@
 .funnel-stage {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .funnel-stage-heading {
@@ -27,7 +33,7 @@
   min-width: 0;
   overflow-wrap: anywhere;
   color: var(--t-text);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.5;
 }
@@ -39,7 +45,7 @@
   gap: 20px;
   color: var(--t-text);
   font-family: var(--t-font-data);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
@@ -52,12 +58,17 @@
 .funnel-pct {
   min-width: 7ch;
   text-align: right;
+  color: var(--tone);
 }
 
 .funnel-track {
   display: flex;
   justify-content: center;
-  height: 16px;
+  height: 40px;
+  background-image: linear-gradient(90deg, var(--t-rule), var(--t-rule));
+  background-size: 1px 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .funnel-bar {
@@ -74,7 +85,7 @@
   align-items: baseline;
   justify-content: center;
   gap: 4px 12px;
-  padding: 12px 0;
+  padding: 10px 0 13px;
 }
 
 .funnel-drop-text,
@@ -92,6 +103,8 @@
 }
 
 @media (max-width: 600px) {
+  .head { padding-left: 0; padding-right: 0; }
+  .funnel-track { height: 32px; }
   .funnel-stage-heading {
     grid-template-columns: minmax(0, 1fr);
     gap: 2px;

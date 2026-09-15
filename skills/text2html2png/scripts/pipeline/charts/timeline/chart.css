@@ -1,9 +1,15 @@
+/* The dates and the spine carry the sequence; boxes mark only milestones. */
+.head { text-align: left; padding-bottom: 8px; }
+.head h1 { font-size: calc(var(--t-title-size) + 8px); }
+.head .lede { margin-left: 0; }
+.head-rule { height: 1px; margin-top: 20px; }
+
 .timeline {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 6px 0;
+  gap: 8px;
+  padding: 14px 0;
 }
 
 .timeline::before {
@@ -19,7 +25,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  column-gap: 16px;
+  column-gap: 24px;
 }
 
 .tl-item:nth-child(even) .tl-date {
@@ -37,12 +43,12 @@
 
 .tl-date {
   min-width: 0;
-  color: var(--t-text-secondary);
+  color: var(--tone);
   font-family: var(--t-font-data);
-  font-size: var(--t-label-size);
+  font-size: 25px;
   font-weight: var(--t-label-weight);
-  letter-spacing: var(--t-label-tracking);
-  text-transform: var(--t-label-transform);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
 .tl-item:nth-child(odd) .tl-date {
@@ -71,18 +77,18 @@
   min-width: 0;
   position: relative;
   overflow: hidden;
-  padding: 12px 14px 13px;
-  background: color-mix(in srgb, var(--tone) 6%, var(--t-surface-strong));
-  border: var(--t-border-width) var(--t-border-style) var(--t-border);
+  padding: 16px 18px 18px;
+  background: none;
+  border: 0;
   border-radius: var(--t-small-radius);
-  box-shadow: var(--t-card-shadow);
+  box-shadow: var(--t-highlight-shadow);
   backdrop-filter: var(--t-backdrop);
   -webkit-backdrop-filter: var(--t-backdrop);
 }
 
 .tl-item.milestone .tl-card {
-  background: color-mix(in srgb, var(--tone) 11%, var(--t-surface-strong));
-  border-color: color-mix(in srgb, var(--tone) 45%, var(--t-border));
+  background: color-mix(in srgb, var(--tone) 9%, var(--t-surface-strong));
+  border-top: 3px solid var(--tone);
 }
 
 .tl-card-head {
@@ -124,14 +130,23 @@
 .tl-name {
   margin: 0;
   color: var(--t-text);
-  font-size: 14px;
+  font-family: var(--t-font-display);
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.3;
 }
 
 .tl-detail {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   color: var(--t-text-secondary);
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+  .tl-item { column-gap: 12px; }
+  .tl-date { font-size: 18px; }
+  .tl-card { padding: 12px 10px; }
+  .tl-name { font-size: 16px; }
+  .tl-card-head { flex-direction: column; align-items: flex-start; }
 }

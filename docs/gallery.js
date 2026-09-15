@@ -1,25 +1,34 @@
 const panels = [...document.querySelectorAll('.demo-panel')];
-const switcher = document.querySelector('.example-switch');
-if (switcher && panels.length) {
-  switcher.hidden = false;
-  const buttons = [...switcher.querySelectorAll('[data-demo]')];
+const choices = [...document.querySelectorAll('[data-demo]')];
+if (choices.length && panels.length) {
+  const languageLink = document.querySelector('.language-link');
+  const languagePage = languageLink?.getAttribute('href');
   function select(id) {
+    if (!panels.some(panel => panel.id === id)) return;
     panels.forEach(panel => { panel.hidden = panel.id !== id; });
-    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.demo === id)));
+    choices.forEach(choice => {
+      if (choice.dataset.demo === id) choice.setAttribute('aria-current', 'true');
+      else choice.removeAttribute('aria-current');
+    });
+    if (languageLink) languageLink.href = `${languagePage}#${id}`;
   }
-  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.demo)));
-  select(panels[0].id);
+  choices.forEach(choice => choice.addEventListener('click', () => select(choice.dataset.demo)));
+  window.addEventListener('hashchange', () => select(location.hash.slice(1)));
+  select(panels.some(panel => panel.id === location.hash.slice(1)) ? location.hash.slice(1) : panels[0].id);
 }
 let statusTimer;
 document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
   const target = document.getElementById(button.dataset.copy);
   const status = document.getElementById('copy-status');
+  if (!target || !status) return;
   const content = target.textContent + (button.dataset.suffix || '');
   button.disabled = true;
   try {
     await navigator.clipboard.writeText(content);
     status.textContent = document.body.dataset.copySuccess;
   } catch {
+    const details = target.closest('details');
+    if (details) details.open = true;
     const range = document.createRange();
     range.selectNodeContents(target);
     const selection = window.getSelection();

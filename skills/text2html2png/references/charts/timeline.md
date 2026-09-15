@@ -182,29 +182,12 @@ Group events by era with a full-width label:
 
 ---
 
-## Pipeline migration note (theme-decoupling)
+## Current renderer
 
-Timeline is migrated to the multi-chart pipeline in `experiments/theme-decoupling/chart/timeline/`
-(`chart.css` + `body.mjs` + `zh.json`/`en.json` fixtures). The validated pattern supersedes the
-snippet above where they differ; the legacy sections remain for the skill's current runtime vocabulary.
+The authoritative implementation is `scripts/pipeline/charts/timeline/`. Older snippets above illustrate the data anatomy; use Diagram JSON and the shared renderer for current output.
 
-Validated structure (all themes × zh/en, `build --render --audit` 42/42 green):
-
-- One uniform DOM per event: `.tl-item` = date → dot → card; even rows flip sides via grid
-  `order` (the item is a 3-track grid `minmax(0,1fr) auto minmax(0,1fr)`), so both locales and
-  all themes share one fingerprint.
-- The side tracks are `minmax(0, 1fr)` — equal by definition, which keeps the dot column exactly
-  on the axis regardless of card padding. (Flexbox `1fr`-style equal splits are NOT equivalent:
-  Chrome clamps a flex item's base size to its padding-box, so a padded card skews the dot off
-  the axis.)
-- The central axis is `border-left: var(--t-leader-width) var(--t-leader-style) var(--t-rule)`
-  on `.timeline::before` — themes that style leaders as dotted/dashed (clean, notebook) get a
-  hand-drawn axis for free.
-- Dots: `border-radius: 50%` is the one allowed geometric constant in chart CSS (validator
-  exemption); the ring uses `outline: 2px solid var(--tone)` instead of a raw box-shadow.
-- Cards reuse the shared card anatomy (token radius/border/shadow, `color-mix` accent tint);
-  milestone events get a bigger dot, a stronger tint, and an accent-mixed border via
-  `.tl-item.milestone`.
-- Accent cycling runs `--t-accent-1..7` through the `--tone` data variable (already whitelisted);
-  themes must keep every accent legible on their surfaces — the strict audit enforces 4.5:1.
-- Optional stats row reuses the shared `.metrics` skeleton (exactly 3 entries).
+- Each event keeps its date, dot and text attached to a central axis; alternating equal-width tracks preserve chronology.
+- Large dates and open text blocks carry the rhythm. Milestones have a stronger dot and an outlined, tinted block.
+- Accent colours, typefaces, leader styles and surfaces come from theme tokens. The same DOM serves both languages and all five themes.
+- Optional supplied summary metrics use the shared three-value strip.
+- Strict browser audits check the actual output. Historical experiment counts do not describe the current visual baseline.
