@@ -76,7 +76,7 @@ jobs:
         run: node scripts/render.mjs --input examples/release-flow.diagram.json --html public-cli-smoke.html --png public-cli-smoke.png --audit --json
 
       - name: Upload public renderer preview
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: renderer-preview-${{ matrix.os }}
           path: |
@@ -101,7 +101,7 @@ jobs:
       - name: Install selected fonts and render in an isolated skill copy
         run: node scripts/smoke-install.mjs --out install-smoke.json
       - name: Upload measured installation result
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: first-install-${{ matrix.os }}
           path: install-smoke.json
